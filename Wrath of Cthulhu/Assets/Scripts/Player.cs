@@ -6,8 +6,8 @@ public class Player : MonoBehaviour {
 
     public float maxSpeed = 3;
     public float speed = 50f;
-    public float jumpPower;
-    public bool grounded;
+    //public float jumpPower;
+    //public bool grounded;
     private Rigidbody2D rb2d;
     private Animator anim;
 
@@ -16,31 +16,37 @@ public class Player : MonoBehaviour {
 
         rb2d = gameObject.GetComponent<Rigidbody2D>();
         anim = gameObject.GetComponent<Animator>();
-        jumpPower = 250f;
-		
-	}
+        //jumpPower = 250f;
+
+    }
 	
 	// Update is called once per frame
 	void Update ()
     {
-        anim.SetBool("Grounded", grounded);
+        //anim.SetBool("Grounded", grounded);
         anim.SetFloat("Speed", Mathf.Abs(rb2d.velocity.x));
+        anim.SetBool("Shooting", false);
 
         if (Input.GetAxis("Horizontal") < -.01f)
         {
-            transform.localScale = new Vector3(-5.861722f, 5.99821f, 2.873394f);
+            transform.localScale = new Vector3(-10.68855f, 8.060138f, 1f);
         }
 
         if (Input.GetAxis("Horizontal") > .01f)
         {
-            transform.localScale = new Vector3(5.861722f, 5.99821f, 2.873394f);
+            transform.localScale = new Vector3(10.68855f, 8.060138f, 1f);
         }
 
-        if(Input.GetButtonDown("Jump") && grounded)
+        if (Input.GetKeyDown("f"))
+        {
+            anim.SetBool("Shooting", true);
+        }
+
+        /*if(Input.GetButtonDown("Jump") && grounded)
         {
             rb2d.AddForce(Vector2.up * jumpPower);
             grounded = false;
-        }
+        }*/
 
     }
 
@@ -53,10 +59,10 @@ public class Player : MonoBehaviour {
 
         float h = Input.GetAxis("Horizontal");
 
-        if (grounded)
+        /*if (grounded)
         {
             rb2d.velocity = easeVelocity;
-        }
+        }*/
 
         rb2d.AddForce((Vector2.right * speed) * h);
 
