@@ -9,12 +9,15 @@ public class Player : MonoBehaviour {
     //public float jumpPower;
     //public bool grounded;
     private Rigidbody2D rb2d;
+    private Rigidbody2D r;
     private Animator anim;
+    private Vector3 input;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
 
         rb2d = gameObject.GetComponent<Rigidbody2D>();
+        r = transform.GetComponent<Rigidbody2D>();
         anim = gameObject.GetComponent<Animator>();
         //jumpPower = 250f;
 
@@ -24,7 +27,7 @@ public class Player : MonoBehaviour {
 	void Update ()
     {
         //anim.SetBool("Grounded", grounded);
-        anim.SetFloat("Speed", Mathf.Abs(rb2d.velocity.x));
+        anim.SetFloat("Speed", Mathf.Abs(rb2d.velocity.x + rb2d.velocity.y));
         anim.SetBool("Shooting", false);
 
         if (Input.GetAxis("Horizontal") < -.01f)
@@ -50,21 +53,26 @@ public class Player : MonoBehaviour {
 
     }
 
+    //for physics
     void FixedUpdate()
     {
+        Physics2D.gravity = Vector2.zero;
         Vector3 easeVelocity = rb2d.velocity;
         easeVelocity.y = rb2d.velocity.y;
         easeVelocity.z = 0.0f;
         easeVelocity.x *= 0.75f;
 
-        float h = Input.GetAxis("Horizontal");
+        float h = Input.GetAxisRaw("Horizontal");
+        float y = Input.GetAxisRaw("Vertical");
 
         /*if (grounded)
         {
             rb2d.velocity = easeVelocity;
         }*/
 
-        rb2d.AddForce((Vector2.right * speed) * h);
+        rb2d.velocity = new Vector2 (h * speed, y * speed);
+        //rb2d.AddForce((Vector2.up * speed) * y);
+
 
         if (rb2d.velocity.x > maxSpeed)
         {
@@ -74,6 +82,16 @@ public class Player : MonoBehaviour {
         if (rb2d.velocity.x < -maxSpeed)
         {
             rb2d.velocity = new Vector2(-maxSpeed, rb2d.velocity.y);
+        }
+
+        if (rb2d.velocity.y > maxSpeed)
+        {
+            rb2d.velocity = new Vector2(rb2d.velocity.x, maxSpeed);
+        }
+
+        if (rb2d.velocity.y < -maxSpeed)
+        {
+            rb2d.velocity = new Vector2(rb2d.velocity.x, -maxSpeed);
         }
 
     }
