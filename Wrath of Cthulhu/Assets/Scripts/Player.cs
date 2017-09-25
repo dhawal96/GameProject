@@ -30,14 +30,14 @@ public class Player : MonoBehaviour {
         anim.SetFloat("Speed", Mathf.Abs(rb2d.velocity.x + rb2d.velocity.y));
         anim.SetBool("Shooting", false);
 
-        if (Input.GetAxis("Horizontal") < -.01f)
+        if (Input.GetKey(KeyCode.A))
         {
-            transform.localScale = new Vector3(-10.68855f, 8.060138f, 1f);
+            transform.localScale = new Vector3(-10f, 10f, 1f);
         }
 
-        if (Input.GetAxis("Horizontal") > .01f)
+        if (Input.GetKey(KeyCode.D))
         {
-            transform.localScale = new Vector3(10.68855f, 8.060138f, 1f);
+            transform.localScale = new Vector3(10f, 10f, 1f);
         }
 
         if (Input.GetKeyDown("f"))
@@ -57,21 +57,33 @@ public class Player : MonoBehaviour {
     void FixedUpdate()
     {
         Physics2D.gravity = Vector2.zero;
-        Vector3 easeVelocity = rb2d.velocity;
-        easeVelocity.y = rb2d.velocity.y;
-        easeVelocity.z = 0.0f;
-        easeVelocity.x *= 0.75f;
 
-        float h = Input.GetAxisRaw("Horizontal");
-        float y = Input.GetAxisRaw("Vertical");
+        //float h = Input.GetAxis("Horizontal");
+        //float y = Input.GetAxisRaw("Vertical");
 
-        /*if (grounded)
-        {
-            rb2d.velocity = easeVelocity;
-        }*/
 
-        rb2d.velocity = new Vector2 (h * speed, y * speed);
+        //rb2d.velocity = new Vector2 (h * speed, y * speed);
         //rb2d.AddForce((Vector2.up * speed) * y);
+
+        if (Input.GetKey(KeyCode.A))
+        {
+            rb2d.AddForce(Vector3.left * speed);
+        }
+
+        if (Input.GetKey(KeyCode.D))
+        {
+            rb2d.AddForce(Vector3.right * speed);
+        }
+
+        if (Input.GetKey(KeyCode.W))
+        {
+            rb2d.AddForce(Vector3.up * speed);
+        }
+
+        if (Input.GetKey(KeyCode.S))
+        {
+            rb2d.AddForce(Vector3.down * speed);
+        }
 
 
         if (rb2d.velocity.x > maxSpeed)
