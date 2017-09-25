@@ -1,5 +1,5 @@
 # Cthulhu Dungeon Crawler
-Updated
+
 ## Idea
 Our current game idea is within the genre of 2D, side scrolling, co-op, brawler with elements of a roguelike game. 
 
