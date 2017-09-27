@@ -9,7 +9,7 @@ public class Player : MonoBehaviour {
     //public float jumpPower;
     //public bool grounded;
     private Rigidbody2D rb2d;
-    private Rigidbody2D r;
+    //private Rigidbody2D r;
     private Animator anim;
     private Vector3 input;
 
@@ -17,7 +17,7 @@ public class Player : MonoBehaviour {
     void Start () {
 
         rb2d = gameObject.GetComponent<Rigidbody2D>();
-        r = transform.GetComponent<Rigidbody2D>();
+       //r = transform.GetComponent<Rigidbody2D>();
         anim = gameObject.GetComponent<Animator>();
         //jumpPower = 250f;
 
