@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="80" height="45" tilewidth="16" tileheight="16" nextobjectid="1">
+ <tileset firstgid="1" source="landscape.tsx"/>
+ <tileset firstgid="1025" source="Bridge details.tsx"/>
+ <tileset firstgid="5121" source="cave.tsx"/>
+ <layer name="Tile Layer 1" width="80" height="45">
+  <data encoding="base64" compression="zlib">
+   eJzt0UENwDAQxMCwbJmk8BsM97EceaXVAPBarbXWWmuttdZaa621W/ecvzl2n385lu5nl+5nl+5nl+5nl+5nl+5nl+5nl+5nl+5nl+5nl+5nl+5nl+5nl+5nl+5nl+5nl+5nl+5nl+5nl+5nl+5nl+5nl+5nl+5nl+5ntzVyP8WvZHY=
+  </data>
+ </layer>
+ <layer name="Grass" width="80" height="45">
+  <data encoding="base64" compression="zlib">
+   eJztzrsNgDAMBUCLIQgsxmdSGA/TAkUIoruTXvEsR3EEAAAAAAAAAAAAAAAAAH/ou4iSGTJjZuvus/1h1vruy17LXddeKv6rve+cT5k5s2RW/XU/AMcpLA8=
+  </data>
+ </layer>
+ <layer name="Dark House" width="80" height="45">
+  <data encoding="base64" compression="zlib">
+   eJzt1U0KglAYRmHLbHCl9qRWs9pTVu6r33V1IJpog69BhHAeODi9vFw1y/QLk5RlU8ppRgXN079PNR4VW9XU0IrWtHG/sD1btXSgI52oc7+wM1td6Eo3utPD/cImJd8/ymlGBc3Lf59qPCq2qqmhFa1p435he7Zq6UBHOlHnfmFntrrQlW50p4f7hS34VyzT8KmYLVvt0vCpmE93b+F+Yf275/v7nfde/RTzvnv9FLNNn5MkSZIkSZIkSZIkSZIkvTwBK8od/Q==
+  </data>
+ </layer>
+ <layer name="DH details " width="80" height="45">
+  <data encoding="base64" compression="zlib">
+   eJzt07ENg0AQRNHNfIRGZK4KN2VSaApSUxErETo7B6eT3qtg9KWJAOjXa2q9AABua4nYSusV/fpmu1O/as8hYhxar+jXnO3e+v3tkx9e/Ljanu0O/ao98sPFjwEAAAAAAAAAAH5cuz8G3w==
+  </data>
+ </layer>
+ <layer name="Det" width="80" height="45">
+  <data encoding="base64" compression="zlib">
+   eJztybkNwCAUBcFfAM0YfNB/ZbwCLBGSzEgbbRUAAAAAAAAAAAAAAADAv96qRrrTk970pZmu5u8+nLQAW1EUKQ==
+  </data>
+ </layer>
+</map>
