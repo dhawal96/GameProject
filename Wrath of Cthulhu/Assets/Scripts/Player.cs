@@ -36,12 +36,12 @@ public class Player : MonoBehaviour {
 
         if (Input.GetKey(KeyCode.A))
         {
-            transform.localScale = new Vector3(-10f, 10f, 1f);
+            transform.localScale = new Vector3(-5f, 5f, 1f);
         }
 
         if (Input.GetKey(KeyCode.D))
         {
-            transform.localScale = new Vector3(10f, 10f, 1f);
+            transform.localScale = new Vector3(5f, 5f, 1f);
         }
 
         if (Input.GetKeyDown("f"))
