@@ -9,6 +9,8 @@ public class Player : MonoBehaviour {
     //public float jumpPower;
     //public bool grounded;
     private Rigidbody2D rb2d;
+    public GameObject bullet;
+    public Transform spawnPoint;
 
     //private Rigidbody2D r;
 
@@ -47,6 +49,11 @@ public class Player : MonoBehaviour {
         if (Input.GetKeyDown("f"))
         {
             anim.SetBool("Shooting", true);
+        }
+
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName("Shoot_Mark"))
+        {
+            Instantiate(bullet, spawnPoint.position, spawnPoint.rotation);
         }
 
         /*if(Input.GetButtonDown("Jump") && grounded)
