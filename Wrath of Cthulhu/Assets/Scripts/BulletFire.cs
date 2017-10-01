@@ -37,12 +37,13 @@ public class BulletFire : MonoBehaviour {
         if (collision.gameObject.tag == "Enemy")
         {
             collision.gameObject.GetComponent<EnemyMove>().health -= bulletDamage;
+            Destroy(gameObject);
 
             if (collision.gameObject.GetComponent<EnemyMove>().health <= 0)
             {
                 Destroy(collision.gameObject);
+                Destroy(gameObject);
             }
-            Destroy(gameObject);
         }
 
         else

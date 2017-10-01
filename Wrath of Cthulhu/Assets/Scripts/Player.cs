@@ -21,14 +21,14 @@ public class Player : MonoBehaviour {
 
         rb2d = gameObject.GetComponent<Rigidbody2D>();
         anim = gameObject.GetComponent<Animator>();
-        playerHealth = 100;
+        playerHealth = 100f;
        
     }
 
     // Update is called once per frame
     void Update()
     {
-        anim.SetFloat("Speed", Mathf.Abs(rb2d.velocity.x + rb2d.velocity.y));
+        anim.SetFloat("Speed", Mathf.Abs(rb2d.velocity.x) + Mathf.Abs(rb2d.velocity.y));
         anim.SetBool("Shooting", false);
 
         if (Input.GetKey(KeyCode.A))

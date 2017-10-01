@@ -4,14 +4,19 @@ using UnityEngine;
 
 public class EnemyAttack : MonoBehaviour {
 
-    private GameObject Player;
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    private Animator anim;
+    // Use this for initialization
+
+    private void Start()
+    {
+        anim = GameObject.FindWithTag("Enemy").GetComponent<Animator>();
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Player") 
+        {
+            Destroy(collision.gameObject);
+        }
+    }
 }
