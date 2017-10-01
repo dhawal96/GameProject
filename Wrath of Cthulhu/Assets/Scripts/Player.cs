@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class Player : MonoBehaviour {
 
-    public float maxSpeed = 3;
+    public float maxSpeed = 2;
     public float speed = 50f;
+    public float playerHealth;
 
     public GameObject bullet;
     public Transform spawnPoint;
@@ -19,9 +20,9 @@ public class Player : MonoBehaviour {
     void Start () {
 
         rb2d = gameObject.GetComponent<Rigidbody2D>();
-
         anim = gameObject.GetComponent<Animator>();
-
+        playerHealth = 100;
+       
     }
 
     // Update is called once per frame

@@ -6,10 +6,14 @@ public class BulletFire : MonoBehaviour {
 
     public float bulletForce = 500f;
     private GameObject Player;
+    private GameObject Enemy;
+    private float bulletDamage;
 
     private void Start()
     {
         Player = GameObject.FindWithTag("Player").gameObject;
+        Enemy = GameObject.FindWithTag("Enemy").gameObject;
+        bulletDamage = 100f;
     }
 
     void OnTriggerEnter2D(Collider2D target)
@@ -32,7 +36,12 @@ public class BulletFire : MonoBehaviour {
     {
         if (collision.gameObject.tag == "Enemy")
         {
-            Destroy(collision.gameObject);
+            collision.gameObject.GetComponent<EnemyMove>().health -= bulletDamage;
+
+            if (collision.gameObject.GetComponent<EnemyMove>().health <= 0)
+            {
+                Destroy(collision.gameObject);
+            }
             Destroy(gameObject);
         }
 
