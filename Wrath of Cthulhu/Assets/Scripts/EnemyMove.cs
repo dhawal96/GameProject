@@ -68,8 +68,10 @@ public class EnemyMove : MonoBehaviour {
             {
                 hit = Physics2D.Raycast(transform.position, Vector2.left);
             }
-
+            if (hit.collider.tag == "Player")
+            {
                 Destroy(Player.gameObject);
+            }
                 anim.SetBool("Attack", false);
             
         }
