@@ -83,11 +83,8 @@ public class EnemyMove : MonoBehaviour {
                 {
                     Destroy(Player.gameObject);
                 }
-            }
-                anim.SetBool("Attack", false);
-            
+            }    
         }
-
 
         Physics2D.gravity = Vector2.zero;
 
