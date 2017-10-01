@@ -30,5 +30,4 @@ public class Spawner : MonoBehaviour
             CancelInvoke();
         }
     }
-
 }

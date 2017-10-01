@@ -6,33 +6,27 @@ public class Player : MonoBehaviour {
 
     public float maxSpeed = 3;
     public float speed = 50f;
-    //public float jumpPower;
-    //public bool grounded;
-    private Rigidbody2D rb2d;
+
     public GameObject bullet;
     public Transform spawnPoint;
 
-    //private Rigidbody2D r;
-
     private Animator anim;
     private Vector3 input;
+    private Rigidbody2D rb2d;
+    private bool shootOnce;
 
     // Use this for initialization
     void Start () {
 
         rb2d = gameObject.GetComponent<Rigidbody2D>();
 
-       //r = transform.GetComponent<Rigidbody2D>();
-
         anim = gameObject.GetComponent<Animator>();
-        //jumpPower = 250f;
 
     }
-	
-	// Update is called once per frame
-	void Update ()
+
+    // Update is called once per frame
+    void Update()
     {
-        //anim.SetBool("Grounded", grounded);
         anim.SetFloat("Speed", Mathf.Abs(rb2d.velocity.x + rb2d.velocity.y));
         anim.SetBool("Shooting", false);
 
@@ -46,21 +40,18 @@ public class Player : MonoBehaviour {
             transform.localScale = new Vector3(5f, 5f, 1f);
         }
 
-        if (Input.GetKeyDown("f"))
+        if (Input.GetKeyDown("f") && !anim.GetCurrentAnimatorStateInfo(0).IsName("Shoot_Mark"))
         {
             anim.SetBool("Shooting", true);
+            shootOnce = true;
         }
 
-        if (anim.GetCurrentAnimatorStateInfo(0).IsName("Shoot_Mark"))
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName("Shoot_Mark") && shootOnce)
         {
             Instantiate(bullet, spawnPoint.position, spawnPoint.rotation);
+            shootOnce = false;
         }
 
-        /*if(Input.GetButtonDown("Jump") && grounded)
-        {
-            rb2d.AddForce(Vector2.up * jumpPower);
-            grounded = false;
-        }*/
 
     }
 
@@ -69,12 +60,6 @@ public class Player : MonoBehaviour {
     {
         Physics2D.gravity = Vector2.zero;
 
-        //float h = Input.GetAxis("Horizontal");
-        //float y = Input.GetAxisRaw("Vertical");
-
-
-        //rb2d.velocity = new Vector2 (h * speed, y * speed);
-        //rb2d.AddForce((Vector2.up * speed) * y);
 
         if (Input.GetKey(KeyCode.A))
         {

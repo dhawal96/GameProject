@@ -5,13 +5,14 @@ using UnityEngine;
 public class EnemyMove : MonoBehaviour {
 
     public Transform Player;
-    private Animator anim;
-    private Rigidbody2D rb2d;
-    RaycastHit2D hit;
     public float speed = 1f;
     public float maxSpeed = .01f;
+
+    private Animator anim;
+    private Rigidbody2D rb2d;
     private float minDistance = 1.35f;
     private float range;
+    RaycastHit2D hit;
 
 
      void Start()
@@ -73,10 +74,6 @@ public class EnemyMove : MonoBehaviour {
             
         }
 
-        /*if (hit.collider.tag == "Player")
-        {
-            Debug.Log("Hit");
-        }*/
 
         Physics2D.gravity = Vector2.zero;
 
@@ -102,23 +99,5 @@ public class EnemyMove : MonoBehaviour {
             rb2d.velocity = new Vector2(rb2d.velocity.x, -maxSpeed);
         }
     }
-
-    /*void OnCollisionEnter2D(Collision2D collision)
-    {
-
-        if (collision.gameObject.tag == "Enemy")
-        {
-            rb2d.isKinematic = true;
-        }
-    }
-
-    void OnCollisionExit2D(Collision2D collision)
-    {
-
-        if (collision.gameObject.tag == "Enemy")
-        {
-            rb2d.isKinematic = false;
-        }
-    }*/
 
 }
