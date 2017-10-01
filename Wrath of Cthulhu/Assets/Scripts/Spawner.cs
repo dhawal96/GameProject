@@ -16,7 +16,7 @@ public class Spawner : MonoBehaviour
     {
         //Start calling the Spawn function repeatedly after a delay.
         InvokeRepeating("Spawn", spawnDelay, spawnTime);
-
+ 
     }
 
     void Spawn()

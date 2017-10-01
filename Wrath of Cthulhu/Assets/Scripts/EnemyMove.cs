@@ -7,12 +7,15 @@ public class EnemyMove : MonoBehaviour {
     public Transform Player;
     public float speed = 1f;
     public float maxSpeed = .01f;
+    public float health;
 
     private Animator anim;
     private Rigidbody2D rb2d;
     private float minDistance = 1.35f;
     private float range;
+    private float enemyDamage;
     RaycastHit2D hit;
+    Player controlscript;
 
 
      void Start()
@@ -20,6 +23,9 @@ public class EnemyMove : MonoBehaviour {
         anim = gameObject.GetComponent<Animator>();
         rb2d = gameObject.GetComponent<Rigidbody2D>();
         Player = GameObject.FindWithTag("Player").transform;
+        controlscript = Player.GetComponent<Player>();
+        health = 200f;
+        enemyDamage = 25f;
         
     }
 
@@ -70,7 +76,13 @@ public class EnemyMove : MonoBehaviour {
             }
             if (hit.collider.tag == "Player")
             {
-                Destroy(Player.gameObject);
+                hit.collider.gameObject.GetComponent<Player>().playerHealth -= enemyDamage;
+                //controlscript.playerHealth -= enemyDamage;
+
+                if (hit.collider.gameObject.GetComponent<Player>().playerHealth  <= 0f)
+                {
+                    Destroy(Player.gameObject);
+                }
             }
                 anim.SetBool("Attack", false);
             
