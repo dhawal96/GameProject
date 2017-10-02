@@ -13,12 +13,13 @@ public class EnemyMove : MonoBehaviour {
     private Rigidbody2D rb2d;
     private float minDistance = 1.35f;
     private float range;
-    private float enemyDamage;
+    public float enemyDamage;
     RaycastHit2D hit;
     Player controlscript;
+    bool contact;
 
 
-     void Start()
+    void Start()
     {
         anim = gameObject.GetComponent<Animator>();
         rb2d = gameObject.GetComponent<Rigidbody2D>();
@@ -26,6 +27,7 @@ public class EnemyMove : MonoBehaviour {
         controlscript = Player.GetComponent<Player>();
         health = 200f;
         enemyDamage = 25f;
+        contact = false;
         
     }
 
@@ -33,7 +35,7 @@ public class EnemyMove : MonoBehaviour {
     {
         anim.SetFloat("Speed", Mathf.Abs(rb2d.velocity.x + rb2d.velocity.y));
         range = Vector2.Distance(transform.position, Player.position);
-        
+
 
         if (range <= minDistance)
         {
@@ -63,29 +65,6 @@ public class EnemyMove : MonoBehaviour {
     void FixedUpdate()
     {
 
-        if (anim.GetBool("Attack") == true)
-        {
-            if (Player.position.x > transform.position.x)
-            {
-                hit = Physics2D.Raycast(transform.position, Vector2.right);
-            }
-
-            else
-            {
-                hit = Physics2D.Raycast(transform.position, Vector2.left);
-            }
-            if (hit.collider.tag == "Player")
-            {
-                hit.collider.gameObject.GetComponent<Player>().playerHealth -= enemyDamage;
-                //controlscript.playerHealth -= enemyDamage;
-
-                if (hit.collider.gameObject.GetComponent<Player>().playerHealth  <= 0f)
-                {
-                    Destroy(Player.gameObject);
-                }
-            }    
-        }
-
         Physics2D.gravity = Vector2.zero;
 
         rb2d.velocity = (Player.position - transform.position).normalized * speed;
@@ -109,6 +88,34 @@ public class EnemyMove : MonoBehaviour {
         {
             rb2d.velocity = new Vector2(rb2d.velocity.x, -maxSpeed);
         }
+    }
+
+    void Damage()
+    {
+        if (anim.GetBool("Attack") == true)
+        {
+            if (Player.position.x > transform.position.x)
+            {
+                hit = Physics2D.Raycast(transform.position, Vector2.right);
+            }
+
+            else
+            {
+                hit = Physics2D.Raycast(transform.position, Vector2.left);
+            }
+            if (hit.collider.tag == "Player")
+            {
+                hit.collider.gameObject.GetComponent<Player>().playerHealth -= enemyDamage;
+                Debug.Log(hit.collider.gameObject.GetComponent<Player>().playerHealth);
+
+                if (hit.collider.gameObject.GetComponent<Player>().playerHealth <= 0f)
+                {
+                    Destroy(Player.gameObject);
+                }
+            }
+            anim.SetBool("Attack", false);
+        }
+
     }
 
 }
