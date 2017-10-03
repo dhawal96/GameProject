@@ -26,6 +26,7 @@ public class Player : MonoBehaviour {
     private Vector3 input;
     private Rigidbody2D rb2d;
     private bool shootOnce;
+	private bool dead = false;
 
 
     // Use this for initialization
@@ -46,42 +47,47 @@ public class Player : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-		healthscript.LifePercentage = playerHealth;
-		madnessscript.MadnessPercentage = playerMadness;
-        anim.SetFloat("Speed", Mathf.Abs(rb2d.velocity.x) + Mathf.Abs(rb2d.velocity.y));
-        anim.SetBool("Shooting", false);
+		if (!dead) {
+			healthscript.LifePercentage = playerHealth;
+			madnessscript.MadnessPercentage = playerMadness;
+			anim.SetFloat("Speed", Mathf.Abs(rb2d.velocity.x) + Mathf.Abs(rb2d.velocity.y));
+			anim.SetBool("Shooting", false);
 
-        if (Input.GetKey(KeyCode.A))
-        {
-            transform.localScale = new Vector3(-5f, 5f, 1f);
-        }
+			if (Input.GetKey(KeyCode.A))
+			{
+				transform.localScale = new Vector3(-5f, 5f, 1f);
+			}
 
-        if (Input.GetKey(KeyCode.D))
-        {
-            transform.localScale = new Vector3(5f, 5f, 1f);
-        }
+			if (Input.GetKey(KeyCode.D))
+			{
+				transform.localScale = new Vector3(5f, 5f, 1f);
+			}
 
-        if (Input.GetKeyDown("f") && !anim.GetCurrentAnimatorStateInfo(0).IsName("Shoot_Mark"))
-        {
-            anim.SetBool("Shooting", true);
-            shootOnce = true;
-        }
+			if (Input.GetKeyDown("f") && !anim.GetCurrentAnimatorStateInfo(0).IsName("Shoot_Mark"))
+			{
+				anim.SetBool("Shooting", true);
+				shootOnce = true;
+			}
 
-        if (anim.GetCurrentAnimatorStateInfo(0).IsName("Shoot_Mark") && shootOnce)
-        {
-            Instantiate(bullet, spawnPoint.position, spawnPoint.rotation);
-            shootOnce = false;
-        }
+			if (anim.GetCurrentAnimatorStateInfo(0).IsName("Shoot_Mark") && shootOnce)
+			{
+				Instantiate(bullet, spawnPoint.position, spawnPoint.rotation);
+				shootOnce = false;
+			}
 
-		if (playerHealth <= 0f) {
-			transform.GetComponent<SpriteRenderer> ().enabled = false;
-			//Destroy (transform.gameObject);
+			if (playerHealth <= 0f) {
+				transform.GetComponent<SpriteRenderer> ().enabled = false;
+				dead = true;
+				//Destroy (transform.gameObject);
+			}
+
+			if (playerMadness >= 100f) {
+				transform.GetComponent<SpriteRenderer> ().enabled = false;
+				dead = true;
+				//Destroy (transform.gameObject);
+			}
 		}
 
-		if (playerMadness >= 100f) {
-			transform.GetComponent<SpriteRenderer> ().enabled = false;
-			//Destroy (transform.gameObject);
-		}
 
 
     }
