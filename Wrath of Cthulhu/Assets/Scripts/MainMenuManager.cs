@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MainMenuManager : MonoBehaviour {
 
@@ -14,6 +15,6 @@ public class MainMenuManager : MonoBehaviour {
 		menuAnim.SetTrigger ("FadeOut");
 	}
 	public void LoadScene () {
-		Application.LoadLevel ("PlayerMovement");
+		SceneManager.LoadSceneAsync ("PlayerMovement", LoadSceneMode.Additive);
 	}
 }
