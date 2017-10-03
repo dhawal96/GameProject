@@ -11,7 +11,7 @@ public class EnemyMove : MonoBehaviour {
 
     private Animator anim;
     private Rigidbody2D rb2d;
-    private float minDistance = 1.35f;
+    private float minDistance = 1.15f;
     private float range;
     public float enemyDamage;
     RaycastHit2D hit;
