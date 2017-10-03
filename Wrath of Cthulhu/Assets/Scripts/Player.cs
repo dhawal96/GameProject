@@ -10,6 +10,7 @@ public class Player : MonoBehaviour {
 
     public GameObject bullet;
     public Transform spawnPoint;
+    private AudioSource winchester;
 
     private Animator anim;
     private Vector3 input;
@@ -21,6 +22,7 @@ public class Player : MonoBehaviour {
 
         rb2d = gameObject.GetComponent<Rigidbody2D>();
         anim = gameObject.GetComponent<Animator>();
+        winchester = gameObject.GetComponent<AudioSource>();
         playerHealth = 100f;
        
     }
@@ -103,5 +105,10 @@ public class Player : MonoBehaviour {
             rb2d.velocity = new Vector2(rb2d.velocity.x, -maxSpeed);
         }
 
+    }
+
+    void playSound()
+    {
+        winchester.Play();
     }
 }
