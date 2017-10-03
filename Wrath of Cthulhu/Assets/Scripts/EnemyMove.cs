@@ -48,6 +48,7 @@ public class EnemyMove : MonoBehaviour {
         {
             rb2d.isKinematic = false;
             anim.SetBool("Attack", false);
+
             transform.position = Vector2.MoveTowards(transform.position, Player.position, speed * Time.deltaTime);
             if (Player.position.x > transform.position.x)
             {
@@ -103,15 +104,16 @@ public class EnemyMove : MonoBehaviour {
             {
                 hit = Physics2D.Raycast(transform.position, Vector2.left);
             }
+
             if (hit.collider.tag == "Player")
             {
                 hit.collider.gameObject.GetComponent<Player>().playerHealth -= enemyDamage;
-                Debug.Log(hit.collider.gameObject.GetComponent<Player>().playerHealth);
 
                 if (hit.collider.gameObject.GetComponent<Player>().playerHealth <= 0f)
                 {
                     Destroy(Player.gameObject);
                 }
+
             }
             anim.SetBool("Attack", false);
         }
