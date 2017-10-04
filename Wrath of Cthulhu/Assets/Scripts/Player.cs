@@ -17,6 +17,9 @@ public class Player : MonoBehaviour {
 	public Transform MadnessPercentage;
 	Player1Madness madnessscript;
 
+    //Player1Currency
+    public float currency = 0;
+
 	//Player1Bullet
     public GameObject bullet;
     public Transform spawnPoint;
