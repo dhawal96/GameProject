@@ -441,7 +441,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxSpeed: 2
   speed: 50
-  PlayerGameObject: {fileID: 0}
   playerHealth: 0
   HealthPercentage: {fileID: 0}
   playerMadness: 0

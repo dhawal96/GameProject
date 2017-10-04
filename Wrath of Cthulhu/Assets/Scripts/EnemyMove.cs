@@ -8,15 +8,12 @@ public class EnemyMove : MonoBehaviour {
     public float speed = 1f;
     public float maxSpeed = .01f;
     public float health;
-	public bool idle;
 
     private Animator anim;
     private Rigidbody2D rb2d;
-	
     private float minDistance = 1.15f;
     private float range;
     public float enemyDamage;
-	public float enemyMadness;
     RaycastHit2D hit;
     Player controlscript;
     bool contact;
@@ -30,37 +27,24 @@ public class EnemyMove : MonoBehaviour {
         controlscript = Player.GetComponent<Player>();
         health = 200f;
         enemyDamage = 25f;
-		enemyMadness = 10f;
         contact = false;
-		idle = true;
         
     }
 
     void Update()
-	{
-		
-		if (controlscript.playerHealth > 0 && controlscript.playerMadness < 100 ) {
-			anim.SetBool ("Idle", false);
-			idle = false;
-		} 
-		else {
-			anim.SetBool ("Idle", true);
-			idle = true;
-		}
-		anim.SetFloat("Speed", Mathf.Abs(rb2d.velocity.x) + Mathf.Abs(rb2d.velocity.y));
+    {
+        anim.SetFloat("Speed", Mathf.Abs(rb2d.velocity.x + rb2d.velocity.y));
         range = Vector2.Distance(transform.position, Player.position);
 
 
-
-
-		if (range <= minDistance && !idle)
+        if (range <= minDistance)
         {
             rb2d.isKinematic = true;
             anim.SetBool("Attack", true);
         }
 
 
-        if (range > minDistance && !idle)
+        if (range > minDistance)
         {
             rb2d.isKinematic = false;
             anim.SetBool("Attack", false);
@@ -109,8 +93,6 @@ public class EnemyMove : MonoBehaviour {
 
     void Damage()
     {
-        if (anim.GetBool("Attack") == true)
-        {
             if (Player.position.x > transform.position.x)
             {
                 hit = Physics2D.Raycast(transform.position, Vector2.right);
@@ -124,15 +106,13 @@ public class EnemyMove : MonoBehaviour {
             if (hit.collider.tag == "Player")
             {
                 hit.collider.gameObject.GetComponent<Player>().playerHealth -= enemyDamage;
-				hit.collider.gameObject.GetComponent<Player>().playerMadness += enemyMadness;
-                //if (hit.collider.gameObject.GetComponent<Player>().playerHealth <= 0f)
-                //{
-                    //Destroy(Player.gameObject);
-                //}
+
+                if (hit.collider.gameObject.GetComponent<Player>().playerHealth <= 0f)
+                {
+                    Destroy(Player.gameObject);
+                }
 
             }
-            anim.SetBool("Attack", false);
-        }
 
     }
 
