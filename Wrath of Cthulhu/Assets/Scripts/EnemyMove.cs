@@ -8,12 +8,14 @@ public class EnemyMove : MonoBehaviour {
     public float speed = 1f;
     public float maxSpeed = .01f;
     public float health;
+    public bool idle;
 
     private Animator anim;
     private Rigidbody2D rb2d;
     private float minDistance = 1.15f;
     private float range;
     public float enemyDamage;
+    public float enemyMadness;
     RaycastHit2D hit;
     Player controlscript;
     bool contact;
@@ -27,12 +29,13 @@ public class EnemyMove : MonoBehaviour {
         controlscript = Player.GetComponent<Player>();
         health = 200f;
         enemyDamage = 25f;
+        enemyMadness = 10f;
         contact = false;
-        
+        idle = true;
+
     }
 
     void Update()
-<<<<<<< HEAD
 	{
 		
 		if (controlscript.playerHealth > 0 && controlscript.playerMadness < 100 ) {
@@ -45,12 +48,6 @@ public class EnemyMove : MonoBehaviour {
 		}
 		anim.SetFloat("Speed", Mathf.Abs(rb2d.velocity.x) + Mathf.Abs(rb2d.velocity.y));
         range = Vector2.Distance(transform.position, Player.transform.position);
-=======
-    {
-        anim.SetFloat("Speed", Mathf.Abs(rb2d.velocity.x + rb2d.velocity.y));
-        range = Vector2.Distance(transform.position, Player.position);
->>>>>>> fd1a8da2147ba2e586d2aea2741f21eaa1267be7
-
 
         if (range <= minDistance)
         {
