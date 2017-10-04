@@ -20,6 +20,8 @@ public class EnemyMove : MonoBehaviour {
     Player controlscript;
     bool contact;
 
+    public GameObject[] currency;
+
 
     void Start()
     {

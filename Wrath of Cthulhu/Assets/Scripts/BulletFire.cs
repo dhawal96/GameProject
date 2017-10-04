@@ -8,6 +8,8 @@ public class BulletFire : MonoBehaviour {
     private GameObject Player;
     private GameObject Enemy;
     private float bulletDamage;
+    private Vector3 enposition;
+    private int currencyIndex;
 
     private void Start()
     {
@@ -41,8 +43,11 @@ public class BulletFire : MonoBehaviour {
 
             if (collision.gameObject.GetComponent<EnemyMove>().health <= 0)
             {
+                enposition = collision.gameObject.GetComponent<EnemyMove>().transform.position;
                 Destroy(collision.gameObject);
                 Destroy(gameObject);
+                currencyIndex = Random.Range(0, collision.gameObject.GetComponent<EnemyMove>().currency.Length);
+                Instantiate(collision.gameObject.GetComponent<EnemyMove>().currency[currencyIndex], enposition, transform.rotation);
             }
         }
 
