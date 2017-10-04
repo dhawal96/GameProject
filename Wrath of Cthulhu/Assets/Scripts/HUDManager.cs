@@ -8,6 +8,7 @@ public class HUDManager : MonoBehaviour {
 	// Use this for initialization
 	void Awake () {
 		HUDAnim = GetComponent<Animator> ();
+        DontDestroyOnLoad(gameObject);
 	}
 	
 	// Update is called once per frame
