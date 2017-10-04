@@ -106,7 +106,7 @@ public class EnemyMove : MonoBehaviour {
     void Damage()
     {
 
-        if (Player.transform.position.y >= gameObject.transform.position.y - .2f && Player.transform.position.y <= gameObject.transform.position.y + .2f)
+        if (Player.transform.position.y >= gameObject.transform.position.y - .3f && Player.transform.position.y <= gameObject.transform.position.y + .3f)
         {
             Player.GetComponent<Player>().playerHealth -= enemyDamage;
             Player.GetComponent<Player>().playerMadness += enemyMadness;
