@@ -17,7 +17,7 @@ public class MainMenuManager : MonoBehaviour {
 
     public void DestroyScene()
     {
-        SceneManager.UnloadScene("MainMenu");
+        //SceneManager.UnloadScene("MainMenu");
 
     }
 	public void LoadScene () {

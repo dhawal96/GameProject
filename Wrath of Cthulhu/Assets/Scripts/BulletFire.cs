@@ -47,7 +47,8 @@ public class BulletFire : MonoBehaviour {
                 Destroy(collision.gameObject);
                 Destroy(gameObject);
                 currencyIndex = Random.Range(0, collision.gameObject.GetComponent<EnemyMove>().currency.Length);
-                Instantiate(collision.gameObject.GetComponent<EnemyMove>().currency[currencyIndex], enposition, transform.rotation);
+                GameObject coin = Instantiate(collision.gameObject.GetComponent<EnemyMove>().currency[currencyIndex], enposition, transform.rotation);
+                Destroy(coin,5);
             }
         }
 

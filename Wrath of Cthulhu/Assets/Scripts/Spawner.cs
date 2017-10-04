@@ -25,7 +25,7 @@ public class Spawner : MonoBehaviour
         //Instantiate a random enemy.
         int enemyIndex = Random.Range(0, enemies.Length);
         Instantiate(enemies[enemyIndex], enposition, transform.rotation);
-        if (waveCount == 3f)
+        if (waveCount == 6f)
         {
             CancelInvoke();
         }
