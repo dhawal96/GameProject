@@ -97,25 +97,27 @@ public class Player : MonoBehaviour {
     {
         Physics2D.gravity = Vector2.zero;
 
+        if(!dead){
+            
+            if (Input.GetKey(KeyCode.A))
+            {
+                rb2d.AddForce(Vector3.left * speed);
+            }
 
-        if (Input.GetKey(KeyCode.A))
-        {
-            rb2d.AddForce(Vector3.left * speed);
-        }
+            if (Input.GetKey(KeyCode.D))
+            {
+                rb2d.AddForce(Vector3.right * speed);
+            }
 
-        if (Input.GetKey(KeyCode.D))
-        {
-            rb2d.AddForce(Vector3.right * speed);
-        }
+            if (Input.GetKey(KeyCode.W))
+            {
+                rb2d.AddForce(Vector3.up * speed);
+            }
 
-        if (Input.GetKey(KeyCode.W))
-        {
-            rb2d.AddForce(Vector3.up * speed);
-        }
-
-        if (Input.GetKey(KeyCode.S))
-        {
-            rb2d.AddForce(Vector3.down * speed);
+            if (Input.GetKey(KeyCode.S))
+            {
+                rb2d.AddForce(Vector3.down * speed);
+            }
         }
 
 
