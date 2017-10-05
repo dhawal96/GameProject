@@ -448,6 +448,7 @@ MonoBehaviour:
   currency: 0
   bullet: {fileID: 1323442686551036, guid: 2a67613210839624d8bcb0a50ab22efc, type: 2}
   spawnPoint: {fileID: 408186884}
+  elixir: 0
 --- !u!61 &291277041
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -964,7 +965,7 @@ GameObject:
   m_Icon: {fileID: -6488666005112524639, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &775736747
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1433,8 +1434,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waveCount: 0
-  spawnTime: 2
-  spawnDelay: 5
+  spawnTime: 3
+  spawnDelay: 10
   enemies:
   - {fileID: 1618293949978046, guid: 0760493300801564db7cf9489e71b661, type: 2}
   enposition: {x: 10, y: 0.01, z: -10}

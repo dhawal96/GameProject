@@ -20,7 +20,7 @@ public class EnemyMove : MonoBehaviour {
     Player controlscript;
     bool contact;
 
-    public GameObject[] currency;
+    public GameObject[] items;
 
 
     void Start()
@@ -29,7 +29,7 @@ public class EnemyMove : MonoBehaviour {
         rb2d = gameObject.GetComponent<Rigidbody2D>();
         Player = GameObject.FindWithTag("Player");
         controlscript = Player.GetComponent<Player>();
-        health = 200f;
+        health = 300f;
         enemyDamage = 25f;
         enemyMadness = 10f;
         contact = false;
@@ -113,33 +113,6 @@ public class EnemyMove : MonoBehaviour {
             Player.GetComponent<Player>().playerHealth -= enemyDamage;
             Player.GetComponent<Player>().playerMadness += enemyMadness;
         }
-        /*if (anim.GetBool("Attack") == true)
-        {
-            if (Player.transform.position.x > transform.position.x)
-
-            {
-                hit = Physics2D.Raycast(transform.position, Vector2.right);
-            }
-
-            else
-            {
-                hit = Physics2D.Raycast(transform.position, Vector2.left);
-            }
-
-            if (hit.collider.tag == "Player")
-            {
-                hit.collider.gameObject.GetComponent<Player>().playerHealth -= enemyDamage;
-
-                if (hit.collider.gameObject.GetComponent<Player>().playerHealth <= 0f)
-                {
-                    Destroy(Player.gameObject);
-                }
-
-            }
-			
-            anim.SetBool("Attack", false);
-        }*/
-
 
     }
 
