@@ -443,14 +443,15 @@ MonoBehaviour:
   HealthPercentage: {fileID: 0}
   playerMadness: 0
   MadnessPercentage: {fileID: 0}
+  minCameraPosX: 0
+  maxCameraPosX: 0
+  CameraFollow: {fileID: 0}
   currency: 0
   bullet: {fileID: 1323442686551036, guid: 2a67613210839624d8bcb0a50ab22efc, type: 2}
   spawnPoint: {fileID: 408186884}
-
   item: none
   maxSpeed: 2
   speed: 50
-
 --- !u!61 &291277041
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -889,9 +890,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-
   m_FillAmount: 1
-
   m_FillClockwise: 1
   m_FillOrigin: 0
 --- !u!222 &585627096
