@@ -17,6 +17,9 @@ public class Player : MonoBehaviour {
 	public Transform MadnessPercentage;
 	Player1Madness madnessscript;
 
+    //Player1Currency
+    public float currency = 0;
+
 	//Player1Bullet
     public GameObject bullet;
     public Transform spawnPoint;
@@ -27,6 +30,7 @@ public class Player : MonoBehaviour {
     private Rigidbody2D rb2d;
     private bool shootOnce;
 	private bool dead = false;
+    public bool elixir = false;
 
 
     // Use this for initialization
@@ -69,6 +73,17 @@ public class Player : MonoBehaviour {
 				shootOnce = true;
 			}
 
+            if (Input.GetKeyDown("g") && elixir)
+            {
+                playerHealth += 50f;
+
+                if (playerHealth >= 100f)
+                {
+                    playerHealth = 100f;
+                }
+                elixir = false;
+            }
+
 			if (anim.GetCurrentAnimatorStateInfo(0).IsName("Shoot_Mark") && shootOnce)
 			{
 				Instantiate(bullet, spawnPoint.position, spawnPoint.rotation);
@@ -86,9 +101,8 @@ public class Player : MonoBehaviour {
 				dead = true;
 				//Destroy (transform.gameObject);
 			}
+
 		}
-
-
 
     }
 
@@ -97,27 +111,25 @@ public class Player : MonoBehaviour {
     {
         Physics2D.gravity = Vector2.zero;
 
-        if(!dead){
-            
-            if (Input.GetKey(KeyCode.A))
-            {
-                rb2d.AddForce(Vector3.left * speed);
-            }
 
-            if (Input.GetKey(KeyCode.D))
-            {
-                rb2d.AddForce(Vector3.right * speed);
-            }
+        if (Input.GetKey(KeyCode.A))
+        {
+            rb2d.AddForce(Vector3.left * speed);
+        }
 
-            if (Input.GetKey(KeyCode.W))
-            {
-                rb2d.AddForce(Vector3.up * speed);
-            }
+        if (Input.GetKey(KeyCode.D))
+        {
+            rb2d.AddForce(Vector3.right * speed);
+        }
 
-            if (Input.GetKey(KeyCode.S))
-            {
-                rb2d.AddForce(Vector3.down * speed);
-            }
+        if (Input.GetKey(KeyCode.W))
+        {
+            rb2d.AddForce(Vector3.up * speed);
+        }
+
+        if (Input.GetKey(KeyCode.S))
+        {
+            rb2d.AddForce(Vector3.down * speed);
         }
 
 
