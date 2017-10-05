@@ -30,6 +30,7 @@ public class Player : MonoBehaviour {
     private Rigidbody2D rb2d;
     private bool shootOnce;
 	private bool dead = false;
+    public bool elixir = false;
 
 
     // Use this for initialization
@@ -72,6 +73,17 @@ public class Player : MonoBehaviour {
 				shootOnce = true;
 			}
 
+            if (Input.GetKeyDown("g") && elixir)
+            {
+                playerHealth += 50f;
+
+                if (playerHealth >= 100f)
+                {
+                    playerHealth = 100f;
+                }
+                elixir = false;
+            }
+
 			if (anim.GetCurrentAnimatorStateInfo(0).IsName("Shoot_Mark") && shootOnce)
 			{
 				Instantiate(bullet, spawnPoint.position, spawnPoint.rotation);
@@ -89,9 +101,8 @@ public class Player : MonoBehaviour {
 				dead = true;
 				//Destroy (transform.gameObject);
 			}
+
 		}
-
-
 
     }
 
