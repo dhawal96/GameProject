@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Player : MonoBehaviour {
 
-    public float maxSpeed = 2;
-    public float speed = 50f;
 
 	//Player1Health
     public float playerHealth;
@@ -17,6 +15,12 @@ public class Player : MonoBehaviour {
 	public Transform MadnessPercentage;
 	Player1Madness madnessscript;
 
+	//Camera
+	public float minCameraPosX;
+	public float maxCameraPosX;
+	public Transform CameraFollow;
+	CameraFollow camerascript;
+
     //Player1Currency
     public float currency = 0;
 
@@ -25,12 +29,18 @@ public class Player : MonoBehaviour {
     public Transform spawnPoint;
     private AudioSource winchester;
 
+	//Anim
     private Animator anim;
     private Vector3 input;
     private Rigidbody2D rb2d;
     private bool shootOnce;
+	private bool left; 
+
+	//Player variables
 	private bool dead = false;
-    public bool elixir = false;
+    public string item;
+	public float maxSpeed = 2;
+	public float speed = 50f;
 
 
     // Use this for initialization
@@ -41,10 +51,13 @@ public class Player : MonoBehaviour {
         winchester = gameObject.GetComponent<AudioSource>();
         playerHealth = 100f;
 		playerMadness = 0f;
+		item = "blink";
 		HealthPercentage = GameObject.Find("Player1Health").transform;
 		healthscript = HealthPercentage.GetComponent<Player1Health>();
 		MadnessPercentage = GameObject.Find("Player1Madness").transform;
 		madnessscript = MadnessPercentage.GetComponent<Player1Madness>();
+		CameraFollow = GameObject.Find ("MainCamera").transform;
+		camerascript = CameraFollow.GetComponent<CameraFollow> ();
        
     }
 
@@ -52,19 +65,19 @@ public class Player : MonoBehaviour {
     void Update()
     {
 		if (!dead) {
-			healthscript.LifePercentage = playerHealth;
-			madnessscript.MadnessPercentage = playerMadness;
 			anim.SetFloat("Speed", Mathf.Abs(rb2d.velocity.x) + Mathf.Abs(rb2d.velocity.y));
 			anim.SetBool("Shooting", false);
 
 			if (Input.GetKey(KeyCode.A))
 			{
 				transform.localScale = new Vector3(-5f, 5f, 1f);
+				left = true;
 			}
 
 			if (Input.GetKey(KeyCode.D))
 			{
 				transform.localScale = new Vector3(5f, 5f, 1f);
+				left = false;
 			}
 
 			if (Input.GetKeyDown("f") && !anim.GetCurrentAnimatorStateInfo(0).IsName("Shoot_Mark"))
@@ -73,15 +86,46 @@ public class Player : MonoBehaviour {
 				shootOnce = true;
 			}
 
-            if (Input.GetKeyDown("g") && elixir)
+			if (Input.GetKeyDown("g"))
             {
-                playerHealth += 50f;
+				switch(item){
+				case "elixir":
+					{
+						playerHealth += 50f;
+						playerMadness += 20f;
 
-                if (playerHealth >= 100f)
-                {
-                    playerHealth = 100f;
-                }
-                elixir = false;
+						if (playerHealth >= 100f)
+						{
+							playerHealth = 100f;
+						}
+						break;
+					}
+				case "blink": ///work in progress
+					{
+						float cameraSize = 2.294f;
+						float xPosition = transform.position.x;
+						if (left){
+							if (xPosition - 2f < -1.65f) 
+								transform.position = new Vector3(-1.65f, transform.position.y, transform.position.z);
+							else 
+								transform.position = new Vector3(xPosition - 2f, transform.position.y, transform.position.z);
+							//transform.Translate(Vector3.left * speed * Time.deltaTime);
+						}
+						else{
+							if (xPosition + 2f > 10.5f) 
+								transform.position = new Vector3(10.5f, transform.position.y, transform.position.z);
+							else 
+								transform.position = new Vector3(xPosition + 2f, transform.position.y, transform.position.z);
+							//transform.Translate(Vector3.right * speed * Time.deltaTime);
+						}
+						break;
+					}
+				default:
+					break;
+					
+				}
+                
+                //elixir = false;
             }
 
 			if (anim.GetCurrentAnimatorStateInfo(0).IsName("Shoot_Mark") && shootOnce)
@@ -101,6 +145,8 @@ public class Player : MonoBehaviour {
 				dead = true;
 				//Destroy (transform.gameObject);
 			}
+			healthscript.LifePercentage = playerHealth;
+			madnessscript.MadnessPercentage = playerMadness;
 
 		}
 
@@ -111,27 +157,29 @@ public class Player : MonoBehaviour {
     {
         Physics2D.gravity = Vector2.zero;
 
+		if (!dead) {
+			if (Input.GetKey(KeyCode.A))
+			{
+				rb2d.AddForce(Vector3.left * speed);
+			}
 
-        if (Input.GetKey(KeyCode.A))
-        {
-            rb2d.AddForce(Vector3.left * speed);
-        }
+			if (Input.GetKey(KeyCode.D))
+			{
+				rb2d.AddForce(Vector3.right * speed);
+			}
 
-        if (Input.GetKey(KeyCode.D))
-        {
-            rb2d.AddForce(Vector3.right * speed);
-        }
+			if (Input.GetKey(KeyCode.W))
+			{
+				rb2d.AddForce(Vector3.up * speed);
+			}
 
-        if (Input.GetKey(KeyCode.W))
-        {
-            rb2d.AddForce(Vector3.up * speed);
-        }
+			if (Input.GetKey(KeyCode.S))
+			{
+				rb2d.AddForce(Vector3.down * speed);
+			}
+		}
 
-        if (Input.GetKey(KeyCode.S))
-        {
-            rb2d.AddForce(Vector3.down * speed);
-        }
-
+        
 
         if (rb2d.velocity.x > maxSpeed)
         {

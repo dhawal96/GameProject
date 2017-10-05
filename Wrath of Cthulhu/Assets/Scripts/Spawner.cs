@@ -21,11 +21,16 @@ public class Spawner : MonoBehaviour
 
     void Spawn()
     {
+        //Randomly Spawn
+        float spawnPointX = Random.Range(2.12f, 6.75f);
+        float spawnPointY = Random.Range(-.57f, 2f);
+        Vector3 spawnPosition = new Vector3(spawnPointX, spawnPointY, 0);
+
         waveCount++;
         //Instantiate a random enemy.
         int enemyIndex = Random.Range(0, enemies.Length);
-        Instantiate(enemies[enemyIndex], enposition, transform.rotation);
-        if (waveCount == 3f)
+        Instantiate(enemies[enemyIndex], spawnPosition, transform.rotation);
+        if (waveCount == 12f)
         {
             CancelInvoke();
         }
