@@ -439,8 +439,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47bd48de6f68ccf47837ce9fa3188521, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 2
-  speed: 50
   playerHealth: 0
   HealthPercentage: {fileID: 0}
   playerMadness: 0
@@ -448,7 +446,11 @@ MonoBehaviour:
   currency: 0
   bullet: {fileID: 1323442686551036, guid: 2a67613210839624d8bcb0a50ab22efc, type: 2}
   spawnPoint: {fileID: 408186884}
-  elixir: 0
+
+  item: none
+  maxSpeed: 2
+  speed: 50
+
 --- !u!61 &291277041
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -887,7 +889,9 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 0.62
+
+  m_FillAmount: 1
+
   m_FillClockwise: 1
   m_FillOrigin: 0
 --- !u!222 &585627096

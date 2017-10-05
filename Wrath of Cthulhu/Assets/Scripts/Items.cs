@@ -29,9 +29,10 @@ public class Items : MonoBehaviour {
         {
             if (collision.tag == "Player")
             {
-                if (collision.gameObject.GetComponent<Player>().elixir == false)
+                if (collision.gameObject.GetComponent<Player>().item != "elixir")
                 {
-                    collision.gameObject.GetComponent<Player>().elixir = true;
+                    collision.gameObject.GetComponent<Player>().item = "elixir";
+
                 }
                 //collision.gameObject.GetComponent<Player>().playerHealth += 50f;
                 Destroy(gameObject);
