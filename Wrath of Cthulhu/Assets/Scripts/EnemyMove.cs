@@ -51,14 +51,16 @@ public class EnemyMove : MonoBehaviour {
 		anim.SetFloat("Speed", Mathf.Abs(rb2d.velocity.x) + Mathf.Abs(rb2d.velocity.y));
         range = Vector2.Distance(transform.position, Player.transform.position);
 
+
         if (range <= minDistance && !idle)
+
         {
             rb2d.isKinematic = true;
             anim.SetBool("Attack", true);
         }
 
 
-        if (range > minDistance && !idle)
+        if (range > minDistance)
         {
             rb2d.isKinematic = false;
             anim.SetBool("Attack", false);
