@@ -56,27 +56,11 @@ public class EnemyMove : MonoBehaviour {
             }
 
 
-            if (range > minDistance)
-            {
-                rb2d.isKinematic = false;
-                anim.SetBool("Attack", false);
 
-                transform.position = Vector2.MoveTowards(transform.position, Player.transform.position, speed * Time.deltaTime);
-                if (Player.transform.position.x > transform.position.x)
-                {
-                    //face right
-                    transform.localScale = new Vector3(4, 4, 1);
-                }
-                else if (Player.transform.position.x < transform.position.x)
-                {
-                    //face left
-                    transform.localScale = new Vector3(-4, 4, 1);
-                }
-            }
-        } 
-		else {
-			anim.SetBool ("Idle", true);
-			idle = true;
+        if (range > minDistance && !idle)
+        {
+            rb2d.isKinematic = false;
+            anim.SetBool("Attack", false);
 
             if (Player.transform.position.x > transform.position.x)
             {
