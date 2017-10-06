@@ -12,7 +12,7 @@ public class EnemyMove : MonoBehaviour {
 
     private Animator anim;
     private Rigidbody2D rb2d;
-    private float minDistance = 1.15f;
+    private float minDistance = .524848f;
     private float range;
     public float enemyDamage;
     public float enemyMadness;
@@ -65,10 +65,10 @@ public class EnemyMove : MonoBehaviour {
 			transform.position = Vector2.MoveTowards(transform.position, Player.transform.position, speed * Time.deltaTime);
 			if (Player.transform.position.x > transform.position.x) {
 				//face right
-				transform.localScale = new Vector3 (4, 4, 1);
+				transform.localScale = new Vector3 (1.5f, 1.5f, 1);
 			} else if (Player.transform.position.x < transform.position.x) {
 				//face left
-				transform.localScale = new Vector3 (-4, 4, 1);
+				transform.localScale = new Vector3 (-1.5f, 1.5f, 1);
 			}
 		}
 	}
