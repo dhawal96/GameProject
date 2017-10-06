@@ -60,7 +60,7 @@ public class EnemyMove : MonoBehaviour {
         }
 
 
-        if (range > minDistance)
+        if (range > minDistance && !idle)
         {
             rb2d.isKinematic = false;
             anim.SetBool("Attack", false);

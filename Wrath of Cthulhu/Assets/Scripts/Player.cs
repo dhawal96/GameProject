@@ -56,7 +56,7 @@ public class Player : MonoBehaviour {
 		healthscript = HealthPercentage.GetComponent<Player1Health>();
 		MadnessPercentage = GameObject.Find("Player1Madness").transform;
 		madnessscript = MadnessPercentage.GetComponent<Player1Madness>();
-		CameraFollow = GameObject.Find ("MainCamera").transform;
+		CameraFollow = GameObject.Find ("Main Camera").transform;
 		camerascript = CameraFollow.GetComponent<CameraFollow> ();
        
     }

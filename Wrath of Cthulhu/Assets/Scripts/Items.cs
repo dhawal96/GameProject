@@ -4,9 +4,14 @@ using UnityEngine;
 
 public class Items : MonoBehaviour {
 
+	//PlayerCurrency
+	public Transform PageCount;
+	Currency pagescript;
+
 	// Use this for initialization
 	void Start () {
-		
+		PageCount = GameObject.Find ("PageCount").transform;
+		pagescript = PageCount.GetComponent<Currency> ();
 	}
 	
 	// Update is called once per frame
@@ -20,7 +25,7 @@ public class Items : MonoBehaviour {
         {
             if (collision.tag == "Player")
             {
-                collision.gameObject.GetComponent<Player>().currency += 1;
+				pagescript.count += 1;
                 Destroy(gameObject);
             }
         }
