@@ -449,6 +449,7 @@ MonoBehaviour:
   currency: 0
   bullet: {fileID: 1323442686551036, guid: 2a67613210839624d8bcb0a50ab22efc, type: 2}
   spawnPoint: {fileID: 408186884}
+  pauseGame: 0
   item: none
   maxSpeed: 2
   speed: 50
