@@ -38,6 +38,7 @@ public class Player : MonoBehaviour {
 
 	//Player variables
 	private bool dead = false;
+    public bool pauseGame;
     public string item;
 	public float maxSpeed = 2;
 	public float speed = 50f;
@@ -52,6 +53,7 @@ public class Player : MonoBehaviour {
         playerHealth = 100f;
 		playerMadness = 0f;
 		item = "blink";
+        pauseGame = false;
 		HealthPercentage = GameObject.Find("Player1Health").transform;
 		healthscript = HealthPercentage.GetComponent<Player1Health>();
 		MadnessPercentage = GameObject.Find("Player1Madness").transform;
@@ -64,69 +66,29 @@ public class Player : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-		if (!dead) {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            if (pauseGame)
+            {
+                Time.timeScale = 1f;
+                pauseGame = false;
+            }
+            else
+            {
+                Time.timeScale = 0f;
+                pauseGame = true;
+            }
+        }
+        else if (!dead)
+        {
 			anim.SetFloat("Speed", Mathf.Abs(rb2d.velocity.x) + Mathf.Abs(rb2d.velocity.y));
 			anim.SetBool("Shooting", false);
-
-			if (Input.GetKey(KeyCode.A))
-			{
-				transform.localScale = new Vector3(-5f, 5f, 1f);
-				left = true;
-			}
-
-			if (Input.GetKey(KeyCode.D))
-			{
-				transform.localScale = new Vector3(5f, 5f, 1f);
-				left = false;
-			}
 
 			if (Input.GetKeyDown("f") && !anim.GetCurrentAnimatorStateInfo(0).IsName("Shoot_Mark"))
 			{
 				anim.SetBool("Shooting", true);
 				shootOnce = true;
 			}
-
-			if (Input.GetKeyDown("g"))
-            {
-				switch(item){
-				case "elixir":
-					{
-						playerHealth += 50f;
-						playerMadness += 20f;
-
-						if (playerHealth >= 100f)
-						{
-							playerHealth = 100f;
-						}
-						break;
-					}
-				case "blink": ///work in progress
-					{
-						float cameraSize = 2.294f;
-						float xPosition = transform.position.x;
-						if (left){
-							if (xPosition - 2f < -1.65f) 
-								transform.position = new Vector3(-1.65f, transform.position.y, transform.position.z);
-							else 
-								transform.position = new Vector3(xPosition - 2f, transform.position.y, transform.position.z);
-							//transform.Translate(Vector3.left * speed * Time.deltaTime);
-						}
-						else{
-							if (xPosition + 2f > 10.5f) 
-								transform.position = new Vector3(10.5f, transform.position.y, transform.position.z);
-							else 
-								transform.position = new Vector3(xPosition + 2f, transform.position.y, transform.position.z);
-							//transform.Translate(Vector3.right * speed * Time.deltaTime);
-						}
-						break;
-					}
-				default:
-					break;
-					
-				}
-                
-                //elixir = false;
-            }
 
 			if (anim.GetCurrentAnimatorStateInfo(0).IsName("Shoot_Mark") && shootOnce)
 			{
@@ -157,16 +119,21 @@ public class Player : MonoBehaviour {
     {
         Physics2D.gravity = Vector2.zero;
 
-		if (!dead) {
-			if (Input.GetKey(KeyCode.A))
+        if (!dead) {
+            
+            if (Input.GetKey(KeyCode.A))
 			{
 				rb2d.AddForce(Vector3.left * speed);
-			}
+                transform.localScale = new Vector3(-5f, 5f, 1f);
+                left = true;
+            }
 
 			if (Input.GetKey(KeyCode.D))
 			{
 				rb2d.AddForce(Vector3.right * speed);
-			}
+                transform.localScale = new Vector3(5f, 5f, 1f);
+                left = false;
+            }
 
 			if (Input.GetKey(KeyCode.W))
 			{
@@ -178,8 +145,6 @@ public class Player : MonoBehaviour {
 				rb2d.AddForce(Vector3.down * speed);
 			}
 		}
-
-        
 
         if (rb2d.velocity.x > maxSpeed)
         {
@@ -199,6 +164,52 @@ public class Player : MonoBehaviour {
         if (rb2d.velocity.y < -maxSpeed)
         {
             rb2d.velocity = new Vector2(rb2d.velocity.x, -maxSpeed);
+        }
+
+        if (Input.GetKeyDown("g"))
+        {
+            switch (item)
+            {
+                case "elixir":
+                    {
+                        playerHealth += 50f;
+                        playerMadness += 20f;
+
+                        if (playerHealth >= 100f)
+                        {
+                            playerHealth = 100f;
+                        }
+                        item = "blink";
+                        break;
+                    }
+                case "blink": ///work in progress
+					{
+                        float cameraSize = 2.294f;
+                        float xPosition = transform.position.x;
+                        if (left)
+                        {
+                            if (xPosition - 2f < -1.65f)
+                                transform.position = new Vector3(-1.65f, transform.position.y, transform.position.z);
+                            else
+                                transform.position = new Vector3(xPosition - 2f, transform.position.y, transform.position.z);
+                            //transform.Translate(Vector3.left * speed * Time.deltaTime);
+                        }
+                        else
+                        {
+                            if (xPosition + 2f > 10.5f)
+                                transform.position = new Vector3(10.5f, transform.position.y, transform.position.z);
+                            else
+                                transform.position = new Vector3(xPosition + 2f, transform.position.y, transform.position.z);
+                            //transform.Translate(Vector3.right * speed * Time.deltaTime);
+                        }
+                        break;
+                    }
+                default:
+                    break;
+
+            }
+
+            //elixir = false;
         }
 
     }

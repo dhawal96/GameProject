@@ -41,31 +41,43 @@ public class EnemyMove : MonoBehaviour {
 	{
 		
 		if (controlscript.playerHealth > 0 && controlscript.playerMadness < 100 ) {
+
 			anim.SetBool ("Idle", false);
 			idle = false;
-		} 
+            anim.SetFloat("Speed", Mathf.Abs(rb2d.velocity.x) + Mathf.Abs(rb2d.velocity.y));
+            range = Vector2.Distance(transform.position, Player.transform.position);
+
+
+            if (range <= minDistance && !idle)
+
+            {
+                rb2d.isKinematic = true;
+                anim.SetBool("Attack", true);
+            }
+
+
+            if (range > minDistance)
+            {
+                rb2d.isKinematic = false;
+                anim.SetBool("Attack", false);
+
+                transform.position = Vector2.MoveTowards(transform.position, Player.transform.position, speed * Time.deltaTime);
+                if (Player.transform.position.x > transform.position.x)
+                {
+                    //face right
+                    transform.localScale = new Vector3(4, 4, 1);
+                }
+                else if (Player.transform.position.x < transform.position.x)
+                {
+                    //face left
+                    transform.localScale = new Vector3(-4, 4, 1);
+                }
+            }
+        } 
 		else {
 			anim.SetBool ("Idle", true);
 			idle = true;
-		}
-		anim.SetFloat("Speed", Mathf.Abs(rb2d.velocity.x) + Mathf.Abs(rb2d.velocity.y));
-        range = Vector2.Distance(transform.position, Player.transform.position);
 
-
-        if (range <= minDistance && !idle)
-
-        {
-            rb2d.isKinematic = true;
-            anim.SetBool("Attack", true);
-        }
-
-
-        if (range > minDistance)
-        {
-            rb2d.isKinematic = false;
-            anim.SetBool("Attack", false);
-
-            transform.position = Vector2.MoveTowards(transform.position, Player.transform.position, speed * Time.deltaTime);
             if (Player.transform.position.x > transform.position.x)
             {
                 //face right
@@ -115,7 +127,6 @@ public class EnemyMove : MonoBehaviour {
             Player.GetComponent<Player>().playerHealth -= enemyDamage;
             Player.GetComponent<Player>().playerMadness += enemyMadness;
         }
-
     }
 
 }
