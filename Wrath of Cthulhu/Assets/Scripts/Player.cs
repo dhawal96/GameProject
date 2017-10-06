@@ -179,7 +179,7 @@ public class Player : MonoBehaviour {
                         {
                             playerHealth = 100f;
                         }
-                        item = "blink";
+                        //item = "blink";
                         break;
                     }
                 case "blink": ///work in progress
