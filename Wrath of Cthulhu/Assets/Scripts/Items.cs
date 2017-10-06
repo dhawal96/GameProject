@@ -14,11 +14,6 @@ public class Items : MonoBehaviour {
 		pagescript = PageCount.GetComponent<Currency> ();
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (gameObject.tag == "Currency")
@@ -37,7 +32,6 @@ public class Items : MonoBehaviour {
                 if (collision.gameObject.GetComponent<Player>().item != "elixir")
                 {
                     collision.gameObject.GetComponent<Player>().item = "elixir";
-
                 }
                 //collision.gameObject.GetComponent<Player>().playerHealth += 50f;
                 Destroy(gameObject);

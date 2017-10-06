@@ -48,7 +48,7 @@ public class BulletFire : MonoBehaviour {
                 Destroy(collision.gameObject);
                 Destroy(gameObject);
                 randomIndex = Random.Range(1f, 100f);
-                if (randomIndex <= 10f && randomIndex >= 1f)
+                if (randomIndex <= 90f && randomIndex >= 1f)
                 {
                     //itemIndex = Random.Range(0, collision.gameObject.GetComponent<EnemyMove>().items.Length - 1);
                     GameObject coin = Instantiate(collision.gameObject.GetComponent<EnemyMove>().items[3], enposition, Quaternion.identity);
