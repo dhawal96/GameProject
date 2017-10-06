@@ -124,14 +124,14 @@ public class Player : MonoBehaviour {
             if (Input.GetKey(KeyCode.A))
 			{
 				rb2d.AddForce(Vector3.left * speed);
-                transform.localScale = new Vector3(-5f, 5f, 1f);
+                transform.localScale = new Vector3(-2f, 2f, 1f);
                 left = true;
             }
 
 			if (Input.GetKey(KeyCode.D))
 			{
 				rb2d.AddForce(Vector3.right * speed);
-                transform.localScale = new Vector3(5f, 5f, 1f);
+                transform.localScale = new Vector3(2f, 2f, 1f);
                 left = false;
             }
 
