@@ -39,13 +39,17 @@ public class BulletFire : MonoBehaviour {
     {
         if (collision.gameObject.tag == "Enemy")
         {
+
+            collision.gameObject.GetComponent<Animator>().SetBool("Hit", true);
+   
             collision.gameObject.GetComponent<EnemyMove>().health -= bulletDamage;
             Destroy(gameObject);
 
             if (collision.gameObject.GetComponent<EnemyMove>().health <= 0)
             {
                 enposition = collision.gameObject.GetComponent<EnemyMove>().transform.position;
-                Destroy(collision.gameObject);
+                collision.gameObject.GetComponent<Animator>().SetBool("Death", true);
+                //Destroy(gameObject, collision.gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
                 Destroy(gameObject);
                 randomIndex = Random.Range(1f, 100f);
                 if (randomIndex <= 10f && randomIndex >= 1f)
@@ -61,7 +65,6 @@ public class BulletFire : MonoBehaviour {
                     GameObject coin = Instantiate(collision.gameObject.GetComponent<EnemyMove>().items[itemIndex], enposition, Quaternion.identity);
                     Destroy(coin, 5);
                 }
-
             }
         }
 
