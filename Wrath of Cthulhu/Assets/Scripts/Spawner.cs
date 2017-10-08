@@ -22,8 +22,8 @@ public class Spawner : MonoBehaviour
     void Spawn()
     {
         //Randomly Spawn
-        float spawnPointX = Random.Range(2.12f, 6.75f);
-        float spawnPointY = Random.Range(-.57f, 2f);
+        float spawnPointX = Random.Range(2.63f, 48.58f);
+        float spawnPointY = Random.Range(1.51f, 5.78f);
         Vector3 spawnPosition = new Vector3(spawnPointX, spawnPointY, 0);
 
         waveCount++;

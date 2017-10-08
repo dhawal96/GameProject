@@ -108,7 +108,18 @@ public class EnemyMove : MonoBehaviour {
         {
             Player.GetComponent<Player>().playerHealth -= enemyDamage;
             Player.GetComponent<Player>().playerMadness += enemyMadness;
+            Player.GetComponent<Animator>().SetBool("Hit", true);
         }
+    }
+
+    void SetHit()
+    {
+        gameObject.GetComponent<Animator>().SetBool("Hit", false);
+    }
+
+    private void Destroy()
+    {
+        Destroy(gameObject);
     }
 
 }

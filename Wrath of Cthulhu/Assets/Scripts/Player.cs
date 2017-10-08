@@ -37,7 +37,6 @@ public class Player : MonoBehaviour {
 	private bool left; 
 
 	//Player variables
-	private bool dead = false;
     public bool pauseGame;
     public string item;
 	public float maxSpeed = 2;
@@ -79,7 +78,7 @@ public class Player : MonoBehaviour {
                 pauseGame = true;
             }
         }
-        else if (!dead)
+        else
         {
 			anim.SetFloat("Speed", Mathf.Abs(rb2d.velocity.x) + Mathf.Abs(rb2d.velocity.y));
 			anim.SetBool("Shooting", false);
@@ -97,16 +96,15 @@ public class Player : MonoBehaviour {
 			}
 
 			if (playerHealth <= 0f) {
-				transform.GetComponent<SpriteRenderer> ().enabled = false;
-				dead = true;
+                anim.SetBool("Dead", true);
 				//Destroy (transform.gameObject);
 			}
 
 			if (playerMadness >= 100f) {
-				transform.GetComponent<SpriteRenderer> ().enabled = false;
-				dead = true;
-				//Destroy (transform.gameObject);
-			}
+                anim.SetBool("Dead", true);
+                //Destroy (transform.gameObject);
+            }
+
 			healthscript.LifePercentage = playerHealth;
 			madnessscript.MadnessPercentage = playerMadness;
 
@@ -118,9 +116,7 @@ public class Player : MonoBehaviour {
     void FixedUpdate()
     {
         Physics2D.gravity = Vector2.zero;
-
-        if (!dead) {
-            
+ 
             if (Input.GetKey(KeyCode.A))
 			{
 				rb2d.AddForce(Vector3.left * speed);
@@ -144,7 +140,7 @@ public class Player : MonoBehaviour {
 			{
 				rb2d.AddForce(Vector3.down * speed);
 			}
-		}
+		
 
         if (rb2d.velocity.x > maxSpeed)
         {
@@ -212,6 +208,16 @@ public class Player : MonoBehaviour {
             //elixir = false;
         }
 
+    }
+
+    void SetHit()
+    {
+        gameObject.GetComponent<Animator>().SetBool("Hit", false);
+    }
+
+    void Destroy()
+    {
+        transform.GetComponent<SpriteRenderer>().enabled = false;
     }
 
     void playSound()
