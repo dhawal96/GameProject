@@ -60,7 +60,7 @@ public class Player : MonoBehaviour {
 		madnessscript = MadnessPercentage.GetComponent<Player1Madness>();
 		CameraFollow = GameObject.Find ("Main Camera").transform;
 		camerascript = CameraFollow.GetComponent<CameraFollow> ();
-        maxSpeed = 5f;
+        maxSpeed = .5f;
         speed = 50;
        
     }

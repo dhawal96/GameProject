@@ -26,6 +26,8 @@ public class EnemyMove : MonoBehaviour {
     bool contact;
 
     public GameObject[] items;
+    public GameObject mainCamera;
+    public Camera camera;
 
 
     void Start()
@@ -34,6 +36,8 @@ public class EnemyMove : MonoBehaviour {
         rb2d = gameObject.GetComponent<Rigidbody2D>();
         Player = GameObject.FindWithTag("Player");
         controlscript = Player.GetComponent<Player>();
+        mainCamera = GameObject.FindWithTag("MainCamera");
+        camera = mainCamera.GetComponent<Camera>();
         health = 300f;
         enemyDamage = 25f;
         enemyMadness = 10f;
@@ -47,9 +51,11 @@ public class EnemyMove : MonoBehaviour {
 		
 		if (controlscript.playerHealth > 0 && controlscript.playerMadness < 100) {
 			range = Vector2.Distance (transform.position, Player.transform.position);
-		} 
+		}
 
-        if (range <= 2.751363f)
+        Vector3 viewPos = camera.WorldToViewportPoint(gameObject.transform.position);
+
+        if (viewPos.x > 0 && viewPos.x < 1 && viewPos.y >0 && viewPos.y <1 && viewPos.z > 0)
         {
             activateEnemy = true;
         }
@@ -153,5 +159,4 @@ public class EnemyMove : MonoBehaviour {
         Destroy(gameObject);
         Player.GetComponent<Player>().enemiesKilled++;
     }
-
 }
