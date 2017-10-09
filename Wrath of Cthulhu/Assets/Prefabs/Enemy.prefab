@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 95072468136569906}
   - component: {fileID: 114210506616646348}
   - component: {fileID: 60258085286527096}
+  - component: {fileID: 61497349912020160}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -71,7 +72,7 @@ PolygonCollider2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1618293949978046}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -112,6 +113,31 @@ PolygonCollider2D:
       - {x: 0.122039005, y: -0.06661479}
       - {x: 0.10618051, y: -0.03127305}
       - {x: 0.07430172, y: -0.036971413}
+--- !u!61 &61497349912020160
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1618293949978046}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.32, y: 0.32}
+    newSize: {x: 0.32, y: 0.32}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.32, y: 0.32}
+  m_EdgeRadius: 0
 --- !u!61 &61612483338756558
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -169,6 +195,7 @@ MonoBehaviour:
   maxSpeed: 0.01
   health: 0
   idle: 0
+  enemyCount: 10
   enemyDamage: 0
   enemyMadness: 0
   items:

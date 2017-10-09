@@ -10,6 +10,7 @@ TagManager:
   - Elixir
   - SectionEndCollider1
   - SectionEndCollider2
+  - MainCamera1
   layers:
   - Default
   - TransparentFX
