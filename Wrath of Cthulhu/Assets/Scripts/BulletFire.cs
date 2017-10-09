@@ -6,17 +6,17 @@ public class BulletFire : MonoBehaviour {
 
     public float bulletForce = 500f;
     private GameObject Player;
-    private GameObject Enemy;
     private float bulletDamage;
     private Vector3 enposition;
     private int itemIndex;
     private float randomIndex;
+    private bool restrictCurrency;
 
     private void Start()
     {
         Player = GameObject.FindWithTag("Player").gameObject;
-        Enemy = GameObject.FindWithTag("Enemy").gameObject;
         bulletDamage = 100f;
+        restrictCurrency = true;
     }
 
     void OnTriggerEnter2D(Collider2D target)
@@ -47,24 +47,10 @@ public class BulletFire : MonoBehaviour {
 
             if (collision.gameObject.GetComponent<EnemyMove>().health <= 0)
             {
-                enposition = collision.gameObject.GetComponent<EnemyMove>().transform.position;
                 collision.gameObject.GetComponent<Animator>().SetBool("Death", true);
-                //Destroy(gameObject, collision.gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
-                Destroy(gameObject);
-                randomIndex = Random.Range(1f, 100f);
-                if (randomIndex <= 10f && randomIndex >= 1f)
-                {
-                    //itemIndex = Random.Range(0, collision.gameObject.GetComponent<EnemyMove>().items.Length - 1);
-                    GameObject coin = Instantiate(collision.gameObject.GetComponent<EnemyMove>().items[3], enposition, Quaternion.identity);
-                    Destroy(coin, 5);
-                }
 
-                else
-                {
-                    itemIndex = Random.Range(0, collision.gameObject.GetComponent<EnemyMove>().items.Length - 1);
-                    GameObject coin = Instantiate(collision.gameObject.GetComponent<EnemyMove>().items[itemIndex], enposition, Quaternion.identity);
-                    Destroy(coin, 5);
-                }
+                Destroy(gameObject);
+                
             }
         }
 
