@@ -39,8 +39,9 @@ public class Player : MonoBehaviour {
 	//Player variables
     public bool pauseGame;
     public string item;
-	public float maxSpeed = 2;
-	public float speed = 50f;
+    public float maxSpeed;
+    public float speed;
+    public float enemiesKilled = 0f;
 
 
     // Use this for initialization
@@ -59,6 +60,8 @@ public class Player : MonoBehaviour {
 		madnessscript = MadnessPercentage.GetComponent<Player1Madness>();
 		CameraFollow = GameObject.Find ("Main Camera").transform;
 		camerascript = CameraFollow.GetComponent<CameraFollow> ();
+        maxSpeed = .5f;
+        speed = 50;
        
     }
 
