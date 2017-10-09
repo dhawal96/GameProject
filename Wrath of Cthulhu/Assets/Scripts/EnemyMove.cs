@@ -64,6 +64,11 @@ public class EnemyMove : MonoBehaviour {
 			anim.SetBool ("Idle", true);
 			idle = true;
 		}
+
+        if (Player.GetComponent<Animator>().GetBool("Dead") == true)
+        {
+            anim.SetBool("Idle", true);
+        }
 		if (range <= minDistance && !idle) {
 			rb2d.isKinematic = true;
 			anim.SetBool ("Attack", true);
