@@ -9,6 +9,11 @@ public class EnemyMove : MonoBehaviour {
     public float maxSpeed = .01f;
     public float health;
     public bool idle;
+    public float enemyCount = 10f;
+    private bool activateEnemy = false;
+    private float randomIndex;
+    private int itemIndex;
+    private Vector3 enposition;
 
     private Animator anim;
     private Rigidbody2D rb2d;
@@ -41,12 +46,20 @@ public class EnemyMove : MonoBehaviour {
 	{
 		
 		if (controlscript.playerHealth > 0 && controlscript.playerMadness < 100) {
-
-			anim.SetBool ("Idle", false);
-			idle = false;
-			anim.SetFloat ("Speed", Mathf.Abs (rb2d.velocity.x) + Mathf.Abs (rb2d.velocity.y));
 			range = Vector2.Distance (transform.position, Player.transform.position);
 		} 
+
+        if (range <= 2.751363f)
+        {
+            activateEnemy = true;
+        }
+
+        if (activateEnemy == true)
+        {
+            anim.SetBool("Idle", false);
+            idle = false;
+            anim.SetFloat("Speed", Mathf.Abs(rb2d.velocity.x) + Mathf.Abs(rb2d.velocity.y));
+        }
 		else {
 			anim.SetBool ("Idle", true);
 			idle = true;
@@ -55,8 +68,6 @@ public class EnemyMove : MonoBehaviour {
 			rb2d.isKinematic = true;
 			anim.SetBool ("Attack", true);
 		}
-
-
 
 		if (range > minDistance && !idle) {
 			rb2d.isKinematic = false;
@@ -119,7 +130,23 @@ public class EnemyMove : MonoBehaviour {
 
     private void Destroy()
     {
+        enposition = gameObject.GetComponent<EnemyMove>().transform.position;
+        randomIndex = Random.Range(1f, 100f);
+        if (randomIndex <= 10f && randomIndex >= 1f)
+        {
+            //itemIndex = Random.Range(0, collision.gameObject.GetComponent<EnemyMove>().items.Length - 1);
+            GameObject coin = Instantiate(gameObject.GetComponent<EnemyMove>().items[3], enposition, Quaternion.identity);
+            Destroy(coin, 5);
+        }
+
+        else
+        {
+            itemIndex = Random.Range(0, gameObject.GetComponent<EnemyMove>().items.Length - 1);
+            GameObject coin = Instantiate(gameObject.GetComponent<EnemyMove>().items[itemIndex], enposition, Quaternion.identity);
+            Destroy(coin, 5);
+        }
         Destroy(gameObject);
+        Player.GetComponent<Player>().enemiesKilled++;
     }
 
 }

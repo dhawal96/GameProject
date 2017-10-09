@@ -8,6 +8,8 @@ TagManager:
   - FirePoint
   - Currency
   - Elixir
+  - SectionEndCollider1
+  - SectionEndCollider2
   layers:
   - Default
   - TransparentFX
