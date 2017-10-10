@@ -43,6 +43,7 @@ public class Player : MonoBehaviour {
     public float speed;
     public float enemiesKilled = 0f;
 	public bool dead;
+    public bool markShooting;
 
 
     // Use this for initialization
@@ -59,8 +60,8 @@ public class Player : MonoBehaviour {
 		healthscript = HealthPercentage.GetComponent<Player1Health>();
 		MadnessPercentage = GameObject.Find("Player1Madness").transform;
 		madnessscript = MadnessPercentage.GetComponent<Player1Madness>();
-		CameraFollow = GameObject.Find ("Main Camera").transform;
-		camerascript = CameraFollow.GetComponent<CameraFollow> ();
+		CameraFollow = GameObject.Find("Main Camera").transform;
+		camerascript = CameraFollow.GetComponent<CameraFollow>();
         maxSpeed = .5f;
         speed = 50;
 		dead = false;
@@ -70,6 +71,7 @@ public class Player : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+        markShooting = false;
         if (Input.GetKeyDown(KeyCode.P))
         {
             if (pauseGame)
@@ -96,13 +98,16 @@ public class Player : MonoBehaviour {
 
 			if (anim.GetCurrentAnimatorStateInfo(0).IsName("Shoot_Mark") && shootOnce)
 			{
-				Instantiate(bullet, spawnPoint.position, spawnPoint.rotation);
+                //Instantiate(bullet, spawnPoint.position, spawnPoint.rotation);
+                Transform newBullet = Instantiate(bullet.transform, spawnPoint.position, Quaternion.identity) as Transform;
+                newBullet.parent = transform;
+                markShooting = true;
 				shootOnce = false;
 			}
 
 			if (playerHealth <= 0f) {
                 anim.SetBool("Dead", true);
-				dead = true;
+				dead = true;          
 				//Destroy (transform.gameObject);
 			}
 
