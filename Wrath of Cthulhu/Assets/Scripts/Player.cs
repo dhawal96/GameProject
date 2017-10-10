@@ -42,6 +42,7 @@ public class Player : MonoBehaviour {
     public float maxSpeed;
     public float speed;
     public float enemiesKilled = 0f;
+	public bool dead;
 
 
     // Use this for initialization
@@ -62,6 +63,7 @@ public class Player : MonoBehaviour {
 		camerascript = CameraFollow.GetComponent<CameraFollow> ();
         maxSpeed = .5f;
         speed = 50;
+		dead = false;
        
     }
 
@@ -81,7 +83,7 @@ public class Player : MonoBehaviour {
                 pauseGame = true;
             }
         }
-        else
+		else if (dead == false)
         {
 			anim.SetFloat("Speed", Mathf.Abs(rb2d.velocity.x) + Mathf.Abs(rb2d.velocity.y));
 			anim.SetBool("Shooting", false);
@@ -100,11 +102,13 @@ public class Player : MonoBehaviour {
 
 			if (playerHealth <= 0f) {
                 anim.SetBool("Dead", true);
+				dead = true;
 				//Destroy (transform.gameObject);
 			}
 
 			if (playerMadness >= 100f) {
                 anim.SetBool("Dead", true);
+				dead = true;
                 //Destroy (transform.gameObject);
             }
 
@@ -119,97 +123,84 @@ public class Player : MonoBehaviour {
     void FixedUpdate()
     {
         Physics2D.gravity = Vector2.zero;
- 
-            if (Input.GetKey(KeyCode.A))
-			{
-				rb2d.AddForce(Vector3.left * speed);
-                transform.localScale = new Vector3(-2f, 2f, 1f);
-                left = true;
-            }
-
-			if (Input.GetKey(KeyCode.D))
-			{
-				rb2d.AddForce(Vector3.right * speed);
-                transform.localScale = new Vector3(2f, 2f, 1f);
-                left = false;
-            }
-
-			if (Input.GetKey(KeyCode.W))
-			{
-				rb2d.AddForce(Vector3.up * speed);
+		if (!dead) {
+			if (Input.GetKey (KeyCode.A)) {
+				rb2d.AddForce (Vector3.left * speed);
+				transform.localScale = new Vector3 (-2f, 2f, 1f);
+				left = true;
 			}
 
-			if (Input.GetKey(KeyCode.S))
-			{
-				rb2d.AddForce(Vector3.down * speed);
+			if (Input.GetKey (KeyCode.D)) {
+				rb2d.AddForce (Vector3.right * speed);
+				transform.localScale = new Vector3 (2f, 2f, 1f);
+				left = false;
+			}
+
+			if (Input.GetKey (KeyCode.W)) {
+				rb2d.AddForce (Vector3.up * speed);
+			}
+
+			if (Input.GetKey (KeyCode.S)) {
+				rb2d.AddForce (Vector3.down * speed);
 			}
 		
 
-        if (rb2d.velocity.x > maxSpeed)
-        {
-            rb2d.velocity = new Vector2(maxSpeed, rb2d.velocity.y);
-        }
+			if (rb2d.velocity.x > maxSpeed) {
+				rb2d.velocity = new Vector2 (maxSpeed, rb2d.velocity.y);
+			}
 
-        if (rb2d.velocity.x < -maxSpeed)
-        {
-            rb2d.velocity = new Vector2(-maxSpeed, rb2d.velocity.y);
-        }
+			if (rb2d.velocity.x < -maxSpeed) {
+				rb2d.velocity = new Vector2 (-maxSpeed, rb2d.velocity.y);
+			}
 
-        if (rb2d.velocity.y > maxSpeed)
-        {
-            rb2d.velocity = new Vector2(rb2d.velocity.x, maxSpeed);
-        }
+			if (rb2d.velocity.y > maxSpeed) {
+				rb2d.velocity = new Vector2 (rb2d.velocity.x, maxSpeed);
+			}
 
-        if (rb2d.velocity.y < -maxSpeed)
-        {
-            rb2d.velocity = new Vector2(rb2d.velocity.x, -maxSpeed);
-        }
+			if (rb2d.velocity.y < -maxSpeed) {
+				rb2d.velocity = new Vector2 (rb2d.velocity.x, -maxSpeed);
+			}
 
-        if (Input.GetKeyDown("g"))
-        {
-            switch (item)
-            {
-                case "elixir":
-                    {
-                        playerHealth += 50f;
-                        playerMadness += 20f;
-
-                        if (playerHealth >= 100f)
-                        {
-                            playerHealth = 100f;
-                        }
-                        //item = "blink";
-                        break;
-                    }
-                case "blink": ///work in progress
+			if (Input.GetKeyDown ("g")) {
+				switch (item) {
+				case "elixir":
 					{
-                        float cameraSize = 2.294f;
-                        float xPosition = transform.position.x;
-                        if (left)
-                        {
-                            if (xPosition - 2f < -1.65f)
-                                transform.position = new Vector3(-1.65f, transform.position.y, transform.position.z);
-                            else
-                                transform.position = new Vector3(xPosition - 2f, transform.position.y, transform.position.z);
-                            //transform.Translate(Vector3.left * speed * Time.deltaTime);
-                        }
-                        else
-                        {
-                            if (xPosition + 2f > 10.5f)
-                                transform.position = new Vector3(10.5f, transform.position.y, transform.position.z);
-                            else
-                                transform.position = new Vector3(xPosition + 2f, transform.position.y, transform.position.z);
-                            //transform.Translate(Vector3.right * speed * Time.deltaTime);
-                        }
-                        break;
-                    }
-                default:
-                    break;
+						playerHealth += 50f;
+						playerMadness += 20f;
 
-            }
+						if (playerHealth >= 100f) {
+							playerHealth = 100f;
+						}
+						//item = "blink";
+						break;
+					}
+				case "blink": ///work in progress
+					{
+						float cameraSize = 2.294f;
+						float xPosition = transform.position.x;
+						if (left) {
+							if (xPosition - 2f < -1.65f)
+								transform.position = new Vector3 (-1.65f, transform.position.y, transform.position.z);
+							else
+								transform.position = new Vector3 (xPosition - 2f, transform.position.y, transform.position.z);
+							//transform.Translate(Vector3.left * speed * Time.deltaTime);
+						} else {
+							if (xPosition + 2f > 10.5f)
+								transform.position = new Vector3 (10.5f, transform.position.y, transform.position.z);
+							else
+								transform.position = new Vector3 (xPosition + 2f, transform.position.y, transform.position.z);
+							//transform.Translate(Vector3.right * speed * Time.deltaTime);
+						}
+						break;
+					}
+				default:
+					break;
 
-            //elixir = false;
-        }
+				}
+
+				//elixir = false;
+			}
+		}
 
     }
 
