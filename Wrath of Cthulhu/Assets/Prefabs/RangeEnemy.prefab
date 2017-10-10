@@ -26,8 +26,24 @@ GameObject:
   - component: {fileID: 114058333183528856}
   m_Layer: 0
   m_Name: RangeEnemy
-  m_TagString: Enemy
+  m_TagString: RangeEnemy
   m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1480820218249914
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4527218878669356}
+  - component: {fileID: 61061089443405632}
+  m_Layer: 0
+  m_Name: BulletSpawn
+  m_TagString: EnemyFirepoint
+  m_Icon: {fileID: 6926474624037801865, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -38,10 +54,24 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1464173346913800}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.62, y: 0.77, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_LocalPosition: {x: 4.04, y: 0.85, z: 0}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
+  m_Children:
+  - {fileID: 4527218878669356}
   m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4527218878669356
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1480820218249914}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.172, y: 0.024, z: 0}
+  m_LocalScale: {x: 0.026046667, y: 0.088246666, z: 0.68899}
+  m_Children: []
+  m_Father: {fileID: 4100221798941382}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &50825315476198248
@@ -63,7 +93,32 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
+--- !u!61 &61061089443405632
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1480820218249914}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.03496912, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.2797713, y: 1}
+  m_EdgeRadius: 0
 --- !u!61 &61627143373342032
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -124,9 +179,15 @@ MonoBehaviour:
   enemyCount: 10
   enemyDamage: 0
   enemyMadness: 0
-  items: []
+  items:
+  - {fileID: 1627987009531400, guid: 2bb48ddf63ba4204e965337588ebb48f, type: 2}
+  - {fileID: 1170061375301152, guid: 1da3534cca72f404198ca461d9a80d43, type: 2}
+  - {fileID: 1163060148841434, guid: c00a01cd08a07474f848b29dd2ed6c5c, type: 2}
+  - {fileID: 1902485343648266, guid: 40d51cef15bfec0458ed5483888b174a, type: 2}
   mainCamera: {fileID: 0}
   camera: {fileID: 0}
+  spawnPoint: {fileID: 4527218878669356}
+  bullet: {fileID: 1323442686551036, guid: 2a67613210839624d8bcb0a50ab22efc, type: 2}
 --- !u!212 &212293567017382188
 SpriteRenderer:
   m_ObjectHideFlags: 1

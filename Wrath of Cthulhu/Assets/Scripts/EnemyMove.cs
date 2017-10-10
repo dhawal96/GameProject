@@ -28,6 +28,8 @@ public class EnemyMove : MonoBehaviour {
     public GameObject[] items;
     public GameObject mainCamera;
     public Camera camera;
+    public Transform spawnPoint;
+    public GameObject bullet;
 
 
     void Start()
@@ -67,26 +69,71 @@ public class EnemyMove : MonoBehaviour {
 			anim.SetFloat("Speed", Mathf.Abs(rb2d.velocity.x) + Mathf.Abs(rb2d.velocity.y));
         }
 
-        
-		if (range <= minDistance && !idle) {
-			rb2d.isKinematic = true;
-			anim.SetBool ("Attack", true);
-		}
+        if (gameObject.tag == "Enemy")
+        {
+            if (range <= minDistance && !idle)
+            {
+                rb2d.isKinematic = true;
+                anim.SetBool("Attack", true);
+            }
 
-		if (range > minDistance && !idle) {
-			rb2d.isKinematic = false;
-			anim.SetBool ("Attack", false);
+            if (range > minDistance && !idle)
+            {
+                rb2d.isKinematic = false;
+                anim.SetBool("Attack", false);
 
-			transform.position = Vector2.MoveTowards(transform.position, Player.transform.position, speed * Time.deltaTime);
-			if (Player.transform.position.x > transform.position.x) {
-				//face right
-				transform.localScale = new Vector3 (1.5f, 1.5f, 1);
-			} else if (Player.transform.position.x < transform.position.x) {
-				//face left
-				transform.localScale = new Vector3 (-1.5f, 1.5f, 1);
-			}
-		}
-	}
+                transform.position = Vector2.MoveTowards(transform.position, Player.transform.position, speed * Time.deltaTime);
+                if (Player.transform.position.x > transform.position.x)
+                {
+                    //face right
+                    transform.localScale = new Vector3(1.5f, 1.5f, 1);
+                }
+                else if (Player.transform.position.x < transform.position.x)
+                {
+                    //face left
+                    transform.localScale = new Vector3(-1.5f, 1.5f, 1);
+                }
+            }
+        }
+
+        if (gameObject.tag == "RangeEnemy")
+        {
+            if (range <= 3f && !idle)
+            {
+                rb2d.isKinematic = true;
+                if (Player.transform.position.x > transform.position.x)
+                {
+                    //face right
+                    transform.localScale = new Vector3(1.5f, 1.5f, 1);
+                }
+                else if (Player.transform.position.x < transform.position.x)
+                {
+                    //face left
+                    transform.localScale = new Vector3(-1.5f, 1.5f, 1);
+                }
+                anim.SetBool("Attack", true);
+            }
+
+            if (range > 3f && !idle)
+            {
+                rb2d.isKinematic = false;
+                anim.SetBool("Attack", false);
+
+                transform.position = Vector2.MoveTowards(transform.position, Player.transform.position, speed * Time.deltaTime);
+                if (Player.transform.position.x > transform.position.x)
+                {
+                    //face right
+                    transform.localScale = new Vector3(1.5f, 1.5f, 1);
+                }
+                else if (Player.transform.position.x < transform.position.x)
+                {
+                    //face left
+                    transform.localScale = new Vector3(-1.5f, 1.5f, 1);
+                }
+
+            }
+        }
+    }
 
     void FixedUpdate()
     {
@@ -151,5 +198,10 @@ public class EnemyMove : MonoBehaviour {
         }
         Destroy(gameObject);
         Player.GetComponent<Player>().enemiesKilled++;
+    }
+
+    void InstantiateBullet()
+    {
+        Instantiate(bullet, spawnPoint.position, spawnPoint.rotation);
     }
 }
