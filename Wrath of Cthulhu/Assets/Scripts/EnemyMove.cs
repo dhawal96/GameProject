@@ -11,6 +11,7 @@ public class EnemyMove : MonoBehaviour {
     public bool idle;
     public float enemyCount = 10f;
     private bool activateEnemy = false;
+    public bool enemyShooting;
     private float randomIndex;
     private int itemIndex;
     private Vector3 enposition;
@@ -32,6 +33,7 @@ public class EnemyMove : MonoBehaviour {
     public GameObject bullet;
 
 
+
     void Start()
     {
         anim = gameObject.GetComponent<Animator>();
@@ -50,6 +52,8 @@ public class EnemyMove : MonoBehaviour {
 
     void Update()
 	{
+        enemyShooting = false;
+
 		if (controlscript.dead)
 		{
 			anim.SetBool("Idle", true);
@@ -98,6 +102,7 @@ public class EnemyMove : MonoBehaviour {
 
         if (gameObject.tag == "RangeEnemy")
         {
+
             if (range <= 3f && !idle && Player.transform.position.y >= gameObject.transform.position.y - .3f && Player.transform.position.y <= gameObject.transform.position.y + .3f)
             {
                 rb2d.isKinematic = true;
@@ -113,7 +118,7 @@ public class EnemyMove : MonoBehaviour {
                 }
                 anim.SetBool("Attack", true);
             }
-            else
+            else if (!idle)
             {
                 rb2d.isKinematic = false;
                 anim.SetBool("Attack", false);
@@ -138,7 +143,7 @@ public class EnemyMove : MonoBehaviour {
     {
 
         Physics2D.gravity = Vector2.zero;
-
+        
         rb2d.velocity = (Player.transform.position - transform.position).normalized * speed;
 
         if (rb2d.velocity.x > maxSpeed)
@@ -201,6 +206,8 @@ public class EnemyMove : MonoBehaviour {
 
     void InstantiateBullet()
     {
-        Instantiate(bullet, spawnPoint.position, spawnPoint.rotation);
+        Transform newBullet = Instantiate(bullet.transform, spawnPoint.position, Quaternion.identity) as Transform;
+        newBullet.parent = transform;
+        enemyShooting = true;
     }
 }

@@ -25,7 +25,7 @@ public class BulletFire : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D target)
     {
-        if (target.gameObject.tag == "FirePoint")
+        if (target.gameObject.tag == "FirePoint" && gameObject.transform.parent.gameObject.tag == "Player")
         {
             if (Player.transform.localScale.x > 0)
             {
@@ -38,7 +38,7 @@ public class BulletFire : MonoBehaviour {
             }
         }
 
-        else if (target.gameObject.tag == "EnemyFirepoint")
+        else if (target.gameObject.tag == "EnemyFirepoint" && gameObject.transform.parent.gameObject.tag == "RangeEnemy")
         {
             if (gameObject.transform.position.x > Player.transform.position.x)
             {
