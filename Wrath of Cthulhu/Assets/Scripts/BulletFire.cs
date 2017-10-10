@@ -40,14 +40,14 @@ public class BulletFire : MonoBehaviour {
 
         else if (target.gameObject.tag == "EnemyFirepoint")
         {
-            if (gameObject.transform.parent.gameObject.transform.localScale.x > 0)
+            if (gameObject.transform.position.x > Player.transform.position.x)
             {
-                GetComponent<Rigidbody2D>().AddForce(transform.right * bulletForce);
+                GetComponent<Rigidbody2D>().AddForce(-transform.right * bulletForce);
             }
 
             else
             {
-                GetComponent<Rigidbody2D>().AddForce(-transform.right * bulletForce);
+                GetComponent<Rigidbody2D>().AddForce(transform.right * bulletForce);
             }
 
         }
