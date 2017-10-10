@@ -182,7 +182,7 @@ public class EnemyMove : MonoBehaviour {
     {
         enposition = gameObject.GetComponent<EnemyMove>().transform.position;
         randomIndex = Random.Range(1f, 100f);
-        if (randomIndex <= 10f && randomIndex >= 1f)
+        /*if (randomIndex <= 1f && randomIndex >= 1f)
         {
             //itemIndex = Random.Range(0, collision.gameObject.GetComponent<EnemyMove>().items.Length - 1);
             GameObject coin = Instantiate(gameObject.GetComponent<EnemyMove>().items[3], enposition, Quaternion.identity);
@@ -190,11 +190,11 @@ public class EnemyMove : MonoBehaviour {
         }
 
         else
-        {
+        {*/
             itemIndex = Random.Range(0, gameObject.GetComponent<EnemyMove>().items.Length - 1);
             GameObject coin = Instantiate(gameObject.GetComponent<EnemyMove>().items[itemIndex], enposition, Quaternion.identity);
             Destroy(coin, 5);
-        }
+        //}
         Destroy(gameObject);
         Player.GetComponent<Player>().enemiesKilled++;
     }
