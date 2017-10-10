@@ -98,7 +98,7 @@ public class EnemyMove : MonoBehaviour {
 
         if (gameObject.tag == "RangeEnemy")
         {
-            if (range <= 3f && !idle)
+            if (range <= 3f && !idle && Player.transform.position.y >= gameObject.transform.position.y - .3f && Player.transform.position.y <= gameObject.transform.position.y + .3f)
             {
                 rb2d.isKinematic = true;
                 if (Player.transform.position.x > transform.position.x)
@@ -113,8 +113,7 @@ public class EnemyMove : MonoBehaviour {
                 }
                 anim.SetBool("Attack", true);
             }
-
-            if (range > 3f && !idle)
+            else
             {
                 rb2d.isKinematic = false;
                 anim.SetBool("Attack", false);
@@ -130,8 +129,8 @@ public class EnemyMove : MonoBehaviour {
                     //face left
                     transform.localScale = new Vector3(-1.5f, 1.5f, 1);
                 }
-
             }
+
         }
     }
 
