@@ -37,5 +37,18 @@ public class Items : MonoBehaviour {
                 Destroy(gameObject);
             }
         }
+
+        if (gameObject.tag == "Eye")
+        {
+            if (collision.tag == "Player")
+            {
+                if (collision.gameObject.GetComponent<Player>().item != "blink")
+                {
+                    collision.gameObject.GetComponent<Player>().item = "blink";
+                }
+                //collision.gameObject.GetComponent<Player>().playerHealth += 50f;
+                Destroy(gameObject);
+            }
+        }
     }
 }
