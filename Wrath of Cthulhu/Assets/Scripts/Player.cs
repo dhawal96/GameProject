@@ -54,7 +54,7 @@ public class Player : MonoBehaviour {
         winchester = gameObject.GetComponent<AudioSource>();
         playerHealth = 100f;
 		playerMadness = 0f;
-		item = "blink";
+		item = "null";
         pauseGame = false;
 		HealthPercentage = GameObject.Find("Player1Health").transform;
 		healthscript = HealthPercentage.GetComponent<Player1Health>();
@@ -85,7 +85,14 @@ public class Player : MonoBehaviour {
                 pauseGame = true;
             }
         }
-		else if (dead == false)
+
+        if (Input.GetKey(KeyCode.H))
+        {
+            playerHealth = 100f;
+            playerMadness = 0f;
+        }
+
+        else if (dead == false)
         {
 			anim.SetFloat("Speed", Mathf.Abs(rb2d.velocity.x) + Mathf.Abs(rb2d.velocity.y));
 			anim.SetBool("Shooting", false);
@@ -176,7 +183,7 @@ public class Player : MonoBehaviour {
 						if (playerHealth >= 100f) {
 							playerHealth = 100f;
 						}
-						//item = "blink";
+						item = "null";
 						break;
 					}
 				case "blink": ///work in progress
@@ -196,6 +203,11 @@ public class Player : MonoBehaviour {
 								transform.position = new Vector3 (xPosition + 2f, transform.position.y, transform.position.z);
 							//transform.Translate(Vector3.right * speed * Time.deltaTime);
 						}
+						break;
+					}
+                  case "null":
+					{
+						//Do Nothing
 						break;
 					}
 				default:
