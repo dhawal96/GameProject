@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -77,6 +77,7 @@ public class Shop : MonoBehaviour {
 		Time.timeScale = 0f;
 		Player = GameObject.Find ("Mark").transform;
 		playerscript = Player.GetComponent <Player> ();
+
 	}
 	
 	// Update is called once per frame
@@ -108,4 +109,5 @@ public class Shop : MonoBehaviour {
 		}
 		//playerscript.item = items [selectIndex].itemName;
 	}
+
 }

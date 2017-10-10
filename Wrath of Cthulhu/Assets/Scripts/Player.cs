@@ -43,6 +43,9 @@ public class Player : MonoBehaviour {
     public float speed;
     public float enemiesKilled = 0f;
 	public bool dead;
+    public bool markShooting;
+    public float minPos;
+    public float maxPos;
 
 
     // Use this for initialization
@@ -53,14 +56,14 @@ public class Player : MonoBehaviour {
         winchester = gameObject.GetComponent<AudioSource>();
         playerHealth = 100f;
 		playerMadness = 0f;
-		item = "blink";
+		item = "null";
         pauseGame = false;
 		HealthPercentage = GameObject.Find("Player1Health").transform;
 		healthscript = HealthPercentage.GetComponent<Player1Health>();
 		MadnessPercentage = GameObject.Find("Player1Madness").transform;
 		madnessscript = MadnessPercentage.GetComponent<Player1Madness>();
-		CameraFollow = GameObject.Find ("Main Camera").transform;
-		camerascript = CameraFollow.GetComponent<CameraFollow> ();
+		CameraFollow = GameObject.Find("Main Camera").transform;
+		camerascript = CameraFollow.GetComponent<CameraFollow>();
         maxSpeed = .5f;
         speed = 50;
 		dead = false;
@@ -70,6 +73,7 @@ public class Player : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+        markShooting = false;
         if (Input.GetKeyDown(KeyCode.P))
         {
             if (pauseGame)
@@ -83,7 +87,14 @@ public class Player : MonoBehaviour {
                 pauseGame = true;
             }
         }
-		else if (dead == false)
+
+        if (Input.GetKey(KeyCode.H))
+        {
+            playerHealth = 100f;
+            playerMadness = 0f;
+        }
+
+        else if (dead == false)
         {
 			anim.SetFloat("Speed", Mathf.Abs(rb2d.velocity.x) + Mathf.Abs(rb2d.velocity.y));
 			anim.SetBool("Shooting", false);
@@ -96,13 +107,16 @@ public class Player : MonoBehaviour {
 
 			if (anim.GetCurrentAnimatorStateInfo(0).IsName("Shoot_Mark") && shootOnce)
 			{
-				Instantiate(bullet, spawnPoint.position, spawnPoint.rotation);
+                //Instantiate(bullet, spawnPoint.position, spawnPoint.rotation);
+                Transform newBullet = Instantiate(bullet.transform, spawnPoint.position, Quaternion.identity) as Transform;
+                newBullet.parent = transform;
+                markShooting = true;
 				shootOnce = false;
 			}
 
 			if (playerHealth <= 0f) {
                 anim.SetBool("Dead", true);
-				dead = true;
+				dead = true;          
 				//Destroy (transform.gameObject);
 			}
 
@@ -171,26 +185,48 @@ public class Player : MonoBehaviour {
 						if (playerHealth >= 100f) {
 							playerHealth = 100f;
 						}
-						//item = "blink";
 						break;
 					}
 				case "blink": ///work in progress
 					{
-						//float cameraSize = 2.294f;
-						float xPosition = transform.position.x;
+                            playerMadness += 1f;
+                            if (transform.position.x >= .25f && transform.position.x <= 19.74f)
+                            {
+                                minPos = .25f;
+                                maxPos = 19.74f;
+                            }
+
+                            else if (transform.position.x >= 20.23 && transform.position.x <= 29.81f)
+                            {
+                                minPos = 20.23f;
+                                maxPos = 29.81f;
+                            }
+
+                            else if (transform.position.x >= 30.27 && transform.position.x <= 42.04f)
+                            {
+                                minPos = 30.27f;
+                                maxPos = 42.04f;
+                            }
+                            //float cameraSize = 2.294f;
+                            float xPosition = transform.position.x;
 						if (left) {
-							if (xPosition - 2f < -1.65f)
-								transform.position = new Vector3 (-1.65f, transform.position.y, transform.position.z);
+							if (xPosition - 2f < minPos)
+								transform.position = new Vector3 (minPos, transform.position.y, transform.position.z);
 							else
 								transform.position = new Vector3 (xPosition - 2f, transform.position.y, transform.position.z);
 							//transform.Translate(Vector3.left * speed * Time.deltaTime);
 						} else {
-							if (xPosition + 2f > 10.5f)
-								transform.position = new Vector3 (10.5f, transform.position.y, transform.position.z);
+							if (xPosition + 2f > maxPos)
+								transform.position = new Vector3 (maxPos, transform.position.y, transform.position.z);
 							else
 								transform.position = new Vector3 (xPosition + 2f, transform.position.y, transform.position.z);
 							//transform.Translate(Vector3.right * speed * Time.deltaTime);
 						}
+						break;
+					}
+                  case "null":
+					{
+						//Do Nothing
 						break;
 					}
 				default:

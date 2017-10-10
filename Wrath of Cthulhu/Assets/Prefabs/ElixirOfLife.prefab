@@ -21,9 +21,11 @@ GameObject:
   - component: {fileID: 224554419109288226}
   - component: {fileID: 212858681327980656}
   - component: {fileID: 61737054752097862}
+
   - component: {fileID: 114204950705851228}
   - component: {fileID: 222702754652021866}
   - component: {fileID: 114101990257417050}
+
   m_Layer: 0
   m_Name: ElixirOfLife
   m_TagString: Elixir
@@ -56,6 +58,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.15666914, y: 0.23833448}
   m_EdgeRadius: 0
+
 --- !u!114 &114101990257417050
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -84,6 +87,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
 --- !u!114 &114204950705851228
+
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -91,12 +95,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1902485343648266}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b05478f84e8514b508aabfa6ee29ec49, type: 3}
+  m_Script: {fileID: 11500000, guid: 27f20e1ae8b6f614a8e86f34754bbe3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemName: elixir
-  cost: 5
-  description: Heals the user at the cost of madness.
+  PageCount: {fileID: 0}
 --- !u!212 &212858681327980656
 SpriteRenderer:
   m_ObjectHideFlags: 1
