@@ -8,7 +8,6 @@ public class Items : MonoBehaviour {
 	public Transform PageCount; //UI element
 	Currency pagescript;
 
-
 	// Use this for initialization
 	void Start () {
 		PageCount = GameObject.Find ("PageCount").transform; //UI Element
@@ -26,18 +25,17 @@ public class Items : MonoBehaviour {
             }
         }
 
-        //if (gameObject.tag == "Elixir")
-        //{
-            //if (collision.tag == "Player")
-            //{
-                //if (collision.gameObject.GetComponent<Player>().item != "elixir")
-                //{
-                    //collision.gameObject.GetComponent<Player>().item = "elixir";
-                //}
+        if (gameObject.tag == "Elixir")
+        {
+            if (collision.tag == "Player")
+            {
+                if (collision.gameObject.GetComponent<Player>().item != "elixir")
+                {
+                    collision.gameObject.GetComponent<Player>().item = "elixir";
+                }
                 //collision.gameObject.GetComponent<Player>().playerHealth += 50f;
-                //Destroy(gameObject);
-            //}
-        //}
+                Destroy(gameObject);
+            }
+        }
     }
-		
 }

@@ -181,7 +181,7 @@ public class Player : MonoBehaviour {
 					}
 				case "blink": ///work in progress
 					{
-						//float cameraSize = 2.294f;
+						float cameraSize = 2.294f;
 						float xPosition = transform.position.x;
 						if (left) {
 							if (xPosition - 2f < -1.65f)
