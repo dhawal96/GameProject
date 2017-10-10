@@ -5,12 +5,12 @@ using UnityEngine;
 public class Items : MonoBehaviour {
 
 	//PlayerCurrency
-	public Transform PageCount;
+	public Transform PageCount; //UI element
 	Currency pagescript;
 
 	// Use this for initialization
 	void Start () {
-		PageCount = GameObject.Find ("PageCount").transform;
+		PageCount = GameObject.Find ("PageCount").transform; //UI Element
 		pagescript = PageCount.GetComponent<Currency> ();
 	}
 	

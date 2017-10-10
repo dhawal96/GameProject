@@ -48,33 +48,26 @@ public class EnemyMove : MonoBehaviour {
 
     void Update()
 	{
-		
-		if (controlscript.playerHealth > 0 && controlscript.playerMadness < 100) {
+		if (controlscript.dead)
+		{
+			anim.SetBool("Idle", true);
+			idle = true;
+			anim.SetFloat("Speed", 0f);
+		}
+		else {
 			range = Vector2.Distance (transform.position, Player.transform.position);
 		}
 
         Vector3 viewPos = camera.WorldToViewportPoint(gameObject.transform.position);
 
-        if (viewPos.x > 0 && viewPos.x < 1 && viewPos.y >0 && viewPos.y <1 && viewPos.z > 0)
+		if (viewPos.x > 0 && viewPos.x < 1 && viewPos.y >0 && viewPos.y <1 && viewPos.z > 0 && !controlscript.dead) //activate enemy
         {
-            activateEnemy = true;
+			anim.SetBool("Idle", false);
+			idle = false;
+			anim.SetFloat("Speed", Mathf.Abs(rb2d.velocity.x) + Mathf.Abs(rb2d.velocity.y));
         }
 
-        if (activateEnemy == true)
-        {
-            anim.SetBool("Idle", false);
-            idle = false;
-            anim.SetFloat("Speed", Mathf.Abs(rb2d.velocity.x) + Mathf.Abs(rb2d.velocity.y));
-        }
-		else {
-			anim.SetBool ("Idle", true);
-			idle = true;
-		}
-
-        if (Player.GetComponent<Animator>().GetBool("Dead") == true)
-        {
-            anim.SetBool("Idle", true);
-        }
+        
 		if (range <= minDistance && !idle) {
 			rb2d.isKinematic = true;
 			anim.SetBool ("Attack", true);
