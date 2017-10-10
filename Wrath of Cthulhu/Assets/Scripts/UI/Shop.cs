@@ -15,10 +15,24 @@ public class Shop : MonoBehaviour {
 	public GameObject[] items;
 	public int current = 0;
 
+	//Items to Place
+	public Transform ItemOne;
+	public Transform ItemTwo;
+	public Transform ItemThree;
+
 	private Vector3 enposition;
 
 	// Use this for initialization
 	void Start () {
+		GameObject itemOneObject = Instantiate(items[0], ItemOne.position, ItemOne.rotation) as GameObject;
+		itemOneObject.transform.SetParent (transform, true);
+		itemOneObject.GetComponent<RectTransform> ().localScale = new Vector3 (1, 1, 1);
+		GameObject itemTwoObject = Instantiate(items[1], ItemTwo.position, ItemTwo.rotation) as GameObject;
+		itemTwoObject.transform.SetParent (transform, true);
+		itemTwoObject.GetComponent<RectTransform> ().localScale = new Vector3 (1, 1, 1);
+		GameObject itemThreeObject = Instantiate(items[2], ItemThree.position, ItemThree.rotation) as GameObject;
+		itemThreeObject.transform.SetParent (transform, true);
+		itemThreeObject.GetComponent<RectTransform> ().localScale = new Vector3 (1, 1, 1);
 		Time.timeScale = 0f;
 		/*Player = GameObject.Find ("Player").transform;
 		playerscript = Player.GetComponent <Player> ();

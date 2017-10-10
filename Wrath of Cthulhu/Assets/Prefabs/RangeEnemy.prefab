@@ -183,7 +183,6 @@ MonoBehaviour:
   - {fileID: 1627987009531400, guid: 2bb48ddf63ba4204e965337588ebb48f, type: 2}
   - {fileID: 1170061375301152, guid: 1da3534cca72f404198ca461d9a80d43, type: 2}
   - {fileID: 1163060148841434, guid: c00a01cd08a07474f848b29dd2ed6c5c, type: 2}
-  - {fileID: 1902485343648266, guid: 40d51cef15bfec0458ed5483888b174a, type: 2}
   mainCamera: {fileID: 0}
   camera: {fileID: 0}
   spawnPoint: {fileID: 4527218878669356}
