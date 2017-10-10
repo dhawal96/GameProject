@@ -44,6 +44,8 @@ public class Player : MonoBehaviour {
     public float enemiesKilled = 0f;
 	public bool dead;
     public bool markShooting;
+    public float minPos;
+    public float maxPos;
 
 
     // Use this for initialization
@@ -183,22 +185,39 @@ public class Player : MonoBehaviour {
 						if (playerHealth >= 100f) {
 							playerHealth = 100f;
 						}
-						item = "null";
 						break;
 					}
 				case "blink": ///work in progress
 					{
-						float cameraSize = 2.294f;
-						float xPosition = transform.position.x;
+                            playerMadness += 1f;
+                            if (transform.position.x >= .25f && transform.position.x <= 19.74f)
+                            {
+                                minPos = .25f;
+                                maxPos = 19.74f;
+                            }
+
+                            else if (transform.position.x >= 20.23 && transform.position.x <= 29.81f)
+                            {
+                                minPos = 20.23f;
+                                maxPos = 29.81f;
+                            }
+
+                            else if (transform.position.x >= 30.27 && transform.position.x <= 42.04f)
+                            {
+                                minPos = 30.27f;
+                                maxPos = 42.04f;
+                            }
+                            //float cameraSize = 2.294f;
+                            float xPosition = transform.position.x;
 						if (left) {
-							if (xPosition - 2f < -1.65f)
-								transform.position = new Vector3 (-1.65f, transform.position.y, transform.position.z);
+							if (xPosition - 2f < minPos)
+								transform.position = new Vector3 (minPos, transform.position.y, transform.position.z);
 							else
 								transform.position = new Vector3 (xPosition - 2f, transform.position.y, transform.position.z);
 							//transform.Translate(Vector3.left * speed * Time.deltaTime);
 						} else {
-							if (xPosition + 2f > 10.5f)
-								transform.position = new Vector3 (10.5f, transform.position.y, transform.position.z);
+							if (xPosition + 2f > maxPos)
+								transform.position = new Vector3 (maxPos, transform.position.y, transform.position.z);
 							else
 								transform.position = new Vector3 (xPosition + 2f, transform.position.y, transform.position.z);
 							//transform.Translate(Vector3.right * speed * Time.deltaTime);
