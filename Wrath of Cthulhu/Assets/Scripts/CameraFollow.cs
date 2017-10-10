@@ -21,6 +21,9 @@ public class CameraFollow : MonoBehaviour
 
     public Vector3 minCameraPos;
     public Vector3 maxCameraPos;
+    
+    
+
 
 
     // Use this for initialization
@@ -37,7 +40,6 @@ public class CameraFollow : MonoBehaviour
         collider2 = false;
         newMin1 = false;
         newMin2 = false;
-
     }
 
     private void Update()

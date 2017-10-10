@@ -11,6 +11,8 @@ TagManager:
   - SectionEndCollider1
   - SectionEndCollider2
   - MainCamera1
+  - RangeEnemy
+  - EnemyFirepoint
   layers:
   - Default
   - TransparentFX
