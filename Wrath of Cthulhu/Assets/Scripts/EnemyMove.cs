@@ -32,8 +32,6 @@ public class EnemyMove : MonoBehaviour {
     public Transform spawnPoint;
     public GameObject bullet;
 
-
-
     void Start()
     {
         anim = gameObject.GetComponent<Animator>();
@@ -47,6 +45,7 @@ public class EnemyMove : MonoBehaviour {
         enemyMadness = 10f;
         contact = false;
         idle = true;
+        anim.SetBool("Idle", true);
 
     }
 
@@ -135,7 +134,6 @@ public class EnemyMove : MonoBehaviour {
                     transform.localScale = new Vector3(-1.5f, 1.5f, 1);
                 }
             }
-
         }
     }
 
@@ -143,8 +141,16 @@ public class EnemyMove : MonoBehaviour {
     {
 
         Physics2D.gravity = Vector2.zero;
-        
-        rb2d.velocity = (Player.transform.position - transform.position).normalized * speed;
+
+        if (idle == true)
+        {
+            rb2d.velocity = new Vector3(0f, 0f, 0f);
+        }
+
+        else
+        {
+            rb2d.velocity = (Player.transform.position - transform.position).normalized * speed;
+        }
 
         if (rb2d.velocity.x > maxSpeed)
         {
@@ -207,8 +213,9 @@ public class EnemyMove : MonoBehaviour {
 
     void InstantiateBullet()
     {
-        Transform newBullet = Instantiate(bullet.transform, spawnPoint.position, Quaternion.identity) as Transform;
-        newBullet.parent = transform;
+        Instantiate(bullet, spawnPoint.position, spawnPoint.rotation);
+        //Transform newBullet = Instantiate(bullet.transform, spawnPoint.position, Quaternion.identity) as Transform;
+        //newBullet.parent = transform;
         enemyShooting = true;
     }
 }
