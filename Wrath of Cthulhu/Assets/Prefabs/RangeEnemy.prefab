@@ -177,6 +177,7 @@ MonoBehaviour:
   health: 0
   idle: 0
   enemyCount: 10
+  enemyShooting: 0
   enemyDamage: 0
   enemyMadness: 0
   items:
@@ -187,7 +188,7 @@ MonoBehaviour:
   mainCamera: {fileID: 0}
   camera: {fileID: 0}
   spawnPoint: {fileID: 4527218878669356}
-  bullet: {fileID: 1323442686551036, guid: 2a67613210839624d8bcb0a50ab22efc, type: 2}
+  bullet: {fileID: 1690581467278976, guid: c6257acb0c49f6144806f40364e51943, type: 2}
 --- !u!212 &212293567017382188
 SpriteRenderer:
   m_ObjectHideFlags: 1
