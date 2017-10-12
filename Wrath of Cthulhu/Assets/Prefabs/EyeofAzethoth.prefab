@@ -21,11 +21,11 @@ GameObject:
   - component: {fileID: 224896656505980490}
   - component: {fileID: 212349611610475844}
   - component: {fileID: 61601418949120072}
-  - component: {fileID: 114574349731866932}
   - component: {fileID: 222749736504678072}
   - component: {fileID: 114997312232718972}
+  - component: {fileID: 114795190197852270}
   m_Layer: 0
-  m_Name: EyeofAzethoth
+  m_Name: EyeOfAzethoth
   m_TagString: Eye
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -56,7 +56,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.28, y: 0.28}
   m_EdgeRadius: 0
---- !u!114 &114574349731866932
+--- !u!114 &114795190197852270
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -67,9 +67,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6745411ed77d049098d9c322104ef4cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemName: elixir
-  cost: 5
-  description: Heals the user at the cost of madness.
+  itemName: blink
+  cost: 8
+  description: Allows the user to teleport a short distance in the direction their
+    facing.
 --- !u!114 &114997312232718972
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -156,7 +157,7 @@ RectTransform:
   m_LocalScale: {x: 0.47351632, y: 0.47351632, z: 0.47351632}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
