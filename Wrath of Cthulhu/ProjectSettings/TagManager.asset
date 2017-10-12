@@ -14,8 +14,6 @@ TagManager:
   - RangeEnemy
   - EnemyFirepoint
   - Eye
-  - EnemyBullet
-  - Bullet
   layers:
   - Default
   - TransparentFX

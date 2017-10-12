@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletFire : MonoBehaviour
-{
+public class BulletFire : MonoBehaviour {
 
-    public float bulletForce;
+    public float bulletForce = 500f;
     private GameObject Player;
     private float bulletDamage;
     private Vector3 enposition;
@@ -22,103 +21,69 @@ public class BulletFire : MonoBehaviour
         enemyDamage = 25f;
         enemyMadness = 10f;
         restrictCurrency = true;
-
-        if (gameObject.tag == "Bullet")
-        {
-            bulletForce = 500f;
-        }
-
-        else
-        {
-            bulletForce = 100f;
-        }
     }
 
     void OnTriggerEnter2D(Collider2D target)
     {
-        switch (target.gameObject.tag)
+        if (target.gameObject.tag == "FirePoint" && gameObject.transform.parent.gameObject.tag == "Player")
         {
-            case "FirePoint":
-                if (gameObject.tag == "Bullet")
-                {
-                    if (Player.transform.localScale.x > 0)
-                    {
-                        GetComponent<Rigidbody2D>().AddForce(transform.right * bulletForce);
+            if (Player.transform.localScale.x > 0)
+            {
+                GetComponent<Rigidbody2D>().AddForce(transform.right * bulletForce);
+            }
 
-                    }
+            else
+            {
+                GetComponent<Rigidbody2D>().AddForce(-transform.right * bulletForce);
+            }
+        }
 
-                    else
-                    {
-                        GetComponent<Rigidbody2D>().AddForce(-transform.right * bulletForce);
-                    }
+        else if (target.gameObject.tag == "EnemyFirepoint" && gameObject.transform.parent.gameObject.tag == "RangeEnemy")
+        {
+            if (gameObject.transform.position.x > Player.transform.position.x)
+            {
+                GetComponent<Rigidbody2D>().AddForce(-transform.right * bulletForce);
+            }
 
-                }
-                break;
+            else
+            {
+                GetComponent<Rigidbody2D>().AddForce(transform.right * bulletForce);
+            }
 
-            case "EnemyFirepoint":
-                if (gameObject.tag == "EnemyBullet")
-                {
-                    if (target.gameObject.transform.position.x > Player.transform.position.x)
-                    {
-                        GetComponent<Rigidbody2D>().AddForce(-transform.right * bulletForce);
-                    }
-
-                    else
-                    {
-                        GetComponent<Rigidbody2D>().AddForce(transform.right * bulletForce);
-                    }
-
-                }
-                break;
-
-            case "Enemy":
-                if (gameObject.tag == "Bullet")
-                {
-                    target.gameObject.GetComponent<Animator>().SetBool("Hit", true);
-
-                    target.gameObject.GetComponent<EnemyMove>().health -= bulletDamage;
-                    Destroy(gameObject);
-
-                    if (target.gameObject.GetComponent<EnemyMove>().health <= 0)
-                    {
-                        target.gameObject.GetComponent<Animator>().SetBool("Death", true);
-
-                        Destroy(gameObject);
-                    }
-                }
-                else
-                {
-                    Destroy(gameObject);
-                }
-                break;
-
-            case "RangeEnemy":
-                if (gameObject.tag == "Bullet")
-                {
-                    target.gameObject.GetComponent<Animator>().SetBool("Hit", true);
-
-                    target.gameObject.GetComponent<EnemyMove>().health -= bulletDamage;
-                    Destroy(gameObject);
-
-                    if (target.gameObject.GetComponent<EnemyMove>().health <= 0)
-                    {
-                        target.gameObject.GetComponent<Animator>().SetBool("Death", true);
-
-                        Destroy(gameObject);
-                    }
-                }
-                break;
-
-            case "Player":
-                target.gameObject.GetComponent<Player>().playerHealth -= enemyDamage;
-                target.gameObject.GetComponent<Player>().playerMadness += enemyMadness;
-                target.gameObject.GetComponent<Animator>().SetBool("Hit", true);
-                Destroy(gameObject);
-                break;
-
-            default:
-                Destroy(gameObject);
-                break;
         }
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "RangeEnemy")
+        {
+
+            collision.gameObject.GetComponent<Animator>().SetBool("Hit", true);
+   
+            collision.gameObject.GetComponent<EnemyMove>().health -= bulletDamage;
+            Destroy(gameObject);
+
+            if (collision.gameObject.GetComponent<EnemyMove>().health <= 0)
+            {
+                collision.gameObject.GetComponent<Animator>().SetBool("Death", true);
+
+                Destroy(gameObject);
+                
+            }
+        }
+
+        else if (collision.gameObject.tag == "Player")
+        {
+            collision.gameObject.GetComponent<Player>().playerHealth -= enemyDamage;
+            collision.gameObject.GetComponent<Player>().playerMadness += enemyMadness;
+            collision.gameObject.GetComponent<Animator>().SetBool("Hit", true);
+            Destroy(gameObject);
+        }
+
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
 }

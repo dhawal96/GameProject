@@ -76,4 +76,27 @@ public class CameraFollow : MonoBehaviour
             Mathf.Clamp(transform.position.z, minCameraPos.z, maxCameraPos.z));
         }
     }
+
+    /*private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "SectionEndCollider1" && collider1 == false)
+        {
+            if (player.GetComponent<Player>().enemiesKilled >= 0)
+            {
+                collision.gameObject.SetActive(false);
+                maxCameraPos = new Vector3(27.43f, 5.78f, -10f);
+                collider1 = true;
+            }
+        }
+
+        if (collision.tag == "SectionEndCollider2" && collider2 == false)
+        {
+            if (player.GetComponent<Player>().enemiesKilled >= 0)
+            {
+                collision.gameObject.SetActive(false);
+                maxCameraPos = new Vector3(48.61f, 5.78f, -10f);
+                collider2 = true;
+            }
+        }
+    }*/
 }
