@@ -88,11 +88,6 @@ public class Player : MonoBehaviour {
             }
         }
 
-        if (Input.GetKey(KeyCode.R))
-        {
-            Application.LoadLevel(1);
-        }
-
         if (Input.GetKey(KeyCode.H))
         {
             playerHealth = 100f;
@@ -112,9 +107,9 @@ public class Player : MonoBehaviour {
 
 			if (anim.GetCurrentAnimatorStateInfo(0).IsName("Shoot_Mark") && shootOnce)
 			{
-                Instantiate(bullet, spawnPoint.position, spawnPoint.rotation);
-                //Transform newBullet = Instantiate(bullet.transform, spawnPoint.position, Quaternion.identity) as Transform;
-                //newBullet.parent = transform;
+                //Instantiate(bullet, spawnPoint.position, spawnPoint.rotation);
+                Transform newBullet = Instantiate(bullet.transform, spawnPoint.position, Quaternion.identity) as Transform;
+                newBullet.parent = transform;
                 markShooting = true;
 				shootOnce = false;
 			}
