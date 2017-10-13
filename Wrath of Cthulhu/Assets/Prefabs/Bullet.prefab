@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 114206567298036216}
   m_Layer: 0
   m_Name: Bullet
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -37,8 +37,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1323442686551036}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.693, y: -0.033, z: 0}
-  m_LocalScale: {x: 0.3183349, y: 0.2982368, z: 1}
+  m_LocalPosition: {x: 2.217, y: 2.925, z: 0}
+  m_LocalScale: {x: 0.21985003, y: 0.19385394, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -72,7 +72,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.011227533, y: -0.0059919357}
@@ -100,6 +100,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletForce: 500
+  enemyDamage: 0
+  enemyMadness: 0
 --- !u!212 &212075867344105676
 SpriteRenderer:
   m_ObjectHideFlags: 1

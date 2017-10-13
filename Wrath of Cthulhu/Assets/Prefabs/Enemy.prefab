@@ -24,6 +24,8 @@ GameObject:
   - component: {fileID: 61612483338756558}
   - component: {fileID: 95072468136569906}
   - component: {fileID: 114210506616646348}
+  - component: {fileID: 60258085286527096}
+  - component: {fileID: 61497349912020160}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -38,8 +40,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1618293949978046}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.0681996, y: 0.9488991, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 1}
+  m_LocalPosition: {x: 8.33, y: 4.09, z: 0}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -64,13 +66,85 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!61 &61612483338756558
+--- !u!60 &60258085286527096
+PolygonCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1618293949978046}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.32, y: 0.32}
+    newSize: {x: 0.32, y: 0.32}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.039285503, y: -0.056656837}
+      - {x: 0.0056091947, y: -0.03276221}
+      - {x: 0.0057473183, y: -0.0013375282}
+      - {x: 0.014267763, y: 0.020035109}
+      - {x: 0.050230503, y: 0.023544472}
+      - {x: 0.03436327, y: 0.06993835}
+      - {x: -0.02279393, y: 0.0666674}
+      - {x: -0.074969135, y: 0.07557504}
+      - {x: -0.12369585, y: 0.029332638}
+      - {x: -0.12111203, y: -0.034422398}
+      - {x: -0.11245029, y: -0.06796821}
+      - {x: -0.13912646, y: -0.088452816}
+      - {x: -0.11993822, y: -0.09745376}
+      - {x: -0.092970215, y: -0.11986971}
+      - {x: -0.099999994, y: -0.16}
+      - {x: -0.0022145908, y: -0.14309025}
+      - {x: -0.0071671805, y: -0.09853189}
+      - {x: 0.032126904, y: -0.09846592}
+      - {x: 0.08624236, y: -0.13557482}
+      - {x: 0.12121137, y: -0.11060572}
+      - {x: 0.122039005, y: -0.06661479}
+      - {x: 0.10618051, y: -0.03127305}
+      - {x: 0.07430172, y: -0.036971413}
+--- !u!61 &61497349912020160
 BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1618293949978046}
   m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.32, y: 0.32}
+    newSize: {x: 0.32, y: 0.32}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.32, y: 0.32}
+  m_EdgeRadius: 0
+--- !u!61 &61612483338756558
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1618293949978046}
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -117,11 +191,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea5b292464eb9e042907b4aa551d9cab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player: {fileID: 0}
   speed: 1
   maxSpeed: 0.01
   health: 0
+  idle: 0
+  enemyCount: 10
+  enemyShooting: 0
   enemyDamage: 0
+  enemyMadness: 0
+  items:
+  - {fileID: 1627987009531400, guid: 2bb48ddf63ba4204e965337588ebb48f, type: 2}
+  - {fileID: 1170061375301152, guid: 1da3534cca72f404198ca461d9a80d43, type: 2}
+  - {fileID: 1163060148841434, guid: c00a01cd08a07474f848b29dd2ed6c5c, type: 2}
+  - {fileID: 1902485343648266, guid: 40d51cef15bfec0458ed5483888b174a, type: 2}
+  - {fileID: 1195885709526352, guid: 1070094478d676c47b162e731e861f51, type: 2}
+  mainCamera: {fileID: 0}
+  camera: {fileID: 0}
+  spawnPoint: {fileID: 0}
+  bullet: {fileID: 0}
 --- !u!212 &212976674959459008
 SpriteRenderer:
   m_ObjectHideFlags: 1

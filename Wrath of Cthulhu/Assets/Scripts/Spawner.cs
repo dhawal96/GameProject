@@ -5,9 +5,9 @@ using UnityEngine;
 public class Spawner : MonoBehaviour
 {
     public float waveCount = 0f;
-    public float spawnTime = 10f;
+    public float spawnTime = 4f;
     //The amount of time between each spawn.
-    public float spawnDelay = 3f;
+    public float spawnDelay = 10f;
     //The amount of time before spawning starts.
     public GameObject[] enemies;
     //Array of enemy prefabs.
@@ -21,11 +21,16 @@ public class Spawner : MonoBehaviour
 
     void Spawn()
     {
+        //Randomly Spawn
+        float spawnPointX = Random.Range(2.63f, 48.58f);
+        float spawnPointY = Random.Range(1.51f, 5.78f);
+        Vector3 spawnPosition = new Vector3(spawnPointX, spawnPointY, 0);
+
         waveCount++;
         //Instantiate a random enemy.
         int enemyIndex = Random.Range(0, enemies.Length);
-        Instantiate(enemies[enemyIndex], enposition, transform.rotation);
-        if (waveCount == 3f)
+        Instantiate(enemies[enemyIndex], spawnPosition, transform.rotation);
+        if (waveCount == 10f)
         {
             CancelInvoke();
         }

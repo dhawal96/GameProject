@@ -6,6 +6,16 @@ TagManager:
   tags:
   - Enemy
   - FirePoint
+  - Currency
+  - Elixir
+  - SectionEndCollider1
+  - SectionEndCollider2
+  - MainCamera1
+  - RangeEnemy
+  - EnemyFirepoint
+  - Eye
+  - EnemyBullet
+  - Bullet
   layers:
   - Default
   - TransparentFX
@@ -15,7 +25,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - CloudsToy
   - 
   - 
   - 
@@ -42,6 +52,9 @@ TagManager:
   m_SortingLayers:
   - name: Terrain
     uniqueID: 3472707345
+    locked: 0
+  - name: Currency
+    uniqueID: 4175120341
     locked: 0
   - name: Default
     uniqueID: 0
