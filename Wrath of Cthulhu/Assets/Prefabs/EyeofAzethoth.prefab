@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 114997312232718972}
   - component: {fileID: 114795190197852270}
   m_Layer: 0
-  m_Name: EyeOfAzethoth
+  m_Name: EyeofAzethoth
   m_TagString: Eye
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
