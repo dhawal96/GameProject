@@ -54,7 +54,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1464173346913800}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.7577546, y: 0.8539381, z: 0}
+  m_LocalPosition: {x: 2.7298293, y: 0.89648426, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_Children:
   - {fileID: 4527218878669356}
@@ -177,6 +177,7 @@ MonoBehaviour:
   health: 0
   idle: 0
   enemyCount: 10
+  enemyShooting: 0
   enemyDamage: 0
   enemyMadness: 0
   items:
@@ -186,7 +187,7 @@ MonoBehaviour:
   mainCamera: {fileID: 0}
   camera: {fileID: 0}
   spawnPoint: {fileID: 4527218878669356}
-  bullet: {fileID: 1323442686551036, guid: 2a67613210839624d8bcb0a50ab22efc, type: 2}
+  bullet: {fileID: 1150888677191480, guid: 73e9833156ac1704da8346986cfb22ca, type: 2}
 --- !u!212 &212293567017382188
 SpriteRenderer:
   m_ObjectHideFlags: 1
