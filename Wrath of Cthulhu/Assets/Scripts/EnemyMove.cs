@@ -47,6 +47,7 @@ public class EnemyMove : MonoBehaviour {
         enemyMadness = 10f;
         contact = false;
         idle = true;
+        anim.SetBool("Idle", true);
 
     }
 
@@ -75,13 +76,13 @@ public class EnemyMove : MonoBehaviour {
 
         if (gameObject.tag == "Enemy")
         {
-            if (range <= minDistance && !idle)
+            if (range <= minDistance && !idle && !anim.GetBool("Death") == true)
             {
                 rb2d.isKinematic = true;
                 anim.SetBool("Attack", true);
             }
 
-            if (range > minDistance && !idle)
+            if (range > minDistance && !idle && !anim.GetBool("Death") == true)
             {
                 rb2d.isKinematic = false;
                 anim.SetBool("Attack", false);
@@ -118,7 +119,7 @@ public class EnemyMove : MonoBehaviour {
                 }
                 anim.SetBool("Attack", true);
             }
-            else if (!idle)
+            else if (!idle && !anim.GetBool("Death") == true)
             {
                 rb2d.isKinematic = false;
                 anim.SetBool("Attack", false);
@@ -143,8 +144,16 @@ public class EnemyMove : MonoBehaviour {
     {
 
         Physics2D.gravity = Vector2.zero;
-        
-        rb2d.velocity = (Player.transform.position - transform.position).normalized * speed;
+
+        if (idle == true)
+        {
+            rb2d.velocity = new Vector3(0f, 0f, 0f);
+        }
+
+        else
+        {
+            rb2d.velocity = (Player.transform.position - transform.position).normalized * speed;
+        }
 
         if (rb2d.velocity.x > maxSpeed)
         {
@@ -186,6 +195,7 @@ public class EnemyMove : MonoBehaviour {
     private void Destroy()
     {
         enposition = gameObject.GetComponent<EnemyMove>().transform.position;
+        Destroy(gameObject);
         randomIndex = Random.Range(1f, 100f);
         if (randomIndex <= 60f && randomIndex >= 1f)
         {
@@ -201,14 +211,14 @@ public class EnemyMove : MonoBehaviour {
             GameObject coin = Instantiate(gameObject.GetComponent<EnemyMove>().items[itemIndex], enposition, Quaternion.identity);
             Destroy(coin, 5);
         }
-        Destroy(gameObject);
         Player.GetComponent<Player>().enemiesKilled++;
     }
 
     void InstantiateBullet()
     {
-        Transform newBullet = Instantiate(bullet.transform, spawnPoint.position, Quaternion.identity) as Transform;
-        newBullet.parent = transform;
+        Instantiate(bullet, spawnPoint.position, spawnPoint.rotation);
+        //Transform newBullet = Instantiate(bullet.transform, spawnPoint.position, Quaternion.identity) as Transform;
+        //newBullet.parent = transform;
         enemyShooting = true;
     }
 }
