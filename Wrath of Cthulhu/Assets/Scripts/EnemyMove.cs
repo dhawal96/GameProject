@@ -30,6 +30,7 @@ public class EnemyMove : MonoBehaviour {
     public GameObject mainCamera;
     public Camera camera;
     public Transform spawnPoint;
+    public Vector3 playerPosition;
     public GameObject bullet;
 
 
@@ -216,9 +217,16 @@ public class EnemyMove : MonoBehaviour {
 
     void InstantiateBullet()
     {
-        Instantiate(bullet, spawnPoint.position, spawnPoint.rotation);
-        //Transform newBullet = Instantiate(bullet.transform, spawnPoint.position, Quaternion.identity) as Transform;
+        //Instantiate(bullet, spawnPoint.position, spawnPoint.rotation);
+        Transform newBullet = Instantiate(bullet.transform, spawnPoint.position, Quaternion.identity) as Transform;
+        newBullet.GetComponent<BulletFire>().Enemy = gameObject;
         //newBullet.parent = transform;
         enemyShooting = true;
     }
+
+    void getPlayerPosition()
+    {
+        playerPosition = Player.transform.position;
+    }
+
 }

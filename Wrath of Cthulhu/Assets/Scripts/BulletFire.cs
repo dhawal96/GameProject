@@ -14,6 +14,7 @@ public class BulletFire : MonoBehaviour
     private bool restrictCurrency;
     public float enemyDamage;
     public float enemyMadness;
+    public GameObject Enemy;
 
     private void Start()
     {
@@ -58,9 +59,10 @@ public class BulletFire : MonoBehaviour
             case "EnemyFirepoint":
                 if (gameObject.tag == "EnemyBullet")
                 {
-                    if (target.gameObject.transform.position.x > Player.transform.position.x)
+                    if (Enemy.transform.localScale.x < 0)
                     {
                         GetComponent<Rigidbody2D>().AddForce(-transform.right * bulletForce);
+
                     }
 
                     else
