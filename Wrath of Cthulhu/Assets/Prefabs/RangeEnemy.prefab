@@ -131,7 +131,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.010751337, y: -0.034007505}
+  m_Offset: {x: -0.026361175, y: -0.036237475}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -142,7 +142,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.22950491, y: 0.25198498}
+  m_Size: {x: 0.18936555, y: 0.24752504}
   m_EdgeRadius: 0
 --- !u!95 &95151509613991002
 Animator:
@@ -187,6 +187,7 @@ MonoBehaviour:
   mainCamera: {fileID: 0}
   camera: {fileID: 0}
   spawnPoint: {fileID: 4527218878669356}
+  playerPosition: {x: 0, y: 0, z: 0}
   bullet: {fileID: 1150888677191480, guid: 73e9833156ac1704da8346986cfb22ca, type: 2}
 --- !u!212 &212293567017382188
 SpriteRenderer:
