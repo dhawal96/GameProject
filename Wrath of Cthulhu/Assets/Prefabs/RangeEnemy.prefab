@@ -21,9 +21,9 @@ GameObject:
   - component: {fileID: 4100221798941382}
   - component: {fileID: 212293567017382188}
   - component: {fileID: 95151509613991002}
-  - component: {fileID: 50825315476198248}
   - component: {fileID: 61627143373342032}
   - component: {fileID: 114058333183528856}
+  - component: {fileID: 50087238516167410}
   m_Layer: 0
   m_Name: RangeEnemy
   m_TagString: RangeEnemy
@@ -74,7 +74,7 @@ Transform:
   m_Father: {fileID: 4100221798941382}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!50 &50825315476198248
+--- !u!50 &50087238516167410
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 1
@@ -188,7 +188,7 @@ MonoBehaviour:
   camera: {fileID: 0}
   spawnPoint: {fileID: 4527218878669356}
   playerPosition: {x: 0, y: 0, z: 0}
-  bullet: {fileID: 1150888677191480, guid: 73e9833156ac1704da8346986cfb22ca, type: 2}
+  bullet: {fileID: 1815403598727914, guid: e362c4bbf94bdf7469be11986168b482, type: 2}
 --- !u!212 &212293567017382188
 SpriteRenderer:
   m_ObjectHideFlags: 1
