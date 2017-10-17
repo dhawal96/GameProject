@@ -21,6 +21,7 @@ public class EnemyMove : MonoBehaviour {
     public Vector2 savedVelocity;
     private float minDistance = .524848f;
     private bool rangeEnemyAttack;
+    private bool setDashActive;
 
     private Animator anim;
     private Rigidbody2D rb2d;
@@ -54,6 +55,7 @@ public class EnemyMove : MonoBehaviour {
         contact = false;
         idle = true;
         rangeEnemyAttack = false;
+        setDashActive = true;
         dashState = DashState.Ready;
         anim.SetBool("Idle", true);
 
@@ -98,25 +100,32 @@ public class EnemyMove : MonoBehaviour {
             anim.SetBool("Attack", true);
         }
 
+        if (gameObject.tag == "Enemy" && !anim.GetCurrentAnimatorStateInfo(0).IsName("Dash_DeepOnes"))
+        {
+            setDashActive = true;
+        }
+
         if (gameObject.tag == "Enemy")
         {
+            
             if (range <= minDistance && !idle && !anim.GetBool("Death") == true && Player.transform.position.y >= gameObject.transform.position.y - .3f && Player.transform.position.y <= gameObject.transform.position.y + .3f)
             {
                 rb2d.isKinematic = true;
                 anim.SetBool("Attack", true);
                 anim.SetBool("Dash", false);
-            }
 
-            else if (range <= 1.093846f && !idle && !anim.GetBool("Death") == true && Player.transform.position.y >= gameObject.transform.position.y - .3f && Player.transform.position.y <= gameObject.transform.position.y + .3f)
+            }
+          
+            else if (range <= 1.093846f && !idle && !anim.GetBool("Death") == true && Player.transform.position.y >= gameObject.transform.position.y - .3f && Player.transform.position.y <= gameObject.transform.position.y + .3f && setDashActive)
             {
-   
+                //dashState = DashState.Ready;
                 Debug.Log(dashState);
                 switch (dashState)
                 {
                     case DashState.Ready:
-                        savedVelocity = rb2d.velocity; 
-                //rb2d.velocity = new Vector2(rb2d.velocity.x * 3f, rb2d.velocity.y);
-              
+                        savedVelocity = rb2d.velocity;
+                        //rb2d.velocity = new Vector2(rb2d.velocity.x * 3f, rb2d.velocity.y);
+
                         dashState = DashState.Dashing;
                         break;
                     case DashState.Dashing:
@@ -126,15 +135,15 @@ public class EnemyMove : MonoBehaviour {
                         }
                         rb2d.isKinematic = false;
                         anim.SetBool("Dash", true);
-                        rb2d.AddForce((Player.transform.position - transform.position) * 25f);
-                        /*if (transform.localScale.x > 0)
+                        //rb2d.AddForce((Player.transform.position - transform.position) * 25f);
+                        if (transform.localScale.x > 0)
                         {
-                            rb2d.AddForce(Vector3.right * 20f);
+                            rb2d.AddForce(Vector3.right * 50f);
                         }
                         else
                         {
-                            rb2d.AddForce(Vector3.left * 20f);
-                        }*/
+                            rb2d.AddForce(Vector3.left * 50f);
+                        }
                         dashTimer += Time.deltaTime * 3;
                         if (dashTimer >= maxDash)
                         {
@@ -142,6 +151,7 @@ public class EnemyMove : MonoBehaviour {
                             rb2d.velocity = savedVelocity;
                             //dashState = DashState.Cooldown;
                         }
+
                         break;
                     case DashState.Cooldown:
                         anim.SetBool("Dash", false);
@@ -158,25 +168,26 @@ public class EnemyMove : MonoBehaviour {
                 }
             }
 
-        else if (range > minDistance && !idle && !anim.GetBool("Death") == true)
-        {
-            rb2d.isKinematic = false;
-            anim.SetBool("Attack", false);
-            anim.SetBool("Dash", false);
+            else if (range > minDistance && !idle && !anim.GetBool("Death") == true && !anim.GetCurrentAnimatorStateInfo(0).IsName("Dash_DeepOnes"))
+            {
+                rb2d.isKinematic = false;
+                anim.SetBool("Attack", false);
+                anim.SetBool("Dash", false);
 
-            transform.position = Vector2.MoveTowards(transform.position, Player.transform.position, speed * Time.deltaTime);
-            if (Player.transform.position.x > transform.position.x)
-            {
-                //face right
-                transform.localScale = new Vector3(1.5f, 1.5f, 1);
+                transform.position = Vector2.MoveTowards(transform.position, Player.transform.position, speed * Time.deltaTime);
+                if (Player.transform.position.x > transform.position.x)
+                {
+                    //face right
+                    transform.localScale = new Vector3(1.5f, 1.5f, 1);
+                }
+                else if (Player.transform.position.x < transform.position.x)
+                {
+                    //face left
+                    transform.localScale = new Vector3(-1.5f, 1.5f, 1);
+                }
             }
-            else if (Player.transform.position.x < transform.position.x)
-            {
-                //face left
-                transform.localScale = new Vector3(-1.5f, 1.5f, 1);
-            }
+            
         }
-    }
 
         if (gameObject.tag == "RangeEnemy")
         {
@@ -313,6 +324,16 @@ public class EnemyMove : MonoBehaviour {
         }
     }
 
+    private void endDashState()
+    {
+        anim.SetBool("Dash", false);
+    }
+
+    private void startDashState()
+    {
+        setDashActive = false;
+    }
+
     public enum DashState
     {
         Ready,
@@ -322,3 +343,5 @@ public class EnemyMove : MonoBehaviour {
     }
 
 }
+
+

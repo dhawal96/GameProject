@@ -485,7 +485,7 @@ Transform:
   - {fileID: 1083108568}
   - {fileID: 986048432}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &52010635
 MonoBehaviour:
@@ -946,7 +946,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4348969975031134, guid: 0760493300801564db7cf9489e71b661, type: 2}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1618293949978046, guid: 0760493300801564db7cf9489e71b661, type: 2}
       propertyPath: m_Name
@@ -1293,7 +1293,7 @@ Transform:
   m_Children:
   - {fileID: 408186884}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &291277039
 Rigidbody2D:
@@ -8635,7 +8635,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4348969975031134, guid: 0760493300801564db7cf9489e71b661, type: 2}
       propertyPath: m_RootOrder
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1618293949978046, guid: 0760493300801564db7cf9489e71b661, type: 2}
       propertyPath: m_Name

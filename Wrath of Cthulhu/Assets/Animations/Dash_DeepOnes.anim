@@ -20,25 +20,25 @@ AnimationClip:
   - curve:
     - time: 0
       value: {fileID: 21300020, guid: 30dfbf852c7544641aa43750d8e74f72, type: 3}
-    - time: 0.15
+    - time: 0.05
       value: {fileID: 21300002, guid: 30dfbf852c7544641aa43750d8e74f72, type: 3}
-    - time: 0.31666666
+    - time: 0.1
       value: {fileID: 21300004, guid: 30dfbf852c7544641aa43750d8e74f72, type: 3}
-    - time: 0.46666667
+    - time: 0.15
       value: {fileID: 21300006, guid: 30dfbf852c7544641aa43750d8e74f72, type: 3}
-    - time: 0.6166667
+    - time: 0.2
       value: {fileID: 21300008, guid: 30dfbf852c7544641aa43750d8e74f72, type: 3}
-    - time: 0.78333336
+    - time: 0.26666668
       value: {fileID: 21300010, guid: 30dfbf852c7544641aa43750d8e74f72, type: 3}
-    - time: 0.9166667
+    - time: 0.31666666
       value: {fileID: 21300012, guid: 30dfbf852c7544641aa43750d8e74f72, type: 3}
-    - time: 1.0666667
+    - time: 0.36666667
       value: {fileID: 21300014, guid: 30dfbf852c7544641aa43750d8e74f72, type: 3}
-    - time: 1.2166667
+    - time: 0.41666666
       value: {fileID: 21300016, guid: 30dfbf852c7544641aa43750d8e74f72, type: 3}
-    - time: 1.3833333
+    - time: 0.46666667
       value: {fileID: 21300018, guid: 30dfbf852c7544641aa43750d8e74f72, type: 3}
-    - time: 1.5333333
+    - time: 0.51666665
       value: {fileID: 21300020, guid: 30dfbf852c7544641aa43750d8e74f72, type: 3}
     attribute: m_Sprite
     path: 
@@ -75,7 +75,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 1.55
+    m_StopTime: 0.55
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -96,8 +96,15 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_GenerateMotionCurves: 0
   m_Events:
-  - time: 1.35
+  - time: 0.46666667
     functionName: Damage
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.55
+    functionName: endDashState
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

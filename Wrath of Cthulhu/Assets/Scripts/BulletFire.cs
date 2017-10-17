@@ -5,7 +5,8 @@ using UnityEngine;
 public class BulletFire : MonoBehaviour
 {
 
-    public float bulletForce;
+    private float playerBulletForce;
+    private float enemyBulletForce;
     private GameObject Player;
     private float bulletDamage;
     private Vector3 enposition;
@@ -23,16 +24,8 @@ public class BulletFire : MonoBehaviour
         enemyDamage = 25f;
         enemyMadness = 10f;
         restrictCurrency = true;
-
-        if (gameObject.tag == "Bullet")
-        {
-            bulletForce = 500f;
-        }
-
-        else
-        {
-            bulletForce = 100f;
-        }
+        playerBulletForce = 500f;
+        enemyBulletForce = 100f;
     }
 
     void OnTriggerEnter2D(Collider2D target)
@@ -44,13 +37,13 @@ public class BulletFire : MonoBehaviour
                 {
                     if (Player.transform.localScale.x > 0)
                     {
-                        GetComponent<Rigidbody2D>().AddForce(transform.right * bulletForce);
+                        GetComponent<Rigidbody2D>().AddForce(transform.right * playerBulletForce);
 
                     }
 
                     else
                     {
-                        GetComponent<Rigidbody2D>().AddForce(-transform.right * bulletForce);
+                        GetComponent<Rigidbody2D>().AddForce(-transform.right * playerBulletForce);
                     }
 
                 }
@@ -61,13 +54,13 @@ public class BulletFire : MonoBehaviour
                 {
                     if (Enemy.transform.localScale.x < 0)
                     {
-                        GetComponent<Rigidbody2D>().AddForce(-transform.right * bulletForce);
+                        GetComponent<Rigidbody2D>().AddForce(-transform.right * enemyBulletForce);
 
                     }
 
                     else
                     {
-                        GetComponent<Rigidbody2D>().AddForce(transform.right * bulletForce);
+                        GetComponent<Rigidbody2D>().AddForce(transform.right * enemyBulletForce);
                     }
 
                 }
