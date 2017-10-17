@@ -178,6 +178,10 @@ MonoBehaviour:
   idle: 0
   enemyCount: 10
   enemyShooting: 0
+  dashState: 0
+  dashTimer: 0
+  maxDash: 20
+  savedVelocity: {x: 0, y: 0}
   enemyDamage: 0
   enemyMadness: 0
   items:
