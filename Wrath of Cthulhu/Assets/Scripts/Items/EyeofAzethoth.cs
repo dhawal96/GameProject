@@ -6,7 +6,7 @@ public class EyeOfAzethoth : MonoBehaviour {
 
 	public string itemName = "blink";
 	public int cost = 8;
-	public string description = "Allows the user to teleport a short distance in the direction their facing.";
+	public string description = "Allows the user to teleport a short distance in the direction they're facing.";
 
 	public void SelectItem(int selectIndex) {
 

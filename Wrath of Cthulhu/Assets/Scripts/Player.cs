@@ -22,7 +22,7 @@ public class Player : MonoBehaviour {
 	CameraFollow camerascript;
 
     //Player1Currency
-    public float currency = 0;
+    public float currency = 0;//currently not used
 
 	//Player1Bullet
     public GameObject bullet;

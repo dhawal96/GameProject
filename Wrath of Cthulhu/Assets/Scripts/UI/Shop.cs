@@ -63,7 +63,7 @@ public class Shop : MonoBehaviour {
 		threeName.name = "Morphine";
 
 		//Create Items
-		GameObject itemOneObject = Instantiate(items[0], ItemOne.position+(transform.forward*-2), ItemOne.rotation) as GameObject;
+		GameObject itemOneObject = Instantiate(items[0], ItemOne.position - ItemOne.forward * 3f, ItemOne.rotation) as GameObject;
 		itemOneObject.transform.SetParent (transform, true);
 		itemOneObject.GetComponent<RectTransform> ().localScale = new Vector3 (1, 1, 1);
 		GameObject itemTwoObject = Instantiate(items[1], ItemTwo.position, ItemTwo.rotation) as GameObject;
@@ -78,11 +78,6 @@ public class Shop : MonoBehaviour {
 		Player = GameObject.Find ("Mark").transform;
 		playerscript = Player.GetComponent <Player> ();
 
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
 	}
 
 	public void DoneShopping(){

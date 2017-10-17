@@ -274,7 +274,7 @@ public class EnemyMove : MonoBehaviour {
         enposition = gameObject.GetComponent<EnemyMove>().transform.position;
         Destroy(gameObject);
         randomIndex = Random.Range(1f, 100f);
-        if (randomIndex <= 60f && randomIndex >= 1f)
+        if (false&&randomIndex <= 60f && randomIndex >= 1f) ///THIS IF NEVER SUCCEEDS BECAUSE THE ITEMS DROPPED BY THE ENEMY ARE LIMITED TO CURRENCY
         {
             //itemIndex = Random.Range(0, collision.gameObject.GetComponent<EnemyMove>().items.Length - 1);
             itemIndex = Random.Range(3, gameObject.GetComponent<EnemyMove>().items.Length);
