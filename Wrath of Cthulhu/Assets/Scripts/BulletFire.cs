@@ -6,7 +6,6 @@ public class BulletFire : MonoBehaviour
 {
 
     private float playerBulletForce;
-    private float enemyBulletForce;
     private GameObject Player;
     private float bulletDamage;
     private Vector3 enposition;
@@ -25,7 +24,6 @@ public class BulletFire : MonoBehaviour
         enemyMadness = 10f;
         restrictCurrency = true;
         playerBulletForce = 500f;
-        enemyBulletForce = 100f;
     }
 
     void OnTriggerEnter2D(Collider2D target)
@@ -54,13 +52,12 @@ public class BulletFire : MonoBehaviour
                 {
                     if (Enemy.transform.localScale.x < 0)
                     {
-                        GetComponent<Rigidbody2D>().AddForce(-transform.right * enemyBulletForce);
-
+                        GetComponent<Rigidbody2D>().velocity = new Vector3(-2.5f, 0f, 0f);
                     }
 
                     else
                     {
-                        GetComponent<Rigidbody2D>().AddForce(transform.right * enemyBulletForce);
+                        GetComponent<Rigidbody2D>().velocity = new Vector3(2.5f, 0f, 0f);
                     }
 
                 }
