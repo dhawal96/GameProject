@@ -17,11 +17,11 @@ public class EnemyMove : MonoBehaviour {
     private Vector3 enposition;
     public DashState dashState;
     public float dashTimer;
-    public float maxDash = 20f;
+    public float maxDash = 1f;
     public Vector2 savedVelocity;
     private float minDistance = .524848f;
     private bool rangeEnemyAttack;
-    private bool setDashActive;
+    private bool moveEnemy;
 
     private Animator anim;
     private Rigidbody2D rb2d;
@@ -54,8 +54,8 @@ public class EnemyMove : MonoBehaviour {
         enemyMadness = 10f;
         contact = false;
         idle = true;
+        moveEnemy = true;
         rangeEnemyAttack = false;
-        setDashActive = true;
         dashState = DashState.Ready;
         anim.SetBool("Idle", true);
 
@@ -100,23 +100,29 @@ public class EnemyMove : MonoBehaviour {
             anim.SetBool("Attack", true);
         }
 
-        if (gameObject.tag == "Enemy" && !anim.GetCurrentAnimatorStateInfo(0).IsName("Dash_DeepOnes"))
-        {
-            setDashActive = true;
-        }
-
         if (gameObject.tag == "Enemy")
         {
             
-            if (range <= minDistance && !idle && !anim.GetBool("Death") == true && Player.transform.position.y >= gameObject.transform.position.y - .3f && Player.transform.position.y <= gameObject.transform.position.y + .3f)
+            if (range <= minDistance && !idle && !anim.GetBool("Death") == true && Player.transform.position.y >= gameObject.transform.position.y - .2f && Player.transform.position.y <= gameObject.transform.position.y + .2f)
             {
                 rb2d.isKinematic = true;
                 anim.SetBool("Attack", true);
                 anim.SetBool("Dash", false);
 
+                if (dashState == DashState.Cooldown)
+                {
+                    dashTimer -= Time.deltaTime * .1f;
+                }
+
+                if (dashTimer <= 0)
+                {
+                    dashTimer = 0;
+                    dashState = DashState.Ready;
+                }
+
             }
           
-            else if (range <= 1.093846f && !idle && !anim.GetBool("Death") == true && Player.transform.position.y >= gameObject.transform.position.y - .3f && Player.transform.position.y <= gameObject.transform.position.y + .3f && setDashActive)
+            else if (range <= 1.093846f && !idle && !anim.GetBool("Death") == true && Player.transform.position.y >= gameObject.transform.position.y - .2f && Player.transform.position.y <= gameObject.transform.position.y + .2f)
             {
                 //dashState = DashState.Ready;
                 Debug.Log(dashState);
@@ -124,43 +130,55 @@ public class EnemyMove : MonoBehaviour {
                 {
                     case DashState.Ready:
                         savedVelocity = rb2d.velocity;
-                        //rb2d.velocity = new Vector2(rb2d.velocity.x * 3f, rb2d.velocity.y);
+                        
+                        rb2d.velocity = new Vector2(rb2d.velocity.x * 3f, rb2d.velocity.y);
 
                         dashState = DashState.Dashing;
                         break;
                     case DashState.Dashing:
+
                         if (Player.GetComponent<Player>().dead == true)
                         {
+                            anim.SetBool("Dash", false);
                             dashState = DashState.End;
                         }
-                        rb2d.isKinematic = false;
-                        anim.SetBool("Dash", true);
-                        //rb2d.AddForce((Player.transform.position - transform.position) * 25f);
-                        if (transform.localScale.x > 0)
-                        {
-                            rb2d.AddForce(Vector3.right * 50f);
-                        }
+
                         else
                         {
-                            rb2d.AddForce(Vector3.left * 50f);
-                        }
-                        dashTimer += Time.deltaTime * 3;
-                        if (dashTimer >= maxDash)
-                        {
-                            dashTimer = maxDash;
-                            rb2d.velocity = savedVelocity;
-                            //dashState = DashState.Cooldown;
-                        }
+                            rb2d.isKinematic = false;
+                            anim.SetBool("Dash", true);
 
-                        break;
+                            if (transform.localScale.x > 0)
+                            {
+                                //rb2d.MovePosition(transform.position + direction * 20f * Time.deltaTime);
+                                rb2d.AddForce(Vector3.right * 325f);
+                            }
+                            else
+                            {
+                                //rb2d.MovePosition(transform.position + direction * 20f * Time.deltaTime);
+                                rb2d.AddForce(Vector3.left * 325f);
+                            }
+
+                            dashTimer += Time.deltaTime * 100;
+                            Debug.Log("This is dashtime " + dashTimer);
+                            if (dashTimer >= maxDash)
+                            {
+
+                                dashTimer = maxDash;
+                                rb2d.velocity = savedVelocity;
+                                dashState = DashState.Cooldown;
+                            }
+                        } 
+                    break;
                     case DashState.Cooldown:
                         anim.SetBool("Dash", false);
                         transform.position = Vector2.MoveTowards(transform.position, Player.transform.position, speed * Time.deltaTime);
-                        dashTimer -= Time.deltaTime;
+                        dashTimer -= Time.deltaTime * .1f;
+
                         if (dashTimer <= 0)
                         {
-                            dashTimer = 0;
-                            dashState = DashState.Ready;
+                           dashTimer = 0;
+                           dashState = DashState.Ready;
                         }
                         break;
                     default:
@@ -173,6 +191,17 @@ public class EnemyMove : MonoBehaviour {
                 rb2d.isKinematic = false;
                 anim.SetBool("Attack", false);
                 anim.SetBool("Dash", false);
+
+                if (dashState == DashState.Cooldown)
+                {
+                    dashTimer -= Time.deltaTime * .1f;
+                }
+
+                if (dashTimer <= 0)
+                {
+                    dashTimer = 0;
+                    dashState = DashState.Ready;
+                }
 
                 transform.position = Vector2.MoveTowards(transform.position, Player.transform.position, speed * Time.deltaTime);
                 if (Player.transform.position.x > transform.position.x)
@@ -227,29 +256,46 @@ public class EnemyMove : MonoBehaviour {
             rb2d.velocity = new Vector3(0f, 0f, 0f);
         }
 
+        /*else if (gameObject.tag == "Enemy" && anim.GetBool("Dash") == true && moveEnemy == true)
+        {
+            Vector3 direction = (Player.transform.position - transform.position).normalized;
+
+
+                if (transform.localScale.x > 0)
+                {
+                    //rb2d.MovePosition(transform.position + direction * 20f * Time.deltaTime);
+                    rb2d.AddForce(Vector3.right * 325f);
+                }
+                else
+                {
+                    //rb2d.MovePosition(transform.position + direction * 20f * Time.deltaTime);
+                    rb2d.AddForce(Vector3.left * 325f);
+                }
+
+        }*/
         else
         {
             rb2d.velocity = (Player.transform.position - transform.position).normalized * speed;
-        }
 
-        if (rb2d.velocity.x > maxSpeed)
-        {
-            rb2d.velocity = new Vector2(maxSpeed, rb2d.velocity.y);
-        }
+            if (rb2d.velocity.x > maxSpeed)
+            {
+                rb2d.velocity = new Vector2(maxSpeed, rb2d.velocity.y);
+            }
 
-        if (rb2d.velocity.x < -maxSpeed)
-        {
-            rb2d.velocity = new Vector2(-maxSpeed, rb2d.velocity.y);
-        }
+            if (rb2d.velocity.x < -maxSpeed)
+            {
+                rb2d.velocity = new Vector2(-maxSpeed, rb2d.velocity.y);
+            }
 
-        if (rb2d.velocity.y > maxSpeed)
-        {
-            rb2d.velocity = new Vector2(rb2d.velocity.x, maxSpeed);
-        }
+            if (rb2d.velocity.y > maxSpeed)
+            {
+                rb2d.velocity = new Vector2(rb2d.velocity.x, maxSpeed);
+            }
 
-        if (rb2d.velocity.y < -maxSpeed)
-        {
-            rb2d.velocity = new Vector2(rb2d.velocity.x, -maxSpeed);
+            if (rb2d.velocity.y < -maxSpeed)
+            {
+                rb2d.velocity = new Vector2(rb2d.velocity.x, -maxSpeed);
+            }
         }
     }
 
@@ -313,7 +359,6 @@ public class EnemyMove : MonoBehaviour {
         {
             rb2d.isKinematic = true;
         }
-
     }
 
     private void OnCollisionExit2D(Collision2D collision)
@@ -329,9 +374,14 @@ public class EnemyMove : MonoBehaviour {
         anim.SetBool("Dash", false);
     }
 
-    private void startDashState()
+    private void moveEnemyDash()
     {
-        setDashActive = false;
+        moveEnemy = true;
+    }
+
+    private void endMoveEnemyDash()
+    {
+        moveEnemy = false;
     }
 
     public enum DashState
@@ -343,5 +393,3 @@ public class EnemyMove : MonoBehaviour {
     }
 
 }
-
-
