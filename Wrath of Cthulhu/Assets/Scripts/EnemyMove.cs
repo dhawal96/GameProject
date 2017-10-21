@@ -1,43 +1,56 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyMove : MonoBehaviour {
 
+    //Game Components
     private GameObject Player;
-    public float speed = 1f;
-    public float maxSpeed = .01f;
-    public float health;
-    public bool idle;
-    public float enemyCount = 10f;
-    private bool activateEnemy = false;
-    public bool enemyShooting;
-    private float randomIndex;
-    private int itemIndex;
-    private Vector3 enposition;
+    Player controlscript;
+    private Animator anim;
+    private Rigidbody2D rb2d;
+
+    //Camera
+    public GameObject mainCamera;
+    public Camera camera;
+
+    //Range Enemy
+    private bool rangeEnemyAttack;
+    private float range;
+
+    //Bullet
+    public Transform spawnPoint;
+    public Vector3 playerPosition;
+    public GameObject bullet;
+
+    //Dash 
     public DashState dashState;
     public float dashTimer;
     public float maxDash = 1f;
     public Vector2 savedVelocity;
-    private float minDistance = .524848f;
-    private bool rangeEnemyAttack;
     private bool moveEnemy;
+    private bool controlDashCollision;
 
-    private Animator anim;
-    private Rigidbody2D rb2d;
-    private float range;
+    //Items
+    private float randomIndex;
+    private int itemIndex;
+    private Vector3 enposition;
+    public GameObject[] items;
+
+    //Melee Attack
+    public bool idle;
+    private float minDistance = .524848f;
+    public bool attackMark;
+    public bool controlMeleeCollision;
+
+    //Enemy Attributes
+    public float speed = 1f;
+    public float maxSpeed = .01f;
+    public float health;
+    public float enemyCount = 10f;
+    public bool enemyShooting;
     public float enemyDamage;
     public float enemyMadness;
-    RaycastHit2D hit;
-    Player controlscript;
-    bool contact;
-
-    public GameObject[] items;
-    public GameObject mainCamera;
-    public Camera camera;
-    public Transform spawnPoint;
-    public Vector3 playerPosition;
-    public GameObject bullet;
 
 
 
@@ -52,12 +65,15 @@ public class EnemyMove : MonoBehaviour {
         health = 300f;
         enemyDamage = 25f;
         enemyMadness = 10f;
-        contact = false;
         idle = true;
-        moveEnemy = true;
+        moveEnemy = false;
         rangeEnemyAttack = false;
+        attackMark = false;
+        controlMeleeCollision = false;
+        controlDashCollision = false;
         dashState = DashState.Ready;
         anim.SetBool("Idle", true);
+        
 
     }
 
@@ -125,7 +141,8 @@ public class EnemyMove : MonoBehaviour {
             else if (range <= 1.093846f && !idle && !anim.GetBool("Death") == true && Player.transform.position.y >= gameObject.transform.position.y - .2f && Player.transform.position.y <= gameObject.transform.position.y + .2f)
             {
                 //dashState = DashState.Ready;
-                Debug.Log(dashState);
+                anim.SetBool("Attack", false);
+                //Debug.Log(dashState);
                 switch (dashState)
                 {
                     case DashState.Ready:
@@ -148,19 +165,8 @@ public class EnemyMove : MonoBehaviour {
                             rb2d.isKinematic = false;
                             anim.SetBool("Dash", true);
 
-                            if (transform.localScale.x > 0)
-                            {
-                                //rb2d.MovePosition(transform.position + direction * 20f * Time.deltaTime);
-                                rb2d.AddForce(Vector3.right * 325f);
-                            }
-                            else
-                            {
-                                //rb2d.MovePosition(transform.position + direction * 20f * Time.deltaTime);
-                                rb2d.AddForce(Vector3.left * 325f);
-                            }
-
                             dashTimer += Time.deltaTime * 100;
-                            Debug.Log("This is dashtime " + dashTimer);
+                            //Debug.Log("This is dashtime " + dashTimer);
                             if (dashTimer >= maxDash)
                             {
 
@@ -256,23 +262,20 @@ public class EnemyMove : MonoBehaviour {
             rb2d.velocity = new Vector3(0f, 0f, 0f);
         }
 
-        /*else if (gameObject.tag == "Enemy" && anim.GetBool("Dash") == true && moveEnemy == true)
+        else if (gameObject.tag == "Enemy" && moveEnemy == true)
         {
             Vector3 direction = (Player.transform.position - transform.position).normalized;
-
-
                 if (transform.localScale.x > 0)
                 {
                     //rb2d.MovePosition(transform.position + direction * 20f * Time.deltaTime);
-                    rb2d.AddForce(Vector3.right * 325f);
+                    rb2d.AddForce(Vector3.right * 50f);
                 }
                 else
                 {
                     //rb2d.MovePosition(transform.position + direction * 20f * Time.deltaTime);
-                    rb2d.AddForce(Vector3.left * 325f);
+                    rb2d.AddForce(Vector3.left * 50f);
                 }
-
-        }*/
+        }
         else
         {
             rb2d.velocity = (Player.transform.position - transform.position).normalized * speed;
@@ -299,14 +302,22 @@ public class EnemyMove : MonoBehaviour {
         }
     }
 
-    void Damage()
+    public void Damage()
     {
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName("Dash_DeepOnes"))
+        {
+            Player.GetComponent<Player>().playerHealth -= enemyDamage/2f;
+            Player.GetComponent<Player>().playerMadness += enemyMadness/2f;
+            Player.GetComponent<Animator>().SetBool("Hit", true);
+            controlDashCollision = false;
+        }
 
-        if (Player.transform.position.y >= gameObject.transform.position.y - .3f && Player.transform.position.y <= gameObject.transform.position.y + .3f)
+        else if (Player.transform.position.y >= gameObject.transform.position.y - .3f && Player.transform.position.y <= gameObject.transform.position.y + .3f)
         {
             Player.GetComponent<Player>().playerHealth -= enemyDamage;
             Player.GetComponent<Player>().playerMadness += enemyMadness;
             Player.GetComponent<Animator>().SetBool("Hit", true);
+            controlMeleeCollision = false;
         }
     }
 
@@ -355,10 +366,34 @@ public class EnemyMove : MonoBehaviour {
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (gameObject.tag == "RangeEnemy")
+        if (gameObject.tag == "RangeEnemy" && collision.gameObject.tag == "Player")
         {
             rb2d.isKinematic = true;
         }
+
+        if (gameObject.tag == "RangeEnemy" && collision.gameObject.tag == "Enemy")
+        {
+            rb2d.isKinematic = true;
+        }
+
+        if (gameObject.tag == "Enemy" && collision.gameObject.tag == "Player" && attackMark && !controlMeleeCollision)
+        {
+            controlMeleeCollision = true;
+            Damage();
+        }
+
+        if (gameObject.tag == "Enemy" && collision.gameObject.tag == "Enemy" && moveEnemy)
+        {
+            moveEnemy = false;
+        }
+
+        if (gameObject.tag == "Enemy" && collision.gameObject.tag == "Player" && moveEnemy && !controlDashCollision)
+        {
+            moveEnemy = false;
+            controlDashCollision = true;
+            Damage();
+        }
+        
     }
 
     private void OnCollisionExit2D(Collision2D collision)
@@ -382,6 +417,16 @@ public class EnemyMove : MonoBehaviour {
     private void endMoveEnemyDash()
     {
         moveEnemy = false;
+    }
+
+    private void meleeAttack()
+    {
+        attackMark = true;
+    }
+
+    private void stopMeleeAttack()
+    {
+        attackMark = false;
     }
 
     public enum DashState

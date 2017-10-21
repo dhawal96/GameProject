@@ -1243,7 +1243,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 291277035}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.98, y: 2.65, z: 0}
+  m_LocalPosition: {x: 1.45, y: 2.63, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children:
   - {fileID: 408186884}
@@ -1293,7 +1293,7 @@ MonoBehaviour:
   spawnPoint: {fileID: 408186884}
   pauseGame: 0
   item: none
-  maxSpeed: 0.5
+  maxSpeed: 50
   speed: 50
   enemiesKilled: 0
   dead: 0
@@ -1312,7 +1312,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.01688692, y: -0.05558066}
+  m_Offset: {x: -0.016181022, y: -0.05558066}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -1323,7 +1323,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.12956554, y: 0.19288167}
+  m_Size: {x: 0.12815374, y: 0.19288167}
   m_EdgeRadius: 0
 --- !u!82 &291277042
 AudioSource:
@@ -1803,7 +1803,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &344743624
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2056,7 +2056,7 @@ GameObject:
   m_Icon: {fileID: 6926474624037801865, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &408186884
 Transform:
   m_ObjectHideFlags: 0
@@ -3419,7 +3419,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1618293949978046, guid: 0760493300801564db7cf9489e71b661, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Offset.y
@@ -4285,7 +4285,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1618293949978046, guid: 0760493300801564db7cf9489e71b661, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0760493300801564db7cf9489e71b661, type: 2}
@@ -5364,7 +5364,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1618293949978046, guid: 0760493300801564db7cf9489e71b661, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0760493300801564db7cf9489e71b661, type: 2}
@@ -7719,7 +7719,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1618293949978046, guid: 0760493300801564db7cf9489e71b661, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Offset.y
@@ -8959,15 +8959,20 @@ Prefab:
       propertyPath: m_Name
       value: Enemy (5)
       objectReference: {fileID: 0}
-    - target: {fileID: 114210506616646348, guid: 0760493300801564db7cf9489e71b661,
+    - target: {fileID: 61612483338756558, guid: 0760493300801564db7cf9489e71b661,
         type: 2}
-      propertyPath: maxDash
-      value: 1
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 0.32
       objectReference: {fileID: 0}
-    - target: {fileID: 95072468136569906, guid: 0760493300801564db7cf9489e71b661,
+    - target: {fileID: 61612483338756558, guid: 0760493300801564db7cf9489e71b661,
         type: 2}
-      propertyPath: m_UpdateMode
-      value: 0
+      propertyPath: m_Offset.x
+      value: -0.001601465
+      objectReference: {fileID: 0}
+    - target: {fileID: 61612483338756558, guid: 0760493300801564db7cf9489e71b661,
+        type: 2}
+      propertyPath: m_Size.x
+      value: 0.24561153
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0760493300801564db7cf9489e71b661, type: 2}
