@@ -30,6 +30,9 @@ public class BulletFire : MonoBehaviour
     {
         switch (target.gameObject.tag)
         {
+            case "Bullet":
+                //Do Nothing
+                break;
             case "FirePoint":
                 if (gameObject.tag == "Bullet")
                 {

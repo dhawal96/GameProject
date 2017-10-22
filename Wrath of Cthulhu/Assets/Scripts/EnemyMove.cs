@@ -9,6 +9,7 @@ public class EnemyMove : MonoBehaviour {
     Player controlscript;
     private Animator anim;
     private Rigidbody2D rb2d;
+    public Collider2D attackTrigger;
 
     //Camera
     public GameObject mainCamera;
@@ -73,6 +74,7 @@ public class EnemyMove : MonoBehaviour {
         controlDashCollision = false;
         dashState = DashState.Ready;
         anim.SetBool("Idle", true);
+        attackTrigger.enabled = false;
         
 
     }
@@ -118,6 +120,16 @@ public class EnemyMove : MonoBehaviour {
 
         if (gameObject.tag == "Enemy")
         {
+
+            if (attackMark)
+            {
+                attackTrigger.enabled = true;
+            }
+
+            if (!attackMark)
+            {
+                attackTrigger.enabled = false;
+            }
             
             if (range <= minDistance && !idle && !anim.GetBool("Death") == true && Player.transform.position.y >= gameObject.transform.position.y - .2f && Player.transform.position.y <= gameObject.transform.position.y + .2f)
             {
@@ -306,8 +318,8 @@ public class EnemyMove : MonoBehaviour {
     {
         if (anim.GetCurrentAnimatorStateInfo(0).IsName("Dash_DeepOnes"))
         {
-            Player.GetComponent<Player>().playerHealth -= enemyDamage/2f;
-            Player.GetComponent<Player>().playerMadness += enemyMadness/2f;
+            Player.GetComponent<Player>().playerHealth -= enemyDamage;
+            Player.GetComponent<Player>().playerMadness += enemyMadness;
             Player.GetComponent<Animator>().SetBool("Hit", true);
             controlDashCollision = false;
         }
@@ -317,7 +329,7 @@ public class EnemyMove : MonoBehaviour {
             Player.GetComponent<Player>().playerHealth -= enemyDamage;
             Player.GetComponent<Player>().playerMadness += enemyMadness;
             Player.GetComponent<Animator>().SetBool("Hit", true);
-            controlMeleeCollision = false;
+            //controlMeleeCollision = false;
         }
     }
 
@@ -376,11 +388,11 @@ public class EnemyMove : MonoBehaviour {
             rb2d.isKinematic = true;
         }
 
-        if (gameObject.tag == "Enemy" && collision.gameObject.tag == "Player" && attackMark && !controlMeleeCollision)
+        /*if (gameObject.tag == "Enemy" && collision.gameObject.tag == "Player" && attackMark && !controlMeleeCollision)
         {
             controlMeleeCollision = true;
             Damage();
-        }
+        }*/
 
         if (gameObject.tag == "Enemy" && collision.gameObject.tag == "Enemy" && moveEnemy)
         {
