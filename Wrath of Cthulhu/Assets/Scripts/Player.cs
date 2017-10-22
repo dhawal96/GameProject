@@ -28,6 +28,7 @@ public class Player : MonoBehaviour {
     public GameObject bullet;
     public Transform spawnPoint;
     private AudioSource winchester;
+    private bool shotgun = true;
 
 	//Anim
     private Animator anim;
@@ -67,6 +68,7 @@ public class Player : MonoBehaviour {
         maxSpeed = .5f;
         speed = 50;
 		dead = false;
+        shotgun = true;
        
     }
 
@@ -110,16 +112,30 @@ public class Player : MonoBehaviour {
 				shootOnce = true;
 			}
 
-			if (anim.GetCurrentAnimatorStateInfo(0).IsName("Shoot_Mark") && shootOnce)
+			/*if (anim.GetCurrentAnimatorStateInfo(0).IsName("Shoot_Mark") && shootOnce)
 			{
                 Instantiate(bullet, spawnPoint.position, spawnPoint.rotation);
                 //Transform newBullet = Instantiate(bullet.transform, spawnPoint.position, Quaternion.identity) as Transform;
                 //newBullet.parent = transform;
                 markShooting = true;
                 shootOnce = false;
+            }*/
+
+            if (anim.GetCurrentAnimatorStateInfo(0).IsName("Shoot_Mark") && shootOnce && shotgun == true)
+            {
+                GameObject bullet1 = (GameObject)Instantiate(bullet, spawnPoint.position, spawnPoint.rotation);
+                bullet1.transform.Rotate(0f, 0f, 10f);
+                GameObject bullet2 = (GameObject)Instantiate(bullet, spawnPoint.position, spawnPoint.rotation);
+                bullet2.transform.Rotate(0f, 0f, 0f);
+                GameObject bullet3 = (GameObject)Instantiate(bullet, spawnPoint.position, spawnPoint.rotation);
+                bullet3.transform.Rotate(0f, 0f, -10f);
+                //Transform newBullet = Instantiate(bullet.transform, spawnPoint.position, Quaternion.identity) as Transform;
+                //newBullet.parent = transform;
+                markShooting = true;
+                shootOnce = false;
             }
 
-			if (playerHealth <= 0f) {
+            if (playerHealth <= 0f) {
                 anim.SetBool("Dead", true);
 				dead = true;          
 				//Destroy (transform.gameObject);
