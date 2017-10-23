@@ -31,6 +31,7 @@ public class EnemyMove : MonoBehaviour {
     public Vector2 savedVelocity;
     private bool moveEnemy;
     private bool controlDashCollision;
+    public float randomNumber;
 
     //Items
     private float randomIndex;
@@ -72,7 +73,18 @@ public class EnemyMove : MonoBehaviour {
         attackMark = false;
         controlMeleeCollision = false;
         controlDashCollision = false;
-        dashState = DashState.Ready;
+        randomNumber = Random.Range(0f, 100f);
+        if (randomNumber <= 20)
+        {
+            dashState = DashState.Ready;
+        }
+
+        else
+        {
+            dashTimer = maxDash;
+            dashState = DashState.Cooldown;
+
+        }
         anim.SetBool("Idle", true);
         attackTrigger.enabled = false;
         
