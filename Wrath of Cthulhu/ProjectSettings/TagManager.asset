@@ -16,6 +16,7 @@ TagManager:
   - Eye
   - Bullet
   - EnemyBullet
+  - Boss
   layers:
   - Default
   - TransparentFX
