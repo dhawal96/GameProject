@@ -802,7 +802,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 52010629}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.9, y: 2.9, z: -10}
+  m_LocalPosition: {x: 2.75, y: 2.92, z: -10}
   m_LocalScale: {x: 1.9729917, y: 1.1988156, z: 1}
   m_Children:
   - {fileID: 1083108568}
@@ -823,6 +823,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   smoothTimeY: 0.05
   smoothTimeX: 0.05
+  SectionEndCollider: {fileID: 0}
   bounds: 1
   minCameraPos: {x: 2.63, y: 1.51, z: -10}
   maxCameraPos: {x: 48.58, y: 5.78, z: -10}
@@ -13773,7 +13774,7 @@ GameObject:
   - component: {fileID: 1377790503}
   m_Layer: 0
   m_Name: SectionEndCollider
-  m_TagString: SectionEndCollider1
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15620,11 +15621,11 @@ GameObject:
   - component: {fileID: 1702226418}
   - component: {fileID: 1702226419}
   - component: {fileID: 1702226420}
-  - component: {fileID: 1702226421}
   - component: {fileID: 1702226422}
+  - component: {fileID: 1702226421}
   m_Layer: 0
   m_Name: SectionEndCollider2
-  m_TagString: SectionEndCollider2
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15695,7 +15696,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1702226417}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a0507a77c2800c48b4ae6a76b04def8, type: 3}
+  m_Script: {fileID: 11500000, guid: eff910428dc4d6a46b86c1c5147c0165, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!68 &1702226422
