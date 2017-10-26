@@ -27,12 +27,12 @@ public class SectionCollider : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        /*if (Player.transform.position.x >= 20.21f && newMin1 == false)
+        if (Player.transform.position.x >= 20.19f) // newMin1 == false)
         {
             gameObject.SetActive(true);
-            controlscript.minCameraPos = new Vector3(22.58f, 1.51f, -10f);
+            //controlscript.minCameraPos = new Vector3(22.58f, 1.51f, -10f);
             newMin1 = true;
-        }*/
+        }
 
         /*if (Player.transform.position.x >= 30.4 && newMin2 == false)
         {
@@ -47,6 +47,7 @@ public class SectionCollider : MonoBehaviour {
         if (collider.gameObject.tag == "Player" && gameObject.tag == "SectionEndCollider1" && collider.gameObject.GetComponent<Player>().enemiesKilled >= 10 && collider1 == false)
         {
            gameObject.SetActive(false);
+           //collider.gameObject.transform.position = new Vector3 (22.56f,1.51f,0f);
            //gameObject.GetComponent<BoxCollider2D>().isTrigger = true;
             controlscript.minCameraPos = new Vector3(22.56f, 1.51f, -10f);
             controlscript.maxCameraPos = new Vector3(27.43f, 5.78f, -10f);

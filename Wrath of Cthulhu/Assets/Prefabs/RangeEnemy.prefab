@@ -172,27 +172,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea5b292464eb9e042907b4aa551d9cab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
-  maxSpeed: 0.01
-  health: 0
-  idle: 0
-  enemyCount: 10
-  enemyShooting: 0
-  dashState: 0
-  dashTimer: 0
-  maxDash: 20
-  savedVelocity: {x: 0, y: 0}
-  enemyDamage: 0
-  enemyMadness: 0
-  items:
-  - {fileID: 1627987009531400, guid: 2bb48ddf63ba4204e965337588ebb48f, type: 2}
-  - {fileID: 1170061375301152, guid: 1da3534cca72f404198ca461d9a80d43, type: 2}
-  - {fileID: 1163060148841434, guid: c00a01cd08a07474f848b29dd2ed6c5c, type: 2}
+  attackTrigger: {fileID: 0}
   mainCamera: {fileID: 0}
   camera: {fileID: 0}
   spawnPoint: {fileID: 4527218878669356}
   playerPosition: {x: 0, y: 0, z: 0}
   bullet: {fileID: 1815403598727914, guid: e362c4bbf94bdf7469be11986168b482, type: 2}
+  dashState: 0
+  dashTimer: 0
+  maxDash: 20
+  savedVelocity: {x: 0, y: 0}
+  randomNumber: 0
+  items:
+  - {fileID: 1627987009531400, guid: 2bb48ddf63ba4204e965337588ebb48f, type: 2}
+  - {fileID: 1170061375301152, guid: 1da3534cca72f404198ca461d9a80d43, type: 2}
+  - {fileID: 1163060148841434, guid: c00a01cd08a07474f848b29dd2ed6c5c, type: 2}
+  idle: 0
+  attackMark: 0
+  controlMeleeCollision: 0
+  speed: 1
+  maxSpeed: 0.01
+  health: 0
+  enemyCount: 10
+  enemyShooting: 0
+  enemyDamage: 0
+  enemyMadness: 0
 --- !u!212 &212293567017382188
 SpriteRenderer:
   m_ObjectHideFlags: 1
