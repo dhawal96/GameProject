@@ -13,10 +13,6 @@ public class CameraFollow : MonoBehaviour
     private GameObject SectionEndCollider1;
     private GameObject SectionEndCollider2;
     public GameObject SectionEndCollider;
-    private bool collider1;
-    private bool collider2;
-    private bool newMin1;
-    private bool newMin2;
 
     public bool bounds;
 
@@ -33,10 +29,6 @@ public class CameraFollow : MonoBehaviour
         minCameraPos = new Vector3(2.63f, 1.51f, -10f);
         //maxCameraPos = new Vector3(48.61f, 5.78f, -10f);
         maxCameraPos = new Vector3(17.41f, 5.78f, -10f);
-        collider1 = false;
-        collider2 = false;
-        newMin1 = false;
-        newMin2 = false;
     }
 
     private void Update()
@@ -44,14 +36,63 @@ public class CameraFollow : MonoBehaviour
         switch (SectionEndCollider.name)
         {
             case "SectionEndCollider":
-                if (player.transform.position.x >= 20.21)
+                if (player.transform.position.x >= 20.21f)
                 {
                     SectionEndCollider.SetActive(true);
                 }
                 break;
 
             case "SectionEndCollider2":
-                if (player.transform.position.x >= 30.927)
+                if (player.transform.position.x >= 30.927f)
+                {
+                    SectionEndCollider.SetActive(true);
+                }
+                break;
+
+            case "SectionEndCollider3":
+                if (player.transform.position.x >= 41.184f)
+                {
+                    SectionEndCollider.SetActive(true);
+                }
+                break;
+
+            case "SectionEndCollider4":
+                if (player.transform.position.x >= 51.802f)
+                {
+                    SectionEndCollider.SetActive(true);
+                }
+                break;
+
+            case "SectionEndCollider5":
+                if (player.transform.position.x >= 62.303f)
+                {
+                    SectionEndCollider.SetActive(true);
+                }
+                break;
+
+            case "SectionEndCollider6":
+                if (player.transform.position.x >= 76.038f)
+                {
+                    SectionEndCollider.SetActive(true);
+                }
+                break;
+
+            case "SectionEndCollider7":
+                if (player.transform.position.x >= 85.01f)
+                {
+                    SectionEndCollider.SetActive(true);
+                }
+                break;
+
+            case "SectionEndCollider8":
+                if (player.transform.position.x >= 98.929f)
+                {
+                    SectionEndCollider.SetActive(true);
+                }
+                break;
+
+            case "SectionEndCollider9":
+                if (player.transform.position.x >= 111.86f)
                 {
                     SectionEndCollider.SetActive(true);
                 }
