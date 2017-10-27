@@ -26,6 +26,14 @@ public class BulletFire : MonoBehaviour
         playerBulletForce = 500f;
     }
 
+    private void Update()
+    {
+        if (GetComponent<Renderer>().isVisible == false)
+        {
+            Destroy(gameObject);
+        }
+    }
+
     void OnTriggerEnter2D(Collider2D target)
     {
         switch (target.gameObject.tag)
@@ -116,4 +124,6 @@ public class BulletFire : MonoBehaviour
                 break;
         }
     }
+
+
 }

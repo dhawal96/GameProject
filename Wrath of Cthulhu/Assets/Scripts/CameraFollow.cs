@@ -12,6 +12,7 @@ public class CameraFollow : MonoBehaviour
     private GameObject player;
     private GameObject SectionEndCollider1;
     private GameObject SectionEndCollider2;
+    public GameObject SectionEndCollider;
     private bool collider1;
     private bool collider2;
     private bool newMin1;
@@ -21,10 +22,6 @@ public class CameraFollow : MonoBehaviour
 
     public Vector3 minCameraPos;
     public Vector3 maxCameraPos;
-    
-    
-
-
 
     // Use this for initialization
     void Start()
@@ -44,22 +41,22 @@ public class CameraFollow : MonoBehaviour
 
     private void Update()
     {
-
-        if (player.transform.position.x >= 20.21f && player.transform.position.x < 30.4f && newMin1 == false)
+        switch (SectionEndCollider.name)
         {
-            SectionEndCollider1.SetActive(true);
-            //SectionEndCollider1.GetComponent<BoxCollider2D>().isTrigger = false;
-            //minCameraPos = new Vector3(22.27f, 1.51f, -10f);
-            newMin1 = true;
-        }
+            case "SectionEndCollider":
+                if (player.transform.position.x >= 20.21)
+                {
+                    SectionEndCollider.SetActive(true);
+                }
+                break;
 
-        if (player.transform.position.x >= 30.4 && newMin2 == false) 
-        {
-            SectionEndCollider2.SetActive(true);
-            //minCameraPos = new Vector3(32.62f, 1.51f, -10f);
-            newMin2 = true;
+            case "SectionEndCollider2":
+                if (player.transform.position.x >= 30.927)
+                {
+                    SectionEndCollider.SetActive(true);
+                }
+                break;
         }
-
     }
 
     void FixedUpdate()
@@ -77,26 +74,4 @@ public class CameraFollow : MonoBehaviour
         }
     }
 
-    /*private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.tag == "SectionEndCollider1" && collider1 == false)
-        {
-            if (player.GetComponent<Player>().enemiesKilled >= 0)
-            {
-                collision.gameObject.SetActive(false);
-                maxCameraPos = new Vector3(27.43f, 5.78f, -10f);
-                collider1 = true;
-            }
-        }
-
-        if (collision.tag == "SectionEndCollider2" && collider2 == false)
-        {
-            if (player.GetComponent<Player>().enemiesKilled >= 0)
-            {
-                collision.gameObject.SetActive(false);
-                maxCameraPos = new Vector3(48.61f, 5.78f, -10f);
-                collider2 = true;
-            }
-        }
-    }*/
 }
