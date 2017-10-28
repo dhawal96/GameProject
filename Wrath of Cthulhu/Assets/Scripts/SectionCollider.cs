@@ -43,7 +43,7 @@ public class SectionCollider : MonoBehaviour {
                 break;
                
             case "SectionEndCollider3":
-                if (collider.gameObject.tag == "Player" && collider.gameObject.GetComponent<Player>().enemiesKilled >= 20 && breakCollision == false)
+                if (collider.gameObject.tag == "Player" && collider.gameObject.GetComponent<Player>().enemiesKilled >= 21 && breakCollision == false)
                 {
                     controlscript.SectionEndCollider = gameObject;
                     gameObject.SetActive(false);
@@ -54,7 +54,7 @@ public class SectionCollider : MonoBehaviour {
                 break;
 
             case "SectionEndCollider4":
-                if (collider.gameObject.tag == "Player" && collider.gameObject.GetComponent<Player>().enemiesKilled >= 25 && breakCollision == false)
+                if (collider.gameObject.tag == "Player" && collider.gameObject.GetComponent<Player>().enemiesKilled >= 26 && breakCollision == false)
                 {
                     controlscript.SectionEndCollider = gameObject;
                     gameObject.SetActive(false);
@@ -65,7 +65,7 @@ public class SectionCollider : MonoBehaviour {
                 break;
 
             case "SectionEndCollider5":
-                if (collider.gameObject.tag == "Player" && collider.gameObject.GetComponent<Player>().enemiesKilled >= 30 && breakCollision == false)
+                if (collider.gameObject.tag == "Player" && collider.gameObject.GetComponent<Player>().enemiesKilled >= 31 && breakCollision == false)
                 {
                     controlscript.SectionEndCollider = gameObject;
                     gameObject.SetActive(false);
@@ -76,7 +76,7 @@ public class SectionCollider : MonoBehaviour {
                 break;
 
             case "SectionEndCollider6":
-                if (collider.gameObject.tag == "Player" && collider.gameObject.GetComponent<Player>().enemiesKilled >= 37 && breakCollision == false)
+                if (collider.gameObject.tag == "Player" && collider.gameObject.GetComponent<Player>().enemiesKilled >= 38 && breakCollision == false)
                 {
                     controlscript.SectionEndCollider = gameObject;
                     gameObject.SetActive(false);
@@ -87,7 +87,7 @@ public class SectionCollider : MonoBehaviour {
                 break;
 
             case "SectionEndCollider7":
-                if (collider.gameObject.tag == "Player" && collider.gameObject.GetComponent<Player>().enemiesKilled >= 42 && breakCollision == false)
+                if (collider.gameObject.tag == "Player" && collider.gameObject.GetComponent<Player>().enemiesKilled >= 43 && breakCollision == false)
                 {
                     controlscript.SectionEndCollider = gameObject;
                     gameObject.SetActive(false);

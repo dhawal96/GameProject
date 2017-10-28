@@ -22,7 +22,7 @@ public class Player : MonoBehaviour {
 	CameraFollow camerascript;
 
     //Player1Currency
-    public float currency = 0;//currently not used
+    public float currency;
 
 	//Player1Bullet
     public GameObject bullet;
@@ -48,11 +48,14 @@ public class Player : MonoBehaviour {
     public float minPos;
     public float maxPos;
 
+    public WeaponObject[] weapons;
+    public int currentWeapon;
+
 
     // Use this for initialization
     void Start () {
 
-        rb2d = gameObject.GetComponent<Rigidbody2D>();
+        rb2d = gameObject.GetComponent<Rigidbody2D>(); 
         anim = gameObject.GetComponent<Animator>();
         winchester = gameObject.GetComponent<AudioSource>();
         playerHealth = 100f;
@@ -69,6 +72,8 @@ public class Player : MonoBehaviour {
         speed = 50;
 		dead = false;
         shotgun = true;
+        currentWeapon = 0;
+        currency = 0;
        
     }
 
@@ -197,7 +202,7 @@ public class Player : MonoBehaviour {
 			}
 
 			if (Input.GetKeyDown ("g")) {
-				switch (item) {
+				switch (weapons[currentWeapon].itemCode) {
 				case "elixir":
 					{
 						playerHealth += 50f;
