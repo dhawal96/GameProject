@@ -26,9 +26,10 @@ public class Player : MonoBehaviour {
 
 	//Player1Bullet
     public GameObject bullet;
+    public float bulletDamage;
     public Transform spawnPoint;
     private AudioSource winchester;
-    private bool shotgun = true;
+    public bool shotgun;
 
 	//Anim
     private Animator anim;
@@ -50,6 +51,7 @@ public class Player : MonoBehaviour {
 
     public WeaponObject[] weapons;
     public int currentWeapon;
+    public GameObject gameOverPanel;
 
 
     // Use this for initialization
@@ -71,9 +73,10 @@ public class Player : MonoBehaviour {
         maxSpeed = .5f;
         speed = 50;
 		dead = false;
-        shotgun = true;
+        shotgun = false;
         currentWeapon = 0;
         currency = 0;
+        bulletDamage = 150f;
        
     }
 
@@ -117,14 +120,97 @@ public class Player : MonoBehaviour {
 				shootOnce = true;
 			}
 
-			/*if (anim.GetCurrentAnimatorStateInfo(0).IsName("Shoot_Mark") && shootOnce)
-			{
-                Instantiate(bullet, spawnPoint.position, spawnPoint.rotation);
-                //Transform newBullet = Instantiate(bullet.transform, spawnPoint.position, Quaternion.identity) as Transform;
-                //newBullet.parent = transform;
-                markShooting = true;
-                shootOnce = false;
-            }*/
+               switch (weapons[currentWeapon].itemCode)
+                {
+                    case "elixir":
+                        {
+                        if (Input.GetKeyDown("g"))
+                        {
+                            playerHealth += 50f;
+                            playerMadness += 20f;
+
+                            if (playerHealth >= 100f)
+                            {
+                                playerHealth = 100f;
+                            }
+                        }
+                            break;
+                        }
+                    case "blink": ///work in progress
+                        {
+                        if (Input.GetKeyDown("g"))
+                        {
+                            playerMadness += 1f;
+                            if (transform.position.x >= .25f && transform.position.x <= 19.74f)
+                            {
+                                minPos = .25f;
+                                maxPos = 19.74f;
+                            }
+
+                            else if (transform.position.x >= 20.23 && transform.position.x <= 29.81f)
+                            {
+                                minPos = 20.23f;
+                                maxPos = 29.81f;
+                            }
+
+                            else if (transform.position.x >= 30.27 && transform.position.x <= 42.04f)
+                            {
+                                minPos = 30.27f;
+                                maxPos = 42.04f;
+                            }
+                            //float cameraSize = 2.294f;
+                            float xPosition = transform.position.x;
+                            if (left)
+                            {
+                                if (xPosition - 2f < minPos)
+                                    transform.position = new Vector3(minPos, transform.position.y, transform.position.z);
+                                else
+                                    transform.position = new Vector3(xPosition - 2f, transform.position.y, transform.position.z);
+                                //transform.Translate(Vector3.left * speed * Time.deltaTime);
+                            }
+                            else
+                            {
+                                if (xPosition + 2f > maxPos)
+                                    transform.position = new Vector3(maxPos, transform.position.y, transform.position.z);
+                                else
+                                    transform.position = new Vector3(xPosition + 2f, transform.position.y, transform.position.z);
+                                //transform.Translate(Vector3.right * speed * Time.deltaTime);
+                            }
+                        }
+                            break;
+
+                        }
+                case "morphine":
+                    {
+                        break;
+                    }
+                    case "shotgun":
+                        {
+                            shotgun = true;
+                            break;
+                        }
+                case "speed":
+                    {
+                        maxSpeed = 1f;
+                        break;
+                    }
+                case "damage":
+                    {
+                        bulletDamage = 300f;
+                        break;
+                    }
+                    case "null":
+                        {
+                            //Do Nothing
+                            break;
+                        }
+                    default:
+                        break;
+
+                }
+
+                //elixir = false;
+            
 
             if (anim.GetCurrentAnimatorStateInfo(0).IsName("Shoot_Mark") && shootOnce && shotgun == true)
             {
@@ -134,6 +220,15 @@ public class Player : MonoBehaviour {
                 bullet2.transform.Rotate(0f, 0f, 0f);
                 GameObject bullet3 = (GameObject)Instantiate(bullet, spawnPoint.position, spawnPoint.rotation);
                 bullet3.transform.Rotate(0f, 0f, -10f);
+                //Transform newBullet = Instantiate(bullet.transform, spawnPoint.position, Quaternion.identity) as Transform;
+                //newBullet.parent = transform;
+                markShooting = true;
+                shootOnce = false;
+            }
+
+            else if (anim.GetCurrentAnimatorStateInfo(0).IsName("Shoot_Mark") && shootOnce)
+			{
+                Instantiate(bullet, spawnPoint.position, spawnPoint.rotation);
                 //Transform newBullet = Instantiate(bullet.transform, spawnPoint.position, Quaternion.identity) as Transform;
                 //newBullet.parent = transform;
                 markShooting = true;
@@ -156,6 +251,11 @@ public class Player : MonoBehaviour {
 			madnessscript.MadnessPercentage = playerMadness;
 
 		}
+
+        if (dead == true)
+        {
+            gameOverPanel.SetActive(true);
+        }
 
     }
 
@@ -199,68 +299,6 @@ public class Player : MonoBehaviour {
 
 			if (rb2d.velocity.y < -maxSpeed) {
 				rb2d.velocity = new Vector2 (rb2d.velocity.x, -maxSpeed);
-			}
-
-			if (Input.GetKeyDown ("g")) {
-				switch (weapons[currentWeapon].itemCode) {
-				case "elixir":
-					{
-						playerHealth += 50f;
-						playerMadness += 20f;
-
-						if (playerHealth >= 100f) {
-							playerHealth = 100f;
-						}
-						break;
-					}
-				case "blink": ///work in progress
-					{
-                            playerMadness += 1f;
-                            if (transform.position.x >= .25f && transform.position.x <= 19.74f)
-                            {
-                                minPos = .25f;
-                                maxPos = 19.74f;
-                            }
-
-                            else if (transform.position.x >= 20.23 && transform.position.x <= 29.81f)
-                            {
-                                minPos = 20.23f;
-                                maxPos = 29.81f;
-                            }
-
-                            else if (transform.position.x >= 30.27 && transform.position.x <= 42.04f)
-                            {
-                                minPos = 30.27f;
-                                maxPos = 42.04f;
-                            }
-                            //float cameraSize = 2.294f;
-                            float xPosition = transform.position.x;
-						if (left) {
-							if (xPosition - 2f < minPos)
-								transform.position = new Vector3 (minPos, transform.position.y, transform.position.z);
-							else
-								transform.position = new Vector3 (xPosition - 2f, transform.position.y, transform.position.z);
-							//transform.Translate(Vector3.left * speed * Time.deltaTime);
-						} else {
-							if (xPosition + 2f > maxPos)
-								transform.position = new Vector3 (maxPos, transform.position.y, transform.position.z);
-							else
-								transform.position = new Vector3 (xPosition + 2f, transform.position.y, transform.position.z);
-							//transform.Translate(Vector3.right * speed * Time.deltaTime);
-						}
-						break;
-					}
-                  case "null":
-					{
-						//Do Nothing
-						break;
-					}
-				default:
-					break;
-
-				}
-
-				//elixir = false;
 			}
 		}
 

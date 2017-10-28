@@ -7,7 +7,7 @@ public class BulletFire : MonoBehaviour
 
     private float playerBulletForce;
     private GameObject Player;
-    private float bulletDamage;
+    Player controlscript;
     private Vector3 enposition;
     private int itemIndex;
     private float randomIndex;
@@ -19,11 +19,11 @@ public class BulletFire : MonoBehaviour
     private void Start()
     {
         Player = GameObject.FindWithTag("Player").gameObject;
-        bulletDamage = 100f;
         enemyDamage = 25f;
         enemyMadness = 10f;
         restrictCurrency = true;
         playerBulletForce = 500f;
+        controlscript = Player.GetComponent<Player>();
     }
 
     private void Update()
@@ -79,7 +79,7 @@ public class BulletFire : MonoBehaviour
                 {
                     target.gameObject.GetComponent<Animator>().SetBool("Hit", true);
 
-                    target.gameObject.GetComponent<EnemyMove>().health -= bulletDamage;
+                    target.gameObject.GetComponent<EnemyMove>().health -= controlscript.bulletDamage;
                     Destroy(gameObject);
 
                     if (target.gameObject.GetComponent<EnemyMove>().health <= 0)
@@ -100,7 +100,7 @@ public class BulletFire : MonoBehaviour
                 {
                     target.gameObject.GetComponent<Animator>().SetBool("Hit", true);
 
-                    target.gameObject.GetComponent<EnemyMove>().health -= bulletDamage;
+                    target.gameObject.GetComponent<EnemyMove>().health -= controlscript.bulletDamage;
                     Destroy(gameObject);
 
                     if (target.gameObject.GetComponent<EnemyMove>().health <= 0)
