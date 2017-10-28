@@ -9,10 +9,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 92580dbae3c87e241851f9ed169840c9, type: 3}
-  m_Name: EyeofAzethoth
+  m_Name: Shotgun
   m_EditorClassIdentifier: 
-  weaponName: Eye of Azethoth
-  itemCode: blink
+  weaponName: Bullet Spread
+  itemCode: shotgun
   cost: 5
-  description: Allows the user to teleport a short distance in the direction they're
-    facing
+  description: Bullets spread out and target more enemies

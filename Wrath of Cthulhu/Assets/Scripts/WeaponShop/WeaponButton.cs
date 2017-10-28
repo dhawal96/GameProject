@@ -35,7 +35,7 @@ public class WeaponButton : MonoBehaviour {
 
     public void OnClick()
     {
-        if (pagescript.count >= controlscript.weapons[weaponNumber].cost)
+        if (pagescript.count >= controlscript.weapons[weaponNumber].cost && controlscript.currentWeapon != weaponNumber)
         {
 
             pagescript.count -= controlscript.weapons[weaponNumber].cost;
