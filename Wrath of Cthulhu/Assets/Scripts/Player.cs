@@ -52,6 +52,7 @@ public class Player : MonoBehaviour {
     public WeaponObject[] weapons;
     public int currentWeapon;
     public GameObject gameOverPanel;
+    public GameObject gameAudio;
 
 
     // Use this for initialization
@@ -254,6 +255,7 @@ public class Player : MonoBehaviour {
 
         if (dead == true)
         {
+            gameAudio.GetComponent<AudioSource>().Stop();
             gameOverPanel.SetActive(true);
         }
 
