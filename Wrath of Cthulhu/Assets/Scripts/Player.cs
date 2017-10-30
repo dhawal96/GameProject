@@ -53,6 +53,10 @@ public class Player : MonoBehaviour {
     public int currentWeapon;
     public GameObject gameOverPanel;
     public GameObject gameAudio;
+    private bool elixir;
+    private bool blink;
+    private bool morphine;
+    private bool locked;
 
 
     // Use this for initialization
@@ -78,6 +82,10 @@ public class Player : MonoBehaviour {
         currentWeapon = 0;
         currency = 0;
         bulletDamage = 150f;
+        elixir = false;
+        blink = false;
+        morphine = false;
+        locked = false;
        
     }
 
@@ -112,94 +120,115 @@ public class Player : MonoBehaviour {
 
         else if (dead == false)
         {
-			anim.SetFloat("Speed", Mathf.Abs(rb2d.velocity.x) + Mathf.Abs(rb2d.velocity.y));
-			anim.SetBool("Shooting", false);
+            anim.SetFloat("Speed", Mathf.Abs(rb2d.velocity.x) + Mathf.Abs(rb2d.velocity.y));
+            anim.SetBool("Shooting", false);
 
-			if (Input.GetKeyDown("f") && !anim.GetCurrentAnimatorStateInfo(0).IsName("Shoot_Mark"))
-			{
-				anim.SetBool("Shooting", true);
-				shootOnce = true;
-			}
+            if (Input.GetKeyDown("f") && !anim.GetCurrentAnimatorStateInfo(0).IsName("Shoot_Mark"))
+            {
+                anim.SetBool("Shooting", true);
+                shootOnce = true;
+            }
 
-               switch (weapons[currentWeapon].itemCode)
+            if (Input.GetKeyDown("g"))
+            {
+                if (elixir)
+                {
+                    playerHealth += 50f;
+                    playerMadness += 20f;
+
+                    if (playerHealth >= 100f)
+                    {
+                        playerHealth = 100f;
+                    }
+                }
+
+                else if (blink)
+                {
+                    playerMadness += 1f;
+                    if (transform.position.x >= .25f && transform.position.x <= 19.74f)
+                    {
+                        minPos = .25f;
+                        maxPos = 19.74f;
+                    }
+
+                    else if (transform.position.x >= 20.23 && transform.position.x <= 29.81f)
+                    {
+                        minPos = 20.23f;
+                        maxPos = 29.81f;
+                    }
+
+                    else if (transform.position.x >= 30.27 && transform.position.x <= 42.04f)
+                    {
+                        minPos = 30.27f;
+                        maxPos = 42.04f;
+                    }
+                    //float cameraSize = 2.294f;
+                    float xPosition = transform.position.x;
+                    if (left)
+                    {
+                        if (xPosition - 2f < minPos)
+                            transform.position = new Vector3(minPos, transform.position.y, transform.position.z);
+                        else
+                            transform.position = new Vector3(xPosition - 2f, transform.position.y, transform.position.z);
+                        //transform.Translate(Vector3.left * speed * Time.deltaTime);
+                    }
+                    else
+                    {
+                        if (xPosition + 2f > maxPos)
+                            transform.position = new Vector3(maxPos, transform.position.y, transform.position.z);
+                        else
+                            transform.position = new Vector3(xPosition + 2f, transform.position.y, transform.position.z);
+                        //transform.Translate(Vector3.right * speed * Time.deltaTime);
+                    }
+
+                }
+            }
+
+            if (weapons[currentWeapon].itemCode == "elixir" || weapons[currentWeapon].itemCode == "blink" || weapons[currentWeapon].itemCode == "shotgun" || weapons[currentWeapon].itemCode == "speed" || weapons[currentWeapon].itemCode == "damage")
+            {
+                locked = false;
+            }
+
+            if (locked == false)
+            {
+                switch (weapons[currentWeapon].itemCode)
                 {
                     case "elixir":
                         {
-                        if (Input.GetKeyDown("g"))
-                        {
-                            playerHealth += 50f;
-                            playerMadness += 20f;
-
-                            if (playerHealth >= 100f)
-                            {
-                                playerHealth = 100f;
-                            }
-                        }
+                            elixir = true;
+                            blink = false;
+                            morphine = false;
                             break;
                         }
                     case "blink": ///work in progress
                         {
-                        if (Input.GetKeyDown("g"))
-                        {
-                            playerMadness += 1f;
-                            if (transform.position.x >= .25f && transform.position.x <= 19.74f)
-                            {
-                                minPos = .25f;
-                                maxPos = 19.74f;
-                            }
-
-                            else if (transform.position.x >= 20.23 && transform.position.x <= 29.81f)
-                            {
-                                minPos = 20.23f;
-                                maxPos = 29.81f;
-                            }
-
-                            else if (transform.position.x >= 30.27 && transform.position.x <= 42.04f)
-                            {
-                                minPos = 30.27f;
-                                maxPos = 42.04f;
-                            }
-                            //float cameraSize = 2.294f;
-                            float xPosition = transform.position.x;
-                            if (left)
-                            {
-                                if (xPosition - 2f < minPos)
-                                    transform.position = new Vector3(minPos, transform.position.y, transform.position.z);
-                                else
-                                    transform.position = new Vector3(xPosition - 2f, transform.position.y, transform.position.z);
-                                //transform.Translate(Vector3.left * speed * Time.deltaTime);
-                            }
-                            else
-                            {
-                                if (xPosition + 2f > maxPos)
-                                    transform.position = new Vector3(maxPos, transform.position.y, transform.position.z);
-                                else
-                                    transform.position = new Vector3(xPosition + 2f, transform.position.y, transform.position.z);
-                                //transform.Translate(Vector3.right * speed * Time.deltaTime);
-                            }
-                        }
+                            elixir = false;
+                            blink = true;
+                            morphine = false;
                             break;
-
                         }
-                case "morphine":
-                    {
-                        break;
-                    }
+                    case "morphine":
+                        {
+
+                            playerMadness = 0;
+                            locked = true;
+                            break;
+                        }
                     case "shotgun":
                         {
                             shotgun = true;
                             break;
                         }
-                case "speed":
-                    {
-                        maxSpeed = 1f;
-                        break;
-                    }
-                case "damage":
-                    {
-                        bulletDamage = 300f;
-                        break;
-                    }
+                    case "speed":
+                        {
+                            maxSpeed = 1f;
+                            break;
+                        }
+                    case "damage":
+                        {
+                            bulletDamage = 300f;
+                            break;
+                        }
                     case "null":
                         {
                             //Do Nothing
@@ -209,6 +238,7 @@ public class Player : MonoBehaviour {
                         break;
 
                 }
+            }
 
                 //elixir = false;
             

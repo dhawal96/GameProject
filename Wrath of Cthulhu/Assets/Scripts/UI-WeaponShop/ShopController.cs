@@ -5,19 +5,27 @@ using UnityEngine;
 public class ShopController : MonoBehaviour {
 
     public GameObject shopPanel;
+    public GameObject openShopUI;
 
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {
-            OpenShop();
+            OpenShopUI();
         }
 
     }
 
-    void OpenShop()
+    void OpenShopUI()
     {
+        openShopUI.SetActive(true);
+        Time.timeScale = 0;
+    }
+
+    public void OpenShop()
+    {
+        openShopUI.SetActive(false);
         shopPanel.SetActive(true);
         Time.timeScale = 0;
     }
@@ -25,6 +33,12 @@ public class ShopController : MonoBehaviour {
     public void CloseShop()
     {
         shopPanel.SetActive(false);
+        Time.timeScale = 1;
+    }
+
+    public void CloseOpenShopUI()
+    {
+        openShopUI.SetActive(false);
         Time.timeScale = 1;
     }
 }
