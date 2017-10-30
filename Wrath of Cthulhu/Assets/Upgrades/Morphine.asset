@@ -14,4 +14,4 @@ MonoBehaviour:
   weaponName: Morphine
   itemCode: morphine
   cost: 5
-  description: Reduces the amount of madness Mark accumulates
+  description: 'Resets Mark''s madness '

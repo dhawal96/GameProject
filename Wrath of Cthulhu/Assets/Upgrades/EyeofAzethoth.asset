@@ -14,4 +14,4 @@ MonoBehaviour:
   weaponName: Eye of Azethoth
   itemCode: blink
   cost: 5
-  description: Allows Mark to teleport a short distance in the direction he faces
+  description: Teleports Mark (costs madness)
