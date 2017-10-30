@@ -183,7 +183,10 @@ MonoBehaviour:
   maxDash: 1
   savedVelocity: {x: 0, y: 0}
   randomNumber: 0
-  items: []
+  items:
+  - {fileID: 1627987009531400, guid: 2bb48ddf63ba4204e965337588ebb48f, type: 2}
+  - {fileID: 1170061375301152, guid: 1da3534cca72f404198ca461d9a80d43, type: 2}
+  - {fileID: 1163060148841434, guid: c00a01cd08a07474f848b29dd2ed6c5c, type: 2}
   idle: 0
   attackMark: 0
   controlMeleeCollision: 0
