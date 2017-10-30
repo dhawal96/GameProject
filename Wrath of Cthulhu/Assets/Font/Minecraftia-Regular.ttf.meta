@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: ad453e256fddac64f83c2c4295bc6a15
+timeCreated: 1509321367
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Minecraftia
+  fontNames:
+  - Minecraftia
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
