@@ -209,19 +209,30 @@ public class Player : MonoBehaviour {
                         }
                     case "morphine":
                         {
-
                             playerMadness = 0;
                             locked = true;
                             break;
                         }
                     case "shotgun":
                         {
+                            if (bulletDamage == 150f)
+                            {
+                                bulletDamage = 60f;
+                            }
                             shotgun = true;
                             break;
                         }
                     case "speed":
                         {
-                            maxSpeed = 1f;
+                            if (maxSpeed >= 1.5f)
+                            {
+                                maxSpeed = 1.5f;
+                            }
+
+                            else
+                            {
+                                maxSpeed += .25f;
+                            }
                             break;
                         }
                     case "damage":

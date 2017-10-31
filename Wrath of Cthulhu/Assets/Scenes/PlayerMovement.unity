@@ -2813,7 +2813,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4348969975031134, guid: 0760493300801564db7cf9489e71b661, type: 2}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1618293949978046, guid: 0760493300801564db7cf9489e71b661, type: 2}
       propertyPath: m_Name
@@ -6258,7 +6258,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4348969975031134, guid: 0760493300801564db7cf9489e71b661, type: 2}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0760493300801564db7cf9489e71b661, type: 2}
@@ -8255,7 +8255,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4348969975031134, guid: 0760493300801564db7cf9489e71b661, type: 2}
       propertyPath: m_RootOrder
-      value: 12
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1618293949978046, guid: 0760493300801564db7cf9489e71b661, type: 2}
       propertyPath: m_Name
@@ -9115,7 +9115,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4114682698746526, guid: 74838ef35bb1d5847a09485e6ebc4936, type: 2}
       propertyPath: m_RootOrder
-      value: 13
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 1979551182017596, guid: 74838ef35bb1d5847a09485e6ebc4936, type: 2}
       propertyPath: m_Name
@@ -9947,7 +9947,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4348969975031134, guid: 0760493300801564db7cf9489e71b661, type: 2}
       propertyPath: m_RootOrder
-      value: 14
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 1618293949978046, guid: 0760493300801564db7cf9489e71b661, type: 2}
       propertyPath: m_Name
@@ -10879,7 +10879,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4114682698746526, guid: 74838ef35bb1d5847a09485e6ebc4936, type: 2}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1979551182017596, guid: 74838ef35bb1d5847a09485e6ebc4936, type: 2}
       propertyPath: m_Name
@@ -13953,6 +13953,10 @@ PolygonCollider2D:
       - {x: 0.16873741, y: 0.20425272}
       - {x: 0.15372157, y: 0.28510714}
       - {x: 0.09821868, y: 0.32625437}
+--- !u!1 &1034014523 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 191326, guid: b046278bb9b6e104790392b566667ba5, type: 2}
+  m_PrefabInternal: {fileID: 1214920029}
 --- !u!1 &1037253542
 GameObject:
   m_ObjectHideFlags: 0
@@ -16228,7 +16232,7 @@ Prefab:
       objectReference: {fileID: 52010633}
     - target: {fileID: 11475408, guid: b046278bb9b6e104790392b566667ba5, type: 2}
       propertyPath: RainIntensity
-      value: 0.703
+      value: 0.705
       objectReference: {fileID: 0}
     - target: {fileID: 11475408, guid: b046278bb9b6e104790392b566667ba5, type: 2}
       propertyPath: EnableWind
@@ -16248,7 +16252,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 465656, guid: b046278bb9b6e104790392b566667ba5, type: 2}
       propertyPath: m_LocalScale.x
-      value: 437.52393
+      value: 91.12761
       objectReference: {fileID: 0}
     - target: {fileID: 465656, guid: b046278bb9b6e104790392b566667ba5, type: 2}
       propertyPath: m_LocalScale.y
@@ -20049,7 +20053,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4348969975031134, guid: 0760493300801564db7cf9489e71b661, type: 2}
       propertyPath: m_RootOrder
-      value: 13
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 1618293949978046, guid: 0760493300801564db7cf9489e71b661, type: 2}
       propertyPath: m_Name
@@ -20413,7 +20417,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4348969975031134, guid: 0760493300801564db7cf9489e71b661, type: 2}
       propertyPath: m_RootOrder
-      value: 11
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 1618293949978046, guid: 0760493300801564db7cf9489e71b661, type: 2}
       propertyPath: m_Name
@@ -22944,7 +22948,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4348969975031134, guid: 0760493300801564db7cf9489e71b661, type: 2}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1618293949978046, guid: 0760493300801564db7cf9489e71b661, type: 2}
       propertyPath: m_Name
@@ -25470,6 +25474,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boss: {fileID: 1451423753}
+  player: {fileID: 291277035}
+  rain: {fileID: 1034014523}
 --- !u!4 &1985183236 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4114682698746526, guid: 74838ef35bb1d5847a09485e6ebc4936,
@@ -25512,7 +25518,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4114682698746526, guid: 74838ef35bb1d5847a09485e6ebc4936, type: 2}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1979551182017596, guid: 74838ef35bb1d5847a09485e6ebc4936, type: 2}
       propertyPath: m_Name
