@@ -13,5 +13,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: Bullet Spread
   itemCode: shotgun
-  cost: 5
+  cost: 10
   description: Target more enemies
