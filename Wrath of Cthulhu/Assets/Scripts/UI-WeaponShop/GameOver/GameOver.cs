@@ -31,4 +31,10 @@ public class GameOver : MonoBehaviour {
         pausePanel.SetActive(false);
         Time.timeScale = 1f;
     }
+
+    public void OnClickRestart()
+    {
+        Time.timeScale = 1f;
+        Application.LoadLevel(0);
+    }
 }

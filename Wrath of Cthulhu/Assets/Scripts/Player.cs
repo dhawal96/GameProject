@@ -111,14 +111,6 @@ public class Player : MonoBehaviour {
             }*/
         }
 
-        if (Input.GetKey(KeyCode.R))
-        {
-            if (Time.timeScale == 1f)
-            {
-                Application.LoadLevel(0);
-            }
-        }
-
         if (Input.GetKey(KeyCode.H))
         {
             playerHealth = 100f;
