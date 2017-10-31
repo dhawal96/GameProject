@@ -57,6 +57,7 @@ public class Player : MonoBehaviour {
     private bool blink;
     private bool morphine;
     private bool locked;
+    public GameObject pausePanel;
 
 
     // Use this for initialization
@@ -95,7 +96,10 @@ public class Player : MonoBehaviour {
         markShooting = false;
         if (Input.GetKeyDown(KeyCode.P))
         {
-            if (pauseGame)
+            pausePanel.SetActive(true);
+            Time.timeScale = 0f;
+
+            /*if (pauseGame)
             {
                 Time.timeScale = 1f;
                 pauseGame = false;
@@ -104,12 +108,15 @@ public class Player : MonoBehaviour {
             {
                 Time.timeScale = 0f;
                 pauseGame = true;
-            }
+            }*/
         }
 
         if (Input.GetKey(KeyCode.R))
         {
-            Application.LoadLevel(0);
+            if (Time.timeScale == 1f)
+            {
+                Application.LoadLevel(0);
+            }
         }
 
         if (Input.GetKey(KeyCode.H))
@@ -123,13 +130,13 @@ public class Player : MonoBehaviour {
             anim.SetFloat("Speed", Mathf.Abs(rb2d.velocity.x) + Mathf.Abs(rb2d.velocity.y));
             anim.SetBool("Shooting", false);
 
-            if (Input.GetKeyDown("f") && !anim.GetCurrentAnimatorStateInfo(0).IsName("Shoot_Mark"))
+            if (Input.GetKeyDown(KeyCode.K) && !anim.GetCurrentAnimatorStateInfo(0).IsName("Shoot_Mark"))
             {
                 anim.SetBool("Shooting", true);
                 shootOnce = true;
             }
 
-            if (Input.GetKeyDown("g"))
+            if (Input.GetKeyDown(KeyCode.L))
             {
                 if (elixir)
                 {
@@ -299,7 +306,6 @@ public class Player : MonoBehaviour {
             gameAudio.GetComponent<AudioSource>().Stop();
             gameOverPanel.SetActive(true);
         }
-
     }
 
     //for physics
@@ -309,17 +315,17 @@ public class Player : MonoBehaviour {
 		if (!dead) {
 			if (Input.GetKey (KeyCode.A)) {
 				rb2d.AddForce (Vector3.left * speed);
-				transform.localScale = new Vector3 (-2f, 2f, 1f);
-				left = true;
-			}
+                transform.localScale = new Vector3(-2f, 2f, 1f);
+                left = true;
+            }
 
 			if (Input.GetKey (KeyCode.D)) {
 				rb2d.AddForce (Vector3.right * speed);
-				transform.localScale = new Vector3 (2f, 2f, 1f);
-				left = false;
-			}
+                transform.localScale = new Vector3(2f, 2f, 1f);
+                left = false;
+            }
 
-			if (Input.GetKey (KeyCode.W)) {
+            if (Input.GetKey (KeyCode.W)) {
 				rb2d.AddForce (Vector3.up * speed);
 			}
 

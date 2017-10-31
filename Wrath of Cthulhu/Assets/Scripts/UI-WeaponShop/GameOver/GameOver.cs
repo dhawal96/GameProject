@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GameOver : MonoBehaviour {
 
+    public GameObject pausePanel;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -22,5 +24,11 @@ public class GameOver : MonoBehaviour {
     public void OnClickExitGame()
     {
         Application.Quit();
+    }
+
+    public void OnClickResume()
+    {
+        pausePanel.SetActive(false);
+        Time.timeScale = 1f;
     }
 }
