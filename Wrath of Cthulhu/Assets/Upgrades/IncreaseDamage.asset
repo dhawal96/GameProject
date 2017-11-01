@@ -13,5 +13,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: Increase Damage
   itemCode: damage
-  cost: 10
+  cost: 4
   description: Bullet does more damage

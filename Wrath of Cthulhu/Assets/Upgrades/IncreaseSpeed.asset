@@ -13,5 +13,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: Increase Speed
   itemCode: speed
-  cost: 5
+  cost: 4
   description: Increase Mark's speed
