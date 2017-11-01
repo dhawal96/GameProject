@@ -37,9 +37,9 @@ public class WeaponButton : MonoBehaviour
     void SetButton()
     {
         string costString = controlscript.weapons[weaponNumber].cost.ToString();
-        name.text = controlscript.weapons[weaponNumber].weaponName;
+        //name.text = controlscript.weapons[weaponNumber].weaponName;
         cost.text = "$" + controlscript.weapons[weaponNumber].cost;
-        description.text = controlscript.weapons[weaponNumber].description;
+        //description.text = controlscript.weapons[weaponNumber].description;
     }
 
     public void OnClick()

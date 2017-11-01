@@ -6,6 +6,7 @@ public class ShopController : MonoBehaviour {
 
     public GameObject shopPanel;
     public GameObject openShopUI;
+    public GameObject scrollBar;
 
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -33,6 +34,7 @@ public class ShopController : MonoBehaviour {
     public void CloseShop()
     {
         shopPanel.SetActive(false);
+        scrollBar.SetActive(false);
         Time.timeScale = 1;
     }
 
