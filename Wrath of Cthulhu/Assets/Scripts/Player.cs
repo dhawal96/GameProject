@@ -61,6 +61,7 @@ public class Player : MonoBehaviour {
     public GameObject enterShopUIPanel;
     public GameObject shopPanel;
     public GameObject gamePlayPanel;
+    public float upgradeDamage;
 
 
     // Use this for initialization
@@ -90,6 +91,7 @@ public class Player : MonoBehaviour {
         blink = false;
         morphine = false;
         locked = false;
+        upgradeDamage = 0f;
         StartCoroutine(OpenGamePlayPanel());
 
 
@@ -231,10 +233,6 @@ public class Player : MonoBehaviour {
                         }
                     case "shotgun":
                         {
-                            if (bulletDamage == 150f)
-                            {
-                                bulletDamage = 60f;
-                            }
                             shotgun = true;
                             break;
                         }
@@ -268,7 +266,7 @@ public class Player : MonoBehaviour {
             }
 
                 //elixir = false;
-            
+
 
             if (anim.GetCurrentAnimatorStateInfo(0).IsName("Shoot_Mark") && shootOnce && shotgun == true)
             {

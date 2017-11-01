@@ -37,9 +37,9 @@ public class WeaponButton : MonoBehaviour
     void SetButton()
     {
         string costString = controlscript.weapons[weaponNumber].cost.ToString();
-        name.text = controlscript.weapons[weaponNumber].weaponName;
+        //name.text = controlscript.weapons[weaponNumber].weaponName;
         cost.text = "$" + controlscript.weapons[weaponNumber].cost;
-        description.text = controlscript.weapons[weaponNumber].description;
+        //description.text = controlscript.weapons[weaponNumber].description;
     }
 
     public void OnClick()
@@ -53,9 +53,13 @@ public class WeaponButton : MonoBehaviour
                 {
                     pagescript.count -= controlscript.weapons[weaponNumber].cost;
                     controlscript.currentWeapon = weaponNumber;
-                    controlscript.maxSpeed += .33f;
-                    controlscript.weapons[weaponNumber].cost += 5;
-                    SetButton();
+                    controlscript.maxSpeed += .17f;
+
+                    if (buySpeedCount != 2)
+                    {
+                        controlscript.weapons[weaponNumber].cost += 3;
+                        SetButton();
+                    }
                     buySpeedCount++;
                 }
 
@@ -73,9 +77,16 @@ public class WeaponButton : MonoBehaviour
                 {
                     pagescript.count -= controlscript.weapons[weaponNumber].cost;
                     controlscript.currentWeapon = weaponNumber;
+                    //controlscript.upgradeDamage += 50f;
+
                     controlscript.bulletDamage += 50f;
-                    controlscript.weapons[weaponNumber].cost += 5;
-                    SetButton();
+                    
+
+                    if (buyDamageCount != 2)
+                    {
+                        controlscript.weapons[weaponNumber].cost += 3;
+                        SetButton();
+                    }
                     buyDamageCount++;
                 }
 
@@ -92,6 +103,7 @@ public class WeaponButton : MonoBehaviour
                 {
                     pagescript.count -= controlscript.weapons[weaponNumber].cost;
                     controlscript.currentWeapon = weaponNumber;
+                    controlscript.bulletDamage = (controlscript.bulletDamage / 3f) + 10f;
                     boughtShotgun = true; //now bought
 
                 }
@@ -129,9 +141,12 @@ public class WeaponButton : MonoBehaviour
                 {
                     pagescript.count -= controlscript.weapons[weaponNumber].cost;
                     controlscript.currentWeapon = weaponNumber;
-                    controlscript.maxSpeed += .33f;
-                    controlscript.weapons[weaponNumber].cost += 5;
-                    SetButton();
+                    controlscript.maxSpeed += .17f;
+                    if (buySpeedCount != 2)
+                    {
+                        controlscript.weapons[weaponNumber].cost += 3;
+                        SetButton();
+                    }
                     buySpeedCount++;
                 }
 
@@ -149,9 +164,14 @@ public class WeaponButton : MonoBehaviour
                 {
                     pagescript.count -= controlscript.weapons[weaponNumber].cost;
                     controlscript.currentWeapon = weaponNumber;
+
                     controlscript.bulletDamage += 50f;
-                    controlscript.weapons[weaponNumber].cost += 5;
-                    SetButton();
+                    
+                    if (buyDamageCount != 2)
+                    {
+                        controlscript.weapons[weaponNumber].cost += 3;
+                        SetButton();
+                    }
                     buyDamageCount++;
                 }
 
