@@ -58,6 +58,9 @@ public class Player : MonoBehaviour {
     private bool morphine;
     private bool locked;
     public GameObject pausePanel;
+    public GameObject enterShopUIPanel;
+    public GameObject shopPanel;
+    public GameObject gamePlayPanel;
 
 
     // Use this for initialization
@@ -87,14 +90,28 @@ public class Player : MonoBehaviour {
         blink = false;
         morphine = false;
         locked = false;
-       
+        StartCoroutine(OpenGamePlayPanel());
+
+
+    }
+
+    IEnumerator OpenGamePlayPanel()
+    {
+        yield return new WaitForSeconds(1);
+        gamePlayPanel.SetActive(true);
     }
 
     // Update is called once per frame
     void Update()
     {
         markShooting = false;
-        if (Input.GetKeyDown(KeyCode.P))
+
+        if (gamePlayPanel.activeSelf)
+        {
+            Time.timeScale = 0f;
+        }
+
+        if (Input.GetKeyDown(KeyCode.P) && !gameOverPanel.activeSelf && !enterShopUIPanel.activeSelf && !shopPanel.activeSelf && !gamePlayPanel.activeSelf)
         {
             pausePanel.SetActive(true);
             Time.timeScale = 0f;
@@ -221,7 +238,7 @@ public class Player : MonoBehaviour {
                             shotgun = true;
                             break;
                         }
-                    case "speed":
+                    /*case "speed": //These are updated through the WeaponButton script so that it doesn't run in every frame from Update()
                         {
                             if (maxSpeed >= 1.5f)
                             {
@@ -238,7 +255,7 @@ public class Player : MonoBehaviour {
                         {
                             bulletDamage = 300f;
                             break;
-                        }
+                        }*/
                     case "null":
                         {
                             //Do Nothing
@@ -359,4 +376,5 @@ public class Player : MonoBehaviour {
     {
         winchester.Play();
     }
+
 }
