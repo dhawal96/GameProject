@@ -3990,7 +3990,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Teleports player\nWARNING: \nIncreases Madness"
+  m_Text: "Teleports a short distance\nWARNING: \nIncreases Madness"
 --- !u!222 &265063609
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4454,6 +4454,7 @@ GameObject:
   - component: {fileID: 291277039}
   - component: {fileID: 291277042}
   - component: {fileID: 291277043}
+  - component: {fileID: 291277044}
   m_Layer: 0
   m_Name: Mark
   m_TagString: Player
@@ -4576,6 +4577,7 @@ MonoBehaviour:
   bullet: {fileID: 1611821028136744, guid: c54433a8189ddf74a82616b18153d612, type: 2}
   bulletDamage: 0
   spawnPoint: {fileID: 408186884}
+  sounds: []
   shotgun: 0
   pauseGame: 0
   item: none
@@ -4764,6 +4766,86 @@ PolygonCollider2D:
       - {x: 0.05346358, y: -0.055836678}
       - {x: 0.053991735, y: -0.033473134}
       - {x: 0.03317356, y: -0.037186027}
+--- !u!82 &291277044
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 291277035}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: d62693935612b484e919c16fa913d833, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!1001 &292576808
 Prefab:
   m_ObjectHideFlags: 0
@@ -11228,7 +11310,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 429831971}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.6540623
+  m_Size: 0.6540622
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -16651,7 +16733,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Heals player\nWARNING: \nIncreases Madness"
+  m_Text: "Restores health\nWARNING: \nIncreases Madness"
 --- !u!222 &1163473653
 CanvasRenderer:
   m_ObjectHideFlags: 0

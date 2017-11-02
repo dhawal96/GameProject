@@ -28,7 +28,7 @@ public class Player : MonoBehaviour {
     public GameObject bullet;
     public float bulletDamage;
     public Transform spawnPoint;
-    private AudioSource winchester;
+    public AudioSource[] sounds;
     public bool shotgun;
 
 	//Anim
@@ -69,7 +69,7 @@ public class Player : MonoBehaviour {
 
         rb2d = gameObject.GetComponent<Rigidbody2D>(); 
         anim = gameObject.GetComponent<Animator>();
-        winchester = gameObject.GetComponent<AudioSource>();
+        sounds = gameObject.GetComponents<AudioSource>();
         playerHealth = 100f;
 		playerMadness = 0f;
 		item = "null";
@@ -363,6 +363,7 @@ public class Player : MonoBehaviour {
     void SetHit()
     {
         gameObject.GetComponent<Animator>().SetBool("Hit", false);
+        sounds[1].Play();
     }
 
     void Destroy()
@@ -372,7 +373,7 @@ public class Player : MonoBehaviour {
 
     void playSound()
     {
-        winchester.Play();
+        sounds[0].Play();
     }
 
 }
