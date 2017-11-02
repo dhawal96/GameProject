@@ -7,6 +7,12 @@ public class ShopController : MonoBehaviour {
     public GameObject shopPanel;
     public GameObject openShopUI;
     public GameObject scrollBar;
+    private Animator anim;
+
+    private void Start()
+    {
+        anim = gameObject.GetComponent<Animator>();
+    }
 
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -42,5 +48,17 @@ public class ShopController : MonoBehaviour {
     {
         openShopUI.SetActive(false);
         Time.timeScale = 1;
+    }
+
+    public IEnumerator Wait()
+    {
+        yield return new WaitForSeconds(4);
+        anim.SetBool("wait", true);
+        
+    }
+
+    public void setWait()
+    {
+        anim.SetBool("wait", false);
     }
 }
