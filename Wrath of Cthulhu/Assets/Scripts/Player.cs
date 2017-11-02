@@ -21,8 +21,6 @@ public class Player : MonoBehaviour {
 	public Transform CameraFollow;
 	CameraFollow camerascript;
 
-    //Player1Currency
-    public float currency;
 
 	//Player1Bullet
     public GameObject bullet;
@@ -50,12 +48,12 @@ public class Player : MonoBehaviour {
     public float maxPos;
 
     public WeaponObject[] weapons;
-    public int currentWeapon;
+    public int latestBuy;
     public GameObject gameOverPanel;
     public GameObject gameAudio;
-    private bool elixir;
-    private bool blink;
-    private bool morphine;
+    public bool elixir;
+    public bool blink;
+    public bool morphine;
     private bool locked;
     public GameObject pausePanel;
     public GameObject enterShopUIPanel;
@@ -84,8 +82,7 @@ public class Player : MonoBehaviour {
         speed = 50;
 		dead = false;
         shotgun = false;
-        currentWeapon = 0;
-        currency = 0;
+		latestBuy = 0;
         bulletDamage = 150f;
         elixir = false;
         blink = false;
@@ -244,14 +241,14 @@ public class Player : MonoBehaviour {
                 }
             }
 
-            if (weapons[currentWeapon].itemCode == "elixir" || weapons[currentWeapon].itemCode == "blink" || weapons[currentWeapon].itemCode == "shotgun" || weapons[currentWeapon].itemCode == "speed" || weapons[currentWeapon].itemCode == "damage")
+			/*if (playerMadness>0)
             {
                 locked = false;
             }
 
             if (locked == false)
             {
-                switch (weapons[currentWeapon].itemCode)
+                switch (weapons[latestBuy].itemCode)
                 {
                     case "elixir":
                         {
@@ -295,7 +292,7 @@ public class Player : MonoBehaviour {
                         {
                             bulletDamage = 300f;
                             break;
-                        }*/
+                        }
                     case "null":
                         {
                             //Do Nothing
@@ -305,7 +302,7 @@ public class Player : MonoBehaviour {
                         break;
 
                 }
-            }
+            }*/
 
                 //elixir = false;
 

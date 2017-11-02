@@ -1076,7 +1076,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c97b45ec42df45f6b014fc121fa2324, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  count: 0
+  count: 99
 --- !u!114 &1804639604
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1090,7 +1090,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.99215686, g: 0.81960785, b: 0.3019608, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
