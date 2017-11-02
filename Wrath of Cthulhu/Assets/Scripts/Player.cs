@@ -99,7 +99,7 @@ public class Player : MonoBehaviour {
 
     IEnumerator OpenGamePlayPanel()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(2);
         gamePlayPanel.SetActive(true);
     }
 
@@ -363,6 +363,10 @@ public class Player : MonoBehaviour {
     void SetHit()
     {
         gameObject.GetComponent<Animator>().SetBool("Hit", false);
+    }
+
+    public void PlayGrunt()
+    {
         sounds[1].Play();
     }
 
