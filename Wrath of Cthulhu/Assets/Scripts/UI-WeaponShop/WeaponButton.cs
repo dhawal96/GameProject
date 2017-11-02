@@ -18,7 +18,6 @@ public class WeaponButton : MonoBehaviour
     public Text cost;
     public Text description;
     private bool boughtShotgun;
-    private string currentItem;
     // Use this for initialization
     void Start()
     {
@@ -29,7 +28,6 @@ public class WeaponButton : MonoBehaviour
         boughtShotgun = false;
         buySpeedCount = 0f;
         buyDamageCount = 0f;
-        currentItem = "null";
         SetButton();
 
     }
@@ -45,148 +43,91 @@ public class WeaponButton : MonoBehaviour
     public void OnClick()
     {
 
-        if (pagescript.count >= controlscript.weapons[weaponNumber].cost && controlscript.currentWeapon != weaponNumber) // You can afford it and don't have it
+		if (pagescript.count >= controlscript.weapons[weaponNumber].cost)// && controlscript.currentWeapon != weaponNumber) // You can afford it and don't have it
         {
-            if (weaponNumber == 5) // if speed
-            {
-                if (buySpeedCount != 3) //if 3 buys not completed yet
-                {
-                    pagescript.count -= controlscript.weapons[weaponNumber].cost;
-                    controlscript.currentWeapon = weaponNumber;
-                    controlscript.maxSpeed += .17f;
+			switch (controlscript.weapons [weaponNumber].itemCode) {
+			case "elixir":
+				{
+					if (!controlscript.elixir) { //if don't own elixir
+						pagescript.count -= controlscript.weapons [weaponNumber].cost;
+						controlscript.latestBuy = weaponNumber;
+						controlscript.elixir = true;
+						controlscript.blink = false;
+						controlscript.morphine = false;
+					}
 
-                    if (buySpeedCount != 2)
-                    {
-                        controlscript.weapons[weaponNumber].cost += 3;
-                        SetButton();
-                    }
-                    buySpeedCount++;
-                }
+					break;
+				}
+			case "blink": 
+				{
+					if (!controlscript.blink) { // if eye
+						pagescript.count -= controlscript.weapons [weaponNumber].cost;
+						controlscript.latestBuy = weaponNumber;
+						controlscript.elixir = false;
+						controlscript.blink = true;
+						controlscript.morphine = false;
+					} 
+					break;
+				}
+			case "morphine":
+				{
+					if (controlscript.playerMadness > 0) {
+						controlscript.playerMadness = 0;
+						pagescript.count -= controlscript.weapons [weaponNumber].cost;
+						controlscript.latestBuy = weaponNumber;
+					}
+					break;
+				}
+			case "shotgun":
+				{
+					if (boughtShotgun == false) { // if shotgun upgrade and havent bought yet
+						pagescript.count -= controlscript.weapons [weaponNumber].cost;
+						controlscript.latestBuy = weaponNumber;
+						controlscript.bulletDamage = (controlscript.bulletDamage / 3f) + 10f;
+						boughtShotgun = true; //now bought
+						controlscript.shotgun = true;
+					} 
+					break;
+				}
+			case "speed":
+				{
+					if (buySpeedCount != 3) //if 3 buys not completed yet
+					{
+						pagescript.count -= controlscript.weapons[weaponNumber].cost;
+						controlscript.latestBuy = weaponNumber;
+						controlscript.maxSpeed += .17f;
 
-                else
-                {
-                    //Do Nothing
-                }
+						if (buySpeedCount != 2)
+						{
+							controlscript.weapons[weaponNumber].cost += 3;
+							SetButton();
+						}
+						buySpeedCount++;
+					}
+					break;
+				}
+			case "damage":
+				{
+					if (buyDamageCount != 3) //if 3 buys not completed yet
+					{
+						pagescript.count -= controlscript.weapons[weaponNumber].cost;
+						controlscript.latestBuy = weaponNumber;
+						//controlscript.upgradeDamage += 50f;
 
-            }
+						controlscript.bulletDamage += 50f;
 
-            else if (weaponNumber == 6) //if damage
-            {
 
-                if (buyDamageCount != 3) //if 3 buys not completed yet
-                {
-                    pagescript.count -= controlscript.weapons[weaponNumber].cost;
-                    controlscript.currentWeapon = weaponNumber;
-                    //controlscript.upgradeDamage += 50f;
+						if (buyDamageCount != 2)
+						{
+							controlscript.weapons[weaponNumber].cost += 3;
+							SetButton();
+						}
+						buyDamageCount++;
+					}
+					break;
+				}
+			}
 
-                    controlscript.bulletDamage += 50f;
-                    
-
-                    if (buyDamageCount != 2)
-                    {
-                        controlscript.weapons[weaponNumber].cost += 3;
-                        SetButton();
-                    }
-                    buyDamageCount++;
-                }
-
-                else
-                {
-                    //Do Nothing
-                }
-
-            }
-
-            else //its not speed or damage
-            {
-                if (weaponNumber == 4 && boughtShotgun == false) // if shotgun upgrade and havent bought yet
-                {
-                    pagescript.count -= controlscript.weapons[weaponNumber].cost;
-                    controlscript.currentWeapon = weaponNumber;
-                    controlscript.bulletDamage = (controlscript.bulletDamage / 3f) + 10f;
-                    boughtShotgun = true; //now bought
-
-                }
-
-                else if (weaponNumber == 1 || weaponNumber == 2) // if elxiir or eye
-                {
-                    if (weaponNumber == 1 && currentItem != "elixir") //if elixir
-                    {
-                        pagescript.count -= controlscript.weapons[weaponNumber].cost;
-                        controlscript.currentWeapon = weaponNumber;
-                        currentItem = "elixir";
-                    }
-
-                    else if (weaponNumber == 2 && currentItem != "eye") // if eye
-                    {
-                        pagescript.count -= controlscript.weapons[weaponNumber].cost;
-                        controlscript.currentWeapon = weaponNumber;
-                        currentItem = "eye";
-                    }
-
-                    else
-                    {
-                        //Do Nothing
-                    }
-                }
-            }
-
-        }
-
-        else if (pagescript.count >= controlscript.weapons[weaponNumber].cost && controlscript.currentWeapon == weaponNumber) // You can buy it and have the item
-        {
-            if (weaponNumber == 5) // if speed
-            {
-                if (buySpeedCount != 3) //if 3 buys not completed yet
-                {
-                    pagescript.count -= controlscript.weapons[weaponNumber].cost;
-                    controlscript.currentWeapon = weaponNumber;
-                    controlscript.maxSpeed += .17f;
-                    if (buySpeedCount != 2)
-                    {
-                        controlscript.weapons[weaponNumber].cost += 3;
-                        SetButton();
-                    }
-                    buySpeedCount++;
-                }
-
-                else
-                {
-                    //Do Nothing
-                }
-
-            }
-
-            else if (weaponNumber == 6) //if damage
-            {
-
-                if (buyDamageCount != 3) //if 3 buys not completed yet
-                {
-                    pagescript.count -= controlscript.weapons[weaponNumber].cost;
-                    controlscript.currentWeapon = weaponNumber;
-
-                    controlscript.bulletDamage += 50f;
-                    
-                    if (buyDamageCount != 2)
-                    {
-                        controlscript.weapons[weaponNumber].cost += 3;
-                        SetButton();
-                    }
-                    buyDamageCount++;
-                }
-
-                else
-                {
-                    //Do Nothing
-                }
-
-            }
-
-            else // its not speed or damage
-
-            {
-                // Do Nothing
-            }
 
         }
 

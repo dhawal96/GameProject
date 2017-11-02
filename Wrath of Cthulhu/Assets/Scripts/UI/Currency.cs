@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Currency : MonoBehaviour {
 
-	public int count = 15;
+	public int count;
 
 	// Update is called once per frame
 	void Update () {
