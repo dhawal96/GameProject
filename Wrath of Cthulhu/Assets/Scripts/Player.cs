@@ -162,23 +162,65 @@ public class Player : MonoBehaviour {
 
                 else if (blink)
                 {
-                    playerMadness += 1f;
-                    if (transform.position.x >= .25f && transform.position.x <= 19.74f)
+                    playerMadness += 10f;
+                    if (transform.position.x >= .25f && transform.position.x <= 19.63752f + .25248f)
                     {
                         minPos = .25f;
-                        maxPos = 19.74f;
+                        maxPos = 19.63752f + .25248f;
                     }
 
-                    else if (transform.position.x >= 20.23 && transform.position.x <= 29.81f)
+                    else if (transform.position.x >= 19.63752f + .56248f && transform.position.x <= 30.35743f + .25248f)
                     {
-                        minPos = 20.23f;
-                        maxPos = 29.81f;
+                        minPos = 19.63752f + .56248f;
+                        maxPos = 30.35743f + .25248f;
                     }
 
-                    else if (transform.position.x >= 30.27 && transform.position.x <= 42.04f)
+                    else if (transform.position.x >= 30.35743f + .56248f && transform.position.x <= 40.61f + .25248f)
                     {
-                        minPos = 30.27f;
-                        maxPos = 42.04f;
+                        minPos = 30.35743f + .56248f;
+                        maxPos = 40.61f + .25248f;
+                    }
+
+                    else if (transform.position.x >= 40.61f + .56248f && transform.position.x <= 51.24f + .25248f)
+                    {
+                        minPos = 40.61f + .56248f;
+                        maxPos = 51.24f + .25248f;
+                    }
+
+                    else if (transform.position.x >= 51.24f + .56248f && transform.position.x <= 61.75f + .25248f)
+                    {
+                        minPos = 51.24f + .56248f;
+                        maxPos = 61.75f + .25248f;
+                    }
+
+                    else if (transform.position.x >= 61.75f + .56248f && transform.position.x <= 75.49f + .25248f)
+                    {
+                        minPos = 61.75f + .56248f;
+                        maxPos = 75.49f + .25248f;
+                    }
+
+                    else if (transform.position.x >= 75.49f + .56248f && transform.position.x <= 84.46f + .25248f)
+                    {
+                        minPos = 75.49f + .56248f;
+                        maxPos = 84.46f + .25248f;
+                    }
+
+                    else if (transform.position.x >= 84.46f + .56248f && transform.position.x <= 98.37f + .25248f)
+                    {
+                        minPos = 84.46f + .56248f;
+                        maxPos = 98.37f + .25248f;
+                    }
+
+                    else if (transform.position.x >= 98.37f + .56248f && transform.position.x <= 111.31f + .25248f)
+                    {
+                        minPos = 98.37f + .56248f;
+                        maxPos = 111.31f + .25248f;
+                    }
+
+                    else if (transform.position.x >= 111.31f + .56248f && transform.position.x <= 118.56f)
+                    {
+                        minPos = 111.31f + .56248f;
+                        maxPos = 118.56f;
                     }
                     //float cameraSize = 2.294f;
                     float xPosition = transform.position.x;
