@@ -14,6 +14,6 @@ public class Ammo : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        GetComponent<Text>().text = countAmmo + " / Ammo";
+        GetComponent<Text>().text = countAmmo + " / A m m o";
     }
 }

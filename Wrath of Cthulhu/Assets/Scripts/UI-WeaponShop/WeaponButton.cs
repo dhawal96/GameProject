@@ -9,6 +9,9 @@ public class WeaponButton : MonoBehaviour
 
     Player controlscript;
     public Transform PageCount; //UI element
+    public GameObject ItemUI;
+    public GameObject elixirImage; //elixir image
+    public GameObject eyeImage; //eye image
     Currency pagescript;
     private GameObject Mark;
     private float buySpeedCount;
@@ -24,6 +27,9 @@ public class WeaponButton : MonoBehaviour
         Mark = GameObject.FindWithTag("Player");
         controlscript = Mark.GetComponent<Player>();
         PageCount = GameObject.Find("PageCount").transform; //UI Element
+        ItemUI = GameObject.Find("Item");
+        elixirImage = ItemUI.transform.Find("ElixirUI").gameObject;
+        eyeImage = ItemUI.transform.Find("EyeUI").gameObject;
         pagescript = PageCount.GetComponent<Currency>();
         boughtShotgun = false;
         buySpeedCount = 0f;
@@ -36,7 +42,7 @@ public class WeaponButton : MonoBehaviour
     {
         string costString = controlscript.weapons[weaponNumber].cost.ToString();
         //name.text = controlscript.weapons[weaponNumber].weaponName;
-        cost.text = "$" + controlscript.weapons[weaponNumber].cost;
+        cost.text = "$" + costString;
         //description.text = controlscript.weapons[weaponNumber].description;
     }
 
@@ -51,7 +57,9 @@ public class WeaponButton : MonoBehaviour
 					if (!controlscript.elixir) { //if don't own elixir
 						pagescript.count -= controlscript.weapons [weaponNumber].cost;
 						controlscript.latestBuy = weaponNumber;
-						controlscript.elixir = true;
+                        eyeImage.SetActive(false);
+                        elixirImage.SetActive(true);
+                        controlscript.elixir = true;
 						controlscript.blink = false;
 						controlscript.morphine = false;
 					}
@@ -63,7 +71,9 @@ public class WeaponButton : MonoBehaviour
 					if (!controlscript.blink) { // if eye
 						pagescript.count -= controlscript.weapons [weaponNumber].cost;
 						controlscript.latestBuy = weaponNumber;
-						controlscript.elixir = false;
+                        eyeImage.SetActive(true);
+                        elixirImage.SetActive(false);
+                        controlscript.elixir = false;
 						controlscript.blink = true;
 						controlscript.morphine = false;
 					} 
@@ -127,8 +137,6 @@ public class WeaponButton : MonoBehaviour
 					break;
 				}
 			}
-
-
         }
 
     }
