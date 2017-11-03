@@ -54,8 +54,6 @@ public class EnemyMove : MonoBehaviour {
     public float enemyDamage;
     public float enemyMadness;
 
-
-
     void Start()
     {
         anim = gameObject.GetComponent<Animator>();
