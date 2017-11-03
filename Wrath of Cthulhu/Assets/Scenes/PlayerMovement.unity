@@ -4548,6 +4548,7 @@ MonoBehaviour:
   enterShopUIPanel: {fileID: 1414628194}
   shopPanel: {fileID: 1916252800}
   gamePlayPanel: {fileID: 1356524129}
+  scrollBar: {fileID: 787893316}
   upgradeDamage: 0
 --- !u!61 &291277041
 BoxCollider2D:
@@ -26565,6 +26566,16 @@ Prefab:
     - target: {fileID: 1618293949978046, guid: 0760493300801564db7cf9489e71b661, type: 2}
       propertyPath: m_Name
       value: Enemy (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 114210506616646348, guid: 0760493300801564db7cf9489e71b661,
+        type: 2}
+      propertyPath: maxSpeed
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 114210506616646348, guid: 0760493300801564db7cf9489e71b661,
+        type: 2}
+      propertyPath: speed
+      value: 0.75
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0760493300801564db7cf9489e71b661, type: 2}

@@ -8,8 +8,8 @@ public class MainMenuManager : MonoBehaviour {
 	private Animator menuAnim;
 	private CanvasGroup menuCanvasGroup;
 
-	// Use this for initialization
-	void Awake () {
+    // Use this for initialization
+    void Awake () {
 		menuAnim = GetComponent<Animator> ();
 		menuCanvasGroup = GetComponent<CanvasGroup> ();
 	}

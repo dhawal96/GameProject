@@ -14,6 +14,12 @@ public class GamePlay : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+        if (Input.GetKey(KeyCode.Return) && gamePlayPanel.activeSelf)
+        {
+            gamePlayPanel.SetActive(false);
+            Time.timeScale = 1f;
+        }
 		
 	}
 

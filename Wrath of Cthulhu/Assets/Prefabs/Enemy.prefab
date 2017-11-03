@@ -231,6 +231,7 @@ MonoBehaviour:
   dashTimer: 0
   maxDash: 1
   savedVelocity: {x: 0, y: 0}
+  randomNumber: 0
   items:
   - {fileID: 1627987009531400, guid: 2bb48ddf63ba4204e965337588ebb48f, type: 2}
   - {fileID: 1170061375301152, guid: 1da3534cca72f404198ca461d9a80d43, type: 2}
@@ -238,7 +239,7 @@ MonoBehaviour:
   idle: 0
   attackMark: 0
   controlMeleeCollision: 0
-  speed: 1
+  speed: 0.75
   maxSpeed: 0.01
   health: 0
   enemyCount: 10

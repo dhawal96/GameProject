@@ -115,6 +115,7 @@ public class BulletFire : MonoBehaviour
             case "Player":
                 target.gameObject.GetComponent<Player>().playerHealth -= enemyDamage;
                 target.gameObject.GetComponent<Player>().playerMadness += enemyMadness;
+                controlscript.sounds[1].Play();
                 target.gameObject.GetComponent<Animator>().SetBool("Hit", true);
                 Destroy(gameObject);
                 break;
