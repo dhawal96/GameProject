@@ -59,7 +59,11 @@ public class Player : MonoBehaviour {
     public GameObject enterShopUIPanel;
     public GameObject shopPanel;
     public GameObject gamePlayPanel;
+    public GameObject scrollBar;
     public float upgradeDamage;
+
+    public Transform AmmoCount;
+    Ammo ammoScript;
 
 
     // Use this for initialization
@@ -78,6 +82,8 @@ public class Player : MonoBehaviour {
 		madnessscript = MadnessPercentage.GetComponent<Player1Madness>();
 		CameraFollow = GameObject.Find("Main Camera").transform;
 		camerascript = CameraFollow.GetComponent<CameraFollow>();
+        AmmoCount = GameObject.Find("AmmoCount").transform;
+        ammoScript = AmmoCount.GetComponent<Ammo>();
         maxSpeed = .5f;
         speed = 50;
 		dead = false;
@@ -110,6 +116,26 @@ public class Player : MonoBehaviour {
             Time.timeScale = 0f;
         }
 
+        if (Input.GetKey(KeyCode.Return) && pausePanel.activeSelf)
+        {
+            pausePanel.SetActive(false);
+            Time.timeScale = 1f;
+        }
+
+        if (Input.GetKey(KeyCode.Return) && enterShopUIPanel.activeSelf)
+        {
+            enterShopUIPanel.SetActive(false);
+            Time.timeScale = 1f;
+        }
+
+        if (Input.GetKey(KeyCode.Return) && shopPanel.activeSelf)
+        {
+            shopPanel.SetActive(false);
+            scrollBar.SetActive(false);
+            Time.timeScale = 1f;
+        }
+
+
         if (Input.GetKeyDown(KeyCode.P) && !gameOverPanel.activeSelf && !enterShopUIPanel.activeSelf && !shopPanel.activeSelf && !gamePlayPanel.activeSelf)
         {
             pausePanel.SetActive(true);
@@ -138,7 +164,18 @@ public class Player : MonoBehaviour {
             anim.SetFloat("Speed", Mathf.Abs(rb2d.velocity.x) + Mathf.Abs(rb2d.velocity.y));
             anim.SetBool("Shooting", false);
 
-            if (Input.GetKeyDown(KeyCode.K) && !anim.GetCurrentAnimatorStateInfo(0).IsName("Shoot_Mark"))
+            if (Input.GetKeyDown(KeyCode.R)) //reload ammo
+            {
+                ammoScript.countAmmo = 6f;
+            }
+
+            if (Input.GetKeyDown(KeyCode.K) && !anim.GetCurrentAnimatorStateInfo(0).IsName("Shoot_Mark") && shotgun == true && ammoScript.countAmmo >= 3f)
+            {
+                anim.SetBool("Shooting", true);
+                shootOnce = true;
+            }
+
+            else if (Input.GetKeyDown(KeyCode.K) && !anim.GetCurrentAnimatorStateInfo(0).IsName("Shoot_Mark") && shotgun == false && ammoScript.countAmmo > 0f)
             {
                 anim.SetBool("Shooting", true);
                 shootOnce = true;
@@ -241,71 +278,6 @@ public class Player : MonoBehaviour {
                 }
             }
 
-			/*if (playerMadness>0)
-            {
-                locked = false;
-            }
-
-            if (locked == false)
-            {
-                switch (weapons[latestBuy].itemCode)
-                {
-                    case "elixir":
-                        {
-                            elixir = true;
-                            blink = false;
-                            morphine = false;
-                            break;
-                        }
-                    case "blink": ///work in progress
-                        {
-                            elixir = false;
-                            blink = true;
-                            morphine = false;
-                            break;
-                        }
-                    case "morphine":
-                        {
-                            playerMadness = 0;
-                            locked = true;
-                            break;
-                        }
-                    case "shotgun":
-                        {
-                            shotgun = true;
-                            break;
-                        }
-                    /*case "speed": //These are updated through the WeaponButton script so that it doesn't run in every frame from Update()
-                        {
-                            if (maxSpeed >= 1.5f)
-                            {
-                                maxSpeed = 1.5f;
-                            }
-
-                            else
-                            {
-                                maxSpeed += .25f;
-                            }
-                            break;
-                        }
-                    case "damage":
-                        {
-                            bulletDamage = 300f;
-                            break;
-                        }
-                    case "null":
-                        {
-                            //Do Nothing
-                            break;
-                        }
-                    default:
-                        break;
-
-                }
-            }*/
-
-                //elixir = false;
-
 
             if (anim.GetCurrentAnimatorStateInfo(0).IsName("Shoot_Mark") && shootOnce && shotgun == true)
             {
@@ -315,6 +287,7 @@ public class Player : MonoBehaviour {
                 bullet2.transform.Rotate(0f, 0f, 0f);
                 GameObject bullet3 = (GameObject)Instantiate(bullet, spawnPoint.position, spawnPoint.rotation);
                 bullet3.transform.Rotate(0f, 0f, -10f);
+                ammoScript.countAmmo -= 3f;
                 //Transform newBullet = Instantiate(bullet.transform, spawnPoint.position, Quaternion.identity) as Transform;
                 //newBullet.parent = transform;
                 markShooting = true;
@@ -324,6 +297,7 @@ public class Player : MonoBehaviour {
             else if (anim.GetCurrentAnimatorStateInfo(0).IsName("Shoot_Mark") && shootOnce)
 			{
                 Instantiate(bullet, spawnPoint.position, spawnPoint.rotation);
+                ammoScript.countAmmo -= 1f;
                 //Transform newBullet = Instantiate(bullet.transform, spawnPoint.position, Quaternion.identity) as Transform;
                 //newBullet.parent = transform;
                 markShooting = true;
@@ -402,11 +376,6 @@ public class Player : MonoBehaviour {
     void SetHit()
     {
         gameObject.GetComponent<Animator>().SetBool("Hit", false);
-    }
-
-    public void PlayGrunt()
-    {
-        sounds[1].Play();
     }
 
     void Destroy()

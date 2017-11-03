@@ -46,8 +46,8 @@ public class EnemyMove : MonoBehaviour {
     public bool controlMeleeCollision;
 
     //Enemy Attributes
-    public float speed = 1f;
-    public float maxSpeed = .01f;
+    public float speed;
+    public float maxSpeed;
     public float health;
     public float enemyCount = 10f;
     public bool enemyShooting;
@@ -73,6 +73,8 @@ public class EnemyMove : MonoBehaviour {
         attackMark = false;
         controlMeleeCollision = false;
         controlDashCollision = false;
+        maxSpeed = .01f;
+        speed = .75f;
         randomNumber = Random.Range(0f, 100f);
         if (randomNumber <= 20)
         {
@@ -330,8 +332,9 @@ public class EnemyMove : MonoBehaviour {
     {
         if (anim.GetCurrentAnimatorStateInfo(0).IsName("Dash_DeepOnes"))
         {
-            Player.GetComponent<Player>().playerHealth -= enemyDamage;
+            Player.GetComponent<Player>().playerHealth -= 15f;
             Player.GetComponent<Player>().playerMadness += enemyMadness;
+            controlscript.sounds[1].Play();
             Player.GetComponent<Animator>().SetBool("Hit", true);
             controlDashCollision = false;
         }
@@ -340,6 +343,7 @@ public class EnemyMove : MonoBehaviour {
         {
             Player.GetComponent<Player>().playerHealth -= enemyDamage;
             Player.GetComponent<Player>().playerMadness += enemyMadness;
+            controlscript.sounds[1].Play();
             Player.GetComponent<Animator>().SetBool("Hit", true);
             //controlMeleeCollision = false;
         }
