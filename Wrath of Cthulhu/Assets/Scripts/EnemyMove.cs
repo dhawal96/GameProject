@@ -41,7 +41,7 @@ public class EnemyMove : MonoBehaviour {
 
     //Melee Attack
     public bool idle;
-    private float minDistance = .524848f;
+    private float minDistance;
     public bool attackMark;
     public bool controlMeleeCollision;
 
@@ -73,6 +73,7 @@ public class EnemyMove : MonoBehaviour {
         controlDashCollision = false;
         maxSpeed = .01f;
         speed = .75f;
+        minDistance = .50f;
         randomNumber = Random.Range(0f, 100f);
         if (randomNumber <= 20)
         {

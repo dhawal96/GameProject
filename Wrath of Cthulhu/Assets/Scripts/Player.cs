@@ -180,9 +180,14 @@ public class Player : MonoBehaviour {
             anim.SetFloat("Speed", Mathf.Abs(rb2d.velocity.x) + Mathf.Abs(rb2d.velocity.y));
             anim.SetBool("Shooting", false);
 
-            if (Input.GetKeyDown(KeyCode.R)) //reload ammo
+            if (Input.GetKeyDown(KeyCode.R) && ammoScript.countAmmo != 6f) //reload ammo
             {
-                ammoScript.countAmmo = 6f;
+                anim.SetBool("Reload", true);
+            }
+
+            if (ammoScript.countAmmo == 0)
+            {
+                anim.SetBool("Reload", true);
             }
 
             if (Input.GetKeyDown(KeyCode.K) && !anim.GetCurrentAnimatorStateInfo(0).IsName("Shoot_Mark") && shotgun == true && ammoScript.countAmmo >= 3f)
@@ -394,23 +399,23 @@ public class Player : MonoBehaviour {
     {
         Physics2D.gravity = Vector2.zero;
 		if (!dead) {
-			if (Input.GetKey (KeyCode.A)) {
+			if (Input.GetKey (KeyCode.A) && !anim.GetCurrentAnimatorStateInfo(0).IsName("Reload_Mark")) {
 				rb2d.AddForce (Vector3.left * speed);
                 transform.localScale = new Vector3(-2f, 2f, 1f);
                 left = true;
             }
 
-			if (Input.GetKey (KeyCode.D)) {
+			if (Input.GetKey (KeyCode.D) && !anim.GetCurrentAnimatorStateInfo(0).IsName("Reload_Mark")) {
 				rb2d.AddForce (Vector3.right * speed);
                 transform.localScale = new Vector3(2f, 2f, 1f);
                 left = false;
             }
 
-            if (Input.GetKey (KeyCode.W)) {
+            if (Input.GetKey (KeyCode.W) && !anim.GetCurrentAnimatorStateInfo(0).IsName("Reload_Mark")) {
 				rb2d.AddForce (Vector3.up * speed);
 			}
 
-			if (Input.GetKey (KeyCode.S)) {
+			if (Input.GetKey (KeyCode.S) && !anim.GetCurrentAnimatorStateInfo(0).IsName("Reload_Mark")) {
 				rb2d.AddForce (Vector3.down * speed);
 			}
 		
@@ -447,6 +452,15 @@ public class Player : MonoBehaviour {
     void playSound()
     {
         sounds[0].Play();
+    }
+
+    public void reloadEnd()
+    {
+        while (ammoScript.countAmmo != 6)
+        {
+            ammoScript.countAmmo += 1f;
+        }
+        anim.SetBool("Reload", false);
     }
 
 }
