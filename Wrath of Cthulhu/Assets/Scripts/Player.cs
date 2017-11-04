@@ -26,7 +26,6 @@ public class Player : MonoBehaviour {
     public GameObject bullet;
     public float bulletDamage;
     public Transform spawnPoint;
-    public AudioSource[] sounds;
     public bool shotgun;
 
 	//Anim
@@ -34,9 +33,29 @@ public class Player : MonoBehaviour {
     private Vector3 input;
     private Rigidbody2D rb2d;
     private bool shootOnce;
-	private bool left; 
+	private bool left;
 
-	//Player variables
+    //Panels
+    public GameObject pausePanel;
+    public GameObject enterShopUIPanel;
+    public GameObject shopPanel;
+    public GameObject gamePlayPanel;
+    public GameObject scrollBar;
+    public GameObject storyPanel;
+    public GameObject gameOverPanel;
+
+    //Items
+    public bool elixir;
+    public bool blink;
+    public bool morphine;
+    private bool locked;
+    public float upgradeDamage;
+
+    //Audio
+    public AudioSource[] sounds;
+    public GameObject gameAudio;
+
+    //Player variables
     public bool pauseGame;
     public string item;
     public float maxSpeed;
@@ -49,18 +68,6 @@ public class Player : MonoBehaviour {
 
     public WeaponObject[] weapons;
     public int latestBuy;
-    public GameObject gameOverPanel;
-    public GameObject gameAudio;
-    public bool elixir;
-    public bool blink;
-    public bool morphine;
-    private bool locked;
-    public GameObject pausePanel;
-    public GameObject enterShopUIPanel;
-    public GameObject shopPanel;
-    public GameObject gamePlayPanel;
-    public GameObject scrollBar;
-    public float upgradeDamage;
 
     public Transform AmmoCount;
     Ammo ammoScript;
@@ -104,6 +111,7 @@ public class Player : MonoBehaviour {
     {
         yield return new WaitForSeconds(2);
         gamePlayPanel.SetActive(true);
+        storyPanel.SetActive(true);
     }
 
     // Update is called once per frame
