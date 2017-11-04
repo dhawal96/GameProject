@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CameraFollow : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class CameraFollow : MonoBehaviour
     public float smoothTimeX;
 
     private GameObject player;
+    private Player controlscript;
     private GameObject SectionEndCollider1;
     private GameObject SectionEndCollider2;
     public GameObject SectionEndCollider;
@@ -24,6 +26,7 @@ public class CameraFollow : MonoBehaviour
     {
 
         player = GameObject.FindGameObjectWithTag("Player");
+        controlscript = player.GetComponent<Player>();
         SectionEndCollider1 = GameObject.FindGameObjectWithTag("SectionEndCollider1");
         SectionEndCollider2 = GameObject.FindGameObjectWithTag("SectionEndCollider2");
         minCameraPos = new Vector3(2.63f, 1.51f, -10f);
@@ -31,13 +34,14 @@ public class CameraFollow : MonoBehaviour
         maxCameraPos = new Vector3(17.41f, 5.78f, -10f);
     }
 
-    private void Update()
+    private void Update() //turn off MoveForward UI
     {
         switch (SectionEndCollider.name)
         {
             case "SectionEndCollider":
                 if (player.transform.position.x >= 20.21f)
                 {
+                    controlscript.moveForwardText.text = " ";
                     SectionEndCollider.SetActive(true);
                 }
                 break;
@@ -45,6 +49,7 @@ public class CameraFollow : MonoBehaviour
             case "SectionEndCollider2":
                 if (player.transform.position.x >= 30.927f)
                 {
+                    controlscript.moveForwardText.text = " ";
                     SectionEndCollider.SetActive(true);
                 }
                 break;
@@ -52,6 +57,7 @@ public class CameraFollow : MonoBehaviour
             case "SectionEndCollider3":
                 if (player.transform.position.x >= 41.184f)
                 {
+                    controlscript.moveForwardText.text = " ";
                     SectionEndCollider.SetActive(true);
                 }
                 break;
@@ -59,6 +65,7 @@ public class CameraFollow : MonoBehaviour
             case "SectionEndCollider4":
                 if (player.transform.position.x >= 51.802f)
                 {
+                    controlscript.moveForwardText.text = " ";
                     SectionEndCollider.SetActive(true);
                 }
                 break;
@@ -66,6 +73,7 @@ public class CameraFollow : MonoBehaviour
             case "SectionEndCollider5":
                 if (player.transform.position.x >= 62.303f)
                 {
+                    controlscript.moveForwardText.text = " ";
                     SectionEndCollider.SetActive(true);
                 }
                 break;
@@ -73,6 +81,7 @@ public class CameraFollow : MonoBehaviour
             case "SectionEndCollider6":
                 if (player.transform.position.x >= 76.038f)
                 {
+                    controlscript.moveForwardText.text = " ";
                     SectionEndCollider.SetActive(true);
                 }
                 break;
@@ -80,6 +89,7 @@ public class CameraFollow : MonoBehaviour
             case "SectionEndCollider7":
                 if (player.transform.position.x >= 85.01f)
                 {
+                    controlscript.moveForwardText.text = " ";
                     SectionEndCollider.SetActive(true);
                 }
                 break;
@@ -87,6 +97,7 @@ public class CameraFollow : MonoBehaviour
             case "SectionEndCollider8":
                 if (player.transform.position.x >= 98.929f)
                 {
+                    controlscript.moveForwardText.text = " ";
                     SectionEndCollider.SetActive(true);
                 }
                 break;
@@ -94,6 +105,7 @@ public class CameraFollow : MonoBehaviour
             case "SectionEndCollider9":
                 if (player.transform.position.x >= 111.86f)
                 {
+                    controlscript.moveForwardText.text = " ";
                     SectionEndCollider.SetActive(true);
                 }
                 break;
