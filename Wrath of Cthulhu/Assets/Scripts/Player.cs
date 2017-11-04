@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour {
 
@@ -71,6 +72,10 @@ public class Player : MonoBehaviour {
 
     public Transform AmmoCount;
     Ammo ammoScript;
+    public GameObject moveForward;
+    public Text moveForwardText;
+    public float colliderCount;
+
 
 
     // Use this for initialization
@@ -91,6 +96,8 @@ public class Player : MonoBehaviour {
 		camerascript = CameraFollow.GetComponent<CameraFollow>();
         AmmoCount = GameObject.Find("AmmoCount").transform;
         ammoScript = AmmoCount.GetComponent<Ammo>();
+        moveForward = GameObject.Find("MoveForward");
+        moveForwardText = moveForward.GetComponent<Text>();
         maxSpeed = .5f;
         speed = 50;
 		dead = false;
@@ -102,6 +109,7 @@ public class Player : MonoBehaviour {
         morphine = false;
         locked = false;
         upgradeDamage = 0f;
+        colliderCount = 0f;
         StartCoroutine(OpenGamePlayPanel());
 
 
@@ -324,7 +332,52 @@ public class Player : MonoBehaviour {
                 //Destroy (transform.gameObject);
             }
 
-			healthscript.LifePercentage = playerHealth;
+            if (enemiesKilled >= 10 && colliderCount == 0f)
+            {
+                moveForwardText.text = "GO ->";
+            }
+
+            else if (enemiesKilled >= 15 && colliderCount == 1f)
+            {
+                moveForwardText.text = "GO ->";
+            }
+
+            else if (enemiesKilled >= 21 && colliderCount == 2f)
+            {
+                moveForwardText.text = "GO ->";
+            }
+
+            else if (enemiesKilled >= 26 && colliderCount == 3f)
+            {
+                moveForwardText.text = "GO ->";
+            }
+
+            else if (enemiesKilled >= 31 && colliderCount == 4f)
+            {
+                moveForwardText.text = "GO ->";
+            }
+
+            else if (enemiesKilled >= 38 && colliderCount == 5f)
+            {
+                moveForwardText.text = "GO ->";
+            }
+
+            else if (enemiesKilled >= 43 && colliderCount == 6f)
+            {
+                moveForwardText.text = "GO ->";
+            }
+
+            else if (enemiesKilled >= 50 && colliderCount == 7f)
+            {
+                moveForwardText.text = "GO ->";
+            }
+
+            else if (enemiesKilled >= 55 && colliderCount == 8f)
+            {
+                moveForwardText.text = "GO ->";
+            }
+
+            healthscript.LifePercentage = playerHealth;
 			madnessscript.MadnessPercentage = playerMadness;
 
 		}

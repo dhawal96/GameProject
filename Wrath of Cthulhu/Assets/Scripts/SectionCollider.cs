@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SectionCollider : MonoBehaviour {
     CameraFollow controlscript;
+    Player playerScript;
     GameObject Camera;
     GameObject Player;
     private bool breakCollision;
@@ -12,13 +13,14 @@ public class SectionCollider : MonoBehaviour {
 	void Start () {
         Camera = GameObject.FindWithTag("MainCamera");
         Player = GameObject.FindWithTag("Player");
+        playerScript = Player.GetComponent<Player>();
         controlscript = Camera.GetComponent<CameraFollow>();
         breakCollision = false;
     }
 
     private void OnCollisionEnter2D(Collision2D collider)
     {
-        switch (gameObject.name)
+        switch (gameObject.name) 
         {
             case "SectionEndCollider":
                 if (collider.gameObject.tag == "Player" && collider.gameObject.GetComponent<Player>().enemiesKilled >= 10 && breakCollision == false)
@@ -27,6 +29,7 @@ public class SectionCollider : MonoBehaviour {
                     gameObject.SetActive(false);
                     controlscript.minCameraPos = new Vector3(22.56f, 1.50f, -10f);
                     controlscript.maxCameraPos = new Vector3(28.17f, 5.78f, -10f);
+                    playerScript.colliderCount += 1f;
                     breakCollision = true;
                 }
                 break;
@@ -38,6 +41,7 @@ public class SectionCollider : MonoBehaviour {
                     gameObject.SetActive(false);
                     controlscript.minCameraPos = new Vector3(33.35f, 1.50f, -10f);
                     controlscript.maxCameraPos = new Vector3(38.38f, 5.80f, -10f);
+                    playerScript.colliderCount += 1f;
                     breakCollision = true;
                 }
                 break;
@@ -49,6 +53,7 @@ public class SectionCollider : MonoBehaviour {
                     gameObject.SetActive(false);
                     controlscript.minCameraPos = new Vector3(43.59f, 1.50f, -10f);
                     controlscript.maxCameraPos = new Vector3(49.01f, 5.80f, -10f);
+                    playerScript.colliderCount += 1f;
                     breakCollision = true;
                 }
                 break;
@@ -60,6 +65,7 @@ public class SectionCollider : MonoBehaviour {
                     gameObject.SetActive(false);
                     controlscript.minCameraPos = new Vector3(54.21f, 1.50f, -10f);
                     controlscript.maxCameraPos = new Vector3(59.53f, 5.80f, -10f);
+                    playerScript.colliderCount += 1f;
                     breakCollision = true;
                 }
                 break;
@@ -71,6 +77,7 @@ public class SectionCollider : MonoBehaviour {
                     gameObject.SetActive(false);
                     controlscript.minCameraPos = new Vector3(64.71f, 1.50f, -10f);
                     controlscript.maxCameraPos = new Vector3(73.27f, 5.80f, -10f);
+                    playerScript.colliderCount += 1f;
                     breakCollision = true;
                 }
                 break;
@@ -82,6 +89,7 @@ public class SectionCollider : MonoBehaviour {
                     gameObject.SetActive(false);
                     controlscript.minCameraPos = new Vector3(78.46f, 1.50f, -10f);
                     controlscript.maxCameraPos = new Vector3(82.24f, 5.80f, -10f);
+                    playerScript.colliderCount += 1f;
                     breakCollision = true;
                 }
                 break;
@@ -93,6 +101,7 @@ public class SectionCollider : MonoBehaviour {
                     gameObject.SetActive(false);
                     controlscript.minCameraPos = new Vector3(87.42f, 1.50f, -10f);
                     controlscript.maxCameraPos = new Vector3(96.15f, 5.80f, -10f);
+                    playerScript.colliderCount += 1f;
                     breakCollision = true;
                 }
                 break;
@@ -104,6 +113,7 @@ public class SectionCollider : MonoBehaviour {
                     gameObject.SetActive(false);
                     controlscript.minCameraPos = new Vector3(101.33f, 1.50f, -10f);
                     controlscript.maxCameraPos = new Vector3(109.08f, 5.80f, -10f);
+                    playerScript.colliderCount += 1f;
                     breakCollision = true;
                 }
                 break;
@@ -115,6 +125,7 @@ public class SectionCollider : MonoBehaviour {
                     gameObject.SetActive(false);
                     controlscript.minCameraPos = new Vector3(114.27f, 1.50f, -10f);
                     controlscript.maxCameraPos = new Vector3(125.23f, 5.80f, -10f);
+                    playerScript.colliderCount += 1f;
                     breakCollision = true;
                 }
                 break;
