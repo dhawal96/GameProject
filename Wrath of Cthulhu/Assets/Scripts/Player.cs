@@ -73,7 +73,7 @@ public class Player : MonoBehaviour {
     public Transform AmmoCount;
     Ammo ammoScript;
     public GameObject moveForward;
-    public Text moveForwardText;
+    public Image GoImage;
     public float colliderCount;
 
 
@@ -97,7 +97,7 @@ public class Player : MonoBehaviour {
         AmmoCount = GameObject.Find("AmmoCount").transform;
         ammoScript = AmmoCount.GetComponent<Ammo>();
         moveForward = GameObject.Find("MoveForward");
-        moveForwardText = moveForward.GetComponent<Text>();
+        GoImage = moveForward.GetComponent<Image>();
         maxSpeed = .5f;
         speed = 50;
 		dead = false;
@@ -339,47 +339,47 @@ public class Player : MonoBehaviour {
 
             if (enemiesKilled >= 10 && colliderCount == 0f)
             {
-                moveForwardText.text = "GO ->";
+                GoImage.enabled = true;
             }
 
             else if (enemiesKilled >= 15 && colliderCount == 1f)
             {
-                moveForwardText.text = "GO ->";
+                GoImage.enabled = true;
             }
 
             else if (enemiesKilled >= 21 && colliderCount == 2f)
             {
-                moveForwardText.text = "GO ->";
+                GoImage.enabled = true;
             }
 
             else if (enemiesKilled >= 26 && colliderCount == 3f)
             {
-                moveForwardText.text = "GO ->";
+                GoImage.enabled = true;
             }
 
             else if (enemiesKilled >= 31 && colliderCount == 4f)
             {
-                moveForwardText.text = "GO ->";
+                GoImage.enabled = true;
             }
 
             else if (enemiesKilled >= 38 && colliderCount == 5f)
             {
-                moveForwardText.text = "GO ->";
+                GoImage.enabled = true;
             }
 
             else if (enemiesKilled >= 43 && colliderCount == 6f)
             {
-                moveForwardText.text = "GO ->";
+                GoImage.enabled = true;
             }
 
             else if (enemiesKilled >= 50 && colliderCount == 7f)
             {
-                moveForwardText.text = "GO ->";
+                GoImage.enabled = true;
             }
 
             else if (enemiesKilled >= 55 && colliderCount == 8f)
             {
-                moveForwardText.text = "GO ->";
+                GoImage.enabled = true; 
             }
 
             healthscript.LifePercentage = playerHealth;

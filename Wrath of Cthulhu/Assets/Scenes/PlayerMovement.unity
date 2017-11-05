@@ -4646,7 +4646,7 @@ MonoBehaviour:
   latestBuy: 0
   AmmoCount: {fileID: 0}
   moveForward: {fileID: 0}
-  moveForwardText: {fileID: 0}
+  GoImage: {fileID: 0}
   colliderCount: 0
 --- !u!61 &291277041
 BoxCollider2D:
@@ -13734,9 +13734,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: " \n The world has been invaded by eldritch creatures, and our hero has
+  m_Text: " \n The world has been invaded by eldritch creatures, and our hero has\n
     awaken in confusion to the recent events. \n\n\n  \n Taking place in 1920s London,
-    you will play as Mark, and defeat the monstrous creatures to restore world peace.\n\n\n\n
+    you will play as Mark, and defeat the\n monstrous creatures to restore world peace.\n\n\n\n
     \ Save the world... from the Wrath of Cthulhu. \n\n  \n\n\n"
 --- !u!222 &847618109
 CanvasRenderer:
