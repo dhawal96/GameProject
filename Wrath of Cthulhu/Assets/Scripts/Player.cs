@@ -180,7 +180,7 @@ public class Player : MonoBehaviour {
             anim.SetFloat("Speed", Mathf.Abs(rb2d.velocity.x) + Mathf.Abs(rb2d.velocity.y));
             anim.SetBool("Shooting", false);
 
-            if (Input.GetKeyDown(KeyCode.R) && ammoScript.countAmmo != 6f) //reload ammo
+            if (Input.GetKeyDown(KeyCode.R) && ammoScript.countAmmo != 12f) //reload ammo
             {
                 anim.SetBool("Reload", true);
             }
@@ -456,7 +456,7 @@ public class Player : MonoBehaviour {
 
     public void reloadEnd()
     {
-        while (ammoScript.countAmmo != 6)
+        while (ammoScript.countAmmo != 12)
         {
             ammoScript.countAmmo += 1f;
         }
