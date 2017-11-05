@@ -16,7 +16,7 @@ public class Ammo : MonoBehaviour {
     {
         if (countAmmo <= 9f)
         {
-            GetComponent<Text>().text = " " + countAmmo + " / A m m o";
+            GetComponent<Text>().text = "   " + countAmmo + " / A m m o";
         }
         else
         {

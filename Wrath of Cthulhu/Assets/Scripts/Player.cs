@@ -183,9 +183,10 @@ public class Player : MonoBehaviour {
             if (Input.GetKeyDown(KeyCode.R) && ammoScript.countAmmo != 12f) //reload ammo
             {
                 anim.SetBool("Reload", true);
+                sounds[2].Play();
             }
 
-            if (ammoScript.countAmmo == 0)
+            if (ammoScript.countAmmo == 0 && ammoScript.countAmmo != 12f)
             {
                 anim.SetBool("Reload", true);
             }
@@ -399,23 +400,23 @@ public class Player : MonoBehaviour {
     {
         Physics2D.gravity = Vector2.zero;
 		if (!dead) {
-			if (Input.GetKey (KeyCode.A) && !anim.GetCurrentAnimatorStateInfo(0).IsName("Reload_Mark")) {
+			if (Input.GetKey (KeyCode.A)) {
 				rb2d.AddForce (Vector3.left * speed);
                 transform.localScale = new Vector3(-2f, 2f, 1f);
                 left = true;
             }
 
-			if (Input.GetKey (KeyCode.D) && !anim.GetCurrentAnimatorStateInfo(0).IsName("Reload_Mark")) {
+			if (Input.GetKey (KeyCode.D)) {
 				rb2d.AddForce (Vector3.right * speed);
                 transform.localScale = new Vector3(2f, 2f, 1f);
                 left = false;
             }
 
-            if (Input.GetKey (KeyCode.W) && !anim.GetCurrentAnimatorStateInfo(0).IsName("Reload_Mark")) {
+            if (Input.GetKey (KeyCode.W)) {
 				rb2d.AddForce (Vector3.up * speed);
 			}
 
-			if (Input.GetKey (KeyCode.S) && !anim.GetCurrentAnimatorStateInfo(0).IsName("Reload_Mark")) {
+			if (Input.GetKey (KeyCode.S)) {
 				rb2d.AddForce (Vector3.down * speed);
 			}
 		
@@ -452,6 +453,14 @@ public class Player : MonoBehaviour {
     void playSound()
     {
         sounds[0].Play();
+    }
+
+    public void playReloadSound()
+    {
+        if (!sounds[2].isPlaying)
+        {
+            sounds[2].Play();
+        }
     }
 
     public void reloadEnd()

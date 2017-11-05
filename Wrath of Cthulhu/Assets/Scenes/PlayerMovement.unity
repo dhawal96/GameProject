@@ -4489,8 +4489,8 @@ GameObject:
   - component: {fileID: 291277040}
   - component: {fileID: 291277039}
   - component: {fileID: 291277042}
-  - component: {fileID: 291277043}
   - component: {fileID: 291277044}
+  - component: {fileID: 291277043}
   m_Layer: 0
   m_Name: Mark
   m_TagString: Player
@@ -4753,63 +4753,86 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
---- !u!60 &291277043
-PolygonCollider2D:
+--- !u!82 &291277043
+AudioSource:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 291277035}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.32, y: 0.32}
-    newSize: {x: 0.32, y: 0.32}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0.011106372, y: -0.03876698}
-      - {x: 0.01423192, y: 0.016172051}
-      - {x: -0.0019655228, y: 0.034214497}
-      - {x: -0.018822253, y: 0.030997992}
-      - {x: -0.024195135, y: 0.0063974857}
-      - {x: -0.02564758, y: -0.015286088}
-      - {x: -0.025051653, y: -0.026018381}
-      - {x: -0.04311359, y: -0.026706457}
-      - {x: -0.07973659, y: -0.031014442}
-      - {x: -0.079514205, y: -0.048564434}
-      - {x: -0.06874353, y: -0.051472068}
-      - {x: -0.06348294, y: -0.05214548}
-      - {x: -0.061314106, y: -0.06658685}
-      - {x: -0.052718937, y: -0.073933005}
-      - {x: -0.03431493, y: -0.07250011}
-      - {x: -0.03350407, y: -0.08879733}
-      - {x: -0.03487277, y: -0.10456574}
-      - {x: -0.03243524, y: -0.12356317}
-      - {x: -0.034115195, y: -0.14671576}
-      - {x: -0.027644575, y: -0.15329337}
-      - {x: -0.015011072, y: -0.1501857}
-      - {x: 0.015148342, y: -0.14882112}
-      - {x: 0.017644703, y: -0.14323342}
-      - {x: 0.01678133, y: -0.112378836}
-      - {x: 0.012634218, y: -0.06429136}
-      - {x: 0.024531484, y: -0.075737715}
-      - {x: 0.022667706, y: -0.09685683}
-      - {x: 0.016877592, y: -0.1020776}
-      - {x: 0.022636712, y: -0.09877157}
-      - {x: 0.022926688, y: -0.07246804}
-      - {x: 0.05346358, y: -0.055836678}
-      - {x: 0.053991735, y: -0.033473134}
-      - {x: 0.03317356, y: -0.037186027}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 7db9bc15534661849951706cf44bf293, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!82 &291277044
 AudioSource:
   m_ObjectHideFlags: 0
