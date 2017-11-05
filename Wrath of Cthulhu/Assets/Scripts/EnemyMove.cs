@@ -9,7 +9,7 @@ public class EnemyMove : MonoBehaviour {
     Player controlscript;
     private Animator anim;
     private Rigidbody2D rb2d;
-    public Collider2D attackTrigger;
+    public GameObject attackTrigger;
 
     //Camera
     public GameObject mainCamera;
@@ -87,7 +87,7 @@ public class EnemyMove : MonoBehaviour {
 
         }
         anim.SetBool("Idle", true);
-        attackTrigger.enabled = false;
+        attackTrigger.SetActive(false);
         
 
     }
@@ -134,14 +134,9 @@ public class EnemyMove : MonoBehaviour {
         if (gameObject.tag == "Enemy")
         {
 
-            if (attackMark)
+            if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Attack_DeepOnes"))
             {
-                attackTrigger.enabled = true;
-            }
-
-            if (!attackMark)
-            {
-                attackTrigger.enabled = false;
+                attackTrigger.SetActive(false);
             }
             
             if (range <= minDistance && !idle && !anim.GetBool("Death") == true && Player.transform.position.y >= gameObject.transform.position.y - .2f && Player.transform.position.y <= gameObject.transform.position.y + .2f)
@@ -448,12 +443,15 @@ public class EnemyMove : MonoBehaviour {
 
     private void meleeAttack()
     {
-        attackMark = true;
+        if (controlscript.dead == false)
+        {
+            attackTrigger.SetActive(true);
+        }
     }
 
     private void stopMeleeAttack()
     {
-        attackMark = false;
+        attackTrigger.SetActive(false);
     }
 
     public enum DashState

@@ -9,11 +9,18 @@ public class Ammo : MonoBehaviour {
 
     private void Start()
     {
-        countAmmo = 6f;        
+        countAmmo = 12f;        
     }
     // Update is called once per frame
     void Update()
     {
-        GetComponent<Text>().text = countAmmo + " / A m m o";
+        if (countAmmo <= 9f)
+        {
+            GetComponent<Text>().text = " " + countAmmo + " / A m m o";
+        }
+        else
+        {
+            GetComponent<Text>().text = countAmmo + " / A m m o";
+        }
     }
 }
