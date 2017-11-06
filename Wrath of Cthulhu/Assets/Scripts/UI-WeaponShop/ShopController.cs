@@ -52,7 +52,7 @@ public class ShopController : MonoBehaviour {
 
     public IEnumerator Wait()
     {
-        yield return new WaitForSeconds(4);
+        yield return new WaitForSecondsRealtime(4);
         anim.SetBool("wait", true);
         
     }
