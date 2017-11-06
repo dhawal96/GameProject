@@ -127,7 +127,7 @@ public class Player : MonoBehaviour {
 
     IEnumerator OpenGamePlayPanel()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSecondsRealtime(2);
         gamePlayPanel.SetActive(true);
         storyPanel.SetActive(true);
     }
