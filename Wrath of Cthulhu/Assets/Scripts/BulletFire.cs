@@ -15,10 +15,12 @@ public class BulletFire : MonoBehaviour
     public float enemyDamage;
     public float enemyMadness;
     public GameObject Enemy;
+    private Animator anim;
 
     private void Start()
     {
         Player = GameObject.FindWithTag("Player").gameObject;
+        anim = Player.GetComponent<Animator>();
         enemyDamage = 25f;
         enemyMadness = 10f;
         restrictCurrency = true;
@@ -113,11 +115,15 @@ public class BulletFire : MonoBehaviour
                 break;
 
             case "Player":
-                target.gameObject.GetComponent<Player>().playerHealth -= enemyDamage;
-                target.gameObject.GetComponent<Player>().playerMadness += enemyMadness;
-                controlscript.sounds[1].Play();
-                target.gameObject.GetComponent<Animator>().SetBool("Hit", true);
-                Destroy(gameObject);
+                if (anim.GetBool("Blink") == false)
+                {
+                    target.gameObject.GetComponent<Player>().playerHealth -= enemyDamage;
+                    target.gameObject.GetComponent<Player>().playerMadness += enemyMadness;
+                    controlscript.sounds[1].Play();
+                    target.gameObject.GetComponent<Animator>().SetBool("Hit", true);
+                    anim.SetBool("Blink", true);
+                    Destroy(gameObject);
+                }
                 break;
 
             default:

@@ -80,6 +80,7 @@ public class Player : MonoBehaviour {
     private GameObject speedUI;
     private GameObject damageUI;
     public float speedCount;
+    public bool call;
 
 
 
@@ -117,12 +118,11 @@ public class Player : MonoBehaviour {
         blink = false;
         morphine = false;
         locked = false;
+        call = true;
         upgradeDamage = 0f;
         colliderCount = 0f;
         speedCount = 0f;
         StartCoroutine(OpenGamePlayPanel());
-
-
     }
 
     IEnumerator OpenGamePlayPanel()
@@ -130,6 +130,13 @@ public class Player : MonoBehaviour {
         yield return new WaitForSeconds(2);
         gamePlayPanel.SetActive(true);
         storyPanel.SetActive(true);
+    }
+
+    IEnumerator BlinkWaitTime()
+    {
+        yield return new WaitForSecondsRealtime(3);
+        anim.SetBool("Blink", false);
+        call = true;
     }
 
     // Update is called once per frame
@@ -193,7 +200,6 @@ public class Player : MonoBehaviour {
             if (Input.GetKeyDown(KeyCode.R) && ammoScript.countAmmo != 12f) //reload ammo
             {
                 anim.SetBool("Reload", true);
-                sounds[2].Play();
             }
 
             if (ammoScript.countAmmo == 0 && ammoScript.countAmmo != 12f)
@@ -403,24 +409,26 @@ public class Player : MonoBehaviour {
 
             else if (speedCount == 0f)
             {
-                Debug.Log("first");
                 speedUI.GetComponent<Text>().text = " " + "Speed : 1.3x";
             }
 
             else if (speedCount == 1f)
             {
-                Debug.Log("second");
                 speedUI.GetComponent<Text>().text = " " + "Speed : 1.6x";
             }
 
             else if (speedCount == 2f)
             {
-                Debug.Log("third");
                 speedUI.GetComponent<Text>().text = " " + "Speed : 2x";
             }
             damageUI.GetComponent<Text>().text = " " + "Damage : " + bulletDamage;
-            
-		}
+
+            if (anim.GetBool("Blink") == true && call)
+            {
+                StartCoroutine(BlinkWaitTime());
+                call = false;            
+            }
+        }
 
         if (dead == true)
         {
@@ -477,6 +485,11 @@ public class Player : MonoBehaviour {
     void SetHit()
     {
         gameObject.GetComponent<Animator>().SetBool("Hit", false);
+    }
+
+    public void SetBlink()
+    {
+        anim.SetBool("Blink", true);
     }
 
     void Destroy()

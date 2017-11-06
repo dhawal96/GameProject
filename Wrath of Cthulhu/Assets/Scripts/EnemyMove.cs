@@ -8,6 +8,7 @@ public class EnemyMove : MonoBehaviour {
     private GameObject Player;
     Player controlscript;
     private Animator anim;
+    private Animator playerAnim;
     private Rigidbody2D rb2d;
     public GameObject attackTrigger;
 
@@ -59,6 +60,7 @@ public class EnemyMove : MonoBehaviour {
         anim = gameObject.GetComponent<Animator>();
         rb2d = gameObject.GetComponent<Rigidbody2D>();
         Player = GameObject.FindWithTag("Player");
+        playerAnim = Player.GetComponent<Animator>();
         controlscript = Player.GetComponent<Player>();
         mainCamera = GameObject.FindWithTag("MainCamera");
         camera = mainCamera.GetComponent<Camera>();
@@ -326,19 +328,25 @@ public class EnemyMove : MonoBehaviour {
     {
         if (anim.GetCurrentAnimatorStateInfo(0).IsName("Dash_DeepOnes"))
         {
-            Player.GetComponent<Player>().playerHealth -= 15f;
-            Player.GetComponent<Player>().playerMadness += enemyMadness;
-            controlscript.sounds[1].Play();
-            Player.GetComponent<Animator>().SetBool("Hit", true);
-            controlDashCollision = false;
+            if (playerAnim.GetBool("Blink") == false)
+            {
+                Player.GetComponent<Player>().playerHealth -= 15f;
+                Player.GetComponent<Player>().playerMadness += enemyMadness;
+                controlscript.sounds[1].Play();
+                Player.GetComponent<Animator>().SetBool("Hit", true);
+                controlDashCollision = false;
+            }
         }
 
         else if (Player.transform.position.y >= gameObject.transform.position.y - .3f && Player.transform.position.y <= gameObject.transform.position.y + .3f)
         {
-            Player.GetComponent<Player>().playerHealth -= enemyDamage;
-            Player.GetComponent<Player>().playerMadness += enemyMadness;
-            controlscript.sounds[1].Play();
-            Player.GetComponent<Animator>().SetBool("Hit", true);
+            if (playerAnim.GetBool("Blink") == false)
+            {
+                Player.GetComponent<Player>().playerHealth -= enemyDamage;
+                Player.GetComponent<Player>().playerMadness += enemyMadness;
+                controlscript.sounds[1].Play();
+                Player.GetComponent<Animator>().SetBool("Hit", true);
+            }
             //controlMeleeCollision = false;
         }
     }
