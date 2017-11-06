@@ -75,6 +75,11 @@ public class Player : MonoBehaviour {
     public GameObject moveForward;
     public Image GoImage;
     public float colliderCount;
+    public float damageUpgrade;
+    private GameObject StatsUI;
+    private GameObject speedUI;
+    private GameObject damageUI;
+    public float speedCount;
 
 
 
@@ -98,18 +103,23 @@ public class Player : MonoBehaviour {
         ammoScript = AmmoCount.GetComponent<Ammo>();
         moveForward = GameObject.Find("MoveForward");
         GoImage = moveForward.GetComponent<Image>();
+        StatsUI = GameObject.Find("SpeedAndDamage");
+        speedUI = StatsUI.transform.Find("Speed").gameObject;
+        damageUI = StatsUI.transform.Find("Damage").gameObject; 
         maxSpeed = .5f;
         speed = 50;
 		dead = false;
         shotgun = false;
 		latestBuy = 0;
         bulletDamage = 150f;
+        damageUpgrade = 0f;
         elixir = false;
         blink = false;
         morphine = false;
         locked = false;
         upgradeDamage = 0f;
         colliderCount = 0f;
+        speedCount = 0f;
         StartCoroutine(OpenGamePlayPanel());
 
 
@@ -386,6 +396,30 @@ public class Player : MonoBehaviour {
             healthscript.LifePercentage = playerHealth;
 			madnessscript.MadnessPercentage = playerMadness;
 
+            if (maxSpeed == .5f)
+            {
+                speedUI.GetComponent<Text>().text = " " + "Speed : 1x"; 
+            }
+
+            else if (speedCount == 0f)
+            {
+                Debug.Log("first");
+                speedUI.GetComponent<Text>().text = " " + "Speed : 1.3x";
+            }
+
+            else if (speedCount == 1f)
+            {
+                Debug.Log("second");
+                speedUI.GetComponent<Text>().text = " " + "Speed : 1.6x";
+            }
+
+            else if (speedCount == 2f)
+            {
+                Debug.Log("third");
+                speedUI.GetComponent<Text>().text = " " + "Speed : 2x";
+            }
+            damageUI.GetComponent<Text>().text = " " + "Damage : " + bulletDamage;
+            
 		}
 
         if (dead == true)

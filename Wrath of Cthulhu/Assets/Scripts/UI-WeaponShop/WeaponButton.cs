@@ -14,7 +14,7 @@ public class WeaponButton : MonoBehaviour
     public GameObject eyeImage; //eye image
     Currency pagescript;
     private GameObject Mark;
-    private float buySpeedCount;
+    public float buySpeedCount;
     private float buyDamageCount;
     public int weaponNumber = 1;
     public Text name;
@@ -93,7 +93,7 @@ public class WeaponButton : MonoBehaviour
 					if (boughtShotgun == false) { // if shotgun upgrade and havent bought yet
 						pagescript.count -= controlscript.weapons [weaponNumber].cost;
 						controlscript.latestBuy = weaponNumber;
-						controlscript.bulletDamage = (controlscript.bulletDamage / 3f) + 10f;
+                        controlscript.bulletDamage = 60f + controlscript.damageUpgrade;
 						boughtShotgun = true; //now bought
 						controlscript.shotgun = true;
 					} 
@@ -105,14 +105,15 @@ public class WeaponButton : MonoBehaviour
 					{
 						pagescript.count -= controlscript.weapons[weaponNumber].cost;
 						controlscript.latestBuy = weaponNumber;
-						controlscript.maxSpeed += .17f;
+						controlscript.maxSpeed += .17f;                        
 
 						if (buySpeedCount != 2)
 						{
 							controlscript.weapons[weaponNumber].cost += 3;
 							SetButton();
 						}
-						buySpeedCount++;
+                        controlscript.speedCount = buySpeedCount;
+                        buySpeedCount++;
 					}
 					break;
 				}
@@ -122,10 +123,18 @@ public class WeaponButton : MonoBehaviour
 					{
 						pagescript.count -= controlscript.weapons[weaponNumber].cost;
 						controlscript.latestBuy = weaponNumber;
-						//controlscript.upgradeDamage += 50f;
+                            //controlscript.upgradeDamage += 50f;
 
-						controlscript.bulletDamage += 50f;
+                        controlscript.damageUpgrade += 50f;
+                        if (controlscript.shotgun == true)
+                            {
+                                controlscript.bulletDamage = controlscript.bulletDamage + controlscript.damageUpgrade;
+                            }
 
+                        else
+                            {
+                                controlscript.bulletDamage = 150f + controlscript.damageUpgrade; 
+                            }
 
 						if (buyDamageCount != 2)
 						{
@@ -138,6 +147,5 @@ public class WeaponButton : MonoBehaviour
 				}
 			}
         }
-
     }
 }
