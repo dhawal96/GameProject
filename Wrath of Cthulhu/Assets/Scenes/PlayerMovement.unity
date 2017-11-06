@@ -4648,6 +4648,9 @@ MonoBehaviour:
   moveForward: {fileID: 0}
   GoImage: {fileID: 0}
   colliderCount: 0
+  damageUpgrade: 0
+  speedCount: 0
+  call: 0
 --- !u!61 &291277041
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -15081,6 +15084,7 @@ MonoBehaviour:
   ItemUI: {fileID: 0}
   elixirImage: {fileID: 0}
   eyeImage: {fileID: 0}
+  buySpeedCount: 0
   weaponNumber: 3
   name: {fileID: 2022682355}
   cost: {fileID: 222762514}
@@ -15549,6 +15553,7 @@ MonoBehaviour:
   ItemUI: {fileID: 0}
   elixirImage: {fileID: 0}
   eyeImage: {fileID: 0}
+  buySpeedCount: 0
   weaponNumber: 1
   name: {fileID: 1499841513}
   cost: {fileID: 566398693}
@@ -26314,6 +26319,7 @@ MonoBehaviour:
   ItemUI: {fileID: 0}
   elixirImage: {fileID: 0}
   eyeImage: {fileID: 0}
+  buySpeedCount: 0
   weaponNumber: 4
   name: {fileID: 102029911}
   cost: {fileID: 2007346391}
@@ -27593,6 +27599,7 @@ MonoBehaviour:
   ItemUI: {fileID: 0}
   elixirImage: {fileID: 0}
   eyeImage: {fileID: 0}
+  buySpeedCount: 0
   weaponNumber: 5
   name: {fileID: 1066289822}
   cost: {fileID: 873130034}
@@ -28499,6 +28506,7 @@ MonoBehaviour:
   ItemUI: {fileID: 0}
   elixirImage: {fileID: 0}
   eyeImage: {fileID: 0}
+  buySpeedCount: 0
   weaponNumber: 6
   name: {fileID: 968906634}
   cost: {fileID: 1717001090}
@@ -32041,6 +32049,7 @@ MonoBehaviour:
   ItemUI: {fileID: 0}
   elixirImage: {fileID: 0}
   eyeImage: {fileID: 0}
+  buySpeedCount: 0
   weaponNumber: 2
   name: {fileID: 344467077}
   cost: {fileID: 1558534010}
