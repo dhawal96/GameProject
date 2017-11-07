@@ -21,8 +21,8 @@ public class BulletFire : MonoBehaviour
     {
         Player = GameObject.FindWithTag("Player").gameObject;
         anim = Player.GetComponent<Animator>();
-        enemyDamage = 25f;
-        enemyMadness = 10f;
+        enemyDamage = 35f;
+        enemyMadness = 15f;
         restrictCurrency = true;
         playerBulletForce = 500f;
         controlscript = Player.GetComponent<Player>();
@@ -124,6 +124,9 @@ public class BulletFire : MonoBehaviour
                     anim.SetBool("Blink", true);
                     Destroy(gameObject);
                 }
+                break;
+
+            case "Currency":
                 break;
 
             default:

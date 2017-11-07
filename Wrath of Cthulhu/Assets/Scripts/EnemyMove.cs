@@ -330,7 +330,7 @@ public class EnemyMove : MonoBehaviour {
         {
             if (playerAnim.GetBool("Blink") == false)
             {
-                Player.GetComponent<Player>().playerHealth -= 15f;
+                Player.GetComponent<Player>().playerHealth -= 20f;
                 Player.GetComponent<Player>().playerMadness += enemyMadness;
                 controlscript.sounds[1].Play();
                 Player.GetComponent<Animator>().SetBool("Hit", true);
@@ -361,21 +361,18 @@ public class EnemyMove : MonoBehaviour {
         enposition = gameObject.GetComponent<EnemyMove>().transform.position;
         Destroy(gameObject);
         randomIndex = Random.Range(1f, 100f);
-        if (false&&randomIndex <= 60f && randomIndex >= 1f) ///THIS IF NEVER SUCCEEDS BECAUSE THE ITEMS DROPPED BY THE ENEMY ARE LIMITED TO CURRENCY
+        /*if (false&&randomIndex <= 60f && randomIndex >= 1f) ///THIS IF NEVER SUCCEEDS BECAUSE THE ITEMS DROPPED BY THE ENEMY ARE LIMITED TO CURRENCY
         {
             //itemIndex = Random.Range(0, collision.gameObject.GetComponent<EnemyMove>().items.Length - 1);
             itemIndex = Random.Range(3, gameObject.GetComponent<EnemyMove>().items.Length);
             GameObject coin = Instantiate(gameObject.GetComponent<EnemyMove>().items[itemIndex], enposition, Quaternion.identity);
             Destroy(coin, 5);
-        }
-
-        else
-        {
-            itemIndex = Random.Range(0, gameObject.GetComponent<EnemyMove>().items.Length - 2);
-            GameObject coin = Instantiate(gameObject.GetComponent<EnemyMove>().items[itemIndex], enposition, Quaternion.identity);
-            Destroy(coin, 5);
-        }
-        Player.GetComponent<Player>().enemiesKilled++;
+        }*/
+       itemIndex = Random.Range(0, gameObject.GetComponent<EnemyMove>().items.Length);
+       GameObject coin = Instantiate(gameObject.GetComponent<EnemyMove>().items[itemIndex], enposition, Quaternion.identity);
+       Destroy(coin, 5);
+      
+       Player.GetComponent<Player>().enemiesKilled++;
     }
 
     void InstantiateBullet()

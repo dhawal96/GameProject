@@ -4569,7 +4569,7 @@ Transform:
   m_Children:
   - {fileID: 408186884}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &291277039
 Rigidbody2D:
@@ -9952,6 +9952,16 @@ Prefab:
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[43].y
       value: 0.037190534
       objectReference: {fileID: 0}
+    - target: {fileID: 212256198402479746, guid: 264076073226a07449b08c733efa85d4,
+        type: 2}
+      propertyPath: m_SortingLayerID
+      value: -822259951
+      objectReference: {fileID: 0}
+    - target: {fileID: 212256198402479746, guid: 264076073226a07449b08c733efa85d4,
+        type: 2}
+      propertyPath: m_SortingLayer
+      value: -2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 264076073226a07449b08c733efa85d4, type: 2}
   m_IsPrefabParent: 0
@@ -11836,6 +11846,16 @@ Prefab:
         type: 2}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[43].y
       value: 0.037190534
+      objectReference: {fileID: 0}
+    - target: {fileID: 212256198402479746, guid: 264076073226a07449b08c733efa85d4,
+        type: 2}
+      propertyPath: m_SortingLayerID
+      value: -822259951
+      objectReference: {fileID: 0}
+    - target: {fileID: 212256198402479746, guid: 264076073226a07449b08c733efa85d4,
+        type: 2}
+      propertyPath: m_SortingLayer
+      value: -2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 264076073226a07449b08c733efa85d4, type: 2}
@@ -17631,6 +17651,16 @@ Prefab:
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[43].y
       value: 0.037190534
       objectReference: {fileID: 0}
+    - target: {fileID: 212256198402479746, guid: 264076073226a07449b08c733efa85d4,
+        type: 2}
+      propertyPath: m_SortingLayerID
+      value: -822259951
+      objectReference: {fileID: 0}
+    - target: {fileID: 212256198402479746, guid: 264076073226a07449b08c733efa85d4,
+        type: 2}
+      propertyPath: m_SortingLayer
+      value: -2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 264076073226a07449b08c733efa85d4, type: 2}
   m_IsPrefabParent: 0
@@ -19041,7 +19071,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 465656, guid: b046278bb9b6e104790392b566667ba5, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 11475408, guid: b046278bb9b6e104790392b566667ba5, type: 2}
       propertyPath: Camera
@@ -24012,6 +24042,16 @@ Prefab:
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[43].y
       value: 0.037190534
       objectReference: {fileID: 0}
+    - target: {fileID: 212256198402479746, guid: 264076073226a07449b08c733efa85d4,
+        type: 2}
+      propertyPath: m_SortingLayerID
+      value: -822259951
+      objectReference: {fileID: 0}
+    - target: {fileID: 212256198402479746, guid: 264076073226a07449b08c733efa85d4,
+        type: 2}
+      propertyPath: m_SortingLayer
+      value: -2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 264076073226a07449b08c733efa85d4, type: 2}
   m_IsPrefabParent: 0
@@ -25648,6 +25688,16 @@ Prefab:
         type: 2}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[43].y
       value: 0.037190534
+      objectReference: {fileID: 0}
+    - target: {fileID: 212256198402479746, guid: 264076073226a07449b08c733efa85d4,
+        type: 2}
+      propertyPath: m_SortingLayerID
+      value: -822259951
+      objectReference: {fileID: 0}
+    - target: {fileID: 212256198402479746, guid: 264076073226a07449b08c733efa85d4,
+        type: 2}
+      propertyPath: m_SortingLayer
+      value: -2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 264076073226a07449b08c733efa85d4, type: 2}
@@ -31591,6 +31641,16 @@ Prefab:
         type: 2}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[43].y
       value: 0.037190534
+      objectReference: {fileID: 0}
+    - target: {fileID: 212256198402479746, guid: 264076073226a07449b08c733efa85d4,
+        type: 2}
+      propertyPath: m_SortingLayerID
+      value: -822259951
+      objectReference: {fileID: 0}
+    - target: {fileID: 212256198402479746, guid: 264076073226a07449b08c733efa85d4,
+        type: 2}
+      propertyPath: m_SortingLayer
+      value: -2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 264076073226a07449b08c733efa85d4, type: 2}
