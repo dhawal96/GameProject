@@ -45,12 +45,13 @@ public class Player : MonoBehaviour {
     public GameObject storyPanel;
     public GameObject gameOverPanel;
 
-    //Items
+	//Items
+	public GameObject ItemUI;
     public bool elixir;
     public bool blink;
-    public bool morphine;
-    private bool locked;
-    public float upgradeDamage;
+	public bool revive;
+	public GameObject reviveImage; //revive image
+
 
     //Audio
     public AudioSource[] sounds;
@@ -66,21 +67,21 @@ public class Player : MonoBehaviour {
     public bool markShooting;
     public float minPos;
     public float maxPos;
-
+	public bool call;  //determines if blinking
     public WeaponObject[] weapons;
     public int latestBuy;
-
-    public Transform AmmoCount;
-    Ammo ammoScript;
     public GameObject moveForward;
     public Image GoImage;
     public float colliderCount;
     public float damageUpgrade;
+
+	//Stats UI
+	public Transform AmmoCount;
+	Ammo ammoScript;
     private GameObject StatsUI;
     private GameObject speedUI;
     private GameObject damageUI;
     public float speedCount;
-    public bool call;
 
 
 
@@ -90,38 +91,48 @@ public class Player : MonoBehaviour {
         rb2d = gameObject.GetComponent<Rigidbody2D>(); 
         anim = gameObject.GetComponent<Animator>();
         sounds = gameObject.GetComponents<AudioSource>();
+
         playerHealth = 100f;
 		playerMadness = 0f;
 		item = "null";
         pauseGame = false;
+		maxSpeed = .5f;
+		speed = 50;
+		dead = false;
+		shotgun = false;
+		latestBuy = 0;
+		bulletDamage = 150f;
+		damageUpgrade = 0f;
+		elixir = false;
+		blink = false;
+		revive = false;
+		call = true;
+		colliderCount = 0f;
+		speedCount = 0f;
+
+		ItemUI = GameObject.Find("Item");
+		reviveImage = ItemUI.transform.Find ("ReviveUI").gameObject;
+
 		HealthPercentage = GameObject.Find("Player1Health").transform;
 		healthscript = HealthPercentage.GetComponent<Player1Health>();
+
 		MadnessPercentage = GameObject.Find("Player1Madness").transform;
 		madnessscript = MadnessPercentage.GetComponent<Player1Madness>();
+
 		CameraFollow = GameObject.Find("Main Camera").transform;
 		camerascript = CameraFollow.GetComponent<CameraFollow>();
+
         AmmoCount = GameObject.Find("AmmoCount").transform;
         ammoScript = AmmoCount.GetComponent<Ammo>();
+
         moveForward = GameObject.Find("MoveForward");
         GoImage = moveForward.GetComponent<Image>();
+
         StatsUI = GameObject.Find("SpeedAndDamage");
         speedUI = StatsUI.transform.Find("Speed").gameObject;
         damageUI = StatsUI.transform.Find("Damage").gameObject; 
-        maxSpeed = .5f;
-        speed = 50;
-		dead = false;
-        shotgun = false;
-		latestBuy = 0;
-        bulletDamage = 150f;
-        damageUpgrade = 0f;
-        elixir = false;
-        blink = false;
-        morphine = false;
-        locked = false;
-        call = true;
-        upgradeDamage = 0f;
-        colliderCount = 0f;
-        speedCount = 0f;
+
+        
         StartCoroutine(OpenGamePlayPanel());
     }
 
@@ -351,14 +362,30 @@ public class Player : MonoBehaviour {
             }
 
             if (playerHealth <= 0f) {
-                anim.SetBool("Dead", true);
-				dead = true;          
+				if (revive) {
+					playerHealth = 100f;
+					playerMadness = 0f;
+					reviveImage.SetActive (false);
+					revive = false;
+				} 
+				else {
+					anim.SetBool ("Dead", true);
+					dead = true;
+				}       
 				//Destroy (transform.gameObject);
 			}
 
 			if (playerMadness >= 100f) {
-                anim.SetBool("Dead", true);
-				dead = true;
+				if (revive) {
+					playerHealth = 100f;
+					playerMadness = 0f;
+					reviveImage.SetActive (false);
+					revive = false;
+				} 
+				else {
+					anim.SetBool ("Dead", true);
+					dead = true;
+				} 
                 //Destroy (transform.gameObject);
             }
 

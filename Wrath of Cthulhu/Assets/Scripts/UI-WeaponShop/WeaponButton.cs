@@ -12,6 +12,7 @@ public class WeaponButton : MonoBehaviour
     public GameObject ItemUI;
     public GameObject elixirImage; //elixir image
     public GameObject eyeImage; //eye image
+	public GameObject reviveImage; //revive image
     Currency pagescript;
     private GameObject Mark;
     public float buySpeedCount;
@@ -30,6 +31,7 @@ public class WeaponButton : MonoBehaviour
         ItemUI = GameObject.Find("Item");
         elixirImage = ItemUI.transform.Find("ElixirUI").gameObject;
         eyeImage = ItemUI.transform.Find("EyeUI").gameObject;
+		reviveImage = ItemUI.transform.Find ("ReviveUI").gameObject;
         pagescript = PageCount.GetComponent<Currency>();
         boughtShotgun = false;
         buySpeedCount = 0f;
@@ -57,25 +59,41 @@ public class WeaponButton : MonoBehaviour
 					if (!controlscript.elixir) { //if don't own elixir
 						pagescript.count -= controlscript.weapons [weaponNumber].cost;
 						controlscript.latestBuy = weaponNumber;
-                        eyeImage.SetActive(false);
-                        elixirImage.SetActive(true);
+						elixirImage.SetActive(true);
+						eyeImage.SetActive(false);
+						reviveImage.SetActive(false);
                         controlscript.elixir = true;
 						controlscript.blink = false;
-						controlscript.morphine = false;
+						controlscript.revive = false;
 					}
 
 					break;
 				}
 			case "blink": 
 				{
-					if (!controlscript.blink) { // if eye
+					if (!controlscript.blink) { // if don't own eye
 						pagescript.count -= controlscript.weapons [weaponNumber].cost;
 						controlscript.latestBuy = weaponNumber;
-                        eyeImage.SetActive(true);
                         elixirImage.SetActive(false);
+						eyeImage.SetActive(true);
+						reviveImage.SetActive(false);
                         controlscript.elixir = false;
 						controlscript.blink = true;
-						controlscript.morphine = false;
+						controlscript.revive = false;
+					} 
+					break;
+				}
+			case "revive": 
+				{
+					if (!controlscript.revive) { // if don't own revive
+						pagescript.count -= controlscript.weapons [weaponNumber].cost;
+						controlscript.latestBuy = weaponNumber;
+						eyeImage.SetActive(false);
+						elixirImage.SetActive(false);
+						reviveImage.SetActive(true);
+						controlscript.elixir = false;
+						controlscript.blink = false;
+						controlscript.revive = true;
 					} 
 					break;
 				}
@@ -123,7 +141,6 @@ public class WeaponButton : MonoBehaviour
 					{
 						pagescript.count -= controlscript.weapons[weaponNumber].cost;
 						controlscript.latestBuy = weaponNumber;
-                            //controlscript.upgradeDamage += 50f;
 
                         controlscript.damageUpgrade += 50f;
                         if (controlscript.shotgun == true)
