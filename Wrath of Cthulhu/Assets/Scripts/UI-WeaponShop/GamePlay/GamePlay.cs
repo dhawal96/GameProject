@@ -7,6 +7,7 @@ public class GamePlay : MonoBehaviour {
     public GameObject gameplayPanel;
     public GameObject storyPanel;
     public GameObject controlsPanel;
+    public GameObject instructions1;
 
 
 	// Use this for initialization
@@ -20,21 +21,36 @@ public class GamePlay : MonoBehaviour {
         {
             storyPanel.SetActive(false);
             controlsPanel.SetActive(true);
+            Time.timeScale = 0f;
         }
 
         else if (Input.GetKeyDown(KeyCode.Return) && controlsPanel.activeSelf)
         {
+            controlsPanel.SetActive(false);
+            instructions1.SetActive(true);
+            Time.timeScale = 0f;
+        }
+
+        else if (Input.GetKeyDown(KeyCode.Return) && instructions1.activeSelf)
+        {
             gameplayPanel.SetActive(false);
             Time.timeScale = 1f;
         }
-		
-	}
+
+    }
 
     public void OnClickEnterControlsPanel()
     {
         storyPanel.SetActive(false);
         controlsPanel.SetActive(true);
-        Time.timeScale = 1f;
+        Time.timeScale = 0f;
+    }
+
+    public void OnClickEnterInstructions1Panel()
+    {
+        controlsPanel.SetActive(false);
+        instructions1.SetActive(true);
+        Time.timeScale = 0f;
     }
 
     public void OnClickExit()
