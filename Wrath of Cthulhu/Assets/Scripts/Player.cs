@@ -160,27 +160,35 @@ public class Player : MonoBehaviour {
             Time.timeScale = 0f;
         }
 
-        if (Input.GetKey(KeyCode.Return) && pausePanel.activeSelf)
+        if (Input.GetKeyDown(KeyCode.Return) && pausePanel.activeSelf)
         {
             pausePanel.SetActive(false);
             Time.timeScale = 1f;
         }
 
-        if (Input.GetKey(KeyCode.Return) && enterShopUIPanel.activeSelf)
+        else if (Input.GetKeyDown(KeyCode.Return) && enterShopUIPanel.activeSelf)
         {
             enterShopUIPanel.SetActive(false);
-            Time.timeScale = 1f;
+            shopPanel.SetActive(true);
+            Time.timeScale = 0f;
         }
 
-        if (Input.GetKey(KeyCode.Return) && shopPanel.activeSelf)
+        else if (Input.GetKeyDown(KeyCode.Return) && shopPanel.activeSelf)
         {
             shopPanel.SetActive(false);
             scrollBar.SetActive(false);
             Time.timeScale = 1f;
         }
 
+        else if (Input.GetKeyDown(KeyCode.Return) && gameOverPanel.activeSelf)
+        {
+            gameOverPanel.SetActive(false);
+            Time.timeScale = 1f;
+            Application.LoadLevel(0);
+        }
 
-        if (Input.GetKeyDown(KeyCode.P) && !gameOverPanel.activeSelf && !enterShopUIPanel.activeSelf && !shopPanel.activeSelf && !gamePlayPanel.activeSelf)
+
+        else if (Input.GetKeyDown(KeyCode.P) && !gameOverPanel.activeSelf && !enterShopUIPanel.activeSelf && !shopPanel.activeSelf && !gamePlayPanel.activeSelf)
         {
             pausePanel.SetActive(true);
             Time.timeScale = 0f;
@@ -218,19 +226,19 @@ public class Player : MonoBehaviour {
                 anim.SetBool("Reload", true);
             }
 
-            if (Input.GetKeyDown(KeyCode.K) && !anim.GetCurrentAnimatorStateInfo(0).IsName("Shoot_Mark") && shotgun == true && ammoScript.countAmmo >= 3f)
+            if (Input.GetKeyDown(KeyCode.Semicolon) && !anim.GetCurrentAnimatorStateInfo(0).IsName("Shoot_Mark") && shotgun == true && ammoScript.countAmmo >= 3f)
             {
                 anim.SetBool("Shooting", true);
                 shootOnce = true;
             }
 
-            else if (Input.GetKeyDown(KeyCode.K) && !anim.GetCurrentAnimatorStateInfo(0).IsName("Shoot_Mark") && shotgun == false && ammoScript.countAmmo > 0f)
+            else if (Input.GetKeyDown(KeyCode.Semicolon) && !anim.GetCurrentAnimatorStateInfo(0).IsName("Shoot_Mark") && shotgun == false && ammoScript.countAmmo > 0f)
             {
                 anim.SetBool("Shooting", true);
                 shootOnce = true;
             }
 
-            if (Input.GetKeyDown(KeyCode.L))
+            if (Input.GetKeyDown(KeyCode.Quote))
             {
                 if (elixir)
                 {
