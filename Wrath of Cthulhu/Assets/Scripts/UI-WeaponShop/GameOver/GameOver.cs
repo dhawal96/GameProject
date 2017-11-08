@@ -8,6 +8,7 @@ public class GameOver : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+
 		
 	}
 	
@@ -18,7 +19,9 @@ public class GameOver : MonoBehaviour {
 
     public void OnClickPlayAgain()
     {
+        Destroy(GameObject.FindGameObjectWithTag("Music"));
         Application.LoadLevel(0);
+        GameObject.FindGameObjectWithTag("Music").GetComponent<MainMenuMusic>().PlayMainMenuMusic();
     }
 
     public void OnClickExitGame()
@@ -34,7 +37,9 @@ public class GameOver : MonoBehaviour {
 
     public void OnClickRestart()
     {
+        Destroy(GameObject.FindGameObjectWithTag("Music"));
         Time.timeScale = 1f;
         Application.LoadLevel(0);
+        GameObject.FindGameObjectWithTag("Music").GetComponent<MainMenuMusic>().PlayMainMenuMusic();
     }
 }

@@ -85,7 +85,6 @@ public class Player : MonoBehaviour {
     public bool canPause;
 
 
-
     // Use this for initialization
     void Start () {
 
@@ -148,6 +147,11 @@ public class Player : MonoBehaviour {
     void Update()
     {
         markShooting = false;
+
+        if (gameOverPanel.activeSelf)
+        {
+            GameObject.FindGameObjectWithTag("Music").GetComponent<MainMenuMusic>().stopGameAudio();
+        }
 
         if (gamePlayPanel.activeSelf)
         {

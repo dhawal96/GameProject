@@ -18,6 +18,7 @@ TagManager:
   - EnemyBullet
   - Boss
   - ShopPanel
+  - Music
   layers:
   - Default
   - TransparentFX

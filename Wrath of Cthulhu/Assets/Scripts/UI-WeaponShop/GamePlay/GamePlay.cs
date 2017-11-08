@@ -11,10 +11,9 @@ public class GamePlay : MonoBehaviour {
     public GameObject instructions2;
 
 
+
 	// Use this for initialization
-	void Start () {
-	}
-	
+
 	// Update is called once per frame
 	void Update () {
 
@@ -39,6 +38,7 @@ public class GamePlay : MonoBehaviour {
         else if (Input.GetKeyDown(KeyCode.Return) && instructions2.activeSelf)
         {
             gameplayPanel.SetActive(false);
+            GameObject.FindGameObjectWithTag("Music").GetComponent<MainMenuMusic>().PlayGameMusic();
             Time.timeScale = 1f;
         }
 
@@ -82,7 +82,8 @@ public class GamePlay : MonoBehaviour {
 
     public void OnClickExit()
     {
-        gameplayPanel.SetActive(false);      
+        gameplayPanel.SetActive(false);
+        GameObject.FindGameObjectWithTag("Music").GetComponent<MainMenuMusic>().PlayGameMusic();
         Time.timeScale = 1f;
     }
 }
