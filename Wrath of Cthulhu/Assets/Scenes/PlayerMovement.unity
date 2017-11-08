@@ -4654,6 +4654,7 @@ MonoBehaviour:
   call: 0
   revive: 0
   canPause: 0
+  playGameAudio: 0
 --- !u!61 &291277041
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -30331,7 +30332,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!82 &1883274628
 AudioSource:
   m_ObjectHideFlags: 0
@@ -30342,7 +30343,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 5acd3b3164ff48f44ab72fc8c5222b1d, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 0.2
   m_Pitch: 1
   Loop: 1
