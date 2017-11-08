@@ -4653,6 +4653,7 @@ MonoBehaviour:
   speedCount: 0
   call: 0
   revive: 0
+  canPause: 0
 --- !u!61 &291277041
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4847,7 +4848,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: d62693935612b484e919c16fa913d833, type: 3}
+  m_audioClip: {fileID: 8300000, guid: e7c6bb4d675625a48a2e35e10062b0f8, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
