@@ -45,13 +45,12 @@ public class Player : MonoBehaviour {
     public GameObject storyPanel;
     public GameObject gameOverPanel;
 
-	//Items
-	public GameObject ItemUI;
+    //Items
     public bool elixir;
     public bool blink;
-	public bool revive;
-	public GameObject reviveImage; //revive image
-
+    public bool morphine;
+    private bool locked;
+    public float upgradeDamage;
 
     //Audio
     public AudioSource[] sounds;
@@ -67,21 +66,23 @@ public class Player : MonoBehaviour {
     public bool markShooting;
     public float minPos;
     public float maxPos;
-	public bool call;  //determines if blinking
+
     public WeaponObject[] weapons;
     public int latestBuy;
+
+    public Transform AmmoCount;
+    Ammo ammoScript;
     public GameObject moveForward;
     public Image GoImage;
     public float colliderCount;
     public float damageUpgrade;
-
-	//Stats UI
-	public Transform AmmoCount;
-	Ammo ammoScript;
     private GameObject StatsUI;
     private GameObject speedUI;
     private GameObject damageUI;
     public float speedCount;
+    public bool call;
+    public bool revive;
+    public bool canPause;
 
 
 
@@ -91,48 +92,40 @@ public class Player : MonoBehaviour {
         rb2d = gameObject.GetComponent<Rigidbody2D>(); 
         anim = gameObject.GetComponent<Animator>();
         sounds = gameObject.GetComponents<AudioSource>();
-
         playerHealth = 100f;
 		playerMadness = 0f;
 		item = "null";
         pauseGame = false;
-		maxSpeed = .5f;
-		speed = 50;
-		dead = false;
-		shotgun = false;
-		latestBuy = 0;
-		bulletDamage = 150f;
-		damageUpgrade = 0f;
-		elixir = false;
-		blink = false;
-		revive = false;
-		call = true;
-		colliderCount = 0f;
-		speedCount = 0f;
-
-		ItemUI = GameObject.Find("Item");
-		reviveImage = ItemUI.transform.Find ("ReviveUI").gameObject;
-
 		HealthPercentage = GameObject.Find("Player1Health").transform;
 		healthscript = HealthPercentage.GetComponent<Player1Health>();
-
 		MadnessPercentage = GameObject.Find("Player1Madness").transform;
 		madnessscript = MadnessPercentage.GetComponent<Player1Madness>();
-
 		CameraFollow = GameObject.Find("Main Camera").transform;
 		camerascript = CameraFollow.GetComponent<CameraFollow>();
-
         AmmoCount = GameObject.Find("AmmoCount").transform;
         ammoScript = AmmoCount.GetComponent<Ammo>();
-
         moveForward = GameObject.Find("MoveForward");
         GoImage = moveForward.GetComponent<Image>();
-
         StatsUI = GameObject.Find("SpeedAndDamage");
         speedUI = StatsUI.transform.Find("Speed").gameObject;
         damageUI = StatsUI.transform.Find("Damage").gameObject; 
-
-        
+        maxSpeed = .5f;
+        speed = 50;
+		dead = false;
+        shotgun = false;
+		latestBuy = 0;
+        bulletDamage = 150f;
+        damageUpgrade = 0f;
+        elixir = false;
+        blink = false;
+        morphine = false;
+        locked = false;
+        call = true;
+        revive = false;
+        canPause = false;
+        upgradeDamage = 0f;
+        colliderCount = 0f;
+        speedCount = 0f;
         StartCoroutine(OpenGamePlayPanel());
     }
 
@@ -141,6 +134,7 @@ public class Player : MonoBehaviour {
         yield return new WaitForSecondsRealtime(2);
         gamePlayPanel.SetActive(true);
         storyPanel.SetActive(true);
+        canPause = true;
     }
 
     IEnumerator BlinkWaitTime()
@@ -188,7 +182,7 @@ public class Player : MonoBehaviour {
         }
 
 
-        else if (Input.GetKeyDown(KeyCode.P) && !gameOverPanel.activeSelf && !enterShopUIPanel.activeSelf && !shopPanel.activeSelf && !gamePlayPanel.activeSelf)
+        else if (Input.GetKeyDown(KeyCode.P) && canPause && !gameOverPanel.activeSelf && !enterShopUIPanel.activeSelf && !shopPanel.activeSelf && !gamePlayPanel.activeSelf)
         {
             pausePanel.SetActive(true);
             Time.timeScale = 0f;
@@ -362,30 +356,14 @@ public class Player : MonoBehaviour {
             }
 
             if (playerHealth <= 0f) {
-				if (revive) {
-					playerHealth = 100f;
-					playerMadness = 0f;
-					reviveImage.SetActive (false);
-					revive = false;
-				} 
-				else {
-					anim.SetBool ("Dead", true);
-					dead = true;
-				}       
+                anim.SetBool("Dead", true);
+				dead = true;          
 				//Destroy (transform.gameObject);
 			}
 
 			if (playerMadness >= 100f) {
-				if (revive) {
-					playerHealth = 100f;
-					playerMadness = 0f;
-					reviveImage.SetActive (false);
-					revive = false;
-				} 
-				else {
-					anim.SetBool ("Dead", true);
-					dead = true;
-				} 
+                anim.SetBool("Dead", true);
+				dead = true;
                 //Destroy (transform.gameObject);
             }
 
@@ -517,6 +495,25 @@ public class Player : MonoBehaviour {
 
     }
 
+    /*private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Enemy" && (anim.GetCurrentAnimatorStateInfo(0).IsName("Blink_Mark") || anim.GetCurrentAnimatorStateInfo(0).IsName("Blink_Walk_Mark")))
+        {
+            Physics2D.IgnoreCollision(gameObject.GetComponent<Collider2D>(), collision.gameObject.GetComponent<Collider2D>());
+        }
+
+        else if (collision.gameObject.tag == "RangeEnemy" && (anim.GetCurrentAnimatorStateInfo(0).IsName("Blink_Mark") || anim.GetCurrentAnimatorStateInfo(0).IsName("Blink_Walk_Mark")))
+        {
+            Physics2D.IgnoreCollision(gameObject.GetComponent<Collider2D>(), collision.gameObject.GetComponent<Collider2D>());
+        }
+
+        else if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "RangeEnemy")
+        {
+            Debug.Log("here");
+            Physics2D.IgnoreCollision(gameObject.GetComponent<Collider2D>(), collision.gameObject.GetComponent<Collider2D>(), false);
+        }
+    }*/
+
     void SetHit()
     {
         gameObject.GetComponent<Animator>().SetBool("Hit", false);
@@ -524,7 +521,15 @@ public class Player : MonoBehaviour {
 
     public void SetBlink()
     {
-        anim.SetBool("Blink", true);
+        if (playerHealth <= 0f && !revive)
+        {
+            anim.SetBool("Dead", true);
+        }
+
+        else
+        {
+            anim.SetBool("Blink", true);
+        }
     }
 
     void Destroy()
