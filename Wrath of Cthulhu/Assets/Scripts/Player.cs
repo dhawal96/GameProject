@@ -54,7 +54,6 @@ public class Player : MonoBehaviour {
 
     //Audio
     public AudioSource[] sounds;
-    public GameObject gameAudio;
 
     //Player variables
     public bool pauseGame;
@@ -156,11 +155,6 @@ public class Player : MonoBehaviour {
     {
         markShooting = false;
 
-        if (gameOverPanel.activeSelf)
-        {
-            GameObject.FindGameObjectWithTag("Music").GetComponent<MainMenuMusic>().stopGameAudio();
-        }
-
         if (gamePlayPanel.activeSelf)
         {
             Time.timeScale = 0f;
@@ -232,7 +226,7 @@ public class Player : MonoBehaviour {
                 anim.SetBool("Reload", true);
             }
 
-            if (Input.GetKeyDown(KeyCode.Semicolon) && !anim.GetCurrentAnimatorStateInfo(0).IsName("Shoot_Mark") && shotgun == true && ammoScript.countAmmo >= 3f)
+            if (Input.GetKeyDown(KeyCode.Semicolon) && !anim.GetCurrentAnimatorStateInfo(0).IsName("Shoot_Mark") && shotgun == true && ammoScript.countAmmo > 0f)
             {
                 anim.SetBool("Shooting", true);
                 shootOnce = true;
@@ -344,13 +338,22 @@ public class Player : MonoBehaviour {
 
             if (anim.GetCurrentAnimatorStateInfo(0).IsName("Shoot_Mark") && shootOnce && shotgun == true)
             {
-                GameObject bullet1 = (GameObject)Instantiate(bullet, spawnPoint.position, spawnPoint.rotation);
-                bullet1.transform.Rotate(0f, 0f, 10f);
-                GameObject bullet2 = (GameObject)Instantiate(bullet, spawnPoint.position, spawnPoint.rotation);
-                bullet2.transform.Rotate(0f, 0f, 0f);
-                GameObject bullet3 = (GameObject)Instantiate(bullet, spawnPoint.position, spawnPoint.rotation);
-                bullet3.transform.Rotate(0f, 0f, -10f);
-                ammoScript.countAmmo -= 3f;
+                if (ammoScript.countAmmo >= 3f)
+                {
+                    GameObject bullet1 = (GameObject)Instantiate(bullet, spawnPoint.position, spawnPoint.rotation);
+                    bullet1.transform.Rotate(0f, 0f, 10f);
+                    GameObject bullet2 = (GameObject)Instantiate(bullet, spawnPoint.position, spawnPoint.rotation);
+                    bullet2.transform.Rotate(0f, 0f, 0f);
+                    GameObject bullet3 = (GameObject)Instantiate(bullet, spawnPoint.position, spawnPoint.rotation);
+                    bullet3.transform.Rotate(0f, 0f, -10f);
+                    ammoScript.countAmmo -= 3f;
+                }
+                
+                else
+                {
+                    Instantiate(bullet, spawnPoint.position, spawnPoint.rotation);
+                    ammoScript.countAmmo -= 1f;
+                }
                 //Transform newBullet = Instantiate(bullet.transform, spawnPoint.position, Quaternion.identity) as Transform;
                 //newBullet.parent = transform;
                 markShooting = true;
@@ -473,8 +476,8 @@ public class Player : MonoBehaviour {
 
         if (dead == true)
         {
-            gameAudio.GetComponent<AudioSource>().Stop();
             gameOverPanel.SetActive(true);
+            GameObject.FindGameObjectWithTag("Music").GetComponent<MainMenuMusic>().stopGameAudio();
         }
     }
 
