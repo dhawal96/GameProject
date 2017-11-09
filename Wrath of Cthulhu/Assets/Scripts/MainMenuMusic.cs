@@ -37,7 +37,7 @@ public class MainMenuMusic : MonoBehaviour {
     {
         while (source.volume > .01F)
         {
-            source.volume = Mathf.Lerp(source.volume, 0F, Time.deltaTime * .75f);
+            source.volume = Mathf.Lerp(source.volume, 0F, Time.deltaTime * 1.5f);
             yield return 0;
         }
         source.volume = 0;
