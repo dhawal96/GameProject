@@ -98,7 +98,7 @@ public class EnemyMove : MonoBehaviour {
     {
         enemyShooting = false;
 
-        if (controlscript.dead)
+		if (controlscript.dead || controlscript.reviving)
         {
             anim.SetBool("Idle", true);
             idle = true;
@@ -110,7 +110,7 @@ public class EnemyMove : MonoBehaviour {
 
         Vector3 viewPos = camera.WorldToViewportPoint(gameObject.transform.position);
 
-        if (viewPos.x > 0 && viewPos.x < 1 && viewPos.y > 0 && viewPos.y < 1 && viewPos.z > 0 && !controlscript.dead) //activate enemy
+		if (viewPos.x > 0 && viewPos.x < 1 && viewPos.y > 0 && viewPos.y < 1 && viewPos.z > 0 && !controlscript.dead && !controlscript.reviving) //activate enemy
         {
             anim.SetBool("Idle", false);
             idle = false;

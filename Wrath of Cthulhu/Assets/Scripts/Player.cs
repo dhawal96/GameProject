@@ -69,6 +69,7 @@ public class Player : MonoBehaviour {
 	public int latestBuy;
 	public bool call;  //determines if blinking
 	public bool canPause;
+	public bool reviving; //Determines if Player has died and is coming back
 
 	public GameObject moveForward;
 	public Image GoImage;
@@ -109,6 +110,7 @@ public class Player : MonoBehaviour {
 		canPause = false;
 		colliderCount = 0f;
 		speedCount = 0f;
+		reviving = false;
 
 		ItemUI = GameObject.Find("Item");
 		reviveImage = ItemUI.transform.Find ("ReviveUI").gameObject;
@@ -376,10 +378,13 @@ public class Player : MonoBehaviour {
 					playerMadness = 0f;
 					reviveImage.SetActive (false);
 					revive = false;
+					reviving = true;
+					anim.SetBool ("Dead", true);
 				} 
 				else {
 					anim.SetBool ("Dead", true);
 					dead = true;
+					reviving = false;
 				}       
 				//Destroy (transform.gameObject);
 			}
@@ -390,10 +395,13 @@ public class Player : MonoBehaviour {
 					playerMadness = 0f;
 					reviveImage.SetActive (false);
 					revive = false;
+					reviving = true;
+					anim.SetBool ("Dead", true);
 				} 
 				else {
 					anim.SetBool ("Dead", true);
 					dead = true;
+					reviving = false;
 				}       
 				//Destroy (transform.gameObject);
             }
@@ -485,7 +493,7 @@ public class Player : MonoBehaviour {
     void FixedUpdate()
     {
         Physics2D.gravity = Vector2.zero;
-		if (!dead) {
+		if (!dead && !reviving) {
 			if (Input.GetKey (KeyCode.A)) {
 				rb2d.AddForce (Vector3.left * speed);
                 transform.localScale = new Vector3(-2f, 2f, 1f);
@@ -565,6 +573,11 @@ public class Player : MonoBehaviour {
 
     void Destroy()
     {
+		if (reviving) {
+			anim.SetBool ("Revive", true);
+			anim.SetBool ("Dead", false);
+		}
+		else 
         transform.GetComponent<SpriteRenderer>().enabled = false;
     }
 
@@ -589,5 +602,13 @@ public class Player : MonoBehaviour {
         }
         anim.SetBool("Reload", false);
     }
+
+
+	public void reviveEnd()
+	{ 
+		anim.SetBool ("Revive", false);
+		reviving = false;
+	}
+
 
 }
