@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class MainMenuMusic : MonoBehaviour {
 
-    private AudioSource audioSource;
     public AudioSource[] sounds;
     private void Awake()
     {
@@ -20,13 +19,30 @@ public class MainMenuMusic : MonoBehaviour {
 
     public void PlayGameMusic()
     {
-        sounds[0].Stop(); // stops main menu music
-        sounds[1].Play(); // plays in-game music
+        FadeOutMusic(sounds[0]); // stops main menu music
+        //sounds[0].Stop();
+        //sounds[1].Play(); // plays in-game music
     }
 
     public void stopGameAudio() //Mark calls this function if he dies
     {
         sounds[1].Stop();
+    }
+
+    public void FadeOutMusic(AudioSource source)
+    {
+        StartCoroutine(FadeMusic(source));
+    }
+    IEnumerator FadeMusic(AudioSource source)
+    {
+        while (source.volume > .01F)
+        {
+            source.volume = Mathf.Lerp(source.volume, 0F, Time.deltaTime * .75f);
+            yield return 0;
+        }
+        source.volume = 0;
+        sounds[1].Play();
+        //perfect opportunity to insert an on complete hook here before the coroutine exits.
     }
 
 }
