@@ -70,6 +70,7 @@ public class Player : MonoBehaviour {
 	public bool call;  //determines if blinking
 	public bool canPause;
 	public bool reviving; //Determines if Player has died and is coming back
+    public bool lockTransform; 
 
 	public GameObject moveForward;
 	public Image GoImage;
@@ -111,6 +112,7 @@ public class Player : MonoBehaviour {
 		colliderCount = 0f;
 		speedCount = 0f;
 		reviving = false;
+        lockTransform = false;
 
 		ItemUI = GameObject.Find("Item");
 		reviveImage = ItemUI.transform.Find ("ReviveUI").gameObject;
@@ -348,12 +350,14 @@ public class Player : MonoBehaviour {
                     bullet2.transform.Rotate(0f, 0f, 0f);
                     GameObject bullet3 = (GameObject)Instantiate(bullet, spawnPoint.position, spawnPoint.rotation);
                     bullet3.transform.Rotate(0f, 0f, -10f);
+                    lockTransform = true;
                     ammoScript.countAmmo -= 3f;
                 }
                 
                 else
                 {
                     Instantiate(bullet, spawnPoint.position, spawnPoint.rotation);
+                    lockTransform = true;
                     ammoScript.countAmmo -= 1f;
                 }
                 //Transform newBullet = Instantiate(bullet.transform, spawnPoint.position, Quaternion.identity) as Transform;
@@ -370,6 +374,7 @@ public class Player : MonoBehaviour {
                 //newBullet.parent = transform;
                 markShooting = true;
                 shootOnce = false;
+                lockTransform = true;
             }
 
             if (playerHealth <= 0f) {
@@ -496,14 +501,22 @@ public class Player : MonoBehaviour {
 		if (!dead && !reviving) {
 			if (Input.GetKey (KeyCode.A)) {
 				rb2d.AddForce (Vector3.left * speed);
-                transform.localScale = new Vector3(-2f, 2f, 1f);
-                left = true;
+
+                if (lockTransform == false)
+                {
+                    transform.localScale = new Vector3(-2f, 2f, 1f);
+                    left = true;
+                }
             }
 
-			if (Input.GetKey (KeyCode.D)) {
+            if (Input.GetKey(KeyCode.D)) {
 				rb2d.AddForce (Vector3.right * speed);
-                transform.localScale = new Vector3(2f, 2f, 1f);
-                left = false;
+
+                if (lockTransform == false)
+                {
+                    transform.localScale = new Vector3(2f, 2f, 1f);
+                    left = false;
+                }
             }
 
             if (Input.GetKey (KeyCode.W)) {
