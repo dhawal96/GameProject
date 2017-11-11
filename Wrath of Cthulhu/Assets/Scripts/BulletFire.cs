@@ -57,6 +57,8 @@ public class BulletFire : MonoBehaviour
                         GetComponent<Rigidbody2D>().AddForce(-transform.right * playerBulletForce);
                     }
 
+                    controlscript.lockTransform = false;
+
                 }
                 break;
 
