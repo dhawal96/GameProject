@@ -4,19 +4,20 @@ using UnityEngine;
 
 public class spawnBoss : MonoBehaviour {
 
-    public GameObject boss;
+    public  GameObject mainCamera;
+    private CameraFollow controlscript;
 
 
     private void Start()
     {
-        boss.SetActive(false);
+        controlscript = mainCamera.GetComponent<CameraFollow>();
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {
-            boss.SetActive(true);
             GameObject.FindGameObjectWithTag("Music").GetComponent<MainMenuMusic>().stopGameAudio();
+            controlscript.stayOnPlayer = false;
         }
     }
 }
