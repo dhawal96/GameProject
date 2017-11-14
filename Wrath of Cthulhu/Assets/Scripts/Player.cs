@@ -578,7 +578,12 @@ public class Player : MonoBehaviour {
             anim.SetBool("Dead", true);
         }
 
-        else
+        else if (playerMadness >= 100f && !revive)
+        {
+            anim.SetBool("Dead", true);
+        }
+
+        else if (!reviving)
         {
             anim.SetBool("Blink", true);
         }

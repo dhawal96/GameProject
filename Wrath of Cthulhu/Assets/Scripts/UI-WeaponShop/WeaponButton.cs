@@ -111,7 +111,7 @@ public class WeaponButton : MonoBehaviour
 					if (boughtShotgun == false) { // if shotgun upgrade and havent bought yet
 						pagescript.count -= controlscript.weapons [weaponNumber].cost;
 						controlscript.latestBuy = weaponNumber;
-                        controlscript.bulletDamage = 60f + controlscript.damageUpgrade;
+                        controlscript.bulletDamage = 75f + controlscript.damageUpgrade;
 						boughtShotgun = true; //now bought
 						controlscript.shotgun = true;
 					} 
