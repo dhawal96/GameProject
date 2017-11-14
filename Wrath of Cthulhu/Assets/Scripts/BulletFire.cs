@@ -131,6 +131,9 @@ public class BulletFire : MonoBehaviour
             case "Currency":
                 break;
 
+            case "BrokenBridge":
+                break;
+
             default:
                 Destroy(gameObject);
                 break;

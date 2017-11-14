@@ -19,6 +19,7 @@ TagManager:
   - Boss
   - ShopPanel
   - Music
+  - BrokenBridge
   layers:
   - Default
   - TransparentFX

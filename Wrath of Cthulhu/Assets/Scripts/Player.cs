@@ -257,7 +257,7 @@ public class Player : MonoBehaviour {
 
                 else if (blink)
                 {
-                    playerMadness += 10f;
+                    //playerMadness += 10f;
                     if (transform.position.x >= .25f && transform.position.x <= 19.63752f + .25248f)
                     {
                         minPos = .25f;
@@ -300,13 +300,13 @@ public class Player : MonoBehaviour {
                         maxPos = 84.46f + .25248f;
                     }
 
-                    else if (transform.position.x >= 84.46f + .56248f && transform.position.x <= 98.37f + .25248f)
+                    else if (transform.position.x >= 84.46f + .56248f && transform.position.x <= 93.36f)
                     {
                         minPos = 84.46f + .56248f;
-                        maxPos = 98.37f + .25248f;
+                        maxPos = 93.36f;
                     }
 
-                    else if (transform.position.x >= 98.37f + .56248f && transform.position.x <= 111.31f + .25248f)
+                    /*else if (transform.position.x >= 98.37f + .56248f && transform.position.x <= 111.31f + .25248f)
                     {
                         minPos = 98.37f + .56248f;
                         maxPos = 111.31f + .25248f;
@@ -316,7 +316,7 @@ public class Player : MonoBehaviour {
                     {
                         minPos = 111.31f + .56248f;
                         maxPos = 118.56f;
-                    }
+                    }*/
                     //float cameraSize = 2.294f;
                     float xPosition = transform.position.x;
                     if (left)
@@ -426,27 +426,27 @@ public class Player : MonoBehaviour {
                 GoImage.enabled = true;
             }
 
-            else if (enemiesKilled >= 26 && colliderCount == 3f)
+            else if (enemiesKilled >= 27 && colliderCount == 3f)
             {
                 GoImage.enabled = true;
             }
 
-            else if (enemiesKilled >= 31 && colliderCount == 4f)
+            else if (enemiesKilled >= 32 && colliderCount == 4f)
             {
                 GoImage.enabled = true;
             }
 
-            else if (enemiesKilled >= 38 && colliderCount == 5f)
+            else if (enemiesKilled >= 39 && colliderCount == 5f)
             {
                 GoImage.enabled = true;
             }
 
-            else if (enemiesKilled >= 43 && colliderCount == 6f)
+            else if (enemiesKilled >= 44 && colliderCount == 6f)
             {
                 GoImage.enabled = true;
             }
 
-            else if (enemiesKilled >= 50 && colliderCount == 7f)
+            /*else if (enemiesKilled >= 50 && colliderCount == 7f)
             {
                 GoImage.enabled = true;
             }
@@ -454,7 +454,7 @@ public class Player : MonoBehaviour {
             else if (enemiesKilled >= 55 && colliderCount == 8f)
             {
                 GoImage.enabled = true; 
-            }
+            }*/
 
             healthscript.LifePercentage = playerHealth;
 			madnessscript.MadnessPercentage = playerMadness;
