@@ -145,7 +145,7 @@ public class WeaponButton : MonoBehaviour
                         controlscript.damageUpgrade += 50f;
                         if (controlscript.shotgun == true)
                             {
-                                controlscript.bulletDamage = controlscript.bulletDamage + controlscript.damageUpgrade;
+                                controlscript.bulletDamage = 75f + controlscript.damageUpgrade;
                             }
 
                         else

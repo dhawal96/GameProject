@@ -300,13 +300,13 @@ public class Player : MonoBehaviour {
                         maxPos = 84.46f + .25248f;
                     }
 
-                    else if (transform.position.x >= 84.46f + .56248f && transform.position.x <= 98.37f + .25248f)
+                    else if (transform.position.x >= 84.46f + .56248f && transform.position.x <= 93.36f)
                     {
                         minPos = 84.46f + .56248f;
-                        maxPos = 98.37f + .25248f;
+                        maxPos = 93.36f;
                     }
 
-                    else if (transform.position.x >= 98.37f + .56248f && transform.position.x <= 111.31f + .25248f)
+                    /*else if (transform.position.x >= 98.37f + .56248f && transform.position.x <= 111.31f + .25248f)
                     {
                         minPos = 98.37f + .56248f;
                         maxPos = 111.31f + .25248f;
@@ -316,7 +316,7 @@ public class Player : MonoBehaviour {
                     {
                         minPos = 111.31f + .56248f;
                         maxPos = 118.56f;
-                    }
+                    }*/
                     //float cameraSize = 2.294f;
                     float xPosition = transform.position.x;
                     if (left)
