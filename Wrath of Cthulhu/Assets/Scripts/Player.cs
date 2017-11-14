@@ -257,7 +257,7 @@ public class Player : MonoBehaviour {
 
                 else if (blink)
                 {
-                    playerMadness += 10f;
+                    //playerMadness += 10f;
                     if (transform.position.x >= .25f && transform.position.x <= 19.63752f + .25248f)
                     {
                         minPos = .25f;
@@ -426,27 +426,27 @@ public class Player : MonoBehaviour {
                 GoImage.enabled = true;
             }
 
-            else if (enemiesKilled >= 26 && colliderCount == 3f)
+            else if (enemiesKilled >= 27 && colliderCount == 3f)
             {
                 GoImage.enabled = true;
             }
 
-            else if (enemiesKilled >= 31 && colliderCount == 4f)
+            else if (enemiesKilled >= 32 && colliderCount == 4f)
             {
                 GoImage.enabled = true;
             }
 
-            else if (enemiesKilled >= 38 && colliderCount == 5f)
+            else if (enemiesKilled >= 39 && colliderCount == 5f)
             {
                 GoImage.enabled = true;
             }
 
-            else if (enemiesKilled >= 43 && colliderCount == 6f)
+            else if (enemiesKilled >= 44 && colliderCount == 6f)
             {
                 GoImage.enabled = true;
             }
 
-            else if (enemiesKilled >= 50 && colliderCount == 7f)
+            /*else if (enemiesKilled >= 50 && colliderCount == 7f)
             {
                 GoImage.enabled = true;
             }
@@ -454,7 +454,7 @@ public class Player : MonoBehaviour {
             else if (enemiesKilled >= 55 && colliderCount == 8f)
             {
                 GoImage.enabled = true; 
-            }
+            }*/
 
             healthscript.LifePercentage = playerHealth;
 			madnessscript.MadnessPercentage = playerMadness;
