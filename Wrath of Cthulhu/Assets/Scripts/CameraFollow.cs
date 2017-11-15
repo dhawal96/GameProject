@@ -48,6 +48,7 @@ public class CameraFollow : MonoBehaviour
         defaultRain.SetActive(false);
         newRain.SetActive(true);
         stayOnPlayer = true;
+        controlscript.canMove = true;
 
 
     }

@@ -18,6 +18,7 @@ public class spawnBoss : MonoBehaviour {
         {
             GameObject.FindGameObjectWithTag("Music").GetComponent<MainMenuMusic>().stopGameAudio();
             controlscript.stayOnPlayer = false;
+            collision.gameObject.GetComponent<Player>().canMove = false;
         }
     }
 }
