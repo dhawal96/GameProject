@@ -70,7 +70,8 @@ public class Player : MonoBehaviour {
 	public bool call;  //determines if blinking
 	public bool canPause;
 	public bool reviving; //Determines if Player has died and is coming back
-    public bool lockTransform; 
+    public bool lockTransform;
+    public bool canMove;
 
 	public GameObject moveForward;
 	public Image GoImage;
@@ -113,6 +114,7 @@ public class Player : MonoBehaviour {
 		speedCount = 0f;
 		reviving = false;
         lockTransform = false;
+        canMove = true;
 
 		ItemUI = GameObject.Find("Item");
 		reviveImage = ItemUI.transform.Find ("ReviveUI").gameObject;
@@ -257,7 +259,7 @@ public class Player : MonoBehaviour {
 
                 else if (blink)
                 {
-                    //playerMadness += 10f;
+                    playerMadness += 10f;
                     if (transform.position.x >= .25f && transform.position.x <= 19.63752f + .25248f)
                     {
                         minPos = .25f;
@@ -498,7 +500,7 @@ public class Player : MonoBehaviour {
     void FixedUpdate()
     {
         Physics2D.gravity = Vector2.zero;
-		if (!dead && !reviving) {
+		if (!dead && !reviving && canMove) {
 			if (Input.GetKey (KeyCode.A)) {
 				rb2d.AddForce (Vector3.left * speed);
 
