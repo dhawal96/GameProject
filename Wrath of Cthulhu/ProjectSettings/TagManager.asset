@@ -67,3 +67,6 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: FillEnemyHealthBar
+    uniqueID: 967677543
+    locked: 0
