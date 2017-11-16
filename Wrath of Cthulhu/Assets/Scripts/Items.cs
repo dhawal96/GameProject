@@ -7,6 +7,7 @@ public class Items : MonoBehaviour {
 	//PlayerCurrency
 	public Transform PageCount; //UI element
 	Currency pagescript;
+    public int value;
 
 	// Use this for initialization
 	void Start () {
@@ -20,7 +21,7 @@ public class Items : MonoBehaviour {
         {
             if (collision.tag == "Player")
             {
-				pagescript.count += 1;
+				pagescript.count += value;
                 Destroy(gameObject);
             }
         }
