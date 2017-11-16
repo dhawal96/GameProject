@@ -68,7 +68,7 @@ public class EnemyMove : MonoBehaviour {
 
         if (gameObject.name == "MeleeBoss" || gameObject.name == "RangeBoss")
         {
-            health = 1000f;
+            health = 1500f;
         }
 
         else
