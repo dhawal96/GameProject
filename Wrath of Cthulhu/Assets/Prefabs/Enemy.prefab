@@ -69,7 +69,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1618293949978046}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.6930938, y: -0.46200013, z: 0}
+  m_LocalPosition: {x: 5.320215, y: 2.5343134, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_Children:
   - {fileID: 4220425589518628}
@@ -222,6 +222,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackTrigger: {fileID: 1369370886750716}
+  attackArea: {fileID: 0}
   mainCamera: {fileID: 0}
   camera: {fileID: 0}
   spawnPoint: {fileID: 0}

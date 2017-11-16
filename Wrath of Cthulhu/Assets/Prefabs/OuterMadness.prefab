@@ -37,6 +37,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4709379087347216}
   - component: {fileID: 212165282473003640}
+  - component: {fileID: 114373795983091604}
   m_Layer: 0
   m_Name: InnerMadness
   m_TagString: Untagged
@@ -85,6 +86,24 @@ MonoBehaviour:
   MinVelocity: {x: -0.01, y: 0.05}
   MaxVelocity: {x: 0.01, y: 0.09}
   LifeSpan: 0.75
+  DestroysSelf: 1
+  AlphaFalloff: 2
+--- !u!114 &114373795983091604
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1970500010733450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42812d850ffebfc48ab0f9c96ae1daa6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MinVelocity: {x: 0, y: 0}
+  MaxVelocity: {x: 0, y: 0}
+  LifeSpan: 1
+  DestroysSelf: 0
+  AlphaFalloff: 2
 --- !u!212 &212165282473003640
 SpriteRenderer:
   m_ObjectHideFlags: 1

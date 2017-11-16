@@ -54,6 +54,7 @@ public class EnemyMove : MonoBehaviour {
     public bool enemyShooting;
     public float enemyDamage;
     public float enemyMadness;
+    private bool bossDied;
 
     void Start()
     {
@@ -64,7 +65,17 @@ public class EnemyMove : MonoBehaviour {
         controlscript = Player.GetComponent<Player>();
         mainCamera = GameObject.FindWithTag("MainCamera");
         camera = mainCamera.GetComponent<Camera>();
-        health = 300f;
+
+        if (gameObject.name == "MeleeBoss" || gameObject.name == "RangeBoss")
+        {
+            health = 1000f;
+        }
+
+        else
+        {
+            health = 300f;
+        }
+        
         enemyDamage = 25f;
         enemyMadness = 10f;
         idle = true;
@@ -90,8 +101,6 @@ public class EnemyMove : MonoBehaviour {
         }
         anim.SetBool("Idle", true);
         attackTrigger.SetActive(false);
-        
-
     }
 
     void Update()
@@ -120,15 +129,32 @@ public class EnemyMove : MonoBehaviour {
         if (rangeEnemyAttack == true)
         {
             rb2d.isKinematic = true;
-            if (Player.transform.position.x > transform.position.x)
+            if (gameObject.name == "MeleeBoss" || gameObject.name == "RangeBoss")
             {
-                //face right
-                transform.localScale = new Vector3(1.5f, 1.5f, 1);
+                if (Player.transform.position.x > transform.position.x)
+                {
+                    //face right
+                    transform.localScale = new Vector3(2.5f, 2.5f, 1);
+                }
+                else if (Player.transform.position.x < transform.position.x)
+                {
+                    //face left
+                    transform.localScale = new Vector3(-2.5f, 2.5f, 1);
+                }
             }
-            else if (Player.transform.position.x < transform.position.x)
+
+            else
             {
-                //face left
-                transform.localScale = new Vector3(-1.5f, 1.5f, 1);
+                if (Player.transform.position.x > transform.position.x)
+                {
+                    //face right
+                    transform.localScale = new Vector3(1.5f, 1.5f, 1);
+                }
+                else if (Player.transform.position.x < transform.position.x)
+                {
+                    //face left
+                    transform.localScale = new Vector3(-1.5f, 1.5f, 1);
+                }
             }
             anim.SetBool("Attack", true);
         }
@@ -232,15 +258,33 @@ public class EnemyMove : MonoBehaviour {
                 }
 
                 transform.position = Vector2.MoveTowards(transform.position, Player.transform.position, speed * Time.deltaTime);
-                if (Player.transform.position.x > transform.position.x)
+
+                if (gameObject.name == "MeleeBoss" || gameObject.name == "RangeBoss")
                 {
-                    //face right
-                    transform.localScale = new Vector3(1.5f, 1.5f, 1);
+                    if (Player.transform.position.x > transform.position.x)
+                    {
+                        //face right
+                        transform.localScale = new Vector3(2.5f, 2.5f, 1);
+                    }
+                    else if (Player.transform.position.x < transform.position.x)
+                    {
+                        //face left
+                        transform.localScale = new Vector3(-2.5f, 2.5f, 1);
+                    }
                 }
-                else if (Player.transform.position.x < transform.position.x)
+
+                else
                 {
-                    //face left
-                    transform.localScale = new Vector3(-1.5f, 1.5f, 1);
+                    if (Player.transform.position.x > transform.position.x)
+                    {
+                        //face right
+                        transform.localScale = new Vector3(1.5f, 1.5f, 1);
+                    }
+                    else if (Player.transform.position.x < transform.position.x)
+                    {
+                        //face left
+                        transform.localScale = new Vector3(-1.5f, 1.5f, 1);
+                    }
                 }
             }
             
@@ -259,15 +303,32 @@ public class EnemyMove : MonoBehaviour {
                 anim.SetBool("Attack", false);
 
                 transform.position = Vector2.MoveTowards(transform.position, Player.transform.position, speed * Time.deltaTime);
-                if (Player.transform.position.x > transform.position.x)
+                if (gameObject.name == "MeleeBoss" || gameObject.name == "RangeBoss")
                 {
-                    //face right
-                    transform.localScale = new Vector3(1.5f, 1.5f, 1);
+                    if (Player.transform.position.x > transform.position.x)
+                    {
+                        //face right
+                        transform.localScale = new Vector3(2.5f, 2.5f, 1);
+                    }
+                    else if (Player.transform.position.x < transform.position.x)
+                    {
+                        //face left
+                        transform.localScale = new Vector3(-2.5f, 2.5f, 1);
+                    }
                 }
-                else if (Player.transform.position.x < transform.position.x)
+
+                else
                 {
-                    //face left
-                    transform.localScale = new Vector3(-1.5f, 1.5f, 1);
+                    if (Player.transform.position.x > transform.position.x)
+                    {
+                        //face right
+                        transform.localScale = new Vector3(1.5f, 1.5f, 1);
+                    }
+                    else if (Player.transform.position.x < transform.position.x)
+                    {
+                        //face left
+                        transform.localScale = new Vector3(-1.5f, 1.5f, 1);
+                    }
                 }
             }
 
@@ -359,6 +420,16 @@ public class EnemyMove : MonoBehaviour {
     private void Destroy()
     {
         enposition = gameObject.GetComponent<EnemyMove>().transform.position;
+
+        if (gameObject.name == "RangeBoss" || gameObject.name == "MeleeBoss")
+        {
+            bossDied = true;
+        }
+
+        else
+        {
+            bossDied = false;
+        }
         Destroy(gameObject);
         randomIndex = Random.Range(1f, 100f);
         /*if (false&&randomIndex <= 60f && randomIndex >= 1f) ///THIS IF NEVER SUCCEEDS BECAUSE THE ITEMS DROPPED BY THE ENEMY ARE LIMITED TO CURRENCY
@@ -370,6 +441,16 @@ public class EnemyMove : MonoBehaviour {
         }*/
        itemIndex = Random.Range(0, gameObject.GetComponent<EnemyMove>().items.Length);
        GameObject coin = Instantiate(gameObject.GetComponent<EnemyMove>().items[itemIndex], enposition, Quaternion.identity);
+       
+       if (bossDied == true)
+        {
+            coin.GetComponent<Items>().value = 5;
+        }
+
+       else
+        {
+            coin.GetComponent<Items>().value = 1;
+        }
        Destroy(coin, 5);
       
        Player.GetComponent<Player>().enemiesKilled++;

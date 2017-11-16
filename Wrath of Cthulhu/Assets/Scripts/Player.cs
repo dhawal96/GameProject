@@ -168,7 +168,7 @@ public class Player : MonoBehaviour {
 
     IEnumerator ExitFullMadness()
     {
-        yield return new WaitForSecondsRealtime(15);
+        yield return new WaitForSecondsRealtime(20);
         playerMadness = 0f;
         particles.SetActive(false);
         leftParticles.SetActive(false);
@@ -498,17 +498,17 @@ public class Player : MonoBehaviour {
                 GoImage.enabled = true;
             }
 
-            else if (enemiesKilled >= 32 && colliderCount == 4f)
+            else if (enemiesKilled >= 29 && colliderCount == 4f)
             {
                 GoImage.enabled = true;
             }
 
-            else if (enemiesKilled >= 39 && colliderCount == 5f)
+            else if (enemiesKilled >= 36 && colliderCount == 5f)
             {
                 GoImage.enabled = true;
             }
 
-            else if (enemiesKilled >= 44 && colliderCount == 6f)
+            else if (enemiesKilled >= 41 && colliderCount == 6f)
             {
                 GoImage.enabled = true;
             }
