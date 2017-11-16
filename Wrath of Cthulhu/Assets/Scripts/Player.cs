@@ -44,13 +44,18 @@ public class Player : MonoBehaviour {
     public GameObject scrollBar;
     public GameObject storyPanel;
     public GameObject gameOverPanel;
+    public GameObject moveForward;
+    public Image GoImage;
+
 
     //Items
-	public GameObject ItemUI;
+    public GameObject ItemUI;
     public bool elixir;
     public bool blink;
 	public bool revive;
 	public GameObject reviveImage; //revive image
+    private GameObject elixirImage;
+    private GameObject eyeImage;
 
     //Audio
     public AudioSource[] sounds;
@@ -72,11 +77,13 @@ public class Player : MonoBehaviour {
 	public bool reviving; //Determines if Player has died and is coming back
     public bool lockTransform;
     public bool canMove;
+    private string[] movementDirection;
+    Random random = new Random();
+    private int randomNumber;
+    public GameObject particles; //Right
+    public GameObject leftParticles;
 
-	public GameObject moveForward;
-	public Image GoImage;
-
-	//Stats UI
+    //Stats UI
     public Transform AmmoCount;
     Ammo ammoScript;
     public float colliderCount;
@@ -88,38 +95,41 @@ public class Player : MonoBehaviour {
 
 
     // Use this for initialization
-    void Start () {
+    void Start() {
 
-        rb2d = gameObject.GetComponent<Rigidbody2D>(); 
+        rb2d = gameObject.GetComponent<Rigidbody2D>();
         anim = gameObject.GetComponent<Animator>();
         sounds = gameObject.GetComponents<AudioSource>();
 
         playerHealth = 100f;
-		playerMadness = 0f;
-		item = "null";
+        playerMadness = 0f;
+        item = "null";
         pauseGame = false;
-		maxSpeed = .5f;
-		speed = 50;
-		dead = false;
-		shotgun = false;
-		latestBuy = 0;
-		bulletDamage = 150f;
-		damageUpgrade = 0f;
-		elixir = false;
-		blink = false;
-		call = true;
-		revive = false;
-		canPause = false;
-		colliderCount = 0f;
-		speedCount = 0f;
-		reviving = false;
+        maxSpeed = .5f;
+        speed = 50;
+        dead = false;
+        shotgun = false;
+        latestBuy = 0;
+        bulletDamage = 150f;
+        damageUpgrade = 0f;
+        elixir = false;
+        blink = false;
+        call = true;
+        revive = false;
+        canPause = false;
+        colliderCount = 0f;
+        speedCount = 0f;
+        reviving = false;
         lockTransform = false;
         canMove = true;
+        movementDirection = new string[] { "left", "right", "up", "down" };
 
 		ItemUI = GameObject.Find("Item");
 		reviveImage = ItemUI.transform.Find ("ReviveUI").gameObject;
+        elixirImage = ItemUI.transform.Find("ElixirUI").gameObject;
+        eyeImage = ItemUI.transform.Find("EyeUI").gameObject;
 
-		HealthPercentage = GameObject.Find("Player1Health").transform;
+        HealthPercentage = GameObject.Find("Player1Health").transform;
 		healthscript = HealthPercentage.GetComponent<Player1Health>();
 
 		MadnessPercentage = GameObject.Find("Player1Madness").transform;
@@ -154,6 +164,14 @@ public class Player : MonoBehaviour {
         yield return new WaitForSecondsRealtime(3);
         anim.SetBool("Blink", false);
         call = true;
+    }
+
+    IEnumerator ExitFullMadness()
+    {
+        yield return new WaitForSecondsRealtime(15);
+        playerMadness = 0f;
+        particles.SetActive(false);
+        leftParticles.SetActive(false);
     }
 
     // Update is called once per frame
@@ -209,6 +227,52 @@ public class Player : MonoBehaviour {
                 Time.timeScale = 0f;
                 pauseGame = true;
             }*/
+        }
+
+        if (playerMadness >= 100f)
+        {
+            blink = false;
+            revive = false;
+            elixir = false;
+
+            eyeImage.SetActive(false);
+            reviveImage.SetActive(false);
+            elixirImage.SetActive(false);
+            
+            if (gameObject.transform.localScale.x == -2f)
+            {
+                particles.SetActive(false);
+                leftParticles.SetActive(true);
+            }
+
+            else
+            {
+                particles.SetActive(true);
+                leftParticles.SetActive(false);
+            }
+
+            StartCoroutine(ExitFullMadness());
+
+
+            if (Input.GetKeyUp(KeyCode.A))
+            {
+                randomNumber = Random.Range(0, 4);
+            }
+
+            else if (Input.GetKeyUp(KeyCode.S))
+            {
+                randomNumber = Random.Range(0, 4);
+            }
+
+            else if (Input.GetKeyUp(KeyCode.W))
+            {
+                randomNumber = Random.Range(0, 4);
+            }
+
+            else if (Input.GetKeyUp(KeyCode.D))
+            {
+                randomNumber = Random.Range(0, 4);
+            }
         }
 
         if (Input.GetKey(KeyCode.H))
@@ -396,8 +460,9 @@ public class Player : MonoBehaviour {
 				//Destroy (transform.gameObject);
 			}
 
+            //Madness Kills
 			if (playerMadness >= 100f) {
-				if (revive) {
+				/*if (revive) {
 					playerHealth = 100f;
 					playerMadness = 0f;
 					reviveImage.SetActive (false);
@@ -410,7 +475,7 @@ public class Player : MonoBehaviour {
 					dead = true;
 					reviving = false;
 				}       
-				//Destroy (transform.gameObject);
+				//Destroy (transform.gameObject);*/
             }
 
             if (enemiesKilled >= 10 && colliderCount == 0f)
@@ -501,33 +566,197 @@ public class Player : MonoBehaviour {
     {
         Physics2D.gravity = Vector2.zero;
 		if (!dead && !reviving && canMove) {
-			if (Input.GetKey (KeyCode.A)) {
-				rb2d.AddForce (Vector3.left * speed);
-
-                if (lockTransform == false)
+            
+            if (playerMadness < 100f)
+            {
+                if (Input.GetKey(KeyCode.A))
                 {
-                    transform.localScale = new Vector3(-2f, 2f, 1f);
-                    left = true;
+                    rb2d.AddForce(Vector3.left * speed);
+
+                    if (lockTransform == false)
+                    {
+                        transform.localScale = new Vector3(-2f, 2f, 1f);
+                        particles.transform.localScale = new Vector3(-1f, 1f, 1f);
+                        left = true;
+                    }
                 }
+
+                if (Input.GetKey(KeyCode.D))
+                {
+                    rb2d.AddForce(Vector3.right * speed);
+
+                    if (lockTransform == false)
+                    {
+                        transform.localScale = new Vector3(2f, 2f, 1f);
+                        particles.transform.localScale = new Vector3(1f, 1f, 1f);
+                        left = false;
+                    }
+                }
+
+                if (Input.GetKey(KeyCode.W))
+                {
+                    rb2d.AddForce(Vector3.up * speed);
+                }
+
+                if (Input.GetKey(KeyCode.S))
+                {
+                    rb2d.AddForce(Vector3.down * speed);
+                }
+
             }
 
-            if (Input.GetKey(KeyCode.D)) {
-				rb2d.AddForce (Vector3.right * speed);
+            else
+            {
 
-                if (lockTransform == false)
+                if (Input.GetKey(KeyCode.A))
                 {
-                    transform.localScale = new Vector3(2f, 2f, 1f);
-                    left = false;
+                    if (movementDirection[randomNumber] == "left")
+                    {
+                        rb2d.AddForce(Vector3.left * speed);
+
+                        if (lockTransform == false)
+                        {
+                            transform.localScale = new Vector3(-2f, 2f, 1f);
+                            particles.transform.localScale = new Vector3(-1f, 1f, 1f);
+                            left = true;
+                        }
+                    }
+
+                    else if (movementDirection[randomNumber] == "right")
+                    {
+                        rb2d.AddForce(Vector3.right * speed);
+
+                        if (lockTransform == false)
+                        {
+                            transform.localScale = new Vector3(2f, 2f, 1f);
+                            particles.transform.localScale = new Vector3(1f, 1f, 1f);
+                            left = false;
+                        }
+                    }
+
+                    else if (movementDirection[randomNumber] == "up")
+                    {
+                        rb2d.AddForce(Vector3.up * speed);
+                    }
+
+                    else if (movementDirection[randomNumber] == "down")
+                    {
+                        rb2d.AddForce(Vector3.down * speed);
+                    }
                 }
+
+                if (Input.GetKey(KeyCode.D))
+                {
+                    if (movementDirection[randomNumber] == "left")
+                    {
+                        rb2d.AddForce(Vector3.left * speed);
+
+                        if (lockTransform == false)
+                        {
+                            transform.localScale = new Vector3(-2f, 2f, 1f);
+                            particles.transform.localScale = new Vector3(-1f, 1f, 1f);
+                            left = true;
+                        }
+                    }
+
+                    else if (movementDirection[randomNumber] == "right")
+                    {
+                        rb2d.AddForce(Vector3.right * speed);
+
+                        if (lockTransform == false)
+                        {
+                            transform.localScale = new Vector3(2f, 2f, 1f);
+                            particles.transform.localScale = new Vector3(1f, 1f, 1f);
+                            left = false;
+                        }
+                    }
+
+                    else if (movementDirection[randomNumber] == "up")
+                    {
+                        rb2d.AddForce(Vector3.up * speed);
+                    }
+
+                    else if (movementDirection[randomNumber] == "down")
+                    {
+                        rb2d.AddForce(Vector3.down * speed);
+                    }
+                }
+
+                if (Input.GetKey(KeyCode.W))
+                {
+                    if (movementDirection[randomNumber] == "left")
+                    {
+                        rb2d.AddForce(Vector3.left * speed);
+
+                        if (lockTransform == false)
+                        {
+                            transform.localScale = new Vector3(-2f, 2f, 1f);
+                            particles.transform.localScale = new Vector3(-1f, 1f, 1f);
+                            left = true;
+                        }
+                    }
+
+                    else if (movementDirection[randomNumber] == "right")
+                    {
+                        rb2d.AddForce(Vector3.right * speed);
+
+                        if (lockTransform == false)
+                        {
+                            transform.localScale = new Vector3(2f, 2f, 1f);
+                            particles.transform.localScale = new Vector3(1f, 1f, 1f);
+                            left = false;
+                        }
+                    }
+
+                    else if (movementDirection[randomNumber] == "up")
+                    {
+                        rb2d.AddForce(Vector3.up * speed);
+                    }
+
+                    else if (movementDirection[randomNumber] == "down")
+                    {
+                        rb2d.AddForce(Vector3.down * speed);
+                    }
+                }
+
+                if (Input.GetKey(KeyCode.S))
+                {
+                    if (movementDirection[randomNumber] == "left")
+                    {
+                        rb2d.AddForce(Vector3.left * speed);
+
+                        if (lockTransform == false)
+                        {
+                            transform.localScale = new Vector3(-2f, 2f, 1f);
+                            particles.transform.localScale = new Vector3(-1f, 1f, 1f);
+                            left = true;
+                        }
+                    }
+
+                    else if (movementDirection[randomNumber] == "right")
+                    {
+                        rb2d.AddForce(Vector3.right * speed);
+
+                        if (lockTransform == false)
+                        {
+                            transform.localScale = new Vector3(2f, 2f, 1f);
+                            particles.transform.localScale = new Vector3(1f, 1f, 1f);
+                            left = false;
+                        }
+                    }
+
+                    else if (movementDirection[randomNumber] == "up")
+                    {
+                        rb2d.AddForce(Vector3.up * speed);
+                    }
+
+                    else if (movementDirection[randomNumber] == "down")
+                    {
+                        rb2d.AddForce(Vector3.down * speed);
+                    }
+                }
+
             }
-
-            if (Input.GetKey (KeyCode.W)) {
-				rb2d.AddForce (Vector3.up * speed);
-			}
-
-			if (Input.GetKey (KeyCode.S)) {
-				rb2d.AddForce (Vector3.down * speed);
-			}
 		
 
 			if (rb2d.velocity.x > maxSpeed) {
@@ -549,24 +778,6 @@ public class Player : MonoBehaviour {
 
     }
 
-    /*private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag == "Enemy" && (anim.GetCurrentAnimatorStateInfo(0).IsName("Blink_Mark") || anim.GetCurrentAnimatorStateInfo(0).IsName("Blink_Walk_Mark")))
-        {
-            Physics2D.IgnoreCollision(gameObject.GetComponent<Collider2D>(), collision.gameObject.GetComponent<Collider2D>());
-        }
-
-        else if (collision.gameObject.tag == "RangeEnemy" && (anim.GetCurrentAnimatorStateInfo(0).IsName("Blink_Mark") || anim.GetCurrentAnimatorStateInfo(0).IsName("Blink_Walk_Mark")))
-        {
-            Physics2D.IgnoreCollision(gameObject.GetComponent<Collider2D>(), collision.gameObject.GetComponent<Collider2D>());
-        }
-
-        else if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "RangeEnemy")
-        {
-            Debug.Log("here");
-            Physics2D.IgnoreCollision(gameObject.GetComponent<Collider2D>(), collision.gameObject.GetComponent<Collider2D>(), false);
-        }
-    }*/
 
     void SetHit()
     {
@@ -580,10 +791,11 @@ public class Player : MonoBehaviour {
             anim.SetBool("Dead", true);
         }
 
-        else if (playerMadness >= 100f && !revive)
+        //Madness Kills
+        /*else if (playerMadness >= 100f && !revive)
         {
             anim.SetBool("Dead", true);
-        }
+        }*/
 
         else if (!reviving)
         {
