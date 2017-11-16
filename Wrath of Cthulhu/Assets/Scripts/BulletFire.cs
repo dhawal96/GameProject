@@ -134,6 +134,11 @@ public class BulletFire : MonoBehaviour
             case "BrokenBridge":
                 break;
 
+            case "Boss":
+                target.gameObject.GetComponent<BossAI>().health -= controlscript.bulletDamage;
+                Destroy(gameObject);
+                break;
+
             default:
                 Destroy(gameObject);
                 break;
