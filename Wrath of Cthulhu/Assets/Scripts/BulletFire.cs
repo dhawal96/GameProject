@@ -135,8 +135,17 @@ public class BulletFire : MonoBehaviour
                 break;
 
             case "Boss":
-                target.gameObject.GetComponent<BossAI>().health -= controlscript.bulletDamage;
-                Destroy(gameObject);
+                if (gameObject.tag == "Bullet")
+                {
+                    target.gameObject.GetComponent<BossAI>().health -= controlscript.bulletDamage;
+                    Destroy(gameObject);
+                }
+
+                else
+                {
+                    Destroy(gameObject);
+                }
+
                 break;
 
             default:

@@ -69,11 +69,13 @@ public class EnemyMove : MonoBehaviour {
         if (gameObject.name == "MeleeBoss" || gameObject.name == "RangeBoss")
         {
             health = 1500f;
+            speed = 1f;
         }
 
         else
         {
             health = 300f;
+            speed = .75f;
         }
         
         enemyDamage = 25f;
@@ -85,7 +87,7 @@ public class EnemyMove : MonoBehaviour {
         controlMeleeCollision = false;
         controlDashCollision = false;
         maxSpeed = .01f;
-        speed = .75f;
+
         minDistance = .50f;
         randomNumber = Random.Range(0f, 100f);
         if (randomNumber <= 20)

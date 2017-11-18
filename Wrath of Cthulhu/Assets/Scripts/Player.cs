@@ -841,6 +841,4 @@ public class Player : MonoBehaviour {
 		anim.SetBool ("Revive", false);
 		reviving = false;
 	}
-
-
 }
