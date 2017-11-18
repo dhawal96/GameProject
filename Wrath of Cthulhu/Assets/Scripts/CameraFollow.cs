@@ -45,11 +45,12 @@ public class CameraFollow : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(1);
         boss.SetActive(true);
-        yield return new WaitForSecondsRealtime(1);
+        yield return new WaitForSecondsRealtime(3);
         defaultRain.SetActive(false);
         newRain.SetActive(true);
         stayOnPlayer = true;
         controlscript.canMove = true;
+        boss.GetComponent<BossAI>().exitEntryScene = true;
         yield return new WaitForSecondsRealtime(1);
         enemyHealthCanvas.SetActive(true);
 
