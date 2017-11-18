@@ -19,6 +19,7 @@ public class CameraFollow : MonoBehaviour
     public GameObject defaultRain;
     public GameObject newRain;
     public GameObject bossSpawn;
+    public GameObject bossSplashEffect;
     private Vector3 bossVelocity = Vector3.zero;
 
     public bool bounds;
@@ -45,7 +46,11 @@ public class CameraFollow : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(1);
         boss.SetActive(true);
-        yield return new WaitForSecondsRealtime(3);
+        bossSplashEffect.SetActive(true);
+        gameObject.GetComponent<CameraControl>().Shake(1f, 1, 1f);
+        yield return new WaitForSecondsRealtime(4);
+        gameObject.GetComponent<CameraControl>()._isShaking = false;
+        gameObject.GetComponent<CameraControl>()._shakeCount = 0;
         defaultRain.SetActive(false);
         newRain.SetActive(true);
         stayOnPlayer = true;
@@ -139,6 +144,8 @@ public class CameraFollow : MonoBehaviour
     {
         if (stayOnPlayer)
         {
+            gameObject.GetComponent<CameraControl>()._isShaking = false;
+            gameObject.GetComponent<CameraControl>()._shakeCount = 0;
             float posX = Mathf.SmoothDamp(transform.position.x, player.transform.position.x, ref velocity.x, smoothTimeX);
             float posY = Mathf.SmoothDamp(transform.position.y, player.transform.position.y, ref velocity.y, smoothTimeY);
 

@@ -10,6 +10,8 @@ public class BossAI : MonoBehaviour {
     public GameObject gameOverPanel;
     public GameObject rain;
     public GameObject spawner;
+    public GameObject bossSplashEffect;
+    public GameObject camera;
     private Animator anim;
     public float health;
     public bool exitEntryScene;
@@ -59,5 +61,12 @@ public class BossAI : MonoBehaviour {
         }
 
         StartCoroutine(WaitTime());
+    }
+
+    public void EndSplashAndCameraShake()
+    {
+        camera.GetComponent<CameraControl>()._isShaking = false;
+        camera.GetComponent<CameraControl>()._shakeCount = 0;
+        Destroy(bossSplashEffect);
     }
 }
