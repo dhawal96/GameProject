@@ -19,6 +19,7 @@ public class CameraFollow : MonoBehaviour
     public GameObject defaultRain;
     public GameObject newRain;
     public GameObject bossSpawn;
+    public GameObject bossSplashEffect;
     private Vector3 bossVelocity = Vector3.zero;
 
     public bool bounds;
@@ -45,8 +46,9 @@ public class CameraFollow : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(1);
         boss.SetActive(true);
-        gameObject.GetComponent<CameraControl>().Shake(.75f, 1, 1f);
-        yield return new WaitForSecondsRealtime(3);
+        bossSplashEffect.SetActive(true);
+        gameObject.GetComponent<CameraControl>().Shake(1f, 1, 1f);
+        yield return new WaitForSecondsRealtime(4);
         gameObject.GetComponent<CameraControl>()._isShaking = false;
         gameObject.GetComponent<CameraControl>()._shakeCount = 0;
         defaultRain.SetActive(false);
