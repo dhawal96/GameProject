@@ -20,12 +20,19 @@ public class BulletFire : MonoBehaviour
     //Bomb Variables
     private bool forceAdded;
     private bool bombLanded;
+    private bool lockCollision;
 
 
     IEnumerator BombWaitTime()
     {
         yield return new WaitForSecondsRealtime(.5f);
         forceAdded = true;
+    }
+
+    IEnumerator ExplosionWaitTime()
+    {
+        yield return new WaitForSecondsRealtime(.50f);
+        gameObject.GetComponent<Animator>().SetBool("Explode", true);
     }
 
     private void Start()
@@ -35,6 +42,7 @@ public class BulletFire : MonoBehaviour
         enemyDamage = 35f;
         enemyMadness = 15f;
         restrictCurrency = true;
+        lockCollision = false;
         playerBulletForce = 500f;
         controlscript = Player.GetComponent<Player>();
     }
@@ -58,8 +66,6 @@ public class BulletFire : MonoBehaviour
 
         if (forceAdded && gameObject.transform.localPosition.y <= Player.transform.localPosition.y)
         {
-            Debug.Log(Player.transform.localPosition.y);
-            Debug.Log(gameObject.transform.localPosition.y);
             Destroy(gameObject.GetComponent<Rigidbody2D>());
             gameObject.transform.Rotate(0, 0, 0);
         }
@@ -97,13 +103,15 @@ public class BulletFire : MonoBehaviour
                 {
                     if (Player.transform.localScale.x > 0)
                     {
-                        GetComponent<Rigidbody2D>().AddForce(transform.right * 250f);
+                        transform.Rotate(0, 0, 60);
+                        GetComponent<Rigidbody2D>().AddForce(transform.right * 200f);
 
                     }
 
                     else
                     {
-                        GetComponent<Rigidbody2D>().AddForce(-transform.right * 250f);
+                        transform.Rotate(0, 0, -60);
+                        GetComponent<Rigidbody2D>().AddForce(-transform.right * 200f);
                     }
 
                     controlscript.lockTransform = false;
@@ -183,6 +191,13 @@ public class BulletFire : MonoBehaviour
             case "BrokenBridge":
                 break;
 
+            case "EnemyBullet":
+                if (gameObject.tag == "Bomb")
+                {
+                    break; 
+                }
+                break;
+
             case "Boss":
                 if (gameObject.tag == "Bullet")
                 {
@@ -201,6 +216,80 @@ public class BulletFire : MonoBehaviour
                 Destroy(gameObject);
                 break;
         }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (gameObject.tag == "Bomb" && collision.gameObject.tag == "Player" && gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Explosion") && lockCollision == false)
+        {
+            lockCollision = true;
+            Player.GetComponent<Player>().playerHealth -= 20f;
+            Player.GetComponent<Player>().playerMadness += enemyMadness;
+            controlscript.sounds[1].Play();
+            Player.GetComponent<Animator>().SetBool("Hit", true);
+        }
+
+        if (gameObject.tag == "Bomb" && (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "RangeEnemy") && gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Explosion"))
+        {
+            Destroy(gameObject.GetComponent<Rigidbody2D>());
+            gameObject.transform.Rotate(0, 0, 0);
+
+            if (lockCollision == false) //Damage Once
+            {
+                collision.gameObject.GetComponent<Animator>().SetBool("Hit", true);
+                collision.gameObject.GetComponent<EnemyMove>().health -= 150f;
+
+                if (collision.gameObject.GetComponent<EnemyMove>().health <= 0)
+                {
+                    collision.gameObject.GetComponent<Animator>().SetBool("Death", true);
+                }
+            }
+
+            lockCollision = true;
+
+        }
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (gameObject.tag == "Bomb" && collision.gameObject.tag == "Player" && gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Explosion") && lockCollision == false)
+        {
+            lockCollision = true;
+            Player.GetComponent<Player>().playerHealth -= 20f;
+            Player.GetComponent<Player>().playerMadness += enemyMadness;
+            controlscript.sounds[1].Play();
+            Player.GetComponent<Animator>().SetBool("Hit", true);
+        }
+
+        if (gameObject.tag == "Bomb" && (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "RangeEnemy") && gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Explosion"))
+        {
+            Destroy(gameObject.GetComponent<Rigidbody2D>());
+            gameObject.transform.Rotate(0, 0, 0);
+
+            if (lockCollision == false) //Damage Once
+            {
+                collision.gameObject.GetComponent<Animator>().SetBool("Hit", true);
+                collision.gameObject.GetComponent<EnemyMove>().health -= 150f;
+
+                if (collision.gameObject.GetComponent<EnemyMove>().health <= 0)
+                {
+                    collision.gameObject.GetComponent<Animator>().SetBool("Death", true);
+                }
+            }
+
+            lockCollision = true;
+
+        }
+    }
+
+    void ExplodeBomb()
+    {
+        StartCoroutine(ExplosionWaitTime());
+    }
+
+    void DestroyBombGameObject()
+    {
+        Destroy(gameObject);
     }
 
 

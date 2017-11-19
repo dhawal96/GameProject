@@ -283,6 +283,8 @@ public class Player : MonoBehaviour {
         {
             playerHealth = 100f;
             playerMadness = 0f;
+            particles.SetActive(false);
+            leftParticles.SetActive(false);
         }
 
         else if (dead == false)
@@ -412,8 +414,6 @@ public class Player : MonoBehaviour {
                 {
                     playerMadness += 10f;
                     GameObject bombClone = (GameObject)Instantiate(bomb, spawnPoint.position, spawnPoint.rotation);
-                    bombClone.transform.Rotate(0f, 0f, 60f);
-                    //bombClone.GetComponent<Rigidbody2D>().AddForce(Vector2.right * 250f);
                 }
             }
 
