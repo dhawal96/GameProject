@@ -53,9 +53,11 @@ public class Player : MonoBehaviour {
     public bool elixir;
     public bool blink;
 	public bool revive;
+    public bool explosive;
 	public GameObject reviveImage; //revive image
     private GameObject elixirImage;
     private GameObject eyeImage;
+    public GameObject bomb;
 
     //Audio
     public AudioSource[] sounds;
@@ -114,6 +116,7 @@ public class Player : MonoBehaviour {
         damageUpgrade = 0f;
         elixir = false;
         blink = false;
+        explosive = true;
         call = true;
         revive = false;
         canPause = false;
@@ -234,6 +237,7 @@ public class Player : MonoBehaviour {
             blink = false;
             revive = false;
             elixir = false;
+            explosive = false;
 
             eyeImage.SetActive(false);
             reviveImage.SetActive(false);
@@ -403,6 +407,14 @@ public class Player : MonoBehaviour {
                     }
 
                 }
+
+                else if (explosive)
+                {
+                    playerMadness += 10f;
+                    GameObject bombClone = (GameObject)Instantiate(bomb, spawnPoint.position, spawnPoint.rotation);
+                    bombClone.transform.Rotate(0f, 0f, 60f);
+                    //bombClone.GetComponent<Rigidbody2D>().AddForce(Vector2.right * 250f);
+                }
             }
 
 
@@ -564,7 +576,7 @@ public class Player : MonoBehaviour {
     //for physics
     void FixedUpdate()
     {
-        Physics2D.gravity = Vector2.zero;
+        //Physics2D.gravity = Vector2.zero;
 		if (!dead && !reviving && canMove) {
             
             if (playerMadness < 100f)

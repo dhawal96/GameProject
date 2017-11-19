@@ -340,7 +340,7 @@ public class EnemyMove : MonoBehaviour {
     void FixedUpdate()
     {
 
-        Physics2D.gravity = Vector2.zero;
+        //Physics2D.gravity = Vector2.zero;
 
         if (idle == true)
         {

@@ -21,6 +21,7 @@ TagManager:
   - Music
   - BrokenBridge
   - BossMelee
+  - Bomb
   layers:
   - Default
   - TransparentFX

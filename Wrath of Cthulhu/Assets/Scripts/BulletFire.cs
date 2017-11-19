@@ -17,6 +17,17 @@ public class BulletFire : MonoBehaviour
     public GameObject Enemy;
     private Animator anim;
 
+    //Bomb Variables
+    private bool forceAdded;
+    private bool bombLanded;
+
+
+    IEnumerator BombWaitTime()
+    {
+        yield return new WaitForSecondsRealtime(.5f);
+        forceAdded = true;
+    }
+
     private void Start()
     {
         Player = GameObject.FindWithTag("Player").gameObject;
@@ -34,7 +45,27 @@ public class BulletFire : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        /*if (gameObject.tag == "Bomb" && forceAdded)
+        {
+            Debug.Log("Here is my current position" + transform.localPosition.y);
+            if (gameObject.transform.localPosition.y <= Player.transform.localPosition.y)
+            {
+                Debug.Log("In position" + transform.localPosition.y);
+                Destroy(gameObject.GetComponent<Rigidbody2D>());
+            }
+        }*/
+
+        if (forceAdded && gameObject.transform.localPosition.y <= Player.transform.localPosition.y)
+        {
+            Debug.Log(Player.transform.localPosition.y);
+            Debug.Log(gameObject.transform.localPosition.y);
+            Destroy(gameObject.GetComponent<Rigidbody2D>());
+            gameObject.transform.Rotate(0, 0, 0);
+        }
+
     }
+
 
     void OnTriggerEnter2D(Collider2D target)
     {
@@ -44,6 +75,7 @@ public class BulletFire : MonoBehaviour
                 //Do Nothing
                 break;
             case "FirePoint":
+
                 if (gameObject.tag == "Bullet")
                 {
                     if (Player.transform.localScale.x > 0)
@@ -59,6 +91,23 @@ public class BulletFire : MonoBehaviour
 
                     controlscript.lockTransform = false;
 
+                }
+
+                else if (gameObject.tag == "Bomb")
+                {
+                    if (Player.transform.localScale.x > 0)
+                    {
+                        GetComponent<Rigidbody2D>().AddForce(transform.right * 250f);
+
+                    }
+
+                    else
+                    {
+                        GetComponent<Rigidbody2D>().AddForce(-transform.right * 250f);
+                    }
+
+                    controlscript.lockTransform = false;
+                    StartCoroutine(BombWaitTime());
                 }
                 break;
 

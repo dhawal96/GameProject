@@ -4742,7 +4742,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 10
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -4783,7 +4783,9 @@ MonoBehaviour:
   elixir: 0
   blink: 0
   revive: 0
+  explosive: 0
   reviveImage: {fileID: 0}
+  bomb: {fileID: 1508096920925086, guid: eee085a5d4a60f841b15823e681b6c8f, type: 2}
   sounds: []
   pauseGame: 0
   item: none
@@ -6889,6 +6891,11 @@ Prefab:
     - target: {fileID: 1618293949978046, guid: 0760493300801564db7cf9489e71b661, type: 2}
       propertyPath: m_Name
       value: MeleeBoss
+      objectReference: {fileID: 0}
+    - target: {fileID: 50683009397419308, guid: 0760493300801564db7cf9489e71b661,
+        type: 2}
+      propertyPath: m_GravityScale
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0760493300801564db7cf9489e71b661, type: 2}
