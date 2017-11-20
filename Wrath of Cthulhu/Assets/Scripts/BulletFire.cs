@@ -21,6 +21,7 @@ public class BulletFire : MonoBehaviour
     private bool forceAdded;
     private bool bombLanded;
     private bool lockCollision;
+    private bool enemyAlreadyHit;
 
 
     IEnumerator BombWaitTime()
@@ -43,6 +44,7 @@ public class BulletFire : MonoBehaviour
         enemyMadness = 15f;
         restrictCurrency = true;
         lockCollision = false;
+        enemyAlreadyHit = false;
         playerBulletForce = 500f;
         controlscript = Player.GetComponent<Player>();
     }
@@ -220,22 +222,24 @@ public class BulletFire : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (gameObject.tag == "Bomb" && collision.gameObject.tag == "Player" && gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Explosion") && lockCollision == false)
+        /*if (gameObject.tag == "Bomb" && collision.gameObject.tag == "Player" && gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Explosion") && lockCollision == false)
         {
             lockCollision = true;
             Player.GetComponent<Player>().playerHealth -= 20f;
             Player.GetComponent<Player>().playerMadness += enemyMadness;
             controlscript.sounds[1].Play();
             Player.GetComponent<Animator>().SetBool("Hit", true);
-        }
+        }*/
 
-        if (gameObject.tag == "Bomb" && (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "RangeEnemy") && gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Explosion"))
+        if (gameObject.tag == "Bomb" && (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "RangeEnemy"))
         {
             Destroy(gameObject.GetComponent<Rigidbody2D>());
             gameObject.transform.Rotate(0, 0, 0);
+        }
 
-            if (lockCollision == false) //Damage Once
-            {
+        if (gameObject.tag == "Bomb" && collision.gameObject.GetComponent<EnemyMove>().enemyAlreadyHit == false && (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "RangeEnemy") && gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Explosion"))
+        {
+
                 collision.gameObject.GetComponent<Animator>().SetBool("Hit", true);
                 collision.gameObject.GetComponent<EnemyMove>().health -= 150f;
 
@@ -243,31 +247,32 @@ public class BulletFire : MonoBehaviour
                 {
                     collision.gameObject.GetComponent<Animator>().SetBool("Death", true);
                 }
-            }
 
-            lockCollision = true;
+            collision.gameObject.GetComponent<EnemyMove>().enemyAlreadyHit = true;
 
         }
     }
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (gameObject.tag == "Bomb" && collision.gameObject.tag == "Player" && gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Explosion") && lockCollision == false)
+        /*if (gameObject.tag == "Bomb" && collision.gameObject.tag == "Player" && gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Explosion") && lockCollision == false)
         {
             lockCollision = true;
             Player.GetComponent<Player>().playerHealth -= 20f;
             Player.GetComponent<Player>().playerMadness += enemyMadness;
             controlscript.sounds[1].Play();
             Player.GetComponent<Animator>().SetBool("Hit", true);
-        }
+        }*/
 
-        if (gameObject.tag == "Bomb" && (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "RangeEnemy") && gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Explosion"))
+        if (gameObject.tag == "Bomb" && (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "RangeEnemy"))
         {
             Destroy(gameObject.GetComponent<Rigidbody2D>());
             gameObject.transform.Rotate(0, 0, 0);
+        }
 
-            if (lockCollision == false) //Damage Once
-            {
+        if (gameObject.tag == "Bomb" && collision.gameObject.GetComponent<EnemyMove>().enemyAlreadyHit == false && (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "RangeEnemy") && gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Explosion"))
+        {
+
                 collision.gameObject.GetComponent<Animator>().SetBool("Hit", true);
                 collision.gameObject.GetComponent<EnemyMove>().health -= 150f;
 
@@ -275,10 +280,17 @@ public class BulletFire : MonoBehaviour
                 {
                     collision.gameObject.GetComponent<Animator>().SetBool("Death", true);
                 }
-            }
 
-            lockCollision = true;
+            collision.gameObject.GetComponent<EnemyMove>().enemyAlreadyHit = true;
 
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if ((collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "RangeEnemy") && collision.gameObject.GetComponent<EnemyMove>().enemyAlreadyHit == true)
+        {
+            collision.gameObject.GetComponent<EnemyMove>().enemyAlreadyHit = false;
         }
     }
 
@@ -291,6 +303,4 @@ public class BulletFire : MonoBehaviour
     {
         Destroy(gameObject);
     }
-
-
 }

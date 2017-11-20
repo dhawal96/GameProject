@@ -55,6 +55,8 @@ public class EnemyMove : MonoBehaviour {
     public float enemyDamage;
     public float enemyMadness;
     private bool bossDied;
+    public bool enemyAlreadyHit;
+    public bool cameFromSpawner;
 
     void Start()
     {
@@ -80,12 +82,12 @@ public class EnemyMove : MonoBehaviour {
         
         enemyDamage = 25f;
         enemyMadness = 10f;
-        idle = true;
         moveEnemy = false;
         rangeEnemyAttack = false;
         attackMark = false;
         controlMeleeCollision = false;
         controlDashCollision = false;
+        enemyAlreadyHit = false;
         maxSpeed = .01f;
 
         minDistance = .50f;
@@ -102,6 +104,7 @@ public class EnemyMove : MonoBehaviour {
 
         }
         anim.SetBool("Idle", true);
+        idle = true;
         attackTrigger.SetActive(false);
     }
 
@@ -121,7 +124,14 @@ public class EnemyMove : MonoBehaviour {
 
         Vector3 viewPos = camera.WorldToViewportPoint(gameObject.transform.position);
 
-		if (viewPos.x > 0 && viewPos.x < 1 && viewPos.y > 0 && viewPos.y < 1 && viewPos.z > 0 && !controlscript.dead && !controlscript.reviving) //activate enemy
+        if (cameFromSpawner)
+        {
+            anim.SetBool("Idle", false);
+            idle = false;
+            anim.SetFloat("Speed", Mathf.Abs(rb2d.velocity.x) + Mathf.Abs(rb2d.velocity.y));
+        }
+
+		else if (viewPos.x > 0 && viewPos.x < 1 && viewPos.y > 0 && viewPos.y < 1 && viewPos.z > 0 && !controlscript.dead && !controlscript.reviving) //activate enemy
         {
             anim.SetBool("Idle", false);
             idle = false;

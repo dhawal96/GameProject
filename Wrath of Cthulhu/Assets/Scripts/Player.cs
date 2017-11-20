@@ -57,6 +57,7 @@ public class Player : MonoBehaviour {
 	public GameObject reviveImage; //revive image
     private GameObject elixirImage;
     private GameObject eyeImage;
+    private GameObject explosiveImage;
     public GameObject bomb;
 
     //Audio
@@ -116,7 +117,7 @@ public class Player : MonoBehaviour {
         damageUpgrade = 0f;
         elixir = false;
         blink = false;
-        explosive = true;
+        explosive = false;
         call = true;
         revive = false;
         canPause = false;
@@ -131,6 +132,7 @@ public class Player : MonoBehaviour {
 		reviveImage = ItemUI.transform.Find ("ReviveUI").gameObject;
         elixirImage = ItemUI.transform.Find("ElixirUI").gameObject;
         eyeImage = ItemUI.transform.Find("EyeUI").gameObject;
+        explosiveImage = ItemUI.transform.Find("ExplosiveUI").gameObject;
 
         HealthPercentage = GameObject.Find("Player1Health").transform;
 		healthscript = HealthPercentage.GetComponent<Player1Health>();
@@ -242,6 +244,7 @@ public class Player : MonoBehaviour {
             eyeImage.SetActive(false);
             reviveImage.SetActive(false);
             elixirImage.SetActive(false);
+            explosiveImage.SetActive(false);
             
             if (gameObject.transform.localScale.x == -2f)
             {

@@ -30,7 +30,9 @@ public class Spawner : MonoBehaviour
         waveCount++;
         //Instantiate a random enemy.
         int enemyIndex = Random.Range(0, enemies.Length);
-        Instantiate(enemies[enemyIndex], gameObject.transform.position, transform.rotation);
+        GameObject enemy = Instantiate(enemies[enemyIndex], gameObject.transform.position, transform.rotation);
+        enemy.GetComponent<EnemyMove>().cameFromSpawner = true;
+
         if (waveCount == 3f)
         {
             CancelInvoke();
