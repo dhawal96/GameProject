@@ -81,5 +81,6 @@ namespace FireParticle
             this.transform.Translate(velocity * Time.deltaTime);
 
         }
+
     }
 }
