@@ -53,9 +53,12 @@ public class Player : MonoBehaviour {
     public bool elixir;
     public bool blink;
 	public bool revive;
+    public bool explosive;
 	public GameObject reviveImage; //revive image
     private GameObject elixirImage;
     private GameObject eyeImage;
+    private GameObject explosiveImage;
+    public GameObject bomb;
 
     //Audio
     public AudioSource[] sounds;
@@ -114,6 +117,7 @@ public class Player : MonoBehaviour {
         damageUpgrade = 0f;
         elixir = false;
         blink = false;
+        explosive = false;
         call = true;
         revive = false;
         canPause = false;
@@ -128,6 +132,7 @@ public class Player : MonoBehaviour {
 		reviveImage = ItemUI.transform.Find ("ReviveUI").gameObject;
         elixirImage = ItemUI.transform.Find("ElixirUI").gameObject;
         eyeImage = ItemUI.transform.Find("EyeUI").gameObject;
+        explosiveImage = ItemUI.transform.Find("ExplosiveUI").gameObject;
 
         HealthPercentage = GameObject.Find("Player1Health").transform;
 		healthscript = HealthPercentage.GetComponent<Player1Health>();
@@ -234,10 +239,12 @@ public class Player : MonoBehaviour {
             blink = false;
             revive = false;
             elixir = false;
+            explosive = false;
 
             eyeImage.SetActive(false);
             reviveImage.SetActive(false);
             elixirImage.SetActive(false);
+            explosiveImage.SetActive(false);
             
             if (gameObject.transform.localScale.x == -2f)
             {
@@ -279,6 +286,8 @@ public class Player : MonoBehaviour {
         {
             playerHealth = 100f;
             playerMadness = 0f;
+            particles.SetActive(false);
+            leftParticles.SetActive(false);
         }
 
         else if (dead == false)
@@ -402,6 +411,12 @@ public class Player : MonoBehaviour {
                         //transform.Translate(Vector3.right * speed * Time.deltaTime);
                     }
 
+                }
+
+                else if (explosive)
+                {
+                    playerMadness += 10f;
+                    GameObject bombClone = (GameObject)Instantiate(bomb, spawnPoint.position, spawnPoint.rotation);
                 }
             }
 
@@ -564,7 +579,7 @@ public class Player : MonoBehaviour {
     //for physics
     void FixedUpdate()
     {
-        Physics2D.gravity = Vector2.zero;
+        //Physics2D.gravity = Vector2.zero;
 		if (!dead && !reviving && canMove) {
             
             if (playerMadness < 100f)
