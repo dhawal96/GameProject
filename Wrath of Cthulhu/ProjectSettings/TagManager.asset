@@ -22,6 +22,7 @@ TagManager:
   - BrokenBridge
   - BossMelee
   - Bomb
+  - Particles
   layers:
   - Default
   - TransparentFX

@@ -4719,12 +4719,13 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 291277035}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.47, y: 2.81, z: 0}
+  m_LocalPosition: {x: 1.46, y: 3.02, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children:
   - {fileID: 408186884}
   - {fileID: 1263962409}
   - {fileID: 1945900662}
+  - {fileID: 1192873688}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4814,6 +4815,7 @@ MonoBehaviour:
   canMove: 0
   particles: {fileID: 1263962408}
   leftParticles: {fileID: 1945900659}
+  bombSpawn: {fileID: 1192873688}
   AmmoCount: {fileID: 0}
   colliderCount: 0
   damageUpgrade: 0
@@ -7228,7 +7230,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.20289731}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -7239,7 +7241,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1, y: 0.37485492}
   m_EdgeRadius: 0
 --- !u!1 &411568108
 GameObject:
@@ -11262,7 +11264,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 649631988}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -84.53, y: -0.3800001, z: -10}
+  m_LocalPosition: {x: -84.539986, y: -0.17000008, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1333846527}
@@ -13661,12 +13663,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee9be9112851ca64a81997981b52339a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  controlscript: {fileID: 0}
   PageCount: {fileID: 0}
   ItemUI: {fileID: 0}
   elixirImage: {fileID: 0}
   eyeImage: {fileID: 0}
   reviveImage: {fileID: 0}
   explosiveImage: {fileID: 0}
+  pagescript: {fileID: 0}
   buySpeedCount: 0
   weaponNumber: 8
   name: {fileID: 1633024945}
@@ -16207,12 +16211,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee9be9112851ca64a81997981b52339a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  controlscript: {fileID: 0}
   PageCount: {fileID: 0}
   ItemUI: {fileID: 0}
   elixirImage: {fileID: 0}
   eyeImage: {fileID: 0}
   reviveImage: {fileID: 0}
   explosiveImage: {fileID: 0}
+  pagescript: {fileID: 0}
   buySpeedCount: 0
   weaponNumber: 3
   name: {fileID: 2022682355}
@@ -16746,12 +16752,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee9be9112851ca64a81997981b52339a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  controlscript: {fileID: 0}
   PageCount: {fileID: 0}
   ItemUI: {fileID: 0}
   elixirImage: {fileID: 0}
   eyeImage: {fileID: 0}
   reviveImage: {fileID: 0}
   explosiveImage: {fileID: 0}
+  pagescript: {fileID: 0}
   buySpeedCount: 0
   weaponNumber: 1
   name: {fileID: 1499841513}
@@ -20259,6 +20267,60 @@ Transform:
   m_Father: {fileID: 651875001}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1192873687
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1192873688}
+  - component: {fileID: 1192873689}
+  m_Layer: 0
+  m_Name: BombSpawn
+  m_TagString: FirePoint
+  m_Icon: {fileID: 6926474624037801865, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1192873688
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1192873687}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.075, y: -0.0236, z: 0}
+  m_LocalScale: {x: 0.019535, y: 0.06618581, z: 0.68899}
+  m_Children: []
+  m_Father: {fileID: 291277038}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &1192873689
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1192873687}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.18711248, y: -0.052610457}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.62577504, y: 0.3686726}
+  m_EdgeRadius: 0
 --- !u!1 &1206498696
 GameObject:
   m_ObjectHideFlags: 0
@@ -23505,12 +23567,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee9be9112851ca64a81997981b52339a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  controlscript: {fileID: 0}
   PageCount: {fileID: 0}
   ItemUI: {fileID: 0}
   elixirImage: {fileID: 0}
   eyeImage: {fileID: 0}
   reviveImage: {fileID: 0}
   explosiveImage: {fileID: 0}
+  pagescript: {fileID: 0}
   buySpeedCount: 0
   weaponNumber: 7
   name: {fileID: 1631944099}
@@ -28356,12 +28420,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee9be9112851ca64a81997981b52339a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  controlscript: {fileID: 0}
   PageCount: {fileID: 0}
   ItemUI: {fileID: 0}
   elixirImage: {fileID: 0}
   eyeImage: {fileID: 0}
   reviveImage: {fileID: 0}
   explosiveImage: {fileID: 0}
+  pagescript: {fileID: 0}
   buySpeedCount: 0
   weaponNumber: 4
   name: {fileID: 102029911}
@@ -29620,12 +29686,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee9be9112851ca64a81997981b52339a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  controlscript: {fileID: 0}
   PageCount: {fileID: 0}
   ItemUI: {fileID: 0}
   elixirImage: {fileID: 0}
   eyeImage: {fileID: 0}
   reviveImage: {fileID: 0}
   explosiveImage: {fileID: 0}
+  pagescript: {fileID: 0}
   buySpeedCount: 0
   weaponNumber: 5
   name: {fileID: 1066289822}
@@ -30529,12 +30597,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee9be9112851ca64a81997981b52339a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  controlscript: {fileID: 0}
   PageCount: {fileID: 0}
   ItemUI: {fileID: 0}
   elixirImage: {fileID: 0}
   eyeImage: {fileID: 0}
   reviveImage: {fileID: 0}
   explosiveImage: {fileID: 0}
+  pagescript: {fileID: 0}
   buySpeedCount: 0
   weaponNumber: 6
   name: {fileID: 968906634}
@@ -34377,12 +34447,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee9be9112851ca64a81997981b52339a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  controlscript: {fileID: 0}
   PageCount: {fileID: 0}
   ItemUI: {fileID: 0}
   elixirImage: {fileID: 0}
   eyeImage: {fileID: 0}
   reviveImage: {fileID: 0}
   explosiveImage: {fileID: 0}
+  pagescript: {fileID: 0}
   buySpeedCount: 0
   weaponNumber: 2
   name: {fileID: 344467077}

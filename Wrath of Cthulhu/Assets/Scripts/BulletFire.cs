@@ -34,6 +34,7 @@ public class BulletFire : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(.50f);
         gameObject.GetComponent<Animator>().SetBool("Explode", true);
+        gameObject.GetComponent<AudioSource>().Play();
     }
 
     private void Start()
@@ -51,11 +52,7 @@ public class BulletFire : MonoBehaviour
 
     private void Update()
     {
-        if (GetComponent<Renderer>().isVisible == false)
-        {
-            Destroy(gameObject);
-        }
-
+    
         /*if (gameObject.tag == "Bomb" && forceAdded)
         {
             Debug.Log("Here is my current position" + transform.localPosition.y);
@@ -215,7 +212,10 @@ public class BulletFire : MonoBehaviour
                 break;
 
             default:
-                Destroy(gameObject);
+                if (gameObject.tag != "Bomb")
+                {
+                    Destroy(gameObject);
+                }
                 break;
         }
     }

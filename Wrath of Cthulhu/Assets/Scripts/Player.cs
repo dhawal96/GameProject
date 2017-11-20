@@ -85,6 +85,7 @@ public class Player : MonoBehaviour {
     private int randomNumber;
     public GameObject particles; //Right
     public GameObject leftParticles;
+    public Transform bombSpawn;
 
     //Stats UI
     public Transform AmmoCount;
@@ -416,7 +417,7 @@ public class Player : MonoBehaviour {
                 else if (explosive)
                 {
                     playerMadness += 10f;
-                    GameObject bombClone = (GameObject)Instantiate(bomb, spawnPoint.position, spawnPoint.rotation);
+                    GameObject bombClone = (GameObject)Instantiate(bomb, bombSpawn.position, bombSpawn.rotation);
                 }
             }
 
