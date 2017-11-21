@@ -118,7 +118,7 @@ public class Player : MonoBehaviour {
         damageUpgrade = 0f;
         elixir = false;
         blink = false;
-        explosive = false;
+        explosive = true;
         call = true;
         revive = false;
         canPause = false;
@@ -218,7 +218,7 @@ public class Player : MonoBehaviour {
         }
 
 
-        else if (Input.GetKeyDown(KeyCode.P) && canPause && !gameOverPanel.activeSelf && !enterShopUIPanel.activeSelf && !shopPanel.activeSelf && !gamePlayPanel.activeSelf)
+        else if (Input.GetKeyDown(KeyCode.P) && canPause && canMove && !gameOverPanel.activeSelf && !enterShopUIPanel.activeSelf && !shopPanel.activeSelf && !gamePlayPanel.activeSelf)
         {
             pausePanel.SetActive(true);
             Time.timeScale = 0f;
@@ -235,7 +235,7 @@ public class Player : MonoBehaviour {
             }*/
         }
 
-        if (playerMadness >= 100f)
+        if (playerMadness >= 100f && dead == false)
         {
             blink = false;
             revive = false;
@@ -573,6 +573,8 @@ public class Player : MonoBehaviour {
         if (dead == true)
         {
             gameOverPanel.SetActive(true);
+            particles.SetActive(false);
+            leftParticles.SetActive(false);
             GameObject.FindGameObjectWithTag("Music").GetComponent<MainMenuMusic>().stopGameAudio();
         }
     }

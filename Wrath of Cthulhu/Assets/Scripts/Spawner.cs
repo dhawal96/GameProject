@@ -5,7 +5,7 @@ using UnityEngine;
 public class Spawner : MonoBehaviour
 {
     public float waveCount = 0f;
-    public float spawnTime = 4f;
+    public float spawnTime = 10f;
     //The amount of time between each spawn.
     public float spawnDelay = 0f;
     //The amount of time before spawning starts.

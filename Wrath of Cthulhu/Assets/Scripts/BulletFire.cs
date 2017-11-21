@@ -22,6 +22,7 @@ public class BulletFire : MonoBehaviour
     private bool bombLanded;
     private bool lockCollision;
     private bool enemyAlreadyHit;
+    public bool exploding;
 
 
     IEnumerator BombWaitTime()
@@ -34,6 +35,7 @@ public class BulletFire : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(.50f);
         gameObject.GetComponent<Animator>().SetBool("Explode", true);
+        exploding = true;
         gameObject.GetComponent<AudioSource>().Play();
     }
 
@@ -231,7 +233,7 @@ public class BulletFire : MonoBehaviour
             Player.GetComponent<Animator>().SetBool("Hit", true);
         }*/
 
-        if (gameObject.tag == "Bomb" && (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "RangeEnemy"))
+        if (gameObject.tag == "Bomb" && (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "RangeEnemy" || collision.gameObject.tag == "Boss"))
         {
             Destroy(gameObject.GetComponent<Rigidbody2D>());
             gameObject.transform.Rotate(0, 0, 0);
@@ -249,7 +251,6 @@ public class BulletFire : MonoBehaviour
                 }
 
             collision.gameObject.GetComponent<EnemyMove>().enemyAlreadyHit = true;
-
         }
     }
 
@@ -264,7 +265,7 @@ public class BulletFire : MonoBehaviour
             Player.GetComponent<Animator>().SetBool("Hit", true);
         }*/
 
-        if (gameObject.tag == "Bomb" && (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "RangeEnemy"))
+        if (gameObject.tag == "Bomb" && (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "RangeEnemy" || collision.gameObject.tag == "Boss"))
         {
             Destroy(gameObject.GetComponent<Rigidbody2D>());
             gameObject.transform.Rotate(0, 0, 0);
