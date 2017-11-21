@@ -16,6 +16,7 @@ public class BossAI : MonoBehaviour {
     public float health;
     public bool exitEntryScene;
     private string[] attacks;
+    public bool alreadyHit;
 
     IEnumerator WaitTime()
     {
@@ -40,6 +41,7 @@ public class BossAI : MonoBehaviour {
         exitEntryScene = false;
         attacks = new string[] { "spawnEnemies"};
         anim = GetComponent<Animator>();
+        alreadyHit = false;
 
     }
 	
@@ -68,5 +70,31 @@ public class BossAI : MonoBehaviour {
         camera.GetComponent<CameraControl>()._isShaking = false;
         camera.GetComponent<CameraControl>()._shakeCount = 0;
         Destroy(bossSplashEffect);
+    }
+
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Bomb" && alreadyHit == false && collision.gameObject.GetComponent<BulletFire>().exploding == true)
+        {
+            health -= 150f;
+            alreadyHit = true;
+        }
+    }
+
+    public void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Bomb" && alreadyHit == false && collision.gameObject.GetComponent<BulletFire>().exploding == true)
+        {
+            health -= 150f;
+            alreadyHit = true;
+        }
+    }
+
+    public void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Bomb" && alreadyHit)
+        {
+            alreadyHit = false;
+        }
     }
 }

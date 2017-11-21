@@ -4719,7 +4719,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 291277035}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.46, y: 3.02, z: 0}
+  m_LocalPosition: {x: 85.999985, y: 2.79, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children:
   - {fileID: 408186884}
@@ -4944,7 +4944,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 0.7316923
   MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0
@@ -8202,7 +8202,7 @@ GameObject:
   m_Component:
   - component: {fileID: 477834401}
   - component: {fileID: 477834400}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Broken Bridge
   m_TagString: Boss
   m_Icon: {fileID: 0}
@@ -11264,7 +11264,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 649631988}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -84.539986, y: -0.17000008, z: -10}
+  m_LocalPosition: {x: 0, y: -0.4, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1333846527}
@@ -17009,6 +17009,26 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!50 &1009994078
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1009994076}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 0
+  m_CollisionDetection: 1
+  m_Constraints: 7
 --- !u!1001 &1010143286
 Prefab:
   m_ObjectHideFlags: 0
@@ -18391,6 +18411,18 @@ Prefab:
       propertyPath: camera
       value: 
       objectReference: {fileID: 52010629}
+    - target: {fileID: 1372547869298404, guid: e6736b7cae29ecc41858715ed51281a7, type: 2}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1482694790982086, guid: e6736b7cae29ecc41858715ed51281a7, type: 2}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1028855781173476, guid: e6736b7cae29ecc41858715ed51281a7, type: 2}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e6736b7cae29ecc41858715ed51281a7, type: 2}
   m_IsPrefabParent: 0
@@ -28069,13 +28101,13 @@ GameObject:
   m_Component:
   - component: {fileID: 1715328787}
   - component: {fileID: 1715328788}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: GameObject
   m_TagString: BrokenBridge
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1715328787
 Transform:
   m_ObjectHideFlags: 0
