@@ -105,9 +105,8 @@ public class SectionCollider : MonoBehaviour {
                     controlscript.SectionEndCollider = gameObject;
                     gameObject.SetActive(false);
                     Player.transform.position = new Vector3(gameObject.transform.localPosition.x + .63227f, 3.08f, 0f);
-                    controlscript.minCameraPos = new Vector3(91.3f, 3.65f, -10f);
-                    controlscript.maxCameraPos = new Vector3(95.75f, 3.65f, -10f);
-                    Camera.orthographicSize = 3.591085f;
+                    controlscript.minCameraPos = new Vector3(87.42f, 1.50f, -10f);
+                    controlscript.maxCameraPos = new Vector3(96.15f, 5.80f, -10f);
                     playerScript.colliderCount += 1f;
                     breakCollision = true;
                 }

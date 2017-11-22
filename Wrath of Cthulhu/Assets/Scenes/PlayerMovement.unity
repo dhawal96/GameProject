@@ -960,6 +960,7 @@ MonoBehaviour:
   newRain: {fileID: 50917977}
   bossSpawn: {fileID: 1984874406}
   bossSplashEffect: {fileID: 119266161}
+  duration: 1
   bounds: 1
   stayOnPlayer: 0
   minCameraPos: {x: 114.27, y: 1.5, z: -10}
@@ -4702,7 +4703,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -61
   m_Sprite: {fileID: 21300000, guid: 9ac37a801f783fd4bab9e2b5f1c247e2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -4720,7 +4721,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 291277035}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.2, y: 3, z: 0}
+  m_LocalPosition: {x: 86.5, y: 3.4, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children:
   - {fileID: 408186884}
@@ -11265,7 +11266,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 649631988}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -88.16, y: -1.1, z: -10}
+  m_LocalPosition: {x: -3.3, y: -0.3, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1333846527}
@@ -17031,6 +17032,65 @@ Rigidbody2D:
   m_SleepingMode: 0
   m_CollisionDetection: 1
   m_Constraints: 7
+--- !u!60 &1009994079
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1009994076}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.28, y: 1.28}
+    newSize: {x: 1.28, y: 1.28}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.19, y: -0.24}
+      - {x: 0.29, y: -0.16}
+      - {x: 0.29999998, y: 0.01}
+      - {x: 0.19114876, y: 0.09850502}
+      - {x: 0.17804146, y: 0.11750311}
+      - {x: 0.10839081, y: 0.19675499}
+      - {x: -0.01988411, y: 0.21066302}
+      - {x: -0.10140419, y: 0.19248176}
+      - {x: -0.17390823, y: 0.12023234}
+      - {x: -0.21290874, y: -0.009257853}
+      - {x: -0.21232986, y: -0.06011188}
+      - {x: -0.21835423, y: -0.16048378}
+      - {x: -0.24513626, y: -0.15232879}
+      - {x: -0.28371906, y: -0.16343445}
+      - {x: -0.32823467, y: -0.16367406}
+      - {x: -0.3295431, y: -0.170713}
+      - {x: -0.34628773, y: -0.1912095}
+      - {x: -0.36590576, y: -0.21580201}
+      - {x: -0.3824978, y: -0.21317726}
+      - {x: -0.38282967, y: -0.26884997}
+      - {x: -0.41973877, y: -0.31161654}
+      - {x: -0.42349434, y: -0.36861667}
+      - {x: -0.44354343, y: -0.39675194}
+      - {x: -0.44679832, y: -0.42025465}
+      - {x: -0.43506813, y: -0.4674682}
+      - {x: -0.4234047, y: -0.49408585}
+      - {x: -0.39909363, y: -0.49335176}
+      - {x: -0.36956596, y: -0.49195987}
+      - {x: -0.15592957, y: -0.4915628}
+      - {x: -0.12972641, y: -0.4944374}
+      - {x: 0.013923645, y: -0.5023529}
+      - {x: 0.09340763, y: -0.5016919}
+      - {x: 0.44678307, y: -0.51046485}
+      - {x: 0.45999998, y: -0.52}
+      - {x: 0.32, y: -0.29}
 --- !u!1001 &1010143286
 Prefab:
   m_ObjectHideFlags: 0
@@ -17529,7 +17589,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waveCount: 0
   spawnTime: 4
-  spawnDelay: 10
+  boss: {fileID: 1009994076}
+  spawnDelay: 0
   enemies:
   - {fileID: 1618293949978046, guid: 0760493300801564db7cf9489e71b661, type: 2}
   - {fileID: 1979551182017596, guid: 74838ef35bb1d5847a09485e6ebc4936, type: 2}
@@ -17541,7 +17602,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1051445728}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 94.846, y: 2.328, z: 0}
+  m_LocalPosition: {x: 94.53, y: 2.6, z: 0}
   m_LocalScale: {x: 2.4388084, y: 1.5904683, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -18350,17 +18411,17 @@ Prefab:
     - target: {fileID: 224518160701159392, guid: e6736b7cae29ecc41858715ed51281a7,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: -0.05
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 224518160701159392, guid: e6736b7cae29ecc41858715ed51281a7,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 22.012
+      value: 23.8083
       objectReference: {fileID: 0}
     - target: {fileID: 224518160701159392, guid: e6736b7cae29ecc41858715ed51281a7,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0.2
+      value: 0.17
       objectReference: {fileID: 0}
     - target: {fileID: 224518160701159392, guid: e6736b7cae29ecc41858715ed51281a7,
         type: 2}
@@ -18439,6 +18500,16 @@ Prefab:
     - target: {fileID: 1028855781173476, guid: e6736b7cae29ecc41858715ed51281a7, type: 2}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 61617682795618488, guid: e6736b7cae29ecc41858715ed51281a7,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 61617682795618488, guid: e6736b7cae29ecc41858715ed51281a7,
+        type: 2}
+      propertyPath: m_AutoTiling
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e6736b7cae29ecc41858715ed51281a7, type: 2}
@@ -32368,7 +32439,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 340125b5fb48f0847a6135721a461936, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainCamera: {fileID: 52010629}
+  mainCamera: {fileID: 52010633}
 --- !u!4 &1985183236 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4114682698746526, guid: 74838ef35bb1d5847a09485e6ebc4936,

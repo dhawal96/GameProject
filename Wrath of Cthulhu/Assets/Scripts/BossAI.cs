@@ -17,21 +17,29 @@ public class BossAI : MonoBehaviour {
     public bool exitEntryScene;
     private string[] attacks;
     public bool alreadyHit;
+    private bool waitOnce;
+    private bool enemySpawnCooldown;
 
     IEnumerator WaitTime()
     {
-        if (attacks[0] == "spawnEnemies" && spawner.GetComponent<Spawner>().waveCount != 3f)
-        {
-            yield return new WaitForSecondsRealtime(5);
-            spawner.SetActive(true);
-        }
 
         if (spawner.GetComponent<Spawner>().waveCount == 3f)
         {
-            spawner.SetActive(false);
+            enemySpawnCooldown = true;
             spawner.GetComponent<Spawner>().waveCount = 0f;
+            spawner.SetActive(false);
+            anim.SetBool("SpawnEnemies", false);
+            yield return new WaitForSecondsRealtime(5);
+            enemySpawnCooldown = false;
+            waitOnce = true;
         }
-        
+
+        else if (attacks[0] == "spawnEnemies" && spawner.GetComponent<Spawner>().waveCount != 3f && !enemySpawnCooldown)
+        {
+            yield return new WaitForSecondsRealtime(5);
+            anim.SetBool("SpawnEnemies", true);
+            waitOnce = true;
+        }      
     }
 
     // Use this for initialization
@@ -42,6 +50,7 @@ public class BossAI : MonoBehaviour {
         attacks = new string[] { "spawnEnemies"};
         anim = GetComponent<Animator>();
         alreadyHit = false;
+        waitOnce = true;
 
     }
 	
@@ -60,9 +69,14 @@ public class BossAI : MonoBehaviour {
         if (exitEntryScene)
         {
             anim.SetBool("IntroDone", true);
+            if (waitOnce)
+            {
+                StartCoroutine(WaitTime());
+                waitOnce = false;
+            }
         }
 
-        StartCoroutine(WaitTime());
+        
     }
 
     public void EndSplashAndCameraShake()
@@ -96,5 +110,10 @@ public class BossAI : MonoBehaviour {
         {
             alreadyHit = false;
         }
+    }
+
+    void spawnEnemies()
+    {
+        spawner.SetActive(true);
     }
 }

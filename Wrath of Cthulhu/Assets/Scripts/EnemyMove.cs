@@ -172,16 +172,19 @@ public class EnemyMove : MonoBehaviour {
         }
 
         if (gameObject.tag == "Enemy")
-        {
-            if (Player.transform.position.x > transform.position.x)
+        {  
+            if (cameFromSpawner)
             {
-                //face right
-                transform.localScale = new Vector3(1.5f, 1.5f, 1);
-            }
-            else if (Player.transform.position.x < transform.position.x)
-            {
-                //face left
-                transform.localScale = new Vector3(-1.5f, 1.5f, 1);
+                if (Player.transform.position.x > transform.position.x)
+                {
+                    //face right
+                    transform.localScale = new Vector3(1.5f, 1.5f, 1);
+                }
+                else if (Player.transform.position.x < transform.position.x)
+                {
+                    //face left
+                    transform.localScale = new Vector3(-1.5f, 1.5f, 1);
+                }
             }
 
             if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Attack_DeepOnes"))
