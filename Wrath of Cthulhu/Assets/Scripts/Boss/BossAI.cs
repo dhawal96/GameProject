@@ -12,6 +12,7 @@ public class BossAI : MonoBehaviour {
     public GameObject spawner;
     public GameObject bossSplashEffect;
     public GameObject camera;
+    public GameObject laser;
     private Animator anim;
     public float health;
     public bool exitEntryScene;
@@ -19,27 +20,44 @@ public class BossAI : MonoBehaviour {
     public bool alreadyHit;
     private bool waitOnce;
     private bool enemySpawnCooldown;
+    private int attackIndex;
+    private Quaternion laserRotation;
 
     IEnumerator WaitTime()
     {
-
-        if (spawner.GetComponent<Spawner>().waveCount == 3f)
+        if (attacks[attackIndex] == "spawnEnemies")
         {
-            enemySpawnCooldown = true;
-            spawner.GetComponent<Spawner>().waveCount = 0f;
-            spawner.SetActive(false);
-            anim.SetBool("SpawnEnemies", false);
-            yield return new WaitForSecondsRealtime(5);
-            enemySpawnCooldown = false;
-            waitOnce = true;
+            if (spawner.GetComponent<Spawner>().waveCount == 3f)
+            {
+                enemySpawnCooldown = true;
+                spawner.GetComponent<Spawner>().waveCount = 0f;
+                spawner.SetActive(false);
+                anim.SetBool("SpawnEnemies", false);
+                yield return new WaitForSecondsRealtime(5);
+                enemySpawnCooldown = false;
+                waitOnce = true;
+            }
+
+            else if (spawner.GetComponent<Spawner>().waveCount != 3f && !enemySpawnCooldown)
+            {
+                yield return new WaitForSecondsRealtime(5);
+                anim.SetBool("SpawnEnemies", true);
+            }         
         }
 
-        else if (attacks[0] == "spawnEnemies" && spawner.GetComponent<Spawner>().waveCount != 3f && !enemySpawnCooldown)
+        else if (attacks[attackIndex] == "laser")
         {
+            Debug.Log("laser");
+            laserRotation = Quaternion.Euler(0, 0, -74.853f);
             yield return new WaitForSecondsRealtime(5);
-            anim.SetBool("SpawnEnemies", true);
+            GameObject leftLaser = Instantiate(laser, new Vector3(89.57f, 2.84f, 0f), laserRotation);
+            GameObject rightLaser = Instantiate(laser, new Vector3(91.17f, 2.78f, 0f), laserRotation);
+            yield return new WaitForSecondsRealtime(5);
+            Destroy(leftLaser);
+            Destroy(rightLaser);
             waitOnce = true;
-        }      
+
+        }
     }
 
     // Use this for initialization
@@ -47,7 +65,7 @@ public class BossAI : MonoBehaviour {
 
         health = 25000f;
         exitEntryScene = false;
-        attacks = new string[] { "spawnEnemies"};
+        attacks = new string[] { "spawnEnemies", "laser"};
         anim = GetComponent<Animator>();
         alreadyHit = false;
         waitOnce = true;
@@ -71,6 +89,8 @@ public class BossAI : MonoBehaviour {
             anim.SetBool("IntroDone", true);
             if (waitOnce)
             {
+                attackIndex = Random.Range(0, 2);
+                Debug.Log(attackIndex);
                 StartCoroutine(WaitTime());
                 waitOnce = false;
             }
