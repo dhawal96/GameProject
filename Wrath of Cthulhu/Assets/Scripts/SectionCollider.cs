@@ -5,13 +5,12 @@ using UnityEngine;
 public class SectionCollider : MonoBehaviour {
     CameraFollow controlscript;
     Player playerScript;
-    GameObject Camera;
+    public Camera Camera;
     GameObject Player;
     private bool breakCollision;
 
 	// Use this for initialization
 	void Start () {
-        Camera = GameObject.FindWithTag("MainCamera");
         Player = GameObject.FindWithTag("Player");
         playerScript = Player.GetComponent<Player>();
         controlscript = Camera.GetComponent<CameraFollow>();

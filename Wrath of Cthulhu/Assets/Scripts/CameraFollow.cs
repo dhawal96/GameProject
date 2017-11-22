@@ -21,6 +21,10 @@ public class CameraFollow : MonoBehaviour
     public GameObject bossSpawn;
     public GameObject bossSplashEffect;
     private Vector3 bossVelocity = Vector3.zero;
+    private Vector3 position;
+    private bool transition;
+    public float duration = 1.0f;
+    private float elapsed = 0.0f;
 
     public bool bounds;
     public bool stayOnPlayer;
@@ -44,10 +48,12 @@ public class CameraFollow : MonoBehaviour
 
     IEnumerator Wait()
     {
+        yield return new WaitForSecondsRealtime(.5f);
+        transition = true;
         yield return new WaitForSecondsRealtime(1);
         boss.SetActive(true);
         bossSplashEffect.SetActive(true);
-        gameObject.GetComponent<CameraControl>().Shake(1f, 1, 1f);
+        gameObject.GetComponent<CameraControl>().Shake(5f, 5, 1f);
         yield return new WaitForSecondsRealtime(4);
         gameObject.GetComponent<CameraControl>()._isShaking = false;
         gameObject.GetComponent<CameraControl>()._shakeCount = 0;
@@ -64,7 +70,18 @@ public class CameraFollow : MonoBehaviour
 
     private void Update() //turn off MoveForward UI
     {
-        switch (SectionEndCollider.name)
+
+        if (transition)
+        {
+            elapsed += Time.deltaTime / duration;
+            Camera.main.orthographicSize = Mathf.Lerp(1.447018f, 3.591085f, elapsed);
+            if (elapsed > 1.0f)
+            {
+                transition = false;
+            }
+        }
+
+            switch (SectionEndCollider.name)
         {
             case "SectionEndCollider":
                 if (player.transform.position.x >= 20.21f)
@@ -162,11 +179,11 @@ public class CameraFollow : MonoBehaviour
         else //Boss Appearance
         {
             bossSpawn.SetActive(false);
-            transform.position = Vector3.MoveTowards(transform.position, new Vector3 (boss.transform.position.x, boss.transform.position.y, -10f), Time.deltaTime * 2f);
-            
+            position = new Vector3(95.79f, 3.65f, -10f);
+            transform.position = Vector3.MoveTowards(transform.position, position, Time.deltaTime * 2f);
         }
 
-        if (transform.position.x == boss.transform.position.x && transform.position.y == boss.transform.position.y)
+        if (transform.position == position)
         {
             StartCoroutine(Wait());
             //stayOnPlayer = true;
