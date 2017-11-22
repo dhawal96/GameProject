@@ -4,26 +4,36 @@ using UnityEngine;
 
 public class BossAI : MonoBehaviour {
 
+    //GameObject
     public GameObject player;
     public GameObject healthBar;
     public GameObject fillHealthBar;
     public GameObject gameOverPanel;
     public GameObject rain;
-    public GameObject spawner;
     public GameObject bossSplashEffect;
     public GameObject camera;
-    public GameObject laser;
     private Animator anim;
+
+    //Enemy Spawning
+    public GameObject spawner;
+    private bool enemySpawnCooldown;
+    private bool spawningComplete;
+
+    //Laser
+    private Quaternion laserRotation;
+    public GameObject laser;
+    private GameObject leftLaser;
+    private GameObject rightLaser;
+
+    //Variables
     public float health;
     public bool exitEntryScene;
     private string[] attacks;
     public bool alreadyHit;
-    private bool waitOnce;
-    private bool enemySpawnCooldown;
+    private bool chooseNewAttack;
     private int attackIndex;
-    private Quaternion laserRotation;
 
-    IEnumerator WaitTime()
+    IEnumerator Attack()
     {
         if (attacks[attackIndex] == "spawnEnemies")
         {
@@ -35,28 +45,37 @@ public class BossAI : MonoBehaviour {
                 anim.SetBool("SpawnEnemies", false);
                 yield return new WaitForSecondsRealtime(5);
                 enemySpawnCooldown = false;
-                waitOnce = true;
+                spawningComplete = true;
+                chooseNewAttack = true;
             }
 
             else if (spawner.GetComponent<Spawner>().waveCount != 3f && !enemySpawnCooldown)
             {
-                yield return new WaitForSecondsRealtime(5);
-                anim.SetBool("SpawnEnemies", true);
+                yield return new WaitForSecondsRealtime(5); //Wait time before Dagon's spawning enemies animation begins
+                anim.SetBool("SpawnEnemies", true); //End of animation clip will call spawnEnemies() function
+                spawningComplete = false;
+                chooseNewAttack = true;
             }         
         }
 
         else if (attacks[attackIndex] == "laser")
         {
             Debug.Log("laser");
-            laserRotation = Quaternion.Euler(0, 0, -74.853f);
-            yield return new WaitForSecondsRealtime(5);
-            GameObject leftLaser = Instantiate(laser, new Vector3(89.57f, 2.84f, 0f), laserRotation);
-            GameObject rightLaser = Instantiate(laser, new Vector3(91.17f, 2.78f, 0f), laserRotation);
-            yield return new WaitForSecondsRealtime(5);
+            yield return new WaitForSecondsRealtime(5); //Instantiate Lasers and Calculate where Mark is
+            leftLaser = Instantiate(laser, new Vector3(97.289f, 4.658f, 0f), laserRotation);
+            rightLaser = Instantiate(laser, new Vector3(98.88f, 4.572f, 0f), laserRotation);
+            Vector2 direction = new Vector2(player.transform.position.x - leftLaser.transform.position.x, player.transform.position.y - leftLaser.transform.position.y);
+            //Debug.Log(direction.x + " and " + direction.y);
+            yield return new WaitForSecondsRealtime(1); //Mark has 1 second to react and dodge it (This is where the animation begins)
+            leftLaser.transform.up = -direction;
+            rightLaser.transform.up = -direction;
+            leftLaser.SetActive(true);
+            rightLaser.SetActive(true);
+            yield return new WaitForSecondsRealtime(5); //How long the laser lasts
             Destroy(leftLaser);
             Destroy(rightLaser);
-            waitOnce = true;
-
+            chooseNewAttack = true;
+            //end the animation here
         }
     }
 
@@ -68,7 +87,8 @@ public class BossAI : MonoBehaviour {
         attacks = new string[] { "spawnEnemies", "laser"};
         anim = GetComponent<Animator>();
         alreadyHit = false;
-        waitOnce = true;
+        spawningComplete = true;
+        chooseNewAttack = true;
 
     }
 	
@@ -87,12 +107,21 @@ public class BossAI : MonoBehaviour {
         if (exitEntryScene)
         {
             anim.SetBool("IntroDone", true);
-            if (waitOnce)
+            if (chooseNewAttack)
             {
-                attackIndex = Random.Range(0, 2);
+                if (spawningComplete == false)
+                {
+                    attackIndex = 0;
+                }
+
+                else
+                {
+                    attackIndex = Random.Range(0, 2);
+                }
+
                 Debug.Log(attackIndex);
-                StartCoroutine(WaitTime());
-                waitOnce = false;
+                StartCoroutine(Attack());
+                chooseNewAttack = false;
             }
         }
 
