@@ -24,6 +24,8 @@ public class BossAI : MonoBehaviour {
     public GameObject laser;
     private GameObject leftLaser;
     private GameObject rightLaser;
+    private bool laserFollowPlayer;
+    private Vector2 direction;
 
     //Variables
     public float health;
@@ -60,18 +62,21 @@ public class BossAI : MonoBehaviour {
 
         else if (attacks[attackIndex] == "laser")
         {
-            Debug.Log("laser");
             yield return new WaitForSecondsRealtime(5); //Instantiate Lasers and Calculate where Mark is
-            leftLaser = Instantiate(laser, new Vector3(97.289f, 4.658f, 0f), laserRotation);
-            rightLaser = Instantiate(laser, new Vector3(98.88f, 4.572f, 0f), laserRotation);
-            Vector2 direction = new Vector2(player.transform.position.x - leftLaser.transform.position.x, player.transform.position.y - leftLaser.transform.position.y);
+            leftLaser = Instantiate(laser, new Vector3(97.4f, 4.976f, 0f), laserRotation);
+            rightLaser = Instantiate(laser, new Vector3(99.001f, 4.918f, 0f), laserRotation);
+            direction = new Vector2(player.transform.position.x - leftLaser.transform.position.x, player.transform.position.y - leftLaser.transform.position.y);
             //Debug.Log(direction.x + " and " + direction.y);
+
             yield return new WaitForSecondsRealtime(1); //Mark has 1 second to react and dodge it (This is where the animation begins)
             leftLaser.transform.up = -direction;
             rightLaser.transform.up = -direction;
             leftLaser.SetActive(true);
             rightLaser.SetActive(true);
+            laserFollowPlayer = true;
+
             yield return new WaitForSecondsRealtime(5); //How long the laser lasts
+            laserFollowPlayer = false;
             Destroy(leftLaser);
             Destroy(rightLaser);
             chooseNewAttack = true;
@@ -89,6 +94,7 @@ public class BossAI : MonoBehaviour {
         alreadyHit = false;
         spawningComplete = true;
         chooseNewAttack = true;
+        laserFollowPlayer = false;
 
     }
 	
@@ -107,7 +113,8 @@ public class BossAI : MonoBehaviour {
         if (exitEntryScene)
         {
             anim.SetBool("IntroDone", true);
-            if (chooseNewAttack)
+
+            if (chooseNewAttack && !gameOverPanel.activeSelf)
             {
                 if (spawningComplete == false)
                 {
@@ -124,8 +131,13 @@ public class BossAI : MonoBehaviour {
                 chooseNewAttack = false;
             }
         }
-
         
+        if (laserFollowPlayer)
+        {
+            direction = new Vector2(player.transform.position.x - leftLaser.transform.position.x, player.transform.position.y - leftLaser.transform.position.y);
+            leftLaser.transform.up = Vector3.Lerp(leftLaser.transform.up, -direction, 0.002f);
+            rightLaser.transform.up = Vector3.Lerp(rightLaser.transform.up, -direction, 0.002f);
+        }
     }
 
     public void EndSplashAndCameraShake()

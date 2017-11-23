@@ -37,6 +37,7 @@ GameObject:
   - component: {fileID: 212404978376378598}
   - component: {fileID: 95406804281746256}
   - component: {fileID: 61136357362935752}
+  - component: {fileID: 114879378791875006}
   m_Layer: 0
   m_Name: laserObject
   m_TagString: Untagged
@@ -51,8 +52,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1081345764735852}
   m_LocalRotation: {x: -0, y: -0, z: -0.5815868, w: 0.81348443}
-  m_LocalPosition: {x: 95.98651, y: 4.347511, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 93.7968, y: 4.095004, z: 0}
+  m_LocalScale: {x: 0.5, y: 1, z: 1}
   m_Children:
   - {fileID: 4143693373499994}
   m_Father: {fileID: 0}
@@ -113,6 +114,18 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114879378791875006
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1256410450815606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3b15e3e7dbadfe469fdd13532b4d020, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
 --- !u!212 &212404978376378598
 SpriteRenderer:
   m_ObjectHideFlags: 1
