@@ -62,7 +62,7 @@ public class CameraFollow : MonoBehaviour
         stayOnPlayer = true;
         controlscript.canMove = true;
         boss.GetComponent<BossAI>().exitEntryScene = true;
-        yield return new WaitForSecondsRealtime(1);
+        yield return new WaitForSeconds(1);
         enemyHealthCanvas.SetActive(true);
 
 

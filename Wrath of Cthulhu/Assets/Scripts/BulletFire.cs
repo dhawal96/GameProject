@@ -241,16 +241,14 @@ public class BulletFire : MonoBehaviour
 
         if (gameObject.tag == "Bomb" && collision.gameObject.GetComponent<EnemyMove>().enemyAlreadyHit == false && (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "RangeEnemy") && gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Explosion"))
         {
-
-                collision.gameObject.GetComponent<Animator>().SetBool("Hit", true);
-                collision.gameObject.GetComponent<EnemyMove>().health -= 150f;
+            collision.gameObject.GetComponent<EnemyMove>().enemyAlreadyHit = true;
+            collision.gameObject.GetComponent<Animator>().SetBool("Hit", true);
+            collision.gameObject.GetComponent<EnemyMove>().health -= 150f;
 
                 if (collision.gameObject.GetComponent<EnemyMove>().health <= 0)
                 {
                     collision.gameObject.GetComponent<Animator>().SetBool("Death", true);
                 }
-
-            collision.gameObject.GetComponent<EnemyMove>().enemyAlreadyHit = true;
         }
     }
 
@@ -274,15 +272,14 @@ public class BulletFire : MonoBehaviour
         if (gameObject.tag == "Bomb" && collision.gameObject.GetComponent<EnemyMove>().enemyAlreadyHit == false && (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "RangeEnemy") && gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Explosion"))
         {
 
-                collision.gameObject.GetComponent<Animator>().SetBool("Hit", true);
-                collision.gameObject.GetComponent<EnemyMove>().health -= 150f;
+            collision.gameObject.GetComponent<EnemyMove>().enemyAlreadyHit = true;
+            collision.gameObject.GetComponent<Animator>().SetBool("Hit", true);
+            collision.gameObject.GetComponent<EnemyMove>().health -= 150f;
 
                 if (collision.gameObject.GetComponent<EnemyMove>().health <= 0)
                 {
                     collision.gameObject.GetComponent<Animator>().SetBool("Death", true);
                 }
-
-            collision.gameObject.GetComponent<EnemyMove>().enemyAlreadyHit = true;
 
         }
     }
