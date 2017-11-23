@@ -167,14 +167,14 @@ public class Player : MonoBehaviour {
 
     IEnumerator BlinkWaitTime()
     {
-        yield return new WaitForSecondsRealtime(3);
+        yield return new WaitForSeconds(3);
         anim.SetBool("Blink", false);
         call = true;
     }
 
     IEnumerator ExitFullMadness()
     {
-        yield return new WaitForSecondsRealtime(20);
+        yield return new WaitForSeconds(20);
         playerMadness = 0f;
         particles.SetActive(false);
         leftParticles.SetActive(false);
