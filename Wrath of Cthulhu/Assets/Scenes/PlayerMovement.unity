@@ -18515,7 +18515,7 @@ Prefab:
         type: 2}
       propertyPath: laser
       value: 
-      objectReference: {fileID: 1893123161058930, guid: ebd53bf3c05973c4789596871d13a45b,
+      objectReference: {fileID: 1081345764735852, guid: f5f81e936280cdb48adeed230bedfbe6,
         type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e6736b7cae29ecc41858715ed51281a7, type: 2}
