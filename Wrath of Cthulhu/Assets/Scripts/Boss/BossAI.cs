@@ -12,6 +12,7 @@ public class BossAI : MonoBehaviour {
     public GameObject rain;
     public GameObject bossSplashEffect;
     public GameObject camera;
+    public GameObject swipeCollision;
     private Animator anim;
 
     //Enemy Spawning
@@ -36,6 +37,9 @@ public class BossAI : MonoBehaviour {
     private int attackIndex;
     private PolygonCollider2D[] colliders;
     private bool attacking;
+    private bool laserCollider;
+    private bool swiping; //animation
+    private bool activeSwiping; //exact stage where swipe occurs
 
     IEnumerator Attack()
     {
@@ -59,8 +63,6 @@ public class BossAI : MonoBehaviour {
                     yield return new WaitForSeconds(5); //Wait time before Dagon's spawning enemies animation begins
                     anim.SetBool("SpawnEnemies", true); //End of animation clip will call spawnEnemies() function
                     attacking = true;
-                    //colliders[1].enabled = colliders[1].enabled;
-                    //colliders[0].enabled = !colliders[0].enabled;
                     spawningComplete = false;
                     chooseNewAttack = true;
                 }
@@ -69,28 +71,31 @@ public class BossAI : MonoBehaviour {
             else if (attacks[attackIndex] == "laser")
             {
                 yield return new WaitForSeconds(5); //Instantiate Lasers and Calculate where Mark is
-                leftLaser = Instantiate(laser, new Vector3(97.269f, 4.63f, 0f), laserRotation);
-                rightLaser = Instantiate(laser, new Vector3(98.863f, 4.558f, 0f), laserRotation);
+                leftLaser = Instantiate(laser, new Vector3(96.829f, 5.205f, 0f), laserRotation);
+                rightLaser = Instantiate(laser, new Vector3(98.446f, 5.588f, 0f), laserRotation);
                 direction = new Vector2(player.transform.position.x - leftLaser.transform.position.x, player.transform.position.y - leftLaser.transform.position.y);
                 //Debug.Log(direction.x + " and " + direction.y);
 
                 yield return new WaitForSeconds(1); //Mark has 1 second to react and dodge it (This is where the animation begins)
-                leftLaser.transform.up = -direction;
-                rightLaser.transform.up = -direction;
-                leftLaser.SetActive(true);
-                rightLaser.SetActive(true);
-                laserFollowPlayer = true;
+                anim.SetBool("Laser", true);
+                laserCollider = true;
 
                 yield return new WaitForSeconds(5); //How long the laser lasts
                 laserFollowPlayer = false;
                 Destroy(leftLaser);
                 Destroy(rightLaser);
                 chooseNewAttack = true;
-                //end the animation here
-                
+                anim.SetBool("Laser", false);
+                laserCollider = false;
             }
-        
-        
+
+            else if (attacks[attackIndex] == "swipe")
+            {
+                Debug.Log("here");
+                yield return new WaitForSeconds(5);
+                swiping = true;
+                anim.SetBool("Swipe", true);
+            }  
     }
 
     // Use this for initialization
@@ -98,13 +103,14 @@ public class BossAI : MonoBehaviour {
 
         health = 25000f;
         exitEntryScene = false;
-        attacks = new string[] { "spawnEnemies", "laser"};
+        attacks = new string[] { "spawnEnemies", "laser", "swipe"};
         anim = GetComponent<Animator>();
         alreadyHit = false;
         spawningComplete = true;
         chooseNewAttack = true;
         laserFollowPlayer = false;
         attacking = false;
+        swiping = false;
         colliders = GetComponents<PolygonCollider2D>();
 
 }
@@ -114,7 +120,15 @@ public class BossAI : MonoBehaviour {
     {
         fillHealthBar.GetComponent<BossHealth>().lifePercentage = health;
 
-        transform.position = new Vector3(98.39f, 5.31f, 0f); //Ensures that Dagon never moves out of place, but continues to keep a dynamic rigidbody
+        if (!swiping)
+        {
+            transform.position = new Vector3(98.39f, 5.31f, 0f); //Ensures that Dagon never moves out of place, but continues to keep a dynamic rigidbody
+        }
+        
+        else if (swiping)
+        {
+            transform.position = new Vector3(97.25f, 5.4f, 0f); //Ensures that Dagon never moves out of place, but continues to keep a dynamic rigidbody
+        }
 
         if (health <= 0f)
         {
@@ -123,16 +137,50 @@ public class BossAI : MonoBehaviour {
             rain.SetActive(false);
         }
 
-        if (!attacking)
+        if (!attacking && laserCollider == false && swiping == false && !activeSwiping)
         {
-            colliders[0].enabled = true;
+            colliders[0].enabled = true; //Idle
             colliders[1].enabled = false;
+            colliders[2].enabled = false;
+            colliders[3].enabled = false;
+            colliders[4].enabled = false;
         }
 
-        else if (attacking)
+        else if (attacking && laserCollider == false && swiping == false && !activeSwiping)
         {
             colliders[0].enabled = false;
-            colliders[1].enabled = true;
+            colliders[1].enabled = true; //Spawning Enemies
+            colliders[2].enabled = false;
+            colliders[3].enabled = false;
+            colliders[4].enabled = false;
+
+        }
+
+        else if (laserCollider == true && swiping == false && !activeSwiping)
+        {
+            colliders[0].enabled = false;
+            colliders[1].enabled = false;
+            colliders[2].enabled = true; //Laser
+            colliders[3].enabled = false;
+            colliders[4].enabled = false;
+        }
+
+        else if (swiping == true && !activeSwiping)
+        {
+            colliders[0].enabled = false;
+            colliders[1].enabled = false;
+            colliders[2].enabled = false; 
+            colliders[3].enabled = true; //Swiping
+            colliders[4].enabled = false;
+        }
+
+        else if (activeSwiping)
+        {
+            colliders[0].enabled = false;
+            colliders[1].enabled = false;
+            colliders[2].enabled = false;
+            colliders[3].enabled = false; 
+            colliders[4].enabled = true; //Active Swiping
         }
 
         if (exitEntryScene)
@@ -148,7 +196,7 @@ public class BossAI : MonoBehaviour {
 
                 else
                 {
-                    attackIndex = Random.Range(0, 2);
+                    attackIndex = Random.Range(0, 3);
                 }
 
                 Debug.Log(attackIndex);
@@ -202,5 +250,29 @@ public class BossAI : MonoBehaviour {
     void spawnEnemies()
     {
         spawner.SetActive(true);
+    }
+
+    void createLaser()
+    {
+        leftLaser.transform.up = -direction;
+        rightLaser.transform.up = -direction;
+        leftLaser.SetActive(true);
+        rightLaser.SetActive(true);
+        laserFollowPlayer = true;
+    }
+
+    void Swiping()
+    {
+        activeSwiping = true;
+        swipeCollision.SetActive(true);
+    }
+
+    void EndSwipe()
+    {
+        activeSwiping = false;
+        swipeCollision.SetActive(false);
+        swiping = false;
+        anim.SetBool("Swipe", false);
+        chooseNewAttack = true;
     }
 }

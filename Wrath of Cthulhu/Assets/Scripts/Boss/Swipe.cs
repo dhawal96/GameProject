@@ -2,18 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Laser : MonoBehaviour {
+public class Swipe : MonoBehaviour {
 
     public GameObject player;
 
-    private void Start()
-    {
-        player = GameObject.FindGameObjectWithTag("Player");
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        
         if (collision.gameObject.tag == "Player" && player.GetComponent<Animator>().GetBool("Blink") == false && player.GetComponent<Animator>().GetBool("Hit") == false && player.GetComponent<Player>().dead == false)
         {
             player.GetComponent<Player>().playerHealth -= 20f;
