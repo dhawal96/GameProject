@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: aed1d50df94ea77469acb4740220d398
-timeCreated: 1511471959
+timeCreated: 1511558884
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -98,12 +98,12 @@ TextureImporter:
       name: DagonSwipe_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 381.75
-        width: 254.66667
-        height: 127.25
+        x: 116
+        y: 380
+        width: 128
+        height: 128
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -112,12 +112,12 @@ TextureImporter:
       name: DagonSwipe_1
       rect:
         serializedVersion: 2
-        x: 254
-        y: 381.75
-        width: 254.66667
-        height: 127.25
+        x: 371
+        y: 383
+        width: 128
+        height: 128
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -126,12 +126,12 @@ TextureImporter:
       name: DagonSwipe_2
       rect:
         serializedVersion: 2
-        x: 508
-        y: 381.75
-        width: 254.66667
-        height: 127.25
+        x: 627
+        y: 382
+        width: 128
+        height: 128
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -140,12 +140,12 @@ TextureImporter:
       name: DagonSwipe_3
       rect:
         serializedVersion: 2
-        x: 0
-        y: 254.75
-        width: 254.66667
-        height: 127.25
+        x: 116
+        y: 253
+        width: 128
+        height: 128
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -154,12 +154,12 @@ TextureImporter:
       name: DagonSwipe_4
       rect:
         serializedVersion: 2
-        x: 254
-        y: 254.75
-        width: 254.66667
-        height: 127.25
+        x: 372
+        y: 255
+        width: 128
+        height: 128
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -168,12 +168,12 @@ TextureImporter:
       name: DagonSwipe_5
       rect:
         serializedVersion: 2
-        x: 508
-        y: 254.75
-        width: 254.66667
-        height: 127.25
+        x: 627
+        y: 255
+        width: 128
+        height: 128
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -182,12 +182,12 @@ TextureImporter:
       name: DagonSwipe_6
       rect:
         serializedVersion: 2
-        x: 0
-        y: 127.75
-        width: 254.66667
-        height: 127.25
+        x: 116
+        y: 127
+        width: 128
+        height: 128
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -196,12 +196,12 @@ TextureImporter:
       name: DagonSwipe_7
       rect:
         serializedVersion: 2
-        x: 254
-        y: 127.75
-        width: 254.66667
-        height: 127.25
+        x: 372
+        y: 127
+        width: 128
+        height: 128
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -210,12 +210,12 @@ TextureImporter:
       name: DagonSwipe_8
       rect:
         serializedVersion: 2
-        x: 508
-        y: 127.75
-        width: 254.66667
-        height: 127.25
+        x: 627
+        y: 127
+        width: 128
+        height: 128
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -224,12 +224,12 @@ TextureImporter:
       name: DagonSwipe_9
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0.75
-        width: 254.66667
-        height: 127.25
+        x: 116
+        y: 0
+        width: 128
+        height: 128
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -238,12 +238,12 @@ TextureImporter:
       name: DagonSwipe_10
       rect:
         serializedVersion: 2
-        x: 254
-        y: 0.75
-        width: 254.66667
-        height: 127.25
+        x: 371
+        y: 0
+        width: 128
+        height: 128
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -252,12 +252,12 @@ TextureImporter:
       name: DagonSwipe_11
       rect:
         serializedVersion: 2
-        x: 508
-        y: 0.75
-        width: 254.66667
-        height: 127.25
+        x: 627
+        y: 0
+        width: 128
+        height: 128
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
