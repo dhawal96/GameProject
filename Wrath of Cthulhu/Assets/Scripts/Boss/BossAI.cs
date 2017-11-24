@@ -69,24 +69,20 @@ public class BossAI : MonoBehaviour {
             else if (attacks[attackIndex] == "laser")
             {
                 yield return new WaitForSeconds(5); //Instantiate Lasers and Calculate where Mark is
-                leftLaser = Instantiate(laser, new Vector3(97.269f, 4.63f, 0f), laserRotation);
-                rightLaser = Instantiate(laser, new Vector3(98.863f, 4.558f, 0f), laserRotation);
+                leftLaser = Instantiate(laser, new Vector3(96.829f, 5.205f, 0f), laserRotation);
+                rightLaser = Instantiate(laser, new Vector3(98.446f, 5.588f, 0f), laserRotation);
                 direction = new Vector2(player.transform.position.x - leftLaser.transform.position.x, player.transform.position.y - leftLaser.transform.position.y);
                 //Debug.Log(direction.x + " and " + direction.y);
 
                 yield return new WaitForSeconds(1); //Mark has 1 second to react and dodge it (This is where the animation begins)
-                leftLaser.transform.up = -direction;
-                rightLaser.transform.up = -direction;
-                leftLaser.SetActive(true);
-                rightLaser.SetActive(true);
-                laserFollowPlayer = true;
+                anim.SetBool("Laser", true);
 
                 yield return new WaitForSeconds(5); //How long the laser lasts
                 laserFollowPlayer = false;
                 Destroy(leftLaser);
                 Destroy(rightLaser);
                 chooseNewAttack = true;
-                //end the animation here
+                anim.SetBool("Laser", false);
                 
             }
         
@@ -148,7 +144,7 @@ public class BossAI : MonoBehaviour {
 
                 else
                 {
-                    attackIndex = Random.Range(0, 2);
+                    attackIndex = Random.Range(1, 2);
                 }
 
                 Debug.Log(attackIndex);
@@ -202,5 +198,14 @@ public class BossAI : MonoBehaviour {
     void spawnEnemies()
     {
         spawner.SetActive(true);
+    }
+
+    void createLaser()
+    {
+        leftLaser.transform.up = -direction;
+        rightLaser.transform.up = -direction;
+        leftLaser.SetActive(true);
+        rightLaser.SetActive(true);
+        laserFollowPlayer = true;
     }
 }

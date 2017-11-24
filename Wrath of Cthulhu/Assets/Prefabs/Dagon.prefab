@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 222751597790187204}
   - component: {fileID: 114731858171076060}
   - component: {fileID: 114736252496043866}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 223919166035232388}
   - component: {fileID: 114065233924430118}
   - component: {fileID: 114198936171939904}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: HealthCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57,7 +57,7 @@ GameObject:
   - component: {fileID: 224116657367805616}
   - component: {fileID: 222338546413960836}
   - component: {fileID: 114503260193737414}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: HealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -76,14 +76,17 @@ GameObject:
   - component: {fileID: 95832592784887438}
   - component: {fileID: 61617682795618488}
   - component: {fileID: 114304775418027572}
-  - component: {fileID: 50473111226164218}
+  - component: {fileID: 50762545159165976}
+  - component: {fileID: 82287399043239406}
+  - component: {fileID: 60207923024628732}
+  - component: {fileID: 60479777887025114}
   m_Layer: 0
   m_Name: Dagon
   m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4885569490845138
 Transform:
   m_ObjectHideFlags: 1
@@ -91,14 +94,14 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1557486574010124}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 95.67905, y: 2.6872804, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 98.39, y: 5.31, z: 0}
+  m_LocalScale: {x: 8, y: 8, z: 1}
   m_Children:
   - {fileID: 224498282115297470}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!50 &50473111226164218
+--- !u!50 &50762545159165976
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 1
@@ -115,11 +118,11 @@ Rigidbody2D:
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 4
---- !u!61 &61617682795618488
-BoxCollider2D:
+  m_SleepingMode: 0
+  m_CollisionDetection: 1
+  m_Constraints: 7
+--- !u!60 &60207923024628732
+PolygonCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -130,7 +133,117 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.003780365, y: -0.264664}
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.28, y: 1.28}
+    newSize: {x: 1.28, y: 1.28}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.28714275, y: -0.32136646}
+      - {x: 0.13639736, y: -0.28888202}
+      - {x: 0.21521759, y: -0.14838517}
+      - {x: 0.18254662, y: -0.04565215}
+      - {x: 0.121367455, y: 0.05105585}
+      - {x: 0.003540039, y: 0.061739087}
+      - {x: -0.11447239, y: 0.03726703}
+      - {x: -0.18726635, y: -0.050000012}
+      - {x: -0.20436096, y: -0.17252591}
+      - {x: -0.21309185, y: -0.28426102}
+      - {x: -0.23518085, y: -0.28189245}
+      - {x: -0.30788803, y: -0.29484475}
+      - {x: -0.36928558, y: -0.3683316}
+      - {x: -0.36652184, y: -0.4034161}
+      - {x: -0.41459656, y: -0.4693789}
+      - {x: -0.43397522, y: -0.49136648}
+      - {x: -0.44274902, y: -0.5559952}
+      - {x: -0.41397572, y: -0.6401863}
+      - {x: -0.18664551, y: -0.63950306}
+      - {x: 0.4460249, y: -0.6395031}
+      - {x: 0.42260933, y: -0.5180124}
+      - {x: 0.35850906, y: -0.4093789}
+--- !u!60 &60479777887025114
+PolygonCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1557486574010124}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.28, y: 1.28}
+    newSize: {x: 1.28, y: 1.28}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.21881294, y: -0.15932268}
+      - {x: 0.14705753, y: -0.16879642}
+      - {x: 0.27271175, y: 0.030167878}
+      - {x: 0.24237347, y: 0.12237191}
+      - {x: 0.19114876, y: 0.09850502}
+      - {x: 0.17804146, y: 0.11750311}
+      - {x: 0.10839081, y: 0.19675499}
+      - {x: -0.01988411, y: 0.21066302}
+      - {x: -0.10140419, y: 0.19248176}
+      - {x: -0.17390823, y: 0.12023234}
+      - {x: -0.21290874, y: -0.009257853}
+      - {x: -0.21232986, y: -0.06011188}
+      - {x: -0.21835423, y: -0.16048378}
+      - {x: -0.23979473, y: -0.16835365}
+      - {x: -0.27837658, y: -0.18213013}
+      - {x: -0.32289314, y: -0.18236965}
+      - {x: -0.3295431, y: -0.170713}
+      - {x: -0.33026314, y: -0.17251384}
+      - {x: -0.3915596, y: -0.17360806}
+      - {x: -0.43000507, y: -0.20244798}
+      - {x: -0.37715626, y: -0.20516482}
+      - {x: -0.3881712, y: -0.22344622}
+      - {x: -0.4544592, y: -0.24484637}
+      - {x: -0.4635563, y: -0.3205421}
+      - {x: -0.4802904, y: -0.39490983}
+      - {x: -0.43261528, y: -0.37770635}
+      - {x: -0.40597057, y: -0.37940353}
+      - {x: -0.40790176, y: -0.44035578}
+      - {x: -0.4087286, y: -0.45125932}
+      - {x: -0.40922165, y: -0.4616681}
+      - {x: -0.39909363, y: -0.49335176}
+      - {x: -0.36956596, y: -0.49195987}
+      - {x: -0.15592957, y: -0.4915628}
+      - {x: -0.12972641, y: -0.4944374}
+      - {x: 0.013923645, y: -0.5023529}
+      - {x: 0.09340763, y: -0.5016919}
+      - {x: 0.26813984, y: -0.5018208}
+      - {x: 0.28135777, y: -0.49983063}
+      - {x: 0.2894163, y: -0.4908426}
+      - {x: 0.32, y: -0.29}
+--- !u!61 &61617682795618488
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1557486574010124}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.023025185, y: -0.264664}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -141,8 +254,88 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.9548416, y: 0.750672}
+  m_Size: {x: 0.9012305, y: 0.750672}
   m_EdgeRadius: 0
+--- !u!82 &82287399043239406
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1557486574010124}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: e9a308df4d14ca740b66e0719be86812, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 0.87776184
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!95 &95832592784887438
 Animator:
   serializedVersion: 3
@@ -213,9 +406,10 @@ MonoBehaviour:
   fillHealthBar: {fileID: 1028855781173476}
   gameOverPanel: {fileID: 0}
   rain: {fileID: 0}
-  spawner: {fileID: 0}
   bossSplashEffect: {fileID: 0}
   camera: {fileID: 0}
+  spawner: {fileID: 0}
+  laser: {fileID: 1081345764735852, guid: f5f81e936280cdb48adeed230bedfbe6, type: 2}
   health: 0
   exitEntryScene: 0
   alreadyHit: 0
@@ -258,7 +452,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.6985294, g: 0.03595371, b: 0.03595371, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -375,8 +569,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -168.254, y: -145.644}
-  m_SizeDelta: {x: 95.018, y: 42.835}
+  m_AnchoredPosition: {x: -168.32, y: -145.751}
+  m_SizeDelta: {x: 23.8083, y: 7.53388}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224498282115297470
 RectTransform:
@@ -412,6 +606,6 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 1.73}
-  m_SizeDelta: {x: 90.32, y: 27.07}
+  m_AnchoredPosition: {x: -0, y: 0.17}
+  m_SizeDelta: {x: 23.8083, y: 5.986}
   m_Pivot: {x: 0.5, y: 0.5}
