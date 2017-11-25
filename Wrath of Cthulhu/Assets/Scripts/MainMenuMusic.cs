@@ -24,9 +24,15 @@ public class MainMenuMusic : MonoBehaviour {
         //sounds[1].Play(); // plays in-game music
     }
 
+    public void PlayBossMusic()
+    {
+        sounds[2].Play();
+    }
+
     public void stopGameAudio() //Mark calls this function if he dies
     {
         sounds[1].Stop();
+        sounds[2].Stop();
     }
 
     public void FadeOutMusic(AudioSource source)

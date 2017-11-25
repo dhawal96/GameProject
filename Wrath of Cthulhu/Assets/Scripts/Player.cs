@@ -44,6 +44,7 @@ public class Player : MonoBehaviour {
     public GameObject scrollBar;
     public GameObject storyPanel;
     public GameObject gameOverPanel;
+    public GameObject youWinPanel;
     public GameObject moveForward;
     public Image GoImage;
 
@@ -218,7 +219,7 @@ public class Player : MonoBehaviour {
         }
 
 
-        else if (Input.GetKeyDown(KeyCode.P) && canPause && canMove && !gameOverPanel.activeSelf && !enterShopUIPanel.activeSelf && !shopPanel.activeSelf && !gamePlayPanel.activeSelf)
+        else if (Input.GetKeyDown(KeyCode.P) && canPause && canMove && !gameOverPanel.activeSelf && !enterShopUIPanel.activeSelf && !shopPanel.activeSelf && !gamePlayPanel.activeSelf && !youWinPanel.activeSelf)
         {
             pausePanel.SetActive(true);
             Time.timeScale = 0f;
