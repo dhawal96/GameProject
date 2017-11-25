@@ -98,6 +98,8 @@ public class Player : MonoBehaviour {
     private GameObject damageUI;
     public float speedCount;
 
+    public bool bossDead;
+
 
     // Use this for initialization
     void Start() {
@@ -127,6 +129,7 @@ public class Player : MonoBehaviour {
         speedCount = 0f;
         reviving = false;
         lockTransform = false;
+        bossDead = false;
         canMove = true;
         movementDirection = new string[] { "left", "right", "up", "down" };
 

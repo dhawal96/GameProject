@@ -133,6 +133,7 @@ public class BossAI : MonoBehaviour {
         if (health <= 0f)
         {
             Destroy(gameObject);
+            player.GetComponent<Player>().bossDead = true;
             youWinPanel.SetActive(true);
             rain.SetActive(false);
             oldRain.SetActive(true);

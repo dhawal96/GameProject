@@ -358,6 +358,11 @@ public class EnemyMove : MonoBehaviour {
             }
 
         }
+
+        if (controlscript.bossDead == true)
+        {
+            gameObject.GetComponent<Animator>().SetBool("Death", true);
+        }
     }
 
     void FixedUpdate()
