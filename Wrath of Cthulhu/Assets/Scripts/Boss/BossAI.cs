@@ -8,8 +8,9 @@ public class BossAI : MonoBehaviour {
     public GameObject player;
     public GameObject healthBar;
     public GameObject fillHealthBar;
-    public GameObject gameOverPanel;
+    public GameObject youWinPanel;
     public GameObject rain;
+    public GameObject oldRain;
     public GameObject bossSplashEffect;
     public GameObject camera;
     public GameObject swipeCollision;
@@ -91,7 +92,6 @@ public class BossAI : MonoBehaviour {
 
             else if (attacks[attackIndex] == "swipe")
             {
-                Debug.Log("here");
                 yield return new WaitForSeconds(5);
                 swiping = true;
                 anim.SetBool("Swipe", true);
@@ -133,8 +133,10 @@ public class BossAI : MonoBehaviour {
         if (health <= 0f)
         {
             Destroy(gameObject);
-            gameOverPanel.SetActive(true);
+            youWinPanel.SetActive(true);
             rain.SetActive(false);
+            oldRain.SetActive(true);
+            GameObject.FindGameObjectWithTag("Music").GetComponent<MainMenuMusic>().stopGameAudio();
         }
 
         if (!attacking && laserCollider == false && swiping == false && !activeSwiping)
@@ -187,7 +189,7 @@ public class BossAI : MonoBehaviour {
         {
             anim.SetBool("IntroDone", true);
 
-            if (chooseNewAttack && !gameOverPanel.activeSelf && Time.timeScale == 1)
+            if (chooseNewAttack && !youWinPanel.activeSelf && Time.timeScale == 1)
             {
                 if (spawningComplete == false)
                 {

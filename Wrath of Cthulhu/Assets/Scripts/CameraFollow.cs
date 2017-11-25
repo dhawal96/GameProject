@@ -25,6 +25,7 @@ public class CameraFollow : MonoBehaviour
     private bool transition;
     public float duration = 1.0f;
     private float elapsed = 0.0f;
+    private bool executeOnce;
 
     public bool bounds;
     public bool stayOnPlayer;
@@ -44,6 +45,7 @@ public class CameraFollow : MonoBehaviour
         minCameraPos = new Vector3(87.9f, 1.51f, -10f);
         maxCameraPos = new Vector3(99.73f, 5.78f, -10f);
         stayOnPlayer = true;
+        executeOnce = false;
     }
 
     IEnumerator Wait()
@@ -61,11 +63,10 @@ public class CameraFollow : MonoBehaviour
         newRain.SetActive(true);
         stayOnPlayer = true;
         controlscript.canMove = true;
+        GameObject.FindGameObjectWithTag("Music").GetComponent<MainMenuMusic>().PlayBossMusic();
         boss.GetComponent<BossAI>().exitEntryScene = true;
         yield return new WaitForSeconds(1);
         enemyHealthCanvas.SetActive(true);
-
-
     }
 
     private void Update() //turn off MoveForward UI
@@ -183,8 +184,9 @@ public class CameraFollow : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position, position, Time.deltaTime * 2f);
         }
 
-        if (transform.position == position)
+        if (transform.position == position && !executeOnce)
         {
+            executeOnce = true;
             StartCoroutine(Wait());
             //stayOnPlayer = true;
         }
