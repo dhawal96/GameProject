@@ -121,7 +121,7 @@ public class Player : MonoBehaviour {
         damageUpgrade = 0f;
         elixir = false;
         blink = false;
-        explosive = true;
+        explosive = false;
         call = true;
         revive = false;
         canPause = false;
@@ -300,7 +300,7 @@ public class Player : MonoBehaviour {
             anim.SetFloat("Speed", Mathf.Abs(rb2d.velocity.x) + Mathf.Abs(rb2d.velocity.y));
             anim.SetBool("Shooting", false);
 
-            if (Input.GetKeyDown(KeyCode.R) && ammoScript.countAmmo != 12f) //reload ammo
+            if (Input.GetKeyDown(KeyCode.R) && ammoScript.countAmmo != 12f && canMove) //reload ammo
             {
                 anim.SetBool("Reload", true);
             }
@@ -310,19 +310,19 @@ public class Player : MonoBehaviour {
                 anim.SetBool("Reload", true);
             }
 
-            if (Input.GetKeyDown(KeyCode.Semicolon) && !anim.GetCurrentAnimatorStateInfo(0).IsName("Shoot_Mark") && shotgun == true && ammoScript.countAmmo > 0f)
+            if (Input.GetKeyDown(KeyCode.Semicolon) && !anim.GetCurrentAnimatorStateInfo(0).IsName("Shoot_Mark") && shotgun == true && ammoScript.countAmmo > 0f && canMove)
             {
                 anim.SetBool("Shooting", true);
                 shootOnce = true;
             }
 
-            else if (Input.GetKeyDown(KeyCode.Semicolon) && !anim.GetCurrentAnimatorStateInfo(0).IsName("Shoot_Mark") && shotgun == false && ammoScript.countAmmo > 0f)
+            else if (Input.GetKeyDown(KeyCode.Semicolon) && !anim.GetCurrentAnimatorStateInfo(0).IsName("Shoot_Mark") && shotgun == false && ammoScript.countAmmo > 0f && canMove)
             {
                 anim.SetBool("Shooting", true);
                 shootOnce = true;
             }
 
-            if (Input.GetKeyDown(KeyCode.Quote))
+            if (Input.GetKeyDown(KeyCode.Quote) && canMove)
             {
                 if (elixir)
                 {

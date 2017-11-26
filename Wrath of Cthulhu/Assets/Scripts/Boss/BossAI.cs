@@ -29,6 +29,14 @@ public class BossAI : MonoBehaviour {
     private bool laserFollowPlayer;
     private Vector2 direction;
 
+    //Swiping
+    private bool swiping; //animation
+    private bool activeSwiping; //exact stage where swipe occurs
+    private bool lockSwipe;
+    private bool canLockSwipe;
+    private int maxSwipes;
+    private int amountOfSwipes; //Will be Random Int (max 3)
+
     //Variables
     public float health;
     public bool exitEntryScene;
@@ -39,8 +47,31 @@ public class BossAI : MonoBehaviour {
     private PolygonCollider2D[] colliders;
     private bool attacking;
     private bool laserCollider;
-    private bool swiping; //animation
-    private bool activeSwiping; //exact stage where swipe occurs
+    private AudioSource[] sounds;
+
+
+    // Use this for initialization
+    void Start()
+    {
+
+        health = 50000f;
+        exitEntryScene = false;
+        attacks = new string[] { "spawnEnemies", "laser", "swipe" };
+        anim = GetComponent<Animator>();
+        alreadyHit = false;
+        spawningComplete = true;
+        chooseNewAttack = true;
+        laserFollowPlayer = false;
+        attacking = false;
+        swiping = false;
+        lockSwipe = false;
+        amountOfSwipes = 0;
+        canLockSwipe = true;
+        maxSwipes = 0;
+        colliders = GetComponents<PolygonCollider2D>();
+        sounds = GetComponents<AudioSource>();
+
+    }
 
     IEnumerator Attack()
     {
@@ -53,7 +84,7 @@ public class BossAI : MonoBehaviour {
                     spawner.SetActive(false);
                     anim.SetBool("SpawnEnemies", false);
                     attacking = false;
-                    yield return new WaitForSeconds(5);
+                    yield return new WaitForSeconds(4);
                     enemySpawnCooldown = false;
                     spawningComplete = true;
                     chooseNewAttack = true;
@@ -61,7 +92,7 @@ public class BossAI : MonoBehaviour {
 
                 else if (spawner.GetComponent<Spawner>().waveCount != 3f && !enemySpawnCooldown)
                 {
-                    yield return new WaitForSeconds(5); //Wait time before Dagon's spawning enemies animation begins
+                    yield return new WaitForSeconds(4); //Wait time before Dagon's spawning enemies animation begins
                     anim.SetBool("SpawnEnemies", true); //End of animation clip will call spawnEnemies() function
                     attacking = true;
                     spawningComplete = false;
@@ -71,7 +102,7 @@ public class BossAI : MonoBehaviour {
 
             else if (attacks[attackIndex] == "laser")
             {
-                yield return new WaitForSeconds(5); //Instantiate Lasers and Calculate where Mark is
+                yield return new WaitForSeconds(4); //Instantiate Lasers and Calculate where Mark is
                 leftLaser = Instantiate(laser, new Vector3(96.829f, 5.205f, 0f), laserRotation);
                 rightLaser = Instantiate(laser, new Vector3(98.446f, 5.588f, 0f), laserRotation);
                 direction = new Vector2(player.transform.position.x - leftLaser.transform.position.x, player.transform.position.y - leftLaser.transform.position.y);
@@ -92,28 +123,12 @@ public class BossAI : MonoBehaviour {
 
             else if (attacks[attackIndex] == "swipe")
             {
-                yield return new WaitForSeconds(5);
+                yield return new WaitForSeconds(4);
                 swiping = true;
                 anim.SetBool("Swipe", true);
             }  
     }
 
-    // Use this for initialization
-    void Start () {
-
-        health = 25000f;
-        exitEntryScene = false;
-        attacks = new string[] { "spawnEnemies", "laser", "swipe"};
-        anim = GetComponent<Animator>();
-        alreadyHit = false;
-        spawningComplete = true;
-        chooseNewAttack = true;
-        laserFollowPlayer = false;
-        attacking = false;
-        swiping = false;
-        colliders = GetComponents<PolygonCollider2D>();
-
-}
 	
 	// Update is called once per frame
 	void Update ()
@@ -128,6 +143,11 @@ public class BossAI : MonoBehaviour {
         else if (swiping)
         {
             transform.position = new Vector3(97.25f, 5.4f, 0f); //Ensures that Dagon never moves out of place, but continues to keep a dynamic rigidbody
+        }
+
+        if (player.transform.position.x >= 92.83071f && canLockSwipe)
+        {
+            lockSwipe = true;
         }
 
         if (health <= 0f)
@@ -197,12 +217,26 @@ public class BossAI : MonoBehaviour {
                     attackIndex = 0;
                 }
 
-                else
+                else if (lockSwipe)
                 {
-                    attackIndex = Random.Range(0, 3);
+                    lockSwipe = false;
+
+                    if (amountOfSwipes == 0) //if not already assigned a random value
+                    {
+                        canLockSwipe = false;
+                        amountOfSwipes = Random.Range(1, 4);
+                    }
+
+                    attackIndex = 2;
+                    amountOfSwipes -= 1;
                 }
 
-                Debug.Log(attackIndex);
+                else
+                {
+                    attackIndex = Random.Range(0, 2);
+                    canLockSwipe = true;
+                }
+
                 StartCoroutine(Attack());
                 chooseNewAttack = false;
             }
@@ -268,6 +302,7 @@ public class BossAI : MonoBehaviour {
     {
         activeSwiping = true;
         swipeCollision.SetActive(true);
+        sounds[1].Play();
     }
 
     void EndSwipe()
