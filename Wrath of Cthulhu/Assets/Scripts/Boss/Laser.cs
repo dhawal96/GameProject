@@ -16,8 +16,8 @@ public class Laser : MonoBehaviour {
         
         if (collision.gameObject.tag == "Player" && player.GetComponent<Animator>().GetBool("Blink") == false && player.GetComponent<Animator>().GetBool("Hit") == false && player.GetComponent<Player>().dead == false)
         {
-            player.GetComponent<Player>().playerHealth -= 20f;
-            player.GetComponent<Player>().playerMadness += 10;
+            player.GetComponent<Player>().playerHealth -= 25f;
+            player.GetComponent<Player>().playerMadness += 15;
             player.GetComponent<Player>().sounds[1].Play();
             player.GetComponent<Animator>().SetBool("Hit", true);
         }
