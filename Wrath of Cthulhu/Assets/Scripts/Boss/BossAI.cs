@@ -19,8 +19,12 @@ public class BossAI : MonoBehaviour {
 
     //Enemy Spawning
     public GameObject spawner;
+    public GameObject spawner2;
+    public GameObject spawner3;
+    public GameObject spawner4;
     private bool enemySpawnCooldown;
     private bool spawningComplete;
+    private bool spawn;
 
     //Laser
     private Quaternion laserRotation;
@@ -66,6 +70,7 @@ public class BossAI : MonoBehaviour {
         attacking = false;
         swiping = false;
         lockSwipe = false;
+        spawn = false;
         amountOfSwipes = 0;
         canLockSwipe = true;
         maxSwipes = 0;
@@ -77,32 +82,15 @@ public class BossAI : MonoBehaviour {
     {
             if (attacks[attackIndex] == "spawnEnemies")
             {
-                if (spawner.GetComponent<Spawner>().waveCount == 3f)
-                {
-                    enemySpawnCooldown = true;
-                    spawner.GetComponent<Spawner>().waveCount = 0f;
-                    spawner.SetActive(false);
-                    anim.SetBool("SpawnEnemies", false);
-                    attacking = false;
-                    yield return new WaitForSeconds(2);
-                    enemySpawnCooldown = false;
-                    spawningComplete = true;
-                    chooseNewAttack = true;
-                }
-
-                else if (spawner.GetComponent<Spawner>().waveCount != 3f && !enemySpawnCooldown)
-                {
-                    yield return new WaitForSeconds(2); //Wait time before Dagon's spawning enemies animation begins
-                    anim.SetBool("SpawnEnemies", true); //End of animation clip will call spawnEnemies() function
-                    attacking = true;
-                    spawningComplete = false;
-                    chooseNewAttack = true;
-                }
+                yield return new WaitForSeconds(3);
+                swiping = true;
+                spawn = true;
+                anim.SetBool("Swipe", true);
             }
 
             else if (attacks[attackIndex] == "laser")
             {
-                yield return new WaitForSeconds(2); //Instantiate Lasers and Calculate where Mark is
+                yield return new WaitForSeconds(3); //Instantiate Lasers and Calculate where Mark is
                 leftLaser = Instantiate(laser, new Vector3(96.829f, 5.205f, 0f), laserRotation);
                 rightLaser = Instantiate(laser, new Vector3(98.446f, 5.588f, 0f), laserRotation);
                 direction = new Vector2(player.transform.position.x - leftLaser.transform.position.x, player.transform.position.y - leftLaser.transform.position.y);
@@ -128,7 +116,7 @@ public class BossAI : MonoBehaviour {
 
             else if (attacks[attackIndex] == "swipe")
             {
-                yield return new WaitForSeconds(4);
+                yield return new WaitForSeconds(3);
                 swiping = true;
                 anim.SetBool("Swipe", true);
             }  
@@ -269,11 +257,10 @@ public class BossAI : MonoBehaviour {
 
                 else
                 {
-                    attackIndex = Random.Range(2, 3);
+                    attackIndex = Random.Range(0, 4);
                     canLockSwipe = true;
                 }
 
-                Debug.Log("here");
                 StartCoroutine(Attack());
             }
         }
@@ -320,10 +307,6 @@ public class BossAI : MonoBehaviour {
         }
     }
 
-    void spawnEnemies()
-    {
-        spawner.SetActive(true);
-    }
 
     void createLaser()
     {
@@ -336,13 +319,33 @@ public class BossAI : MonoBehaviour {
 
     void Swiping()
     {
-        activeSwiping = true;
-        swipeCollision.SetActive(true);
-        sounds[1].Play();
+        if (spawn == true)
+        {
+            spawn = false;
+            activeSwiping = true;
+            swipeCollision.SetActive(true);
+            sounds[1].Play();
+            spawner.SetActive(true);
+            spawner2.SetActive(true);
+            spawner3.SetActive(true);
+            spawner4.SetActive(true);
+        }
+
+        else
+        {
+            activeSwiping = true;
+            swipeCollision.SetActive(true);
+            sounds[1].Play();
+        }
     }
 
     void EndSwipe()
     {
+
+        spawner.SetActive(false);
+        spawner2.SetActive(false);
+        spawner3.SetActive(false);
+        spawner4.SetActive(false);
         activeSwiping = false;
         swipeCollision.SetActive(false);
         swiping = false;

@@ -34,8 +34,9 @@ public class Spawner : MonoBehaviour
         GameObject enemy = Instantiate(enemies[enemyIndex], gameObject.transform.position, transform.rotation);
         enemy.GetComponent<EnemyMove>().cameFromSpawner = true;
 
-        if (waveCount == 3f)
+        if (waveCount == 1f)
         {
+            waveCount = 0;
             CancelInvoke();
         }
     }
