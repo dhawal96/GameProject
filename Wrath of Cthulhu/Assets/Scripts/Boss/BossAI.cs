@@ -71,7 +71,6 @@ public class BossAI : MonoBehaviour {
         maxSwipes = 0;
         colliders = GetComponents<PolygonCollider2D>();
         sounds = GetComponents<AudioSource>();
-
     }
 
     IEnumerator Attack()
@@ -124,28 +123,7 @@ public class BossAI : MonoBehaviour {
 
             else if (attacks[attackIndex] == "madness")
             {
-            yield return new WaitForSeconds(3);
-            GameObject madnessBall1 = (GameObject)Instantiate(madnessBall, spawner.transform.position, spawner.transform.rotation);
-            madnessBall1.transform.Rotate(0f, 0f, 10f);
-            GameObject madnessBall2 = (GameObject)Instantiate(madnessBall, spawner.transform.position, spawner.transform.rotation);
-            madnessBall2.transform.Rotate(0f, 0f, 0f);
-            GameObject madnessBall3 = (GameObject)Instantiate(madnessBall, spawner.transform.position, spawner.transform.rotation);
-            madnessBall3.transform.Rotate(0f, 0f, -10f);
-            GameObject madnessBall4 = (GameObject)Instantiate(madnessBall, spawner.transform.position, spawner.transform.rotation);
-            madnessBall4.transform.Rotate(0f, 0f, 20f);
-            GameObject madnessBall5 = (GameObject)Instantiate(madnessBall, spawner.transform.position, spawner.transform.rotation);
-            madnessBall5.transform.Rotate(0f, 0f, -20f);
-            yield return new WaitForSeconds(1);
-            GameObject madnessBall6 = (GameObject)Instantiate(madnessBall, spawner.transform.position, spawner.transform.rotation);
-            madnessBall6.transform.Rotate(0f, 0f, 5f);
-            GameObject madnessBall7 = (GameObject)Instantiate(madnessBall, spawner.transform.position, spawner.transform.rotation);
-            madnessBall7.transform.Rotate(0f, 0f, -5f);
-            GameObject madnessBall8 = (GameObject)Instantiate(madnessBall, spawner.transform.position, spawner.transform.rotation);
-            madnessBall8.transform.Rotate(0f, 0f, 15f);
-            GameObject madnessBall9 = (GameObject)Instantiate(madnessBall, spawner.transform.position, spawner.transform.rotation);
-            madnessBall9.transform.Rotate(0f, 0f, -15f);
-
-            chooseNewAttack = true;
+               anim.SetBool("SpawnEnemies", true); //THIS ANIMATiON IS NO LONGER USED TO SPAWN ENEMIES. IT IS USED TO INSTANTIATE MADNESS BALLS
             }
 
             else if (attacks[attackIndex] == "swipe")
@@ -154,6 +132,31 @@ public class BossAI : MonoBehaviour {
                 swiping = true;
                 anim.SetBool("Swipe", true);
             }  
+    }
+
+    IEnumerator MadnessBall()
+    {
+        GameObject madnessBall1 = (GameObject)Instantiate(madnessBall, spawner.transform.position, spawner.transform.rotation);
+        madnessBall1.transform.Rotate(0f, 0f, 10f);
+        GameObject madnessBall2 = (GameObject)Instantiate(madnessBall, spawner.transform.position, spawner.transform.rotation);
+        madnessBall2.transform.Rotate(0f, 0f, 0f);
+        GameObject madnessBall3 = (GameObject)Instantiate(madnessBall, spawner.transform.position, spawner.transform.rotation);
+        madnessBall3.transform.Rotate(0f, 0f, -10f);
+        GameObject madnessBall4 = (GameObject)Instantiate(madnessBall, spawner.transform.position, spawner.transform.rotation);
+        madnessBall4.transform.Rotate(0f, 0f, 20f);
+        GameObject madnessBall5 = (GameObject)Instantiate(madnessBall, spawner.transform.position, spawner.transform.rotation);
+        madnessBall5.transform.Rotate(0f, 0f, -20f);
+        yield return new WaitForSeconds(1);
+        GameObject madnessBall6 = (GameObject)Instantiate(madnessBall, spawner.transform.position, spawner.transform.rotation);
+        madnessBall6.transform.Rotate(0f, 0f, 5f);
+        GameObject madnessBall7 = (GameObject)Instantiate(madnessBall, spawner.transform.position, spawner.transform.rotation);
+        madnessBall7.transform.Rotate(0f, 0f, -5f);
+        GameObject madnessBall8 = (GameObject)Instantiate(madnessBall, spawner.transform.position, spawner.transform.rotation);
+        madnessBall8.transform.Rotate(0f, 0f, 15f);
+        GameObject madnessBall9 = (GameObject)Instantiate(madnessBall, spawner.transform.position, spawner.transform.rotation);
+        madnessBall9.transform.Rotate(0f, 0f, -15f);
+        anim.SetBool("SpawnEnemies", false);
+        chooseNewAttack = true;
     }
 
 	
@@ -266,7 +269,7 @@ public class BossAI : MonoBehaviour {
 
                 else
                 {
-                    attackIndex = Random.Range(0, 3);
+                    attackIndex = Random.Range(2, 3);
                     canLockSwipe = true;
                 }
 

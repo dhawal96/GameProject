@@ -42,8 +42,8 @@ public class CameraFollow : MonoBehaviour
         controlscript = player.GetComponent<Player>();
         SectionEndCollider1 = GameObject.FindGameObjectWithTag("SectionEndCollider1");
         SectionEndCollider2 = GameObject.FindGameObjectWithTag("SectionEndCollider2");
-        minCameraPos = new Vector3(2.63f, 1.51f, -10f);
-        maxCameraPos = new Vector3(17.41f, 5.78f, -10f);
+        minCameraPos = new Vector3(87.42f, 1.50f, -10f);
+        maxCameraPos = new Vector3(96.15f, 5.80f, -10f);
         stayOnPlayer = true;
         executeOnce = false;
     }
