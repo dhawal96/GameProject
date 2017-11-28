@@ -239,7 +239,7 @@ public class BulletFire : MonoBehaviour
             gameObject.transform.Rotate(0, 0, 0);
         }
 
-        if (gameObject.tag == "Bomb" && collision.gameObject.GetComponent<EnemyMove>().enemyAlreadyHit == false && (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "RangeEnemy") && gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Explosion"))
+        if (gameObject.tag == "Bomb" && collision.gameObject.GetComponent<EnemyMove>().enemyAlreadyHit == false && (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "RangeEnemy") && gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("newExplosion"))
         {
             collision.gameObject.GetComponent<EnemyMove>().enemyAlreadyHit = true;
             collision.gameObject.GetComponent<Animator>().SetBool("Hit", true);
@@ -269,7 +269,7 @@ public class BulletFire : MonoBehaviour
             gameObject.transform.Rotate(0, 0, 0);
         }
 
-        if (gameObject.tag == "Bomb" && collision.gameObject.GetComponent<EnemyMove>().enemyAlreadyHit == false && (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "RangeEnemy") && gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Explosion"))
+        if (gameObject.tag == "Bomb" && collision.gameObject.GetComponent<EnemyMove>().enemyAlreadyHit == false && (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "RangeEnemy") && gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("newExplosion"))
         {
 
             collision.gameObject.GetComponent<EnemyMove>().enemyAlreadyHit = true;
