@@ -7,6 +7,7 @@ public class ShopController : MonoBehaviour {
     public GameObject shopPanel;
     public GameObject openShopUI;
     public GameObject scrollBar;
+    public GameObject youWinPanel;
     private Animator anim;
 
     private void Start()
@@ -17,7 +18,7 @@ public class ShopController : MonoBehaviour {
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Player" && !youWinPanel.activeSelf)
         {
             OpenShopUI();
         }

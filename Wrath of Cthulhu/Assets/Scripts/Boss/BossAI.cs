@@ -82,7 +82,7 @@ public class BossAI : MonoBehaviour {
     {
             if (attacks[attackIndex] == "spawnEnemies")
             {
-                yield return new WaitForSeconds(3);
+                yield return new WaitForSeconds(6);
                 swiping = true;
                 spawn = true;
                 anim.SetBool("Swipe", true);
@@ -90,7 +90,7 @@ public class BossAI : MonoBehaviour {
 
             else if (attacks[attackIndex] == "laser")
             {
-                yield return new WaitForSeconds(3); //Instantiate Lasers and Calculate where Mark is
+                yield return new WaitForSeconds(4); //Instantiate Lasers and Calculate where Mark is
                 leftLaser = Instantiate(laser, new Vector3(96.829f, 5.205f, 0f), laserRotation);
                 rightLaser = Instantiate(laser, new Vector3(98.446f, 5.588f, 0f), laserRotation);
                 direction = new Vector2(player.transform.position.x - leftLaser.transform.position.x, player.transform.position.y - leftLaser.transform.position.y);
@@ -111,12 +111,13 @@ public class BossAI : MonoBehaviour {
 
             else if (attacks[attackIndex] == "madness")
             {
-               anim.SetBool("SpawnEnemies", true); //THIS ANIMATiON IS NO LONGER USED TO SPAWN ENEMIES. IT IS USED TO INSTANTIATE MADNESS BALLS
+                yield return new WaitForSeconds(4);
+                anim.SetBool("SpawnEnemies", true); //THIS ANIMATiON IS NO LONGER USED TO SPAWN ENEMIES. IT IS USED TO INSTANTIATE MADNESS BALLS
             }
 
             else if (attacks[attackIndex] == "swipe")
             {
-                yield return new WaitForSeconds(3);
+                yield return new WaitForSeconds(4);
                 swiping = true;
                 anim.SetBool("Swipe", true);
             }  
@@ -199,7 +200,6 @@ public class BossAI : MonoBehaviour {
             colliders[2].enabled = false;
             colliders[3].enabled = false;
             colliders[4].enabled = false;
-
         }
 
         else if (laserCollider == true && swiping == false && !activeSwiping)
@@ -236,12 +236,8 @@ public class BossAI : MonoBehaviour {
             if (chooseNewAttack && !youWinPanel.activeSelf && player.GetComponent<Player>().dead == false && Time.timeScale == 1)
             {
                 chooseNewAttack = false;
-                if (spawningComplete == false)
-                {
-                    attackIndex = 0;
-                }
 
-                else if (lockSwipe)
+                if (lockSwipe)
                 {
                     lockSwipe = false;
 
@@ -257,7 +253,18 @@ public class BossAI : MonoBehaviour {
 
                 else
                 {
-                    attackIndex = Random.Range(0, 4);
+                    int randomNumber = Random.Range(0, 100);
+
+                    if (randomNumber <= 20)
+                    {
+                        attackIndex = 0;
+                    }
+
+                    else
+                    {
+                        attackIndex = Random.Range(1, 3);
+                    }
+
                     canLockSwipe = true;
                 }
 
