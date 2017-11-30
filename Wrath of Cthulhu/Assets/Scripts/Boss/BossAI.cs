@@ -53,7 +53,7 @@ public class BossAI : MonoBehaviour {
     private bool attacking;
     private bool laserCollider;
     private AudioSource[] sounds;
-
+    private bool executeOnce;
 
     // Use this for initialization
     void Start()
@@ -70,6 +70,7 @@ public class BossAI : MonoBehaviour {
         attacking = false;
         swiping = false;
         lockSwipe = false;
+        executeOnce = false;
         spawn = false;
         amountOfSwipes = 0;
         canLockSwipe = true;
@@ -174,14 +175,18 @@ public class BossAI : MonoBehaviour {
             lockSwipe = false;
         }
 
-        if (health <= 0f)
+        if (!player.GetComponent<Player>().gameOverPanel.activeSelf) // if the game is not already over
         {
-            Destroy(gameObject);
-            player.GetComponent<Player>().bossDead = true;
-            youWinPanel.SetActive(true);
-            rain.SetActive(false);
-            oldRain.SetActive(true);
-            GameObject.FindGameObjectWithTag("Music").GetComponent<MainMenuMusic>().stopGameAudio();
+            if (health <= 0f && !executeOnce)
+            {
+                executeOnce = true;
+                anim.SetBool("Dead", true);
+                Destroy(leftLaser);
+                Destroy(rightLaser);
+                GameObject.FindGameObjectWithTag("Music").GetComponent<MainMenuMusic>().stopGameAudio();
+                sounds[2].Play();
+                player.GetComponent<Player>().bossDead = true;
+            }
         }
 
         if (!attacking && laserCollider == false && swiping == false && !activeSwiping)
@@ -255,7 +260,7 @@ public class BossAI : MonoBehaviour {
                 {
                     int randomNumber = Random.Range(0, 100);
 
-                    if (randomNumber <= 20)
+                    if (randomNumber <= 15)
                     {
                         attackIndex = 0;
                     }
@@ -348,7 +353,6 @@ public class BossAI : MonoBehaviour {
 
     void EndSwipe()
     {
-
         spawner.SetActive(false);
         spawner2.SetActive(false);
         spawner3.SetActive(false);
@@ -358,5 +362,13 @@ public class BossAI : MonoBehaviour {
         swiping = false;
         anim.SetBool("Swipe", false);
         chooseNewAttack = true;
+    }
+
+    void Dead()
+    {
+        Destroy(gameObject);
+        youWinPanel.SetActive(true);
+        rain.SetActive(false);
+        oldRain.SetActive(true);
     }
 }
