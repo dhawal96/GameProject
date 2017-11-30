@@ -59,7 +59,7 @@ public class BossAI : MonoBehaviour {
     void Start()
     {
 
-        health = 50000f;
+        health = 36000f;
         exitEntryScene = false;
         attacks = new string[] { "spawnEnemies", "laser", "madness", "swipe"};
         anim = GetComponent<Animator>();
@@ -118,7 +118,7 @@ public class BossAI : MonoBehaviour {
 
             else if (attacks[attackIndex] == "swipe")
             {
-                yield return new WaitForSeconds(4);
+                yield return new WaitForSeconds(2);
                 swiping = true;
                 anim.SetBool("Swipe", true);
             }  
@@ -136,6 +136,10 @@ public class BossAI : MonoBehaviour {
         madnessBall4.transform.Rotate(0f, 0f, 20f);
         GameObject madnessBall5 = (GameObject)Instantiate(madnessBall, spawner.transform.position, spawner.transform.rotation);
         madnessBall5.transform.Rotate(0f, 0f, -20f);
+        GameObject madnessBall10 = (GameObject)Instantiate(madnessBall, spawner.transform.position, spawner.transform.rotation);
+        madnessBall10.transform.Rotate(0f, 0f, 30f);
+        GameObject madnessBall11 = (GameObject)Instantiate(madnessBall, spawner.transform.position, spawner.transform.rotation);
+        madnessBall11.transform.Rotate(0f, 0f, -30f);
         yield return new WaitForSeconds(1);
         GameObject madnessBall6 = (GameObject)Instantiate(madnessBall, spawner.transform.position, spawner.transform.rotation);
         madnessBall6.transform.Rotate(0f, 0f, 5f);
@@ -145,6 +149,10 @@ public class BossAI : MonoBehaviour {
         madnessBall8.transform.Rotate(0f, 0f, 15f);
         GameObject madnessBall9 = (GameObject)Instantiate(madnessBall, spawner.transform.position, spawner.transform.rotation);
         madnessBall9.transform.Rotate(0f, 0f, -15f);
+        GameObject madnessBall12 = (GameObject)Instantiate(madnessBall, spawner.transform.position, spawner.transform.rotation);
+        madnessBall12.transform.Rotate(0f, 0f, 25f);
+        GameObject madnessBall13 = (GameObject)Instantiate(madnessBall, spawner.transform.position, spawner.transform.rotation);
+        madnessBall13.transform.Rotate(0f, 0f, -25f);
         anim.SetBool("SpawnEnemies", false);
         chooseNewAttack = true;
     }
@@ -267,7 +275,7 @@ public class BossAI : MonoBehaviour {
 
                     else
                     {
-                        attackIndex = Random.Range(1, 3);
+                        attackIndex = Random.Range(1, 4);
                     }
 
                     canLockSwipe = true;
