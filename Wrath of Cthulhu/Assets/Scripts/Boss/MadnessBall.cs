@@ -9,7 +9,7 @@ public class MadnessBall : MonoBehaviour {
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        GetComponent<Rigidbody2D>().AddForce(-transform.right * 50);
+        GetComponent<Rigidbody2D>().AddForce(-transform.right * 75);
     }
 
     private void Update()

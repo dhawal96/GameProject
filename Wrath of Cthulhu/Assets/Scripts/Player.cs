@@ -187,6 +187,7 @@ public class Player : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+
         markShooting = false;
 
         if (gamePlayPanel.activeSelf)
@@ -287,15 +288,7 @@ public class Player : MonoBehaviour {
             }
         }
 
-        if (Input.GetKey(KeyCode.H))
-        {
-            playerHealth = 100f;
-            playerMadness = 0f;
-            particles.SetActive(false);
-            leftParticles.SetActive(false);
-        }
-
-        else if (dead == false)
+        if (dead == false)
         {
             anim.SetFloat("Speed", Mathf.Abs(rb2d.velocity.x) + Mathf.Abs(rb2d.velocity.y));
             anim.SetBool("Shooting", false);

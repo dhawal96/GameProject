@@ -10,7 +10,7 @@ public class BossHealth : MonoBehaviour {
 
     void Start()
     {
-        maxHealth = 50000f;
+        maxHealth = 36000f;
     }
 
 	
