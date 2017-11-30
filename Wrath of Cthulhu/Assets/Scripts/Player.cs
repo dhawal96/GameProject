@@ -574,12 +574,15 @@ public class Player : MonoBehaviour {
             }
         }
 
-        if (dead == true)
+        if (!youWinPanel.activeSelf) //if game is not already won
         {
-            gameOverPanel.SetActive(true);
-            particles.SetActive(false);
-            leftParticles.SetActive(false);
-            GameObject.FindGameObjectWithTag("Music").GetComponent<MainMenuMusic>().stopGameAudio();
+            if (dead == true)
+            {
+                gameOverPanel.SetActive(true);
+                particles.SetActive(false);
+                leftParticles.SetActive(false);
+                GameObject.FindGameObjectWithTag("Music").GetComponent<MainMenuMusic>().stopGameAudio();
+            }
         }
     }
 
