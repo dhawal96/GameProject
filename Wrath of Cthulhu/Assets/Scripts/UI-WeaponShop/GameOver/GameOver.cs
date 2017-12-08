@@ -26,7 +26,7 @@ public class GameOver : MonoBehaviour {
 
     public void OnClickExitGame()
     {
-        Application.Quit();
+        Application.OpenURL("https://itch.io/");
     }
 
     public void OnClickResume()

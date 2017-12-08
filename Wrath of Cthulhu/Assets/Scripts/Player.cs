@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityStandardAssets.CrossPlatformInput;
 
 public class Player : MonoBehaviour {
 
@@ -34,7 +35,7 @@ public class Player : MonoBehaviour {
     private Vector3 input;
     private Rigidbody2D rb2d;
     private bool shootOnce;
-	private bool left;
+	public bool left;
 
     //Panels
     public GameObject pausePanel;
@@ -88,6 +89,10 @@ public class Player : MonoBehaviour {
     public GameObject leftParticles;
     public Transform bombSpawn;
 
+    public GameObject joystick;
+    public GameObject shootUI;
+    public GameObject reloadUI;
+
     //Stats UI
     public Transform AmmoCount;
     Ammo ammoScript;
@@ -138,6 +143,10 @@ public class Player : MonoBehaviour {
         elixirImage = ItemUI.transform.Find("ElixirUI").gameObject;
         eyeImage = ItemUI.transform.Find("EyeUI").gameObject;
         explosiveImage = ItemUI.transform.Find("ExplosiveUI").gameObject;
+
+        joystick = GameObject.Find("MobileJoystick");
+        shootUI = GameObject.Find("Shoot");
+        reloadUI = GameObject.Find("Reload");
 
         HealthPercentage = GameObject.Find("Player1Health").transform;
 		healthscript = HealthPercentage.GetComponent<Player1Health>();
@@ -240,6 +249,11 @@ public class Player : MonoBehaviour {
             }*/
         }
 
+        if (Input.GetKeyDown(KeyCode.Escape))
+        { 
+            Application.Quit();
+        }
+
         if (playerMadness >= 100f && dead == false && playerHealth > 0f)
         {
             blink = false;
@@ -267,22 +281,22 @@ public class Player : MonoBehaviour {
             StartCoroutine(ExitFullMadness());
 
 
-            if (Input.GetKeyUp(KeyCode.A))
+            if (joystick.GetComponent<RectTransform>().position.x <= 39.9)
             {
                 randomNumber = Random.Range(0, 4);
             }
 
-            else if (Input.GetKeyUp(KeyCode.S))
+            else if (joystick.GetComponent<RectTransform>().position.y < -11)
             {
                 randomNumber = Random.Range(0, 4);
             }
 
-            else if (Input.GetKeyUp(KeyCode.W))
+            else if (joystick.GetComponent<RectTransform>().position.y >= -11)
             {
                 randomNumber = Random.Range(0, 4);
             }
 
-            else if (Input.GetKeyUp(KeyCode.D))
+            else if (joystick.GetComponent<RectTransform>().position.x >= 40)
             {
                 randomNumber = Random.Range(0, 4);
             }
@@ -293,9 +307,15 @@ public class Player : MonoBehaviour {
             anim.SetFloat("Speed", Mathf.Abs(rb2d.velocity.x) + Mathf.Abs(rb2d.velocity.y));
             anim.SetBool("Shooting", false);
 
-            if (Input.GetKeyDown(KeyCode.R) && ammoScript.countAmmo != 12f && canMove) //reload ammo
+            if (reloadUI.GetComponent<ShootandReload>().reload && ammoScript.countAmmo != 12f && canMove) //reload ammo
             {
+                reloadUI.GetComponent<ShootandReload>().reload = false;
                 anim.SetBool("Reload", true);
+            }
+
+            else if (reloadUI.GetComponent<ShootandReload>().reload)
+            {
+                reloadUI.GetComponent<ShootandReload>().reload = false;
             }
 
             if (ammoScript.countAmmo == 0 && ammoScript.countAmmo != 12f)
@@ -303,20 +323,23 @@ public class Player : MonoBehaviour {
                 anim.SetBool("Reload", true);
             }
 
-            if (Input.GetKeyDown(KeyCode.Semicolon) && !anim.GetCurrentAnimatorStateInfo(0).IsName("Shoot_Mark") && shotgun == true && ammoScript.countAmmo > 0f && canMove)
+            if (shootUI.GetComponent<ShootandReload>().shoot && !anim.GetCurrentAnimatorStateInfo(0).IsName("Shoot_Mark") && shotgun == true && ammoScript.countAmmo > 0f && canMove)
             {
+                shootUI.GetComponent<ShootandReload>().shoot = false;
                 anim.SetBool("Shooting", true);
                 shootOnce = true;
             }
 
-            else if (Input.GetKeyDown(KeyCode.Semicolon) && !anim.GetCurrentAnimatorStateInfo(0).IsName("Shoot_Mark") && shotgun == false && ammoScript.countAmmo > 0f && canMove)
+            else if (shootUI.GetComponent<ShootandReload>().shoot && !anim.GetCurrentAnimatorStateInfo(0).IsName("Shoot_Mark") && shotgun == false && ammoScript.countAmmo > 0f && canMove)
             {
+                shootUI.GetComponent<ShootandReload>().shoot = false;
                 anim.SetBool("Shooting", true);
                 shootOnce = true;
             }
 
-            if (Input.GetKeyDown(KeyCode.Quote) && canMove)
+            if (ItemUI.GetComponent<ItemControl>().useItem && canMove)
             {
+                ItemUI.GetComponent<ItemControl>().useItem = false;
                 if (elixir)
                 {
                     playerHealth += 50f;
@@ -582,26 +605,16 @@ public class Player : MonoBehaviour {
     //for physics
     void FixedUpdate()
     {
+        Vector2 moveVec = new Vector2(CrossPlatformInputManager.GetAxis("Horizontal"),CrossPlatformInputManager.GetAxis("Vertical")) * speed;
         //Physics2D.gravity = Vector2.zero;
 		if (!dead && !reviving && canMove) {
             
             if (playerMadness < 100f)
             {
-                if (Input.GetKey(KeyCode.A))
-                {
-                    rb2d.AddForce(Vector3.left * speed);
+                rb2d.AddForce(moveVec);
 
-                    if (lockTransform == false)
-                    {
-                        transform.localScale = new Vector3(-2f, 2f, 1f);
-                        particles.transform.localScale = new Vector3(-1f, 1f, 1f);
-                        left = true;
-                    }
-                }
-
-                if (Input.GetKey(KeyCode.D))
+                if (joystick.GetComponent<RectTransform>().position.x >= 40)
                 {
-                    rb2d.AddForce(Vector3.right * speed);
 
                     if (lockTransform == false)
                     {
@@ -611,22 +624,22 @@ public class Player : MonoBehaviour {
                     }
                 }
 
-                if (Input.GetKey(KeyCode.W))
+                else if (joystick.GetComponent<RectTransform>().position.x <= 39.9)
                 {
-                    rb2d.AddForce(Vector3.up * speed);
-                }
 
-                if (Input.GetKey(KeyCode.S))
-                {
-                    rb2d.AddForce(Vector3.down * speed);
+                    if (lockTransform == false)
+                    {
+                        transform.localScale = new Vector3(-2f, 2f, 1f);
+                        particles.transform.localScale = new Vector3(-1f, 1f, 1f);
+                        left = true;
+                    }
                 }
-
             }
 
             else
             {
 
-                if (Input.GetKey(KeyCode.A))
+                if (joystick.GetComponent<RectTransform>().position.x <= 39.9)
                 {
                     if (movementDirection[randomNumber] == "left")
                     {
@@ -663,7 +676,7 @@ public class Player : MonoBehaviour {
                     }
                 }
 
-                if (Input.GetKey(KeyCode.D))
+                if (joystick.GetComponent<RectTransform>().position.x > 41)
                 {
                     if (movementDirection[randomNumber] == "left")
                     {
@@ -700,7 +713,7 @@ public class Player : MonoBehaviour {
                     }
                 }
 
-                if (Input.GetKey(KeyCode.W))
+                if (joystick.GetComponent<RectTransform>().position.y > -10)
                 {
                     if (movementDirection[randomNumber] == "left")
                     {
@@ -737,7 +750,7 @@ public class Player : MonoBehaviour {
                     }
                 }
 
-                if (Input.GetKey(KeyCode.S))
+                if (joystick.GetComponent<RectTransform>().position.y < -11)
                 {
                     if (movementDirection[randomNumber] == "left")
                     {
@@ -776,7 +789,6 @@ public class Player : MonoBehaviour {
 
             }
 		
-
 			if (rb2d.velocity.x > maxSpeed) {
 				rb2d.velocity = new Vector2 (maxSpeed, rb2d.velocity.y);
 			}

@@ -4857,7 +4857,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 291277035}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.0800018, y: 2.83, z: 0}
+  m_LocalPosition: {x: 1.9800034, y: 2.6599998, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children:
   - {fileID: 408186884}
@@ -4955,6 +4955,10 @@ MonoBehaviour:
   particles: {fileID: 1263962408}
   leftParticles: {fileID: 1945900659}
   bombSpawn: {fileID: 1192873688}
+  up: {fileID: 0}
+  leftArrow: {fileID: 0}
+  right: {fileID: 0}
+  down: {fileID: 0}
   AmmoCount: {fileID: 0}
   colliderCount: 0
   damageUpgrade: 0
@@ -11856,7 +11860,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 649631988}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -88.22, y: -1.16, z: -10}
+  m_LocalPosition: {x: -88.32, y: -1.33, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1333846527}
