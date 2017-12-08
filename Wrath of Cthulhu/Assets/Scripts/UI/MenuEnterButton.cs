@@ -23,6 +23,10 @@ public class MenuEnterButton : MonoBehaviour
             executeOnce = true;
         }
 
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
 
     }
 }

@@ -280,23 +280,23 @@ public class Player : MonoBehaviour {
 
             StartCoroutine(ExitFullMadness());
 
-
-            if (joystick.GetComponent<RectTransform>().position.x <= 39.9)
+            
+            if (joystick.GetComponent<RectTransform>().localPosition.x < -301)
             {
                 randomNumber = Random.Range(0, 4);
             }
 
-            else if (joystick.GetComponent<RectTransform>().position.y < -11)
+            else if (joystick.GetComponent<RectTransform>().localPosition.y < -14)
             {
                 randomNumber = Random.Range(0, 4);
             }
 
-            else if (joystick.GetComponent<RectTransform>().position.y >= -11)
+            else if (joystick.GetComponent<RectTransform>().localPosition.y >= -14)
             {
                 randomNumber = Random.Range(0, 4);
             }
 
-            else if (joystick.GetComponent<RectTransform>().position.x >= 40)
+            else if (joystick.GetComponent<RectTransform>().localPosition.x >= -301)
             {
                 randomNumber = Random.Range(0, 4);
             }
@@ -613,7 +613,7 @@ public class Player : MonoBehaviour {
             {
                 rb2d.AddForce(moveVec);
 
-                if (joystick.GetComponent<RectTransform>().position.x >= 40)
+                if (joystick.GetComponent<RectTransform>().localPosition.x >= -301)
                 {
 
                     if (lockTransform == false)
@@ -624,7 +624,7 @@ public class Player : MonoBehaviour {
                     }
                 }
 
-                else if (joystick.GetComponent<RectTransform>().position.x <= 39.9)
+                else if (joystick.GetComponent<RectTransform>().localPosition.x < -301)
                 {
 
                     if (lockTransform == false)
@@ -639,7 +639,7 @@ public class Player : MonoBehaviour {
             else
             {
 
-                if (joystick.GetComponent<RectTransform>().position.x <= 39.9)
+                if (joystick.GetComponent<RectTransform>().localPosition.x < -301)
                 {
                     if (movementDirection[randomNumber] == "left")
                     {
@@ -676,7 +676,7 @@ public class Player : MonoBehaviour {
                     }
                 }
 
-                if (joystick.GetComponent<RectTransform>().position.x > 41)
+                if (joystick.GetComponent<RectTransform>().localPosition.x >= -301)
                 {
                     if (movementDirection[randomNumber] == "left")
                     {
@@ -713,7 +713,7 @@ public class Player : MonoBehaviour {
                     }
                 }
 
-                if (joystick.GetComponent<RectTransform>().position.y > -10)
+                if (joystick.GetComponent<RectTransform>().localPosition.y >= -14)
                 {
                     if (movementDirection[randomNumber] == "left")
                     {
@@ -750,7 +750,7 @@ public class Player : MonoBehaviour {
                     }
                 }
 
-                if (joystick.GetComponent<RectTransform>().position.y < -11)
+                if (joystick.GetComponent<RectTransform>().localPosition.y < -14)
                 {
                     if (movementDirection[randomNumber] == "left")
                     {
