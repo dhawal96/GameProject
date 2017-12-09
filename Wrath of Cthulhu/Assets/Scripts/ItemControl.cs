@@ -5,10 +5,16 @@ using UnityEngine;
 public class ItemControl : MonoBehaviour {
 
     public bool useItem;
+    public bool pause;
 
 	public void UseItem()
     {
         useItem = true;
+    }
+
+    public void pauseGame()
+    {
+        pause = true;
     }
 
 }

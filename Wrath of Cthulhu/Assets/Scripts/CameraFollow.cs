@@ -46,6 +46,7 @@ public class CameraFollow : MonoBehaviour
         maxCameraPos = new Vector3(17.41f, 5.78f, -10f);
         stayOnPlayer = true;
         executeOnce = false;
+        Screen.SetResolution(1920, 1080, true);
     }
 
     IEnumerator Wait()
@@ -88,6 +89,7 @@ public class CameraFollow : MonoBehaviour
                 if (player.transform.position.x >= 20.21f)
                 {
                     controlscript.GoImage.enabled = false;
+                    controlscript.enemiesLeftUI.SetActive(true);
                     SectionEndCollider.SetActive(true);
                 }
                 break;
@@ -96,6 +98,7 @@ public class CameraFollow : MonoBehaviour
                 if (player.transform.position.x >= 30.927f)
                 {
                     controlscript.GoImage.enabled = false;
+                    controlscript.enemiesLeftUI.SetActive(true);
                     SectionEndCollider.SetActive(true);
                 }
                 break;
@@ -104,6 +107,7 @@ public class CameraFollow : MonoBehaviour
                 if (player.transform.position.x >= 41.184f)
                 {
                     controlscript.GoImage.enabled = false;
+                    controlscript.enemiesLeftUI.SetActive(true);
                     SectionEndCollider.SetActive(true);
                 }
                 break;
@@ -112,6 +116,7 @@ public class CameraFollow : MonoBehaviour
                 if (player.transform.position.x >= 51.802f)
                 {
                     controlscript.GoImage.enabled = false;
+                    controlscript.enemiesLeftUI.SetActive(true);
                     SectionEndCollider.SetActive(true);
                 }
                 break;
@@ -120,6 +125,7 @@ public class CameraFollow : MonoBehaviour
                 if (player.transform.position.x >= 62.303f)
                 {
                     controlscript.GoImage.enabled = false;
+                    controlscript.enemiesLeftUI.SetActive(true);
                     SectionEndCollider.SetActive(true);
                 }
                 break;
@@ -128,6 +134,7 @@ public class CameraFollow : MonoBehaviour
                 if (player.transform.position.x >= 76.038f)
                 {
                     controlscript.GoImage.enabled = false;
+                    controlscript.enemiesLeftUI.SetActive(true);
                     SectionEndCollider.SetActive(true);
                 }
                 break;
@@ -135,7 +142,8 @@ public class CameraFollow : MonoBehaviour
             case "SectionEndCollider7":
                 if (player.transform.position.x >= 85.01f)
                 {
-                    controlscript.GoImage.enabled = false; 
+                    controlscript.GoImage.enabled = false;
+                    controlscript.enemiesLeftUI.SetActive(true);
                     SectionEndCollider.SetActive(true);
                 }
                 break;
@@ -144,6 +152,7 @@ public class CameraFollow : MonoBehaviour
                 if (player.transform.position.x >= 98.929f)
                 {
                     controlscript.GoImage.enabled = false;
+                    controlscript.enemiesLeftUI.SetActive(true);
                     SectionEndCollider.SetActive(true);
                 }
                 break;
@@ -152,6 +161,7 @@ public class CameraFollow : MonoBehaviour
                 if (player.transform.position.x >= 111.86f)
                 {
                     controlscript.GoImage.enabled = false;
+                    controlscript.enemiesLeftUI.SetActive(true);
                     SectionEndCollider.SetActive(true);
                 }
                 break;

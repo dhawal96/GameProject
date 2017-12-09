@@ -30,6 +30,8 @@ public class SectionCollider : MonoBehaviour {
                     controlscript.minCameraPos = new Vector3(22.56f, 1.50f, -10f);
                     controlscript.maxCameraPos = new Vector3(28.17f, 5.78f, -10f);
                     playerScript.colliderCount += 1f;
+                    playerScript.enemiesRemaining = 5;
+                    playerScript.enemiesKilled = 0;
                     breakCollision = true;
                 }
                 break;
@@ -43,6 +45,8 @@ public class SectionCollider : MonoBehaviour {
                     controlscript.minCameraPos = new Vector3(33.35f, 1.50f, -10f);
                     controlscript.maxCameraPos = new Vector3(38.38f, 5.80f, -10f);
                     playerScript.colliderCount += 1f;
+                    playerScript.enemiesRemaining = 6;
+                    playerScript.enemiesKilled = 0;
                     breakCollision = true;
                 }
                 break;
@@ -56,6 +60,8 @@ public class SectionCollider : MonoBehaviour {
                     controlscript.minCameraPos = new Vector3(43.59f, 1.50f, -10f);
                     controlscript.maxCameraPos = new Vector3(49.01f, 5.80f, -10f);
                     playerScript.colliderCount += 1f;
+                    playerScript.enemiesRemaining = 6;
+                    playerScript.enemiesKilled = 0;
                     breakCollision = true;
                 }
                 break;
@@ -69,6 +75,8 @@ public class SectionCollider : MonoBehaviour {
                     controlscript.minCameraPos = new Vector3(54.21f, 1.50f, -10f);
                     controlscript.maxCameraPos = new Vector3(59.53f, 5.80f, -10f);
                     playerScript.colliderCount += 1f;
+                    playerScript.enemiesRemaining = 2;
+                    playerScript.enemiesKilled = 0;
                     breakCollision = true;
                 }
                 break;
@@ -82,6 +90,8 @@ public class SectionCollider : MonoBehaviour {
                     controlscript.minCameraPos = new Vector3(64.71f, 1.50f, -10f);
                     controlscript.maxCameraPos = new Vector3(73.27f, 5.80f, -10f);
                     playerScript.colliderCount += 1f;
+                    playerScript.enemiesRemaining = 7;
+                    playerScript.enemiesKilled = 0;
                     breakCollision = true;
                 }
                 break;
@@ -95,6 +105,8 @@ public class SectionCollider : MonoBehaviour {
                     controlscript.minCameraPos = new Vector3(78.46f, 1.50f, -10f);
                     controlscript.maxCameraPos = new Vector3(82.24f, 5.80f, -10f);
                     playerScript.colliderCount += 1f;
+                    playerScript.enemiesRemaining = 5;
+                    playerScript.enemiesKilled = 0;
                     breakCollision = true;
                 }
                 break;
@@ -108,6 +120,7 @@ public class SectionCollider : MonoBehaviour {
                     controlscript.minCameraPos = new Vector3(87.42f, 1.50f, -10f);
                     controlscript.maxCameraPos = new Vector3(96.15f, 5.80f, -10f);
                     playerScript.colliderCount += 1f;
+                    playerScript.enemiesKilled = 100;
                     breakCollision = true;
                 }
                 break;

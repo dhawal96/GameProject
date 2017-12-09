@@ -4959,6 +4959,8 @@ MonoBehaviour:
   joystick: {fileID: 0}
   shootUI: {fileID: 0}
   reloadUI: {fileID: 0}
+  pause: {fileID: 0}
+  enemiesLeft: {fileID: 0}
   AmmoCount: {fileID: 0}
   colliderCount: 0
   damageUpgrade: 0

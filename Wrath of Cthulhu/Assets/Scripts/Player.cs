@@ -88,10 +88,14 @@ public class Player : MonoBehaviour {
     public GameObject particles; //Right
     public GameObject leftParticles;
     public Transform bombSpawn;
+    public float enemiesRemaining;
 
     public GameObject joystick;
     public GameObject shootUI;
     public GameObject reloadUI;
+    public GameObject pause;
+    public GameObject enemiesLeftUI;
+    public GameObject enemiesLeft;
 
     //Stats UI
     public Transform AmmoCount;
@@ -122,7 +126,7 @@ public class Player : MonoBehaviour {
         dead = false;
         shotgun = false;
         latestBuy = 0;
-        bulletDamage = 150f;
+        bulletDamage = 15000f;
         damageUpgrade = 0f;
         elixir = false;
         blink = false;
@@ -132,6 +136,7 @@ public class Player : MonoBehaviour {
         canPause = false;
         colliderCount = 0f;
         speedCount = 0f;
+        enemiesRemaining = 10f;
         reviving = false;
         lockTransform = false;
         bossDead = false;
@@ -147,6 +152,9 @@ public class Player : MonoBehaviour {
         joystick = GameObject.Find("MobileJoystick");
         shootUI = GameObject.Find("Shoot");
         reloadUI = GameObject.Find("Reload");
+        pause = GameObject.Find("Pause");
+        enemiesLeftUI = GameObject.Find("EnemiesLeft");
+        enemiesLeft = GameObject.Find("HowManyLeft");
 
         HealthPercentage = GameObject.Find("Player1Health").transform;
 		healthscript = HealthPercentage.GetComponent<Player1Health>();
@@ -232,8 +240,9 @@ public class Player : MonoBehaviour {
         }
 
 
-        else if (Input.GetKeyDown(KeyCode.P) && canPause && canMove && !gameOverPanel.activeSelf && !enterShopUIPanel.activeSelf && !shopPanel.activeSelf && !gamePlayPanel.activeSelf && !youWinPanel.activeSelf)
+        else if (pause.GetComponent<ItemControl>().pause && canPause && canMove && !gameOverPanel.activeSelf && !enterShopUIPanel.activeSelf && !shopPanel.activeSelf && !gamePlayPanel.activeSelf && !youWinPanel.activeSelf)
         {
+            pause.GetComponent<ItemControl>().pause = false;
             pausePanel.SetActive(true);
             Time.timeScale = 0f;
 
@@ -281,22 +290,22 @@ public class Player : MonoBehaviour {
             StartCoroutine(ExitFullMadness());
 
             
-            if (joystick.GetComponent<RectTransform>().localPosition.x < -301)
+            if (joystick.GetComponent<RectTransform>().localPosition.x < -301.5)
             {
                 randomNumber = Random.Range(0, 4);
             }
 
-            else if (joystick.GetComponent<RectTransform>().localPosition.y < -14)
+            else if (joystick.GetComponent<RectTransform>().localPosition.y < -22)
             {
                 randomNumber = Random.Range(0, 4);
             }
 
-            else if (joystick.GetComponent<RectTransform>().localPosition.y >= -14)
+            else if (joystick.GetComponent<RectTransform>().localPosition.y > -22)
             {
                 randomNumber = Random.Range(0, 4);
             }
 
-            else if (joystick.GetComponent<RectTransform>().localPosition.x >= -301)
+            else if (joystick.GetComponent<RectTransform>().localPosition.x > -301)
             {
                 randomNumber = Random.Range(0, 4);
             }
@@ -306,6 +315,8 @@ public class Player : MonoBehaviour {
         {
             anim.SetFloat("Speed", Mathf.Abs(rb2d.velocity.x) + Mathf.Abs(rb2d.velocity.y));
             anim.SetBool("Shooting", false);
+
+            enemiesLeft.GetComponent<Text>().text = "Enemies Left: " + (enemiesRemaining - enemiesKilled); 
 
             if (reloadUI.GetComponent<ShootandReload>().reload && ammoScript.countAmmo != 12f && canMove) //reload ammo
             {
@@ -517,36 +528,43 @@ public class Player : MonoBehaviour {
             if (enemiesKilled >= 10 && colliderCount == 0f)
             {
                 GoImage.enabled = true;
+                enemiesLeftUI.SetActive(false);
             }
 
-            else if (enemiesKilled >= 15 && colliderCount == 1f)
+            else if (enemiesKilled >= 5 && colliderCount == 1f)
             {
                 GoImage.enabled = true;
+                enemiesLeftUI.SetActive(false);
             }
 
-            else if (enemiesKilled >= 21 && colliderCount == 2f)
+            else if (enemiesKilled >= 6 && colliderCount == 2f)
             {
                 GoImage.enabled = true;
+                enemiesLeftUI.SetActive(false);
             }
 
-            else if (enemiesKilled >= 27 && colliderCount == 3f)
+            else if (enemiesKilled >= 6 && colliderCount == 3f)
             {
                 GoImage.enabled = true;
+                enemiesLeftUI.SetActive(false);
             }
 
-            else if (enemiesKilled >= 29 && colliderCount == 4f)
+            else if (enemiesKilled >= 2 && colliderCount == 4f)
             {
                 GoImage.enabled = true;
+                enemiesLeftUI.SetActive(false);
             }
 
-            else if (enemiesKilled >= 36 && colliderCount == 5f)
+            else if (enemiesKilled >= 7 && colliderCount == 5f)
             {
                 GoImage.enabled = true;
+                enemiesLeftUI.SetActive(false);
             }
 
-            else if (enemiesKilled >= 41 && colliderCount == 6f)
+            else if (enemiesKilled >= 5 && colliderCount == 6f)
             {
                 GoImage.enabled = true;
+                enemiesLeftUI.SetActive(false);
             }
 
             /*else if (enemiesKilled >= 50 && colliderCount == 7f)
@@ -613,7 +631,7 @@ public class Player : MonoBehaviour {
             {
                 rb2d.AddForce(moveVec);
 
-                if (joystick.GetComponent<RectTransform>().localPosition.x >= -301)
+                if (joystick.GetComponent<RectTransform>().localPosition.x > -301)
                 {
 
                     if (lockTransform == false)
@@ -624,7 +642,7 @@ public class Player : MonoBehaviour {
                     }
                 }
 
-                else if (joystick.GetComponent<RectTransform>().localPosition.x < -301)
+                else if (joystick.GetComponent<RectTransform>().localPosition.x < -301.5)
                 {
 
                     if (lockTransform == false)
@@ -638,8 +656,12 @@ public class Player : MonoBehaviour {
 
             else
             {
+                if (joystick.GetComponent<RectTransform>().localPosition.x == -301 && joystick.GetComponent<RectTransform>().localPosition.y == -22)
+                {
+                    //Do Nothing
+                }
 
-                if (joystick.GetComponent<RectTransform>().localPosition.x < -301)
+                else if (joystick.GetComponent<RectTransform>().localPosition.x < -301.5)
                 {
                     if (movementDirection[randomNumber] == "left")
                     {
@@ -676,7 +698,7 @@ public class Player : MonoBehaviour {
                     }
                 }
 
-                if (joystick.GetComponent<RectTransform>().localPosition.x >= -301)
+                else if (joystick.GetComponent<RectTransform>().localPosition.x > -301)
                 {
                     if (movementDirection[randomNumber] == "left")
                     {
@@ -713,7 +735,7 @@ public class Player : MonoBehaviour {
                     }
                 }
 
-                if (joystick.GetComponent<RectTransform>().localPosition.y >= -14)
+                else if (joystick.GetComponent<RectTransform>().localPosition.y > -22)
                 {
                     if (movementDirection[randomNumber] == "left")
                     {
@@ -750,7 +772,7 @@ public class Player : MonoBehaviour {
                     }
                 }
 
-                if (joystick.GetComponent<RectTransform>().localPosition.y < -14)
+                else if (joystick.GetComponent<RectTransform>().localPosition.y < -22)
                 {
                     if (movementDirection[randomNumber] == "left")
                     {
