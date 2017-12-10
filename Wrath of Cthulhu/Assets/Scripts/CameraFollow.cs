@@ -161,7 +161,6 @@ public class CameraFollow : MonoBehaviour
                 if (player.transform.position.x >= 111.86f)
                 {
                     controlscript.GoImage.enabled = false;
-                    controlscript.enemiesLeftUI.SetActive(true);
                     SectionEndCollider.SetActive(true);
                 }
                 break;

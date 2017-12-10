@@ -89,7 +89,7 @@ namespace UnityStandardAssets.CrossPlatformInput
 
 		public void OnPointerUp(PointerEventData data)
 		{
-			transform.position = m_StartPos;
+            gameObject.GetComponent<RectTransform>().localPosition = new Vector3(-301, -22, 0);
 			UpdateVirtualAxes(m_StartPos);
 		}
 

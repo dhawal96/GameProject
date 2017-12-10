@@ -91,6 +91,8 @@ public class Player : MonoBehaviour {
     public float enemiesRemaining;
 
     public GameObject joystick;
+    private float joystickXPosition;
+    private float joystickYPosition;
     public GameObject shootUI;
     public GameObject reloadUI;
     public GameObject pause;
@@ -126,11 +128,11 @@ public class Player : MonoBehaviour {
         dead = false;
         shotgun = false;
         latestBuy = 0;
-        bulletDamage = 15000f;
+        bulletDamage = 150f;
         damageUpgrade = 0f;
         elixir = false;
         blink = false;
-        explosive = false;
+        explosive = true;
         call = true;
         revive = false;
         canPause = false;
@@ -155,6 +157,9 @@ public class Player : MonoBehaviour {
         pause = GameObject.Find("Pause");
         enemiesLeftUI = GameObject.Find("EnemiesLeft");
         enemiesLeft = GameObject.Find("HowManyLeft");
+
+        joystickXPosition = joystick.GetComponent<RectTransform>().localPosition.x;
+        joystickYPosition = joystick.GetComponent<RectTransform>().localPosition.y;
 
         HealthPercentage = GameObject.Find("Player1Health").transform;
 		healthscript = HealthPercentage.GetComponent<Player1Health>();
@@ -290,22 +295,22 @@ public class Player : MonoBehaviour {
             StartCoroutine(ExitFullMadness());
 
             
-            if (joystick.GetComponent<RectTransform>().localPosition.x < -301.5)
+            if (joystick.GetComponent<RectTransform>().localPosition.x < joystickXPosition)
             {
                 randomNumber = Random.Range(0, 4);
             }
 
-            else if (joystick.GetComponent<RectTransform>().localPosition.y < -22)
+            else if (joystick.GetComponent<RectTransform>().localPosition.y < joystickYPosition)
             {
                 randomNumber = Random.Range(0, 4);
             }
 
-            else if (joystick.GetComponent<RectTransform>().localPosition.y > -22)
+            else if (joystick.GetComponent<RectTransform>().localPosition.y > joystickYPosition)
             {
                 randomNumber = Random.Range(0, 4);
             }
 
-            else if (joystick.GetComponent<RectTransform>().localPosition.x > -301)
+            else if (joystick.GetComponent<RectTransform>().localPosition.x > joystickXPosition)
             {
                 randomNumber = Random.Range(0, 4);
             }
@@ -317,6 +322,7 @@ public class Player : MonoBehaviour {
             anim.SetBool("Shooting", false);
 
             enemiesLeft.GetComponent<Text>().text = "Enemies Left: " + (enemiesRemaining - enemiesKilled); 
+            //enemiesLeft.GetComponent<Text>().text = "x" + joystick.GetComponent<RectTransform>().localPosition.x + " y " + joystick.GetComponent<RectTransform>().localPosition.y; 
 
             if (reloadUI.GetComponent<ShootandReload>().reload && ammoScript.countAmmo != 12f && canMove) //reload ammo
             {
@@ -413,18 +419,6 @@ public class Player : MonoBehaviour {
                         maxPos = 93.36f;
                     }
 
-                    /*else if (transform.position.x >= 98.37f + .56248f && transform.position.x <= 111.31f + .25248f)
-                    {
-                        minPos = 98.37f + .56248f;
-                        maxPos = 111.31f + .25248f;
-                    }
-
-                    else if (transform.position.x >= 111.31f + .56248f && transform.position.x <= 118.56f)
-                    {
-                        minPos = 111.31f + .56248f;
-                        maxPos = 118.56f;
-                    }*/
-                    //float cameraSize = 2.294f;
                     float xPosition = transform.position.x;
                     if (left)
                     {
@@ -567,16 +561,6 @@ public class Player : MonoBehaviour {
                 enemiesLeftUI.SetActive(false);
             }
 
-            /*else if (enemiesKilled >= 50 && colliderCount == 7f)
-            {
-                GoImage.enabled = true;
-            }
-
-            else if (enemiesKilled >= 55 && colliderCount == 8f)
-            {
-                GoImage.enabled = true; 
-            }*/
-
             healthscript.LifePercentage = playerHealth;
 			madnessscript.MadnessPercentage = playerMadness;
 
@@ -629,9 +613,14 @@ public class Player : MonoBehaviour {
             
             if (playerMadness < 100f)
             {
-                rb2d.AddForce(moveVec);
+                rb2d.AddForce(moveVec); 
 
-                if (joystick.GetComponent<RectTransform>().localPosition.x > -301)
+                if (joystick.GetComponent<RectTransform>().localPosition.x == joystickXPosition && joystick.GetComponent<RectTransform>().localPosition.y == joystickYPosition)
+                {
+                    //Do Nothing
+                }
+
+                else if (joystick.GetComponent<RectTransform>().localPosition.x > joystickXPosition)
                 {
 
                     if (lockTransform == false)
@@ -642,7 +631,7 @@ public class Player : MonoBehaviour {
                     }
                 }
 
-                else if (joystick.GetComponent<RectTransform>().localPosition.x < -301.5)
+                else if (joystick.GetComponent<RectTransform>().localPosition.x < joystickXPosition)
                 {
 
                     if (lockTransform == false)
@@ -656,12 +645,12 @@ public class Player : MonoBehaviour {
 
             else
             {
-                if (joystick.GetComponent<RectTransform>().localPosition.x == -301 && joystick.GetComponent<RectTransform>().localPosition.y == -22)
+                if (joystick.GetComponent<RectTransform>().localPosition.x == joystickXPosition && joystick.GetComponent<RectTransform>().localPosition.y == joystickYPosition)
                 {
                     //Do Nothing
                 }
 
-                else if (joystick.GetComponent<RectTransform>().localPosition.x < -301.5)
+                else if (joystick.GetComponent<RectTransform>().localPosition.x < joystickXPosition)
                 {
                     if (movementDirection[randomNumber] == "left")
                     {
@@ -698,7 +687,7 @@ public class Player : MonoBehaviour {
                     }
                 }
 
-                else if (joystick.GetComponent<RectTransform>().localPosition.x > -301)
+                else if (joystick.GetComponent<RectTransform>().localPosition.x > joystickXPosition)
                 {
                     if (movementDirection[randomNumber] == "left")
                     {
@@ -735,7 +724,7 @@ public class Player : MonoBehaviour {
                     }
                 }
 
-                else if (joystick.GetComponent<RectTransform>().localPosition.y > -22)
+                else if (joystick.GetComponent<RectTransform>().localPosition.y > joystickYPosition)
                 {
                     if (movementDirection[randomNumber] == "left")
                     {
@@ -772,7 +761,7 @@ public class Player : MonoBehaviour {
                     }
                 }
 
-                else if (joystick.GetComponent<RectTransform>().localPosition.y < -22)
+                else if (joystick.GetComponent<RectTransform>().localPosition.y < joystickYPosition)
                 {
                     if (movementDirection[randomNumber] == "left")
                     {

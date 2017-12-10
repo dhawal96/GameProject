@@ -4956,10 +4956,12 @@ MonoBehaviour:
   particles: {fileID: 1263962408}
   leftParticles: {fileID: 1945900659}
   bombSpawn: {fileID: 1192873688}
+  enemiesRemaining: 0
   joystick: {fileID: 0}
   shootUI: {fileID: 0}
   reloadUI: {fileID: 0}
   pause: {fileID: 0}
+  enemiesLeftUI: {fileID: 0}
   enemiesLeft: {fileID: 0}
   AmmoCount: {fileID: 0}
   colliderCount: 0
@@ -6157,12 +6159,12 @@ Prefab:
     - target: {fileID: 224116657367805616, guid: e6736b7cae29ecc41858715ed51281a7,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: -168.32
+      value: -169.126
       objectReference: {fileID: 0}
     - target: {fileID: 224116657367805616, guid: e6736b7cae29ecc41858715ed51281a7,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -145.74165
+      value: -145.624
       objectReference: {fileID: 0}
     - target: {fileID: 60207923024628732, guid: e6736b7cae29ecc41858715ed51281a7,
         type: 2}
